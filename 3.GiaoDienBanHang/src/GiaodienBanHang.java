@@ -54,6 +54,7 @@ public class GiaodienBanHang extends javax.swing.JFrame {
         Logout = new javax.swing.JLabel();
         NhanVien = new javax.swing.JLabel();
         KhachHang = new javax.swing.JLabel();
+        ThongKe = new javax.swing.JLabel();
         Middle = new javax.swing.JPanel();
         Search = new javax.swing.JButton();
         ThemBtn = new javax.swing.JButton();
@@ -207,6 +208,14 @@ public class GiaodienBanHang extends javax.swing.JFrame {
         KhachHang.setText("Khách Hàng");
         KhachHang.setIconTextGap(5);
 
+        ThongKe.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        ThongKe.setForeground(new java.awt.Color(204, 255, 204));
+        ThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/giaodienchuan/images/icons8_bar_chart_30px.png"))); // NOI18N
+        ThongKe.setText("Thống Kê");
+        ThongKe.setMaximumSize(new java.awt.Dimension(121, 32));
+        ThongKe.setMinimumSize(new java.awt.Dimension(121, 32));
+        ThongKe.setPreferredSize(new java.awt.Dimension(121, 32));
+
         javax.swing.GroupLayout LeftMenuLayout = new javax.swing.GroupLayout(LeftMenu);
         LeftMenu.setLayout(LeftMenuLayout);
         LeftMenuLayout.setHorizontalGroup(
@@ -226,7 +235,8 @@ public class GiaodienBanHang extends javax.swing.JFrame {
                     .addComponent(KhoSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(NhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(KhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(KhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ThongKe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         LeftMenuLayout.setVerticalGroup(
@@ -252,7 +262,9 @@ public class GiaodienBanHang extends javax.swing.JFrame {
                 .addComponent(NhanVien)
                 .addGap(30, 30, 30)
                 .addComponent(KhachHang)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addComponent(ThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(Logout)
                 .addContainerGap())
         );
@@ -553,11 +565,12 @@ public class GiaodienBanHang extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(MiddleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(MiddleLayout.createSequentialGroup()
-                        .addGroup(MiddleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(MiddleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2)
-                            .addComponent(Search))
+                            .addComponent(Search, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(MiddleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Sachtable, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(MiddleLayout.createSequentialGroup()
@@ -718,6 +731,7 @@ public class GiaodienBanHang extends javax.swing.JFrame {
     private javax.swing.JButton SuaBtn;
     private javax.swing.JLabel TaiKhoan;
     private javax.swing.JButton ThemBtn;
+    private javax.swing.JLabel ThongKe;
     private javax.swing.JLabel TuSach;
     private javax.swing.JButton XoaBtn;
     private javax.swing.JComboBox<String> comboxKH;
