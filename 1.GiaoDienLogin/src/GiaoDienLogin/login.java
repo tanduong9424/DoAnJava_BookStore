@@ -2,10 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GiaoDien1;
+package GiaoDienLogin;
 
+import java.awt.Component;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -184,6 +187,18 @@ public class login extends javax.swing.JFrame {
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         String tentk = txTenDangNhap.getText();
         String mk = txMatKhau.getText();
+        GiaoDienChuan x=new GiaoDienChuan();
+            x.setVisible(true);
+            JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
+            currentFrame .dispose();
+        /*if(tentk.equals("admin") && mk.equals("admin")){
+            GiaoDienChuan x=new GiaoDienChuan();
+            x.setVisible(true);
+            JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
+            currentFrame .dispose();
+        }*/
+            
+                    
         //QuanLyTaiKhoanBUS qltk = new QuanLyTaiKhoanBUS();
         //TaiKhoan tk = qltk.getTaiKhoan(tentk);
 
