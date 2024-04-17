@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/1.GiaoDienLogin/1.GiaoDienLogin.iml" filepath="$PROJECT_DIR$/1.GiaoDienLogin/1.GiaoDienLogin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/main_backup/main_backup.iml" filepath="$PROJECT_DIR$/main_backup/main_backup.iml" />
+      <module fileurl="file://$PROJECT_DIR$/newwwww/newwwww.iml" filepath="$PROJECT_DIR$/newwwww/newwwww.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/tmp-java.iml" filepath="$PROJECT_DIR$/.idea/tmp-java.iml" />
+    </modules>
+  </component>
+</project>
