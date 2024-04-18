@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="81970956-b1af-4d53-8fbb-fe23fd690df8" name="Changes" comment="" />
+    <list default="true" id="81970956-b1af-4d53-8fbb-fe23fd690df8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newwwww/JavaApplication18/build/classes/Main/BackEnd/BanHang.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newwwww/JavaApplication18/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/newwwww/JavaApplication18/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newwwww/JavaApplication18/src/Main/BackEnd/Bus/BanHang.java" beforeDir="false" afterPath="$PROJECT_DIR$/newwwww/JavaApplication18/src/Main/BackEnd/Bus/BanHang.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,9 +15,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2fDQqVgCbJuUlAuJSPiS9ZGHyQL" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -23,7 +28,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "KhachHang",
     "ignore.virus.scanning.warn.message": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -37,6 +42,7 @@
       <option name="presentableId" value="Default" />
       <updated>1713333361258</updated>
       <workItem from="1713333363284" duration="38000" />
+      <workItem from="1713419804110" duration="7000" />
     </task>
     <servers />
   </component>
