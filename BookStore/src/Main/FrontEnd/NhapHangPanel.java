@@ -4,6 +4,9 @@
  */
 package Main.FrontEnd;
 
+import Main.FrontEnd.FormAdd.AddNhaCungCap;
+import Main.FrontEnd.FormAdd.AddSach;
+
 /**
  *
  * @author DELL
@@ -36,6 +39,8 @@ public class NhapHangPanel extends javax.swing.JPanel {
         Nhaptb = new javax.swing.JTable();
         inputsearch2 = new javax.swing.JTextField();
         Search1 = new javax.swing.JButton();
+        panelImg = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         ChiTietHD = new javax.swing.JPanel();
         NhaCC = new javax.swing.JTextField();
         NVien = new javax.swing.JTextField();
@@ -248,29 +253,56 @@ public class NhapHangPanel extends javax.swing.JPanel {
             }
         });
 
+        panelImg.setBackground(new java.awt.Color(204, 255, 204));
+        panelImg.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ảnh minh họa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+
+        jLabel1.setText("chèn ảnh vào");
+
+        javax.swing.GroupLayout panelImgLayout = new javax.swing.GroupLayout(panelImg);
+        panelImg.setLayout(panelImgLayout);
+        panelImgLayout.setHorizontalGroup(
+            panelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImgLayout.createSequentialGroup()
+                .addContainerGap(63, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(80, 80, 80))
+        );
+        panelImgLayout.setVerticalGroup(
+            panelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelImgLayout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout DanhSachNhapLayout = new javax.swing.GroupLayout(DanhSachNhap);
         DanhSachNhap.setLayout(DanhSachNhapLayout);
         DanhSachNhapLayout.setHorizontalGroup(
             DanhSachNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DanhSachNhapLayout.createSequentialGroup()
-                .addComponent(scroll2, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 7, Short.MAX_VALUE))
-            .addGroup(DanhSachNhapLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(inputsearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Search1)
+                .addGroup(DanhSachNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DanhSachNhapLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(inputsearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Search1))
+                    .addComponent(scroll2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         DanhSachNhapLayout.setVerticalGroup(
             DanhSachNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DanhSachNhapLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(DanhSachNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Search1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inputsearch2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scroll2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(DanhSachNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelImg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(DanhSachNhapLayout.createSequentialGroup()
+                        .addGroup(DanhSachNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Search1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inputsearch2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scroll2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -500,7 +532,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
                             .addComponent(SL, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(maNhapHang, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(NV, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
+                        .addGap(20, 20, 20)
                         .addGroup(ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(selectedSach, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(ThongTinNhapHangPanelLayout.createSequentialGroup()
@@ -517,7 +549,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
                         .addComponent(SuaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(XoaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ThongTinNhapHangPanelLayout.setVerticalGroup(
             ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -570,8 +602,8 @@ public class NhapHangPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PhieuNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ChiTietHD, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)))
-                .addGap(10, 10, 10))
+                        .addComponent(ChiTietHD, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,6 +650,8 @@ public class NhapHangPanel extends javax.swing.JPanel {
 
     private void addNewNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewNCCActionPerformed
         // TODO add your handling code here:
+        AddNhaCungCap x=new AddNhaCungCap();
+        x.setVisible(true);
     }//GEN-LAST:event_addNewNCCActionPerformed
 
     private void SLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SLActionPerformed
@@ -626,6 +660,8 @@ public class NhapHangPanel extends javax.swing.JPanel {
 
     private void addNewSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewSachActionPerformed
         // TODO add your handling code here:
+        AddSach x=new AddSach();
+        x.setVisible(true);
     }//GEN-LAST:event_addNewSachActionPerformed
 
     private void selectedSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedSachActionPerformed
@@ -661,9 +697,11 @@ public class NhapHangPanel extends javax.swing.JPanel {
     private javax.swing.JButton addNewSach;
     private javax.swing.JTextField inputsearch1;
     private javax.swing.JTextField inputsearch2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField maNhapHang;
     private javax.swing.JLabel nhacungcap;
+    private javax.swing.JPanel panelImg;
     private javax.swing.JScrollPane scroll1;
     private javax.swing.JScrollPane scroll2;
     private javax.swing.JScrollPane scroll3;

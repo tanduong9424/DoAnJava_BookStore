@@ -56,7 +56,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Header.setBackground(new java.awt.Color(0, 51, 51));
         Header.setPreferredSize(new java.awt.Dimension(1400, 50));

@@ -4,6 +4,8 @@
  */
 package Main.FrontEnd;
 
+import Main.FrontEnd.FormAdd.AddTaiKhoan;
+
 /**
  *
  * @author DELL
@@ -241,6 +243,8 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
 
     private void ThembtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThembtnActionPerformed
         // TODO add your handling code here:
+        AddTaiKhoan x=new AddTaiKhoan();
+        x.setVisible(true);
     }//GEN-LAST:event_ThembtnActionPerformed
 
     private void thuoctinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thuoctinhActionPerformed

@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Main.FrontEnd;
+
+import Main.FrontEnd.FormAdd.AddKhachHang;
+import Main.FrontEnd.FormAdd.AddKhachHang;
+
 /**
  *
  * @author xuand
@@ -269,6 +273,8 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
     private void ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemActionPerformed
         // TODO add your handling code here:
+        AddKhachHang x=new AddKhachHang();
+        x.setVisible(true);
     }//GEN-LAST:event_ThemActionPerformed
 
     private void XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaActionPerformed

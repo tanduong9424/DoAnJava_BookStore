@@ -4,6 +4,8 @@
  */
 package Main.FrontEnd;
 
+import Main.FrontEnd.FormAdd.AddNhanVien;
+
 /**
  *
  * @author xuand
@@ -275,6 +277,8 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
     private void ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemActionPerformed
         // TODO add your handling code here:
+        AddNhanVien x=new AddNhanVien();
+        x.setVisible(true);
     }//GEN-LAST:event_ThemActionPerformed
 
     private void XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaActionPerformed

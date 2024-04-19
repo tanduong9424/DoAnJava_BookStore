@@ -4,6 +4,8 @@
  */
 package Main.FrontEnd;
 
+import Main.FrontEnd.FormAdd.AddKhachHang;
+
 /**
  *
  * @author DELL
@@ -647,6 +649,8 @@ public class BanHangPanel extends javax.swing.JPanel {
 
     private void newKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newKHActionPerformed
         // TODO add your handling code here:
+        AddKhachHang x=new AddKhachHang();
+        x.setVisible(true);
     }//GEN-LAST:event_newKHActionPerformed
 
     private void ThemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemBtnActionPerformed
