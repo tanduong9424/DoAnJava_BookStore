@@ -4,6 +4,11 @@
  */
 package Main.FrontEnd;
 
+import Main.BackEnd.repository.dao.SACHDAO;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import modal.SACH;
+
 /**
  *
  * @author DELL
@@ -16,6 +21,25 @@ public class BanHangPanel extends javax.swing.JPanel {
     public BanHangPanel() {
         initComponents();
     }
+    //LOAD SÁCH 
+    public void loadBooksToTable() {
+    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+    // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
+    model.setRowCount(0);
+
+    try {
+        System.out.print("hoạt động");
+        ArrayList<SACH> sachList = SACHDAO.getInstance().selectAllExceptISHIDDEN();
+
+        for (SACH sach : sachList) {
+            Object[] row = {sach.getMASACH(), sach.getTENSACH(), sach.getSOLUONG(), sach.getGIABIA(), sach.getTENNHAXUATBAN()};
+            model.addRow(row);
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -255,11 +279,11 @@ public class BanHangPanel extends javax.swing.JPanel {
         );
         DanhSachSPLayout.setVerticalGroup(
             DanhSachSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
+            .addGap(0, 192, Short.MAX_VALUE)
             .addGroup(DanhSachSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(DanhSachSPLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 

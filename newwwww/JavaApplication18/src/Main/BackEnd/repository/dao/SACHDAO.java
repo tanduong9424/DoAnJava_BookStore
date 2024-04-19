@@ -1,5 +1,7 @@
 package Main.BackEnd.repository.dao;
 
+import Main.BackEnd.repository.dao.DAOInterface;
+import Main.BackEnd.repository.database.JDBCUtil;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,12 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import Main.BackEnd.repository.database.JDBCUtil;
-import Main.BackEnd.repository.modal.LOAISACH;
-import Main.BackEnd.repository.modal.NHAXUATBAN;
-import Main.BackEnd.repository.modal.SACH;
+import modal.SACH;
 
 public class SACHDAO implements DAOInterface<SACH> {
 	
@@ -168,7 +165,7 @@ public int insertSACH(SACH t) {
 	int ketqua=0;
 	try {
 		Connection con=JDBCUtil.getConnection();
-		ArrayList<SACH> dathem=SACHDAO.getInstance().selectByCondition("TENSACH="+t.getTENSACH()+" MATACGIA="+t.getMATACGIA()+" TENLOAISACH="+t.getTENLOAISACH()+" LANTAIBAN="+t.getLANTAIBAN()+" TENNHAXUATBAN="+t.getTENNHAXUATBAN()+" NAMXUATBAN="+t.getNAMXUATBAN()+"ISHIDDEN=true");
+		ArrayList<SACH> dathem=SACHDAO.getInstance().selectByCondition("TENSACH="+t.getTENSACH()+" MATACGIA="+t.getMATACGIA()+" TENLOAISACH="+t.getTENLOAISACH()+" GIABIA="+t.getGIABIA()+" LANTAIBAN="+t.getLANTAIBAN()+" TENNHAXUATBAN="+t.getTENNHAXUATBAN()+" NAMXUATBAN="+t.getNAMXUATBAN()+"ISHIDDEN=true");
 		if(dathem!=null) {
 			String sql="UPDATE sach "+
 					"SET ISHIDDEN=false"+
@@ -226,7 +223,7 @@ public int insertSACH(SACH t) {
 			}
 	
 			// Nếu không có giá trị nào giống, thực hiện cập nhật
-			String sql = "UPDATE sach " + " SET " + " TENSACH=?, IMAGE=?,  TENLOAISACH=?, GIABIA=?, LANTAIBAN=?, TENNHAXUATBAN=?, NAMXUATBAN=?" + " WHERE MASACH=?";
+			String sql = "UPDATE sach " + " SET " + " TENSACH=?, IMAGE=?, TENLOAISACH=?,  GIABIA=?, LANTAIBAN=?, TENNHAXUATBAN=?, NAMXUATBAN=? " + " WHERE MASACH=?";
 			
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setString(1, t.getTENSACH());
@@ -417,6 +414,7 @@ public int insertSACH(SACH t) {
 				int LANTAIBAN=rs.getInt("LANTAIBAN");
 				String TENNHAXUATBAN=rs.getString("TENNHAXUATBAN");
 				Date NAMXUATBAN=rs.getDate("NAMXUATBAN");
+
 				boolean ISHIDDEN=rs.getBoolean("ISHIDDEN");
 				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,MATACGIA,TENLOAISACH,TENNHAXUATBAN,GIABIA,LANTAIBAN,NAMXUATBAN,ISHIDDEN);
 				ketqua.add(sach);
@@ -447,20 +445,20 @@ public int insertSACH(SACH t) {
 				String TENSACH=rs.getString("TENSACH");
 				String IMAGE=rs.getString("IMAGE");
 				int SOLUONG= rs.getInt("SOLUONG");
-				int MATACGIA=rs.getInt("MATACGIA");
 				String TENLOAISACH=rs.getString("TENLOAISACH");
 				int GIABIA=rs.getInt("GIABIA");
 				int LANTAIBAN=rs.getInt("LANTAIBAN");
 				String TENNHAXUATBAN=rs.getString("TENNHAXUATBAN");
 				Date NAMXUATBAN=rs.getDate("NAMXUATBAN");
+
 				boolean ISHIDDEN=rs.getBoolean("ISHIDDEN");
-				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,MATACGIA,TENLOAISACH,TENNHAXUATBAN,GIABIA,LANTAIBAN,NAMXUATBAN,ISHIDDEN);
+				SACH sach=new SACH(MASACH,TENSACH,SOLUONG,TENNHAXUATBAN,GIABIA);
 				ketqua.add(sach);
 			}
 			JDBCUtil.closeConnection(con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class SACHDAO \n");
 			e.printStackTrace();
 		}
 		return ketqua;
@@ -490,6 +488,7 @@ public int insertSACH(SACH t) {
 				int LANTAIBAN=rs.getInt("LANTAIBAN");
 				String TENNHAXUATBAN=rs.getString("TENNHAXUATBAN");
 				Date NAMXUATBAN=rs.getDate("NAMXUATBAN");
+
 				boolean ISHIDDEN=rs.getBoolean("ISHIDDEN");
 				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,MATACGIA,TENLOAISACH,TENNHAXUATBAN,GIABIA,LANTAIBAN,NAMXUATBAN,ISHIDDEN);
 				ketqua=sach;
@@ -527,6 +526,7 @@ public int insertSACH(SACH t) {
 				int LANTAIBAN=rs.getInt("LANTAIBAN");
 				String TENNHAXUATBAN=rs.getString("TENNHAXUATBAN");
 				Date NAMXUATBAN=rs.getDate("NAMXUATBAN");
+
 				boolean ISHIDDEN=rs.getBoolean("ISHIDDEN");
 				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,MATACGIA,TENLOAISACH,TENNHAXUATBAN,GIABIA,LANTAIBAN,NAMXUATBAN,ISHIDDEN);
 				ketqua.add(sach);

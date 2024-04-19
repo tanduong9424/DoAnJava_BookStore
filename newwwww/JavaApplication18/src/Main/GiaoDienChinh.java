@@ -4,6 +4,7 @@
  */
 package Main;
 
+import Main.BackEnd.repository.database.JDBCUtil;
 import Main.FrontEnd.ThongKePanel;
 import Main.FrontEnd.TaiKhoanPanel;
 import Main.FrontEnd.NhapHangPanel;
@@ -310,6 +311,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         Middle.add(banhang, "banhang");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
         cardLayout.show(Middle, "banhang");
+        banhang.loadBooksToTable();
     }//GEN-LAST:event_BanHangMouseClicked
 
     private void NhapHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NhapHangMouseClicked
@@ -455,10 +457,11 @@ public class GiaoDienChinh extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(GiaoDienChinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        JDBCUtil.getConnection();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new GiaoDienChinh().setVisible(true);
             }
         });
