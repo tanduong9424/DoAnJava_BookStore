@@ -1,4 +1,4 @@
-package Main.BackEnd.repository.modal;
+package modal;
 
 import java.sql.Date;
 
@@ -24,8 +24,8 @@ public class SACH {
 	}
 
 	public SACH(int mASACH, String tENSACH, String iMAGE, int sOLUONG, int mATACGIA,
-			String tENLOAISACH, String tENNHAXUATBAN,  int gIABIA, int lANTAIBAN, Date nAMXUATBAN
-			, boolean iSHIDDEN) {
+			String tENLOAISACH, String tENNHAXUATBAN, int gIABIA, int lANTAIBAN, Date nAMXUATBAN,
+			boolean iSHIDDEN) {
 		MASACH = mASACH;
 		TENSACH = tENSACH;
 		IMAGE = iMAGE;
@@ -53,7 +53,13 @@ public class SACH {
 		NAMXUATBAN = nAMXUATBAN;
 		ISHIDDEN = iSHIDDEN;
 	}
-
+        public SACH(int mASACH, String tENSACH, int sOLUONG, String tENNHAXUATBAN, int gIABIA) {
+		MASACH = mASACH;
+		TENSACH = tENSACH;
+		SOLUONG = sOLUONG;
+		TENNHAXUATBAN = tENNHAXUATBAN;
+		GIABIA = gIABIA;
+	}
 	public int getMASACH() {
 		return MASACH;
 	}
@@ -94,6 +100,7 @@ public class SACH {
 		MATACGIA = mATACGIA;
 	}
 
+
 	public String getTENLOAISACH() {
 		return TENLOAISACH;
 	}
@@ -109,7 +116,6 @@ public class SACH {
 	public void setTENNHAXUATBAN(String tENNHAXUATBAN) {
 		TENNHAXUATBAN = tENNHAXUATBAN;
 	}
-
 	public int getGIABIA() {
 		return GIABIA;
 	}

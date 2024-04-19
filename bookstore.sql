@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2024 at 09:36 AM
+-- Generation Time: Apr 19, 2024 at 10:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -73,7 +73,7 @@ CREATE TABLE `hoadon` (
 
 CREATE TABLE `khachhang` (
   `makh` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
   `hoten` varchar(255) NOT NULL,
   `diachi` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -108,6 +108,13 @@ CREATE TABLE `loaisach` (
   `TENLOAISACH` varchar(100) NOT NULL,
   `ISHIDDEN` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `loaisach`
+--
+
+INSERT INTO `loaisach` (`TENLOAISACH`, `ISHIDDEN`) VALUES
+('truyện thiếu nhi', 0);
 
 -- --------------------------------------------------------
 
@@ -145,6 +152,13 @@ CREATE TABLE `nhaxuatban` (
   `ISHIDDEN` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `nhaxuatban`
+--
+
+INSERT INTO `nhaxuatban` (`TENNHAXUATBAN`, `ISHIDDEN`) VALUES
+('Kim Đồng', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -168,15 +182,22 @@ CREATE TABLE `phieunhap` (
 CREATE TABLE `sach` (
   `MASACH` int(100) NOT NULL,
   `TENSACH` varchar(100) NOT NULL,
-  `IMAGE` varchar(255) NOT NULL,
-  `SOLUONG` int(11) NOT NULL,
-  `TENLOAISACH` varchar(100) NOT NULL,
+  `IMAGE` varchar(255) DEFAULT NULL,
+  `SOLUONG` int(11) NOT NULL DEFAULT 0,
+  `TENLOAISACH` varchar(100) DEFAULT NULL,
   `GIABIA` int(11) NOT NULL,
-  `LANTAIBAN` int(11) NOT NULL,
-  `TENNHAXUATBAN` varchar(100) NOT NULL,
-  `NAMXUATBAN` date NOT NULL,
+  `LANTAIBAN` int(11) DEFAULT NULL,
+  `TENNHAXUATBAN` varchar(100) DEFAULT NULL,
+  `NAMXUATBAN` date DEFAULT NULL,
   `ISHIDDEN` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sach`
+--
+
+INSERT INTO `sach` (`MASACH`, `TENSACH`, `IMAGE`, `SOLUONG`, `TENLOAISACH`, `GIABIA`, `LANTAIBAN`, `TENNHAXUATBAN`, `NAMXUATBAN`, `ISHIDDEN`) VALUES
+(1, 'Doreamon', NULL, 0, 'truyện thiếu nhi', 25000, 5, 'Kim Đồng', '2024-04-19', 0);
 
 -- --------------------------------------------------------
 
@@ -316,7 +337,7 @@ ALTER TABLE `phieunhap`
 -- AUTO_INCREMENT for table `sach`
 --
 ALTER TABLE `sach`
-  MODIFY `MASACH` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `MASACH` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

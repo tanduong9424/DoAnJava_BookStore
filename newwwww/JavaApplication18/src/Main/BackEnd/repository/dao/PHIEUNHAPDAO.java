@@ -15,7 +15,7 @@ import java.sql.Statement;
 import Main.BackEnd.repository.database.JDBCUtil;
 import Main.BackEnd.repository.modal.NHANVIEN;
 import Main.BackEnd.repository.modal.PHIEUNHAP;
-import Main.BackEnd.repository.modal.SACH;
+import modal.SACH;
 public class PHIEUNHAPDAO implements DAOInterface<PHIEUNHAP>{
 
     @Override
