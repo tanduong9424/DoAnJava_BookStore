@@ -6,6 +6,7 @@ package Main.FrontEnd;
 
 import Main.FrontEnd.FormAdd.AddKhachHang;
 import Main.FrontEnd.FormAdd.AddKhachHang;
+import Main.FrontEnd.FormEdit.EditKhachHang;
 
 /**
  *
@@ -46,6 +47,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1250, 428));
 
         XuatExcel.setBackground(new java.awt.Color(204, 255, 204));
+        XuatExcel.setForeground(new java.awt.Color(0, 51, 51));
         XuatExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_ms_excel_30px.png"))); // NOI18N
         XuatExcel.setText("Xuất Excel");
         XuatExcel.addActionListener(new java.awt.event.ActionListener() {
@@ -55,6 +57,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
         });
 
         NhapExcel.setBackground(new java.awt.Color(204, 255, 204));
+        NhapExcel.setForeground(new java.awt.Color(0, 51, 51));
         NhapExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_ms_excel_30px.png"))); // NOI18N
         NhapExcel.setText("Nhập Excel");
         NhapExcel.addActionListener(new java.awt.event.ActionListener() {
@@ -128,8 +131,9 @@ public class KhachHangPanel extends javax.swing.JPanel {
         scroll1.setViewportView(KhachHangtb);
 
         Them.setBackground(new java.awt.Color(204, 255, 204));
+        Them.setForeground(new java.awt.Color(0, 51, 51));
         Them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_add_30px.png"))); // NOI18N
-        Them.setText("Thêm");
+        Them.setText("Thêm Khách Hàng");
         Them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ThemActionPerformed(evt);
@@ -137,8 +141,9 @@ public class KhachHangPanel extends javax.swing.JPanel {
         });
 
         Xoa.setBackground(new java.awt.Color(204, 255, 204));
+        Xoa.setForeground(new java.awt.Color(0, 51, 51));
         Xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_delete_30px_1.png"))); // NOI18N
-        Xoa.setText("Xóa");
+        Xoa.setText("Xóa Khách Hàng");
         Xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 XoaActionPerformed(evt);
@@ -146,8 +151,9 @@ public class KhachHangPanel extends javax.swing.JPanel {
         });
 
         Sua.setBackground(new java.awt.Color(204, 255, 204));
+        Sua.setForeground(new java.awt.Color(0, 51, 51));
         Sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_maintenance_30px.png"))); // NOI18N
-        Sua.setText("Sửa");
+        Sua.setText("Sửa Thông tin Khách Hàng");
         Sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SuaActionPerformed(evt);
@@ -175,7 +181,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
             dataKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataKHLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+                .addComponent(scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dataKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Sua)
@@ -193,6 +199,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
         search.setContentAreaFilled(false);
 
         thuoctinh.setBackground(new java.awt.Color(204, 255, 204));
+        thuoctinh.setForeground(new java.awt.Color(0, 51, 51));
         thuoctinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã Khách Hàng", "Tên Khách Hàng", "Địa Chỉ", "Số Điện Thoại", "Email" }));
         thuoctinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,7 +208,8 @@ public class KhachHangPanel extends javax.swing.JPanel {
         });
 
         inputSearch.setBackground(new java.awt.Color(204, 255, 204));
-        inputSearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tất Cả", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Black", 0, 10))); // NOI18N
+        inputSearch.setForeground(new java.awt.Color(0, 51, 51));
+        inputSearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tất Cả", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         inputSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputSearchActionPerformed(evt);
@@ -273,7 +281,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
     private void ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemActionPerformed
         // TODO add your handling code here:
-        AddKhachHang x=new AddKhachHang();
+        AddKhachHang x = new AddKhachHang();
         x.setVisible(true);
     }//GEN-LAST:event_ThemActionPerformed
 
@@ -283,6 +291,8 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
     private void SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaActionPerformed
         // TODO add your handling code here:
+        EditKhachHang y = new EditKhachHang();
+        y.setVisible(true);
     }//GEN-LAST:event_SuaActionPerformed
 
     private void thuoctinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thuoctinhActionPerformed

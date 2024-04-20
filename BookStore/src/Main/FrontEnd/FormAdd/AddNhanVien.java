@@ -4,6 +4,8 @@
  */
 package Main.FrontEnd.FormAdd;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author DELL
@@ -150,7 +152,14 @@ public class AddNhanVien extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
-        this.dispose();
+       this.dispose();
+        if(true){
+            int trungNV=JOptionPane.showConfirmDialog(null,"Nhân Viên này đã tồn tại\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
+            if (trungNV == JOptionPane.YES_OPTION) {
+                AddNhanVien y = new AddNhanVien();
+                y.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_submitbtnMouseClicked
 
     /**

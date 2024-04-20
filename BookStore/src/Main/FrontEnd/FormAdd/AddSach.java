@@ -5,6 +5,7 @@
 package Main.FrontEnd.FormAdd;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -184,6 +185,13 @@ public class AddSach extends javax.swing.JFrame {
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
         this.dispose();
+        if(true){
+            int trungSach=JOptionPane.showConfirmDialog(null,"Sách này đã tồn tại\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
+            if (trungSach == JOptionPane.YES_OPTION) {
+                AddSach y = new AddSach();
+                y.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void jLabel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseMoved

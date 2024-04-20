@@ -5,6 +5,7 @@
 package Main.FrontEnd;
 
 import Main.FrontEnd.FormAdd.AddNhanVien;
+import Main.FrontEnd.FormEdit.EditNhanVien;
 
 /**
  *
@@ -53,6 +54,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         search.setContentAreaFilled(false);
 
         thuoctinh.setBackground(new java.awt.Color(204, 255, 204));
+        thuoctinh.setForeground(new java.awt.Color(0, 51, 51));
         thuoctinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã Nhân Viên", "Tên Nhân Viên", "Email", "Số Điện Thoại", "Địa Chỉ" }));
         thuoctinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,7 +63,8 @@ public class NhanVienPanel extends javax.swing.JPanel {
         });
 
         inputsearch.setBackground(new java.awt.Color(204, 255, 204));
-        inputsearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tất Cả", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Black", 0, 10))); // NOI18N
+        inputsearch.setForeground(new java.awt.Color(0, 51, 51));
+        inputsearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tất Cả", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         inputsearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputsearchActionPerformed(evt);
@@ -93,6 +96,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         );
 
         XuatExcel.setBackground(new java.awt.Color(204, 255, 204));
+        XuatExcel.setForeground(new java.awt.Color(0, 51, 51));
         XuatExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_ms_excel_30px.png"))); // NOI18N
         XuatExcel.setText("Xuất Excel");
         XuatExcel.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +106,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         });
 
         NhapExcel.setBackground(new java.awt.Color(204, 255, 204));
+        NhapExcel.setForeground(new java.awt.Color(0, 51, 51));
         NhapExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_ms_excel_30px.png"))); // NOI18N
         NhapExcel.setText("Nhập Excel");
 
@@ -172,8 +177,9 @@ public class NhanVienPanel extends javax.swing.JPanel {
         scroll1.setViewportView(DataNhanVien);
 
         Them.setBackground(new java.awt.Color(204, 255, 204));
+        Them.setForeground(new java.awt.Color(0, 51, 51));
         Them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_add_30px.png"))); // NOI18N
-        Them.setText("Thêm");
+        Them.setText("Thêm Nhân Viên");
         Them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ThemActionPerformed(evt);
@@ -181,8 +187,9 @@ public class NhanVienPanel extends javax.swing.JPanel {
         });
 
         Xoa.setBackground(new java.awt.Color(204, 255, 204));
+        Xoa.setForeground(new java.awt.Color(0, 51, 51));
         Xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_delete_30px_1.png"))); // NOI18N
-        Xoa.setText("Xóa");
+        Xoa.setText("Xóa Nhân Viên");
         Xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 XoaActionPerformed(evt);
@@ -190,8 +197,9 @@ public class NhanVienPanel extends javax.swing.JPanel {
         });
 
         Sua.setBackground(new java.awt.Color(204, 255, 204));
+        Sua.setForeground(new java.awt.Color(0, 51, 51));
         Sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_support_30px.png"))); // NOI18N
-        Sua.setText("Sửa");
+        Sua.setText("Sửa thông tin Nhân Viên");
         Sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SuaActionPerformed(evt);
@@ -282,11 +290,14 @@ public class NhanVienPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_ThemActionPerformed
 
     private void XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:\
+       
     }//GEN-LAST:event_XoaActionPerformed
 
     private void SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaActionPerformed
         // TODO add your handling code here:
+        EditNhanVien y = new EditNhanVien();
+        y.setVisible(true);
     }//GEN-LAST:event_SuaActionPerformed
 
 

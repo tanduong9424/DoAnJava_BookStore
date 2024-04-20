@@ -4,6 +4,8 @@
  */
 package Main.FrontEnd.FormAdd;
 
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -152,6 +154,13 @@ public class AddKhachHang extends javax.swing.JFrame {
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
         this.dispose();
+        if(true){
+            int trungKH=JOptionPane.showConfirmDialog(null,"Khách Hàng này đã tồn tại\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
+            if (trungKH == JOptionPane.YES_OPTION) {
+                AddKhachHang y = new AddKhachHang();
+                y.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_submitbtnMouseClicked
 
     /**

@@ -13,6 +13,7 @@ import Main.FrontEnd.BanHangPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import static java.lang.System.exit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -300,7 +301,10 @@ public class GiaoDienChinh extends javax.swing.JFrame {
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
-         exit(0);
+        int confirmResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thoát không?", "Xác nhận thoát", JOptionPane.YES_NO_OPTION);
+        if (confirmResult == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_exitActionPerformed
 
     private void BanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BanHangMouseClicked

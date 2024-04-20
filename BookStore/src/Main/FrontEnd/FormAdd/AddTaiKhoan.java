@@ -4,6 +4,8 @@
  */
 package Main.FrontEnd.FormAdd;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author DELL
@@ -144,6 +146,13 @@ public class AddTaiKhoan extends javax.swing.JFrame {
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
         this.dispose();
+        if(true){
+            int trungTK=JOptionPane.showConfirmDialog(null,"Tài khoản này đã tồn tại\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
+            if (trungTK == JOptionPane.YES_OPTION) {
+                AddTaiKhoan y = new AddTaiKhoan();
+                y.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_submitbtnMouseClicked
 
     /**

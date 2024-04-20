@@ -5,6 +5,7 @@
 package Main.FrontEnd;
 
 import Main.FrontEnd.FormAdd.AddTaiKhoan;
+import Main.FrontEnd.FormEdit.EditTaiKhoan;
 
 /**
  *
@@ -42,8 +43,9 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 153, 153));
 
         Suabtn.setBackground(new java.awt.Color(204, 255, 204));
+        Suabtn.setForeground(new java.awt.Color(0, 51, 51));
         Suabtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_maintenance_30px.png"))); // NOI18N
-        Suabtn.setText("Sửa");
+        Suabtn.setText("Sửa Tài Khoản");
         Suabtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SuabtnActionPerformed(evt);
@@ -51,8 +53,9 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         });
 
         Xoabtn.setBackground(new java.awt.Color(204, 255, 204));
+        Xoabtn.setForeground(new java.awt.Color(0, 51, 51));
         Xoabtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_delete_30px_1.png"))); // NOI18N
-        Xoabtn.setText("Xóa");
+        Xoabtn.setText("Xóa Tài Khoản");
         Xoabtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 XoabtnActionPerformed(evt);
@@ -60,8 +63,9 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         });
 
         Thembtn.setBackground(new java.awt.Color(204, 255, 204));
+        Thembtn.setForeground(new java.awt.Color(0, 51, 51));
         Thembtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_add_30px.png"))); // NOI18N
-        Thembtn.setText("Thêm");
+        Thembtn.setText("Thêm Tài Khoản");
         Thembtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ThembtnActionPerformed(evt);
@@ -76,6 +80,7 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         search.setContentAreaFilled(false);
 
         thuoctinh.setBackground(new java.awt.Color(204, 255, 204));
+        thuoctinh.setForeground(new java.awt.Color(0, 51, 51));
         thuoctinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Họ và Tên", "Tên Tài Khoản", "Chức Năng" }));
         thuoctinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +89,8 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         });
 
         inputsearch.setBackground(new java.awt.Color(204, 255, 204));
-        inputsearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tất Cả", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Black", 0, 10))); // NOI18N
+        inputsearch.setForeground(new java.awt.Color(0, 51, 51));
+        inputsearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tất Cả", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Black", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         inputsearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputsearchActionPerformed(evt);
@@ -118,7 +124,7 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         detailAccount.setBackground(new java.awt.Color(0, 204, 204));
 
         scroll1.setBackground(new java.awt.Color(0, 204, 204));
-        scroll1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin tài khoản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Black", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        scroll1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, " Thông tin tài khoản truy cập hệ thống", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Black", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         account.setBackground(new java.awt.Color(204, 255, 204));
         account.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -207,10 +213,10 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Thembtn)
                 .addGap(30, 30, 30)
-                .addComponent(Xoabtn, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Xoabtn)
                 .addGap(30, 30, 30)
-                .addComponent(Suabtn, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(487, 487, 487))
+                .addComponent(Suabtn)
+                .addGap(400, 400, 400))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(detailAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -221,7 +227,7 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Thembtn)
                             .addComponent(Xoabtn)
@@ -235,6 +241,8 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
 
     private void SuabtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuabtnActionPerformed
         // TODO add your handling code here:
+        EditTaiKhoan y = new EditTaiKhoan();
+        y.setVisible(true);
     }//GEN-LAST:event_SuabtnActionPerformed
 
     private void XoabtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoabtnActionPerformed

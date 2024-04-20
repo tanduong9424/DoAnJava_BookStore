@@ -4,6 +4,8 @@
  */
 package Main.FrontEnd.FormAdd;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author DELL
@@ -144,6 +146,13 @@ public class AddNhaCungCap extends javax.swing.JFrame {
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
         this.dispose();
+        if(true){
+            int trungNCC=JOptionPane.showConfirmDialog(null,"Nhà cung cấp này đã tồn tại\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
+            if (trungNCC == JOptionPane.YES_OPTION) {
+                AddNhaCungCap y = new AddNhaCungCap();
+                y.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_submitbtnMouseClicked
 
     /**

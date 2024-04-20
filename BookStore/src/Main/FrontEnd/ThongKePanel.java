@@ -65,6 +65,7 @@ public class ThongKePanel extends javax.swing.JPanel {
 
         DataBanRa.setBackground(new java.awt.Color(204, 255, 204));
         DataBanRa.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        DataBanRa.setForeground(new java.awt.Color(0, 51, 51));
         DataBanRa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -119,7 +120,7 @@ public class ThongKePanel extends javax.swing.JPanel {
         DataBanRa.setShowGrid(true);
         BanRa.setViewportView(DataBanRa);
 
-        sumHD.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        sumHD.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         sumHD.setForeground(new java.awt.Color(0, 0, 0));
         sumHD.setText("Tổng hóa đơn");
 
@@ -127,7 +128,7 @@ public class ThongKePanel extends javax.swing.JPanel {
         sum.setBackground(new java.awt.Color(204, 255, 204));
         sum.setEnabled(false);
 
-        nameKH.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        nameKH.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         nameKH.setForeground(new java.awt.Color(0, 0, 0));
         nameKH.setText("Tên khách hàng");
 
@@ -140,12 +141,13 @@ public class ThongKePanel extends javax.swing.JPanel {
         });
 
         sumALLbtn.setBackground(new java.awt.Color(204, 255, 204));
+        sumALLbtn.setForeground(new java.awt.Color(0, 51, 51));
         sumALLbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_us_dollar_30px.png"))); // NOI18N
         sumALLbtn.setText("Tổng");
 
         sumALL.setEditable(false);
         sumALL.setBackground(new java.awt.Color(204, 255, 204));
-        sumALL.setBorder(javax.swing.BorderFactory.createTitledBorder("Tổng toàn bộ hóa đơn"));
+        sumALL.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tổng toàn bộ hóa đơn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         sumALL.setFocusable(false);
         sumALL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +205,8 @@ public class ThongKePanel extends javax.swing.JPanel {
 
         DataHoaDonLonNhat.setAutoCreateRowSorter(true);
         DataHoaDonLonNhat.setBackground(new java.awt.Color(204, 255, 204));
+        DataHoaDonLonNhat.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        DataHoaDonLonNhat.setForeground(new java.awt.Color(0, 51, 51));
         DataHoaDonLonNhat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -257,10 +261,10 @@ public class ThongKePanel extends javax.swing.JPanel {
         HoaDonLonNhat.setViewportView(DataHoaDonLonNhat);
 
         NgayLapMax.setBackground(new java.awt.Color(0, 204, 204));
-        NgayLapMax.setBorder(javax.swing.BorderFactory.createTitledBorder("Ngày lập"));
+        NgayLapMax.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày lập", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         NhapNgay1.setBackground(new java.awt.Color(204, 255, 204));
-        NhapNgay1.setBorder(javax.swing.BorderFactory.createTitledBorder("Từ"));
+        NhapNgay1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Từ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         javax.swing.GroupLayout NhapNgay1Layout = new javax.swing.GroupLayout(NhapNgay1);
         NhapNgay1.setLayout(NhapNgay1Layout);
@@ -281,7 +285,7 @@ public class ThongKePanel extends javax.swing.JPanel {
         });
 
         NhapNgay2.setBackground(new java.awt.Color(204, 255, 204));
-        NhapNgay2.setBorder(javax.swing.BorderFactory.createTitledBorder("Đến"));
+        NhapNgay2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đến", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         javax.swing.GroupLayout NhapNgay2Layout = new javax.swing.GroupLayout(NhapNgay2);
         NhapNgay2.setLayout(NhapNgay2Layout);
@@ -324,6 +328,7 @@ public class ThongKePanel extends javax.swing.JPanel {
         );
 
         TimHoaDonLonNhat.setBackground(new java.awt.Color(204, 255, 204));
+        TimHoaDonLonNhat.setForeground(new java.awt.Color(0, 51, 51));
         TimHoaDonLonNhat.setText("Hóa đơn lớn nhất");
         TimHoaDonLonNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -366,6 +371,7 @@ public class ThongKePanel extends javax.swing.JPanel {
 
         DataTrungBinh.setBackground(new java.awt.Color(204, 255, 204));
         DataTrungBinh.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        DataTrungBinh.setForeground(new java.awt.Color(0, 51, 51));
         DataTrungBinh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -427,10 +433,12 @@ public class ThongKePanel extends javax.swing.JPanel {
         TrungBinh.setViewportView(DataTrungBinh);
 
         NgayLapTrungBinh.setBackground(new java.awt.Color(0, 204, 204));
-        NgayLapTrungBinh.setBorder(javax.swing.BorderFactory.createTitledBorder("Ngày lập"));
+        NgayLapTrungBinh.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày lập", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        NgayLapTrungBinh.setForeground(new java.awt.Color(0, 51, 51));
 
         NhapNgay1TB.setBackground(new java.awt.Color(204, 255, 204));
-        NhapNgay1TB.setBorder(javax.swing.BorderFactory.createTitledBorder("Từ"));
+        NhapNgay1TB.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Từ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        NhapNgay1TB.setForeground(new java.awt.Color(0, 51, 51));
 
         javax.swing.GroupLayout NhapNgay1TBLayout = new javax.swing.GroupLayout(NhapNgay1TB);
         NhapNgay1TB.setLayout(NhapNgay1TBLayout);
@@ -451,7 +459,8 @@ public class ThongKePanel extends javax.swing.JPanel {
         });
 
         NhapNgay2TB.setBackground(new java.awt.Color(204, 255, 204));
-        NhapNgay2TB.setBorder(javax.swing.BorderFactory.createTitledBorder("Đến"));
+        NhapNgay2TB.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đến", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        NhapNgay2TB.setForeground(new java.awt.Color(0, 51, 51));
 
         javax.swing.GroupLayout NhapNgay2TBLayout = new javax.swing.GroupLayout(NhapNgay2TB);
         NhapNgay2TB.setLayout(NhapNgay2TBLayout);
@@ -496,7 +505,8 @@ public class ThongKePanel extends javax.swing.JPanel {
 
         KetQuaTB.setEditable(false);
         KetQuaTB.setBackground(new java.awt.Color(204, 255, 204));
-        KetQuaTB.setBorder(javax.swing.BorderFactory.createTitledBorder("Trung Bình Tất Cả"));
+        KetQuaTB.setForeground(new java.awt.Color(0, 51, 51));
+        KetQuaTB.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Trung Bình Tất Cả", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         KetQuaTB.setFocusable(false);
         KetQuaTB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -505,6 +515,7 @@ public class ThongKePanel extends javax.swing.JPanel {
         });
 
         TinhTrungBinh.setBackground(new java.awt.Color(204, 255, 204));
+        TinhTrungBinh.setForeground(new java.awt.Color(0, 51, 51));
         TinhTrungBinh.setText("Trung Bình");
         TinhTrungBinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -536,10 +547,10 @@ public class ThongKePanel extends javax.swing.JPanel {
                     .addComponent(NgayLapTrungBinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(AVGLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(AVGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(KetQuaTB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TinhTrungBinh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(AVGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(KetQuaTB)
+                            .addComponent(TinhTrungBinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(0, 0, 0)
                 .addComponent(TrungBinh, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(189, 189, 189))
         );
