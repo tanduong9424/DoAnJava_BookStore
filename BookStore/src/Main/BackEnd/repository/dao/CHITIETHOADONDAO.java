@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import Main.BackEnd.repository.database.JDBCUtil;
 import Main.BackEnd.repository.modal.CHITIETHOADON;
+import Main.BackEnd.repository.modal.HOADON;
 
 public class CHITIETHOADONDAO implements DAOInterface<CHITIETHOADON>{
 	public static CHITIETHOADONDAO getInstance() {
@@ -100,6 +101,33 @@ public class CHITIETHOADONDAO implements DAOInterface<CHITIETHOADON>{
 				int THANHTIEN=rs.getInt("THANHTIEN");
 				CHITIETHOADON ct=new CHITIETHOADON(MAHOADON,MASACH,GIATIEN,THANHTIEN,SOLUONG);
 				ketqua=ct;
+			}
+			JDBCUtil.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class CHITIETHOADONDAO \n");
+			e.printStackTrace();
+		}
+		return ketqua;
+	}
+	public ArrayList<CHITIETHOADON> selectByIDHOADON(HOADON t) {
+		ArrayList<CHITIETHOADON> ketqua=new ArrayList<CHITIETHOADON>();
+		try {
+			Connection con=JDBCUtil.getConnection();
+			String sql=" SELECT * FROM chitiethoadon "+
+					"WHERE MAHOADON=?";
+			PreparedStatement pst=con.prepareStatement(sql);
+			pst.setInt(1,t.getMAHOADON());
+			
+			ResultSet rs=pst.executeQuery();
+			while(rs.next()) {
+				int MAHOADON=rs.getInt("MAHOADON");
+				int MASACH=rs.getInt("MASACH");
+				int SOLUONG=rs.getInt("SOLUONG");
+				int GIATIEN=rs.getInt("GIATIEN");
+				int THANHTIEN=rs.getInt("THANHTIEN");
+				CHITIETHOADON ct=new CHITIETHOADON(MAHOADON,MASACH,GIATIEN,THANHTIEN,SOLUONG);
+				ketqua.add(ct);
 			}
 			JDBCUtil.closeConnection(con);
 		} catch (SQLException e) {

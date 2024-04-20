@@ -8,7 +8,6 @@ public class SACH {
 	private String TENSACH;
 	private String IMAGE;
 	private int SOLUONG;
-	private int MATACGIA;
 	private String TENLOAISACH;
 	private String TENNHAXUATBAN;
 	private int GIABIA;
@@ -23,14 +22,13 @@ public class SACH {
 		MASACH = mASACH;
 	}
 
-	public SACH(int mASACH, String tENSACH, String iMAGE, int sOLUONG, int mATACGIA,
+	public SACH(int mASACH, String tENSACH, String iMAGE, int sOLUONG,
 			String tENLOAISACH, String tENNHAXUATBAN, int gIABIA, int lANTAIBAN, Date nAMXUATBAN,
 			boolean iSHIDDEN) {
 		MASACH = mASACH;
 		TENSACH = tENSACH;
 		IMAGE = iMAGE;
 		SOLUONG = sOLUONG;
-		MATACGIA = mATACGIA;
 		TENLOAISACH = tENLOAISACH;
 		TENNHAXUATBAN = tENNHAXUATBAN;
 		GIABIA = gIABIA;
@@ -39,13 +37,12 @@ public class SACH {
 		ISHIDDEN = iSHIDDEN;
 	}
 
-	public SACH(String tENSACH, String iMAGE, int sOLUONG, int mATACGIA, String tENLOAISACH,
+	public SACH(String tENSACH, String iMAGE, int sOLUONG, String tENLOAISACH,
 			String tENNHAXUATBAN, int gIABIA, int lANTAIBAN, Date nAMXUATBAN,
 			boolean iSHIDDEN) {
 		TENSACH = tENSACH;
 		IMAGE = iMAGE;
 		SOLUONG = sOLUONG;
-		MATACGIA = mATACGIA;
 		TENLOAISACH = tENLOAISACH;
 		TENNHAXUATBAN = tENNHAXUATBAN;
 		GIABIA = gIABIA;
@@ -92,13 +89,7 @@ public class SACH {
 		SOLUONG = sOLUONG;
 	}
 
-	public int getMATACGIA() {
-		return MATACGIA;
-	}
 
-	public void setMATACGIA(int mATACGIA) {
-		MATACGIA = mATACGIA;
-	}
 
 
 	public String getTENLOAISACH() {

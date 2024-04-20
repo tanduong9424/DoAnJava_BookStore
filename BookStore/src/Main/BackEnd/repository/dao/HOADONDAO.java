@@ -242,7 +242,7 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
 				int MAHOADON=rs.getInt("MAHOADON");
-				String TENKHACHHANG=rs.getString("TENKHACHHANG");
+				String TENKHACHHANG=rs.getString("TENKHACHHAHNG");
 				int manv=rs.getInt("manv");
 				Date NGAYLAP=rs.getDate("NGAYLAP");
 				int TONGTIEN=rs.getInt("TONGTIEN");

@@ -311,6 +311,10 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         // TODO add your handling code here:
         Title.setText("Bán Hàng");
         BanHangPanel banhang = new BanHangPanel();
+//        load hoadon và sách
+        banhang.loadBooksToTable();
+        banhang.loadHOADONToTable();
+//kết thúc
         Middle.add(banhang, "banhang");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
         cardLayout.show(Middle, "banhang");

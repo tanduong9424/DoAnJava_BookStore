@@ -4,7 +4,15 @@
  */
 package Main.FrontEnd;
 
+import Main.BackEnd.repository.dao.CHITIETHOADONDAO;
+import Main.BackEnd.repository.dao.HOADONDAO;
+import Main.BackEnd.repository.dao.SACHDAO;
+import Main.BackEnd.repository.modal.CHITIETHOADON;
+import Main.BackEnd.repository.modal.HOADON;
 import Main.FrontEnd.FormAdd.AddKhachHang;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import modal.SACH;
 
 /**
  *
@@ -20,6 +28,59 @@ public class BanHangPanel extends javax.swing.JPanel {
         submit.setVisible(false);
         xoaspbtn.setVisible(false);
     }
+    public void loadBooksToTable() {
+        DefaultTableModel model = (DefaultTableModel) Sachtb.getModel();
+        // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
+        model.setRowCount(0);
+
+        try {
+            System.out.print("hoạt động");
+            ArrayList<SACH> sachList = SACHDAO.getInstance().selectAllExceptISHIDDEN();
+
+            for (SACH sach : sachList) {
+                Object[] row = {sach.getMASACH(), sach.getTENSACH(), sach.getSOLUONG(), sach.getGIABIA(), sach.getTENNHAXUATBAN()};
+                model.addRow(row);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void loadHOADONToTable() {
+        DefaultTableModel model = (DefaultTableModel) dataHoadon.getModel();
+        // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
+        model.setRowCount(0);
+
+        try {
+            System.out.print("hoạt động");
+            ArrayList<HOADON> hoadonList = HOADONDAO.getInstance().selectAllHOANTHANH();
+
+            for (HOADON hoadon : hoadonList) {
+                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),hoadon.getTENTAIKHOAN(),hoadon.getNGAYLAP(),hoadon.getTONGTIEN()};
+                model.addRow(row);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }    
+    public void loadCHITIETHOADONToTable(HOADON t) {
+        DefaultTableModel model = (DefaultTableModel) selectedSach.getModel();
+        // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
+        model.setRowCount(0);
+
+        try {
+            System.out.print("hoạt động");
+            ArrayList<CHITIETHOADON> chitiethoadonList = CHITIETHOADONDAO.getInstance().selectByIDHOADON(t);
+
+            for (CHITIETHOADON chitiethoadon : chitiethoadonList) {
+                SACH sach=new SACH(chitiethoadon.getMASACH());
+                SACH result=SACHDAO.getInstance().selectById(sach);
+                Object[] row = {chitiethoadon.getMASACH(),result.getTENSACH(),chitiethoadon.getSOLUONG(),chitiethoadon.getGIATIEN(),chitiethoadon.getTHANHTIEN()};
+                model.addRow(row);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -133,7 +194,7 @@ public class BanHangPanel extends javax.swing.JPanel {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -229,16 +290,9 @@ public class BanHangPanel extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Long.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         Sachtb.setShowGrid(true);
@@ -684,6 +738,14 @@ public class BanHangPanel extends javax.swing.JPanel {
 
     private void dataHoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataHoadonMouseClicked
         // TODO add your handling code here:
+        int row = dataHoadon.rowAtPoint(evt.getPoint());
+        if (row >= 0) { // Chỉ xử lý khi chọn hàng hợp lệ
+            String maHoaDonStr = dataHoadon.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
+            int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
+            HOADON hd = new HOADON(maHoaDon);
+            loadCHITIETHOADONToTable(hd);
+        }
+
     }//GEN-LAST:event_dataHoadonMouseClicked
 
     private void NhaptenKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NhaptenKHActionPerformed

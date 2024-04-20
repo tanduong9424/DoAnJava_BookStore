@@ -9,24 +9,23 @@ import Main.BackEnd.repository.dao.KHACHHANGDAO;
 import Main.BackEnd.repository.dao.TAIKHOANDAO;
 import Main.BackEnd.repository.modal.KHACHANG;
 import Main.BackEnd.repository.modal.TAIKHOAN;
+import static com.google.protobuf.WireFormat.JavaType.BOOLEAN;
+import com.mysql.cj.xdevapi.Row;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import javax.print.DocFlavor.STRING;
+//import org.apache.poi.ss.usermodel.Cell;
+//import org.apache.poi.ss.usermodel.DateUtil;
+//import org.apache.poi.xssf.usermodel.XSSFRow;
+//import org.apache.poi.xssf.usermodel.XSSFSheet;
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class khachHangImpl implements khachHang{
 

@@ -169,7 +169,7 @@ public class BanHangPanel extends javax.swing.JPanel {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -262,7 +262,6 @@ public class BanHangPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jTable2.setEnabled(false);
         jTable2.setShowGrid(true);
         jScrollPane1.setViewportView(jTable2);
 
