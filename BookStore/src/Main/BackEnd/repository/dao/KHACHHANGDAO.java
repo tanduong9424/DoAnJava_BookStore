@@ -13,6 +13,10 @@ import Main.BackEnd.repository.modal.TAIKHOAN;
 
 public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
 
+	public static KHACHHANGDAO getInstance() {
+		return new KHACHHANGDAO();
+	}    
+    
     @Override
     public int insert(KHACHANG  t) {
         int ketqua=0;
@@ -206,6 +210,38 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
             
             PreparedStatement pst=con.prepareStatement(sql);
 			pst.setInt(1, t.getMakh());
+            
+            
+            ResultSet rs=pst.executeQuery();
+            while(rs.next()) {
+                int makh=rs.getInt("makh");	
+                String username=rs.getString("username");	
+                String hoten=rs.getString("hoten");	
+                String diachi=rs.getString("diachi");	
+                String email=rs.getString("email");	
+                int dienthoai=rs.getInt("dienthoai");	
+                Date ngaytao=rs.getDate("ngaytao");	
+                boolean tttk=rs.getBoolean("tttk");	
+                KHACHANG nv=new KHACHANG(makh,username,hoten,diachi,email,dienthoai,ngaytao,tttk);
+                ketqua=nv;
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
+            e.printStackTrace();
+        }
+        return ketqua;
+    }
+        public KHACHANG selectByUsername(TAIKHOAN t) {
+        KHACHANG ketqua=null;
+        try {
+            Connection con=JDBCUtil.getConnection();
+            
+            String sql=" SELECT * FROM khachhang WHERE username=? ";
+            
+            PreparedStatement pst=con.prepareStatement(sql);
+			pst.setString(1, t.getUSERNAME());
             
             
             ResultSet rs=pst.executeQuery();
