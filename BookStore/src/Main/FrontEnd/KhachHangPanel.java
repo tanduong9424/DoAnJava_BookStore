@@ -8,7 +8,6 @@ import Main.BackEnd.Bus.Impl.khachHangImpl;
 import Main.BackEnd.repository.dao.KHACHHANGDAO;
 import Main.BackEnd.repository.modal.KHACHANG;
 import Main.FrontEnd.FormAdd.AddKhachHang;
-import Main.FrontEnd.FormAdd.AddKhachHang;
 import Main.FrontEnd.FormEdit.EditKhachHang;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +21,8 @@ public class KhachHangPanel extends javax.swing.JPanel {
     /**
      * Creates new form KhachHangPanel
      */
+    khachHangImpl khaHangImpl = new khachHangImpl();
+    
     public KhachHangPanel() {
         initComponents();
     }
@@ -206,6 +207,11 @@ public class KhachHangPanel extends javax.swing.JPanel {
         search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-magnifying-glass-30.png"))); // NOI18N
         search.setBorder(null);
         search.setContentAreaFilled(false);
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
 
         thuoctinh.setBackground(new java.awt.Color(204, 255, 204));
         thuoctinh.setForeground(new java.awt.Color(0, 51, 51));
@@ -278,24 +284,50 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
     private void XuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XuatExcelActionPerformed
         // TODO add your handling code here:
-        khachHangImpl khachHangImpl1 = new khachHangImpl();
-        khachHangImpl1.xuatExcel();
+        khaHangImpl.xuatExcel();
     }//GEN-LAST:event_XuatExcelActionPerformed
 
     private void ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemActionPerformed
         // TODO add your handling code here:
         AddKhachHang x = new AddKhachHang();
         x.setVisible(true);
+        x.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                loadBooksToTable();
+            }
+        });
+
     }//GEN-LAST:event_ThemActionPerformed
 
     private void XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaActionPerformed
         // TODO add your handling code here:
+        int selectedRowIdx = KhachHangtb.getSelectedRow();
+        if (selectedRowIdx != -1) { 
+            Object value = KhachHangtb.getModel().getValueAt(selectedRowIdx, 0); 
+            int intValue = Integer.parseInt(value.toString());
+            KHACHANG khachang = new KHACHANG(intValue);
+            khaHangImpl.xoaKhachHang(khachang);
+            loadBooksToTable();
+        }
     }//GEN-LAST:event_XoaActionPerformed
 
     private void SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaActionPerformed
         // TODO add your handling code here:
         EditKhachHang y = new EditKhachHang();
         y.setVisible(true);
+        int selectedRowIdx = KhachHangtb.getSelectedRow();
+        if (selectedRowIdx != -1) { 
+            Object value = KhachHangtb.getModel().getValueAt(selectedRowIdx, 0); 
+            String valueAsString = value.toString();
+            y.addThongTin(valueAsString);
+            y.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                loadBooksToTable();
+            }
+        });
+        }
     }//GEN-LAST:event_SuaActionPerformed
 
     private void thuoctinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thuoctinhActionPerformed
@@ -305,6 +337,23 @@ public class KhachHangPanel extends javax.swing.JPanel {
     private void inputSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputSearchActionPerformed
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) KhachHangtb.getModel();
+        model.setRowCount(0);
+        
+        String kieuTimKiem = (String) thuoctinh.getSelectedItem();
+        String inputText = inputSearch.getText();
+        
+        if(inputText!=null){
+            ArrayList<KHACHANG> sachList = khaHangImpl.timKiem(kieuTimKiem,inputText);
+            for (KHACHANG khachang : sachList) {
+                Object[] row = {khachang.getMakh(), khachang.getHoten(), khachang.getDiachi(), khachang.getDienthoai(), khachang.getEmail()};
+                model.addRow(row);
+            }
+        }
+    }//GEN-LAST:event_searchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

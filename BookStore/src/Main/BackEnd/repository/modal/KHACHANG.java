@@ -13,7 +13,9 @@ public class KHACHANG {
     private boolean tttk;
     public KHACHANG() {
     }
-
+    public KHACHANG(int makh) {
+        this.makh = makh;
+    }
     
     public KHACHANG(int makh, String username, String hoten, String diachi, String email, int dienthoai, Date ngaytao,
             boolean tttk) {

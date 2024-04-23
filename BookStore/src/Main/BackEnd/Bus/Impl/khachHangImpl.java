@@ -44,9 +44,43 @@ public class khachHangImpl implements khachHang{
     }   
 
     @Override
-    public KHACHANG timKiemMaKhachHang(KHACHANG khachang) {
-        return khachHangDao.selectById(khachang);
-    }
+    public ArrayList<KHACHANG> timKiem(String kieuTimKiem,String inputText) {
+        
+        ArrayList<KHACHANG> result = new ArrayList<>();
+        ArrayList<KHACHANG> dskh = khachHangDao.selectAll();
+        dskh.forEach((kh) -> {
+            switch (kieuTimKiem) {
+                case "Mã Khách Hàng":
+                    if (String.valueOf(kh.getMakh()).toLowerCase().contains(inputText.toLowerCase())) {
+                        result.add(kh);
+                    }
+                    break;
+                case "Tên Khách Hàng":
+                    if (kh.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
+                        result.add(kh);
+                    }
+                    break;
+                case "Địa Chỉ":
+                    if (kh.getDiachi().toLowerCase().contains(inputText.toLowerCase())) {
+                        result.add(kh);
+                    }
+                    break;
+                case "Số Điện Thoại":
+                    if (String.valueOf(kh.getDienthoai()).toLowerCase().contains(inputText.toLowerCase())) {
+                        result.add(kh);
+                    }
+                    break;
+                case "Email":
+                    if (kh.getEmail().toLowerCase().contains(inputText.toLowerCase())) {
+                        result.add(kh);
+                    }
+                    break;        
+            }
+        });
+
+        return result;
+    }   
+
 
     @Override
     public Boolean themKhachHangCoTK(KHACHANG khachang,TAIKHOAN tk) {
@@ -103,5 +137,7 @@ public class khachHangImpl implements khachHang{
         }
         return "";
     }
+
+ 
     
 }

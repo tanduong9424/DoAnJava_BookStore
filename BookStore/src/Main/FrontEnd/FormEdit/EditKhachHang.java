@@ -4,15 +4,15 @@
  */
 package Main.FrontEnd.FormEdit;
 
-import Main.FrontEnd.FormAdd.*;
-import javax.swing.JOptionPane;
-
+import Main.BackEnd.Bus.Impl.khachHangImpl;
+import Main.BackEnd.repository.modal.KHACHANG;
 
 /**
  *
  * @author DELL
  */
 public class EditKhachHang extends javax.swing.JFrame {
+    khachHangImpl khaHangImpl = new khachHangImpl();
 
     /**
      * Creates new form AddKhachHang1
@@ -166,16 +166,18 @@ public class EditKhachHang extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
+        int maKH = Integer.parseInt(MaKH.getText());
+        String userName = name.getText();
+        String diaChi = dchi.getText();
+        String mailPerson = mail.getText();
+        KHACHANG khachang = new KHACHANG(maKH, null, userName, diaChi, mailPerson,0 , null,true);
+        khaHangImpl.suaKhachHang(khachang);
         this.dispose();
-        if(true){
-            int failKH=JOptionPane.showConfirmDialog(null,"Đã có lỗi xảy ra\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
-            if (failKH == JOptionPane.YES_OPTION) {
-                EditKhachHang y = new EditKhachHang();
-                y.setVisible(true);
-            }
-        }
+     
     }//GEN-LAST:event_submitbtnMouseClicked
-
+    public void addThongTin(String maKH){
+        MaKH.setText(maKH);
+    }
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_formMouseClicked

@@ -4,7 +4,8 @@
  */
 package Main.FrontEnd.FormAdd;
 
-import javax.swing.JOptionPane;
+import Main.BackEnd.Bus.Impl.khachHangImpl;
+import Main.BackEnd.repository.modal.KHACHANG;
 
 
 /**
@@ -12,10 +13,10 @@ import javax.swing.JOptionPane;
  * @author DELL
  */
 public class AddKhachHang extends javax.swing.JFrame {
-
     /**
      * Creates new form AddKhachHang1
      */
+    khachHangImpl khaHangImpl = new khachHangImpl();
     public AddKhachHang() {
         this.setUndecorated(true);
         initComponents();
@@ -119,6 +120,9 @@ public class AddKhachHang extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 submitbtnMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                submitbtnMouseEntered(evt);
+            }
         });
 
         javax.swing.GroupLayout botLayout = new javax.swing.GroupLayout(bot);
@@ -159,21 +163,24 @@ public class AddKhachHang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here:in
+        
+        String userName = name.getText();
+        String diaChi = dchi.getText();
+        String mailPerson = mail.getText();
+        KHACHANG khachang = new KHACHANG(0, null, userName, diaChi, mailPerson, 0, null,true);
+        khaHangImpl.themKhachHang(khachang);
         this.dispose();
-        if(true){
-            int trungKH=JOptionPane.showConfirmDialog(null,"Khách Hàng này đã tồn tại\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
-            if (trungKH == JOptionPane.YES_OPTION) {
-                AddKhachHang y = new AddKhachHang();
-                y.setVisible(true);
-            }
-        }
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_exitMouseClicked
+
+    private void submitbtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_submitbtnMouseEntered
 
     /**
      * @param args the command line arguments

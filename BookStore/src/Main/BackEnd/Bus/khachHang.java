@@ -6,6 +6,7 @@ package Main.BackEnd.Bus;
 
 import Main.BackEnd.repository.modal.KHACHANG;
 import Main.BackEnd.repository.modal.TAIKHOAN;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,6 +18,6 @@ public interface khachHang {
     Boolean xoaKhachHang(KHACHANG khachang);
     Boolean suaKhachHang(KHACHANG khachang);
     Boolean suaKhachHangCoTK(KHACHANG khachang,TAIKHOAN tk);
-    KHACHANG timKiemMaKhachHang(KHACHANG khachang);
+    ArrayList<KHACHANG> timKiem(String kieuTimKiem,String inputText);
     String xuatExcel();
 }
