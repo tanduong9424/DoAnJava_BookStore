@@ -22,7 +22,7 @@ import modal.SACH;
  * @author DELL
  */
 public class BanHangPanel extends javax.swing.JPanel {
-
+    int status=0;
     /**
      * Creates new form BanHangPanel
      */
@@ -147,7 +147,6 @@ public void loadAnh(SACH t) {
         XoaBtn = new javax.swing.JButton();
         ChiTietHD = new javax.swing.JPanel();
         tongtien = new javax.swing.JLabel();
-        nameKH = new javax.swing.JTextField();
         sum = new javax.swing.JTextField();
         scroll3 = new javax.swing.JScrollPane();
         selectedSach = new javax.swing.JTable();
@@ -214,7 +213,7 @@ public void loadAnh(SACH t) {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Hóa Đơn", "Mã Nhân Viên", "Mã Khách", "Ngày lập", "Mã khuyế mãi", "% giảm giá", "Tổng tiền"
+                "Mã Hóa Đơn", "Mã Nhân Viên", "Tên Tài Khoản", "Ngày lập", "Mã khuyế mãi", "% giảm giá", "Tổng tiền"
             }
         ) {
             Class[] types = new Class [] {
@@ -611,11 +610,6 @@ public void loadAnh(SACH t) {
         tongtien.setForeground(new java.awt.Color(0, 51, 51));
         tongtien.setText("Tổng tiền (VND)");
 
-        nameKH.setEditable(false);
-        nameKH.setBackground(new java.awt.Color(204, 255, 204));
-        nameKH.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tên Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        nameKH.setFocusable(false);
-
         sum.setEditable(false);
         sum.setBackground(new java.awt.Color(204, 255, 204));
         sum.setFocusable(false);
@@ -694,31 +688,29 @@ public void loadAnh(SACH t) {
         ChiTietHD.setLayout(ChiTietHDLayout);
         ChiTietHDLayout.setHorizontalGroup(
             ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ChiTietHDLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(tongtien)
-                .addGap(18, 18, 18)
-                .addComponent(sum, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(377, 377, 377))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ChiTietHDLayout.createSequentialGroup()
-                .addGroup(ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addComponent(scroll3, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+            .addGroup(ChiTietHDLayout.createSequentialGroup()
+                .addGroup(ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ChiTietHDLayout.createSequentialGroup()
-                        .addComponent(nameKH, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(6, 6, 6)
+                        .addComponent(tongtien)
+                        .addGap(18, 18, 18)
+                        .addComponent(sum, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ChiTietHDLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(xoaspbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scroll3, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31))
+                        .addComponent(xoaspbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(377, 377, 377))
         );
         ChiTietHDLayout.setVerticalGroup(
             ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ChiTietHDLayout.createSequentialGroup()
-                .addGroup(ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nameKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(xoaspbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(xoaspbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addComponent(scroll3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -878,6 +870,8 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
         DefaultTableModel model = (DefaultTableModel) selectedSach.getModel();
         // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
         model.setRowCount(0);
+        status=1;
+        System.out.println(status);
 
     }//GEN-LAST:event_ThemBtnActionPerformed
 
@@ -946,6 +940,9 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
+        submit.setVisible(false);
+        xoaspbtn.setVisible(false);
+        status=0;
     }//GEN-LAST:event_submitActionPerformed
 
     private void searchSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchSachActionPerformed
@@ -957,10 +954,17 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
                 // TODO add your handling code here:
         int row = Sachtb.rowAtPoint(evt.getPoint());
         if (row >= 0) { // Chỉ xử lý khi chọn hàng hợp lệ
+            if(status==0){
             String maHoaDonStr = Sachtb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
             int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
             SACH hd = new SACH(maHoaDon);
             loadAnh(hd);
+            }
+            else{
+            String maHoaDonStr = Sachtb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
+            int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
+            System.out.println("da them sach vao chi tiet hoa don "+maHoaDon);
+            }
         }
 
     }//GEN-LAST:event_SachtbMouseClicked
@@ -982,7 +986,6 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel maHD;
     private javax.swing.JTextField maHDtext;
-    private javax.swing.JTextField nameKH;
     private javax.swing.JButton newKH;
     private javax.swing.JTextField nv;
     private javax.swing.JPanel panelImg;
