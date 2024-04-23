@@ -6,11 +6,14 @@ package Main.FrontEnd;
 
 import Main.BackEnd.repository.dao.CHITIETHOADONDAO;
 import Main.BackEnd.repository.dao.HOADONDAO;
+import Main.BackEnd.repository.dao.KHUYENMAIDAO;
 import Main.BackEnd.repository.dao.SACHDAO;
 import Main.BackEnd.repository.modal.CHITIETHOADON;
 import Main.BackEnd.repository.modal.HOADON;
+import Main.BackEnd.repository.modal.KHUYENMAI;
 import Main.FrontEnd.FormAdd.AddKhachHang;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import modal.SACH;
 
@@ -53,9 +56,16 @@ public class BanHangPanel extends javax.swing.JPanel {
         try {
             System.out.print("hoạt động");
             ArrayList<HOADON> hoadonList = HOADONDAO.getInstance().selectAllHOANTHANH();
-
+            
             for (HOADON hoadon : hoadonList) {
-                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),hoadon.getTENTAIKHOAN(),hoadon.getNGAYLAP(),hoadon.getTONGTIEN()};
+                int makhuyenmai=0;
+                int phantramgiam=0;
+                    makhuyenmai=hoadon.getMakhuyenmai();
+                    KHUYENMAI km=KHUYENMAIDAO.getInstance().selectById(new KHUYENMAI(hoadon.getMakhuyenmai()));
+                    if(km!=null){
+                        phantramgiam=km.getPhantramgiam();
+                    }                
+                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),hoadon.getTENTAIKHOAN(),hoadon.getNGAYLAP(),makhuyenmai,phantramgiam,hoadon.getTONGTIEN()};
                 model.addRow(row);
             }
         } catch (Exception ex) {
@@ -70,17 +80,35 @@ public class BanHangPanel extends javax.swing.JPanel {
         try {
             System.out.print("hoạt động");
             ArrayList<CHITIETHOADON> chitiethoadonList = CHITIETHOADONDAO.getInstance().selectByIDHOADON(t);
-
+            int tongtien=0;
             for (CHITIETHOADON chitiethoadon : chitiethoadonList) {
                 SACH sach=new SACH(chitiethoadon.getMASACH());
                 SACH result=SACHDAO.getInstance().selectById(sach);
                 Object[] row = {chitiethoadon.getMASACH(),result.getTENSACH(),chitiethoadon.getSOLUONG(),chitiethoadon.getGIATIEN(),chitiethoadon.getTHANHTIEN()};
                 model.addRow(row);
+                tongtien+=chitiethoadon.getTHANHTIEN();
             }
+            sum.setText(""+tongtien);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }  
+public void loadAnh(SACH t) {
+    String url = t.getIMAGE(); // Lấy đường dẫn ảnh từ đối tượng SACH
+    
+    try {
+        if(url !=null){
+                    // Tạo một đối tượng ImageIcon từ đường dẫn ảnh
+        ImageIcon icon = new ImageIcon(getClass().getResource(url));
+        
+        // Đặt hình ảnh lên jLabel1
+        jLabel1.setIcon(icon);
+        }
+    } catch (Exception ex) {
+        // Nếu có lỗi xảy ra, in ra thông báo lỗi
+        ex.printStackTrace();
+    }
+} 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -116,7 +144,6 @@ public class BanHangPanel extends javax.swing.JPanel {
         nv = new javax.swing.JTextField();
         newKH = new javax.swing.JButton();
         ThemBtn = new javax.swing.JButton();
-        SuaBtn = new javax.swing.JButton();
         XoaBtn = new javax.swing.JButton();
         ChiTietHD = new javax.swing.JPanel();
         tongtien = new javax.swing.JLabel();
@@ -154,47 +181,47 @@ public class BanHangPanel extends javax.swing.JPanel {
         dataHoadon.setForeground(new java.awt.Color(0, 51, 51));
         dataHoadon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"HD1", "NV1", "KH1", "20-03-2024",  new Integer(300000)},
-                {"HD2", "NV2", "KH2", "30-03-2023",  new Integer(320000)},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {"HD1", "NV1", "KH1", "20-03-2024", null, null,  new Integer(300000)},
+                {"HD2", "NV2", "KH2", "30-03-2023", null, null,  new Integer(320000)},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Hóa Đơn", "Mã Nhân Viên", "Mã Khách", "Ngày lập", "Tổng tiền"
+                "Mã Hóa Đơn", "Mã Nhân Viên", "Mã Khách", "Ngày lập", "Mã khuyế mãi", "% giảm giá", "Tổng tiền"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -290,12 +317,24 @@ public class BanHangPanel extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Long.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         Sachtb.setShowGrid(true);
+        Sachtb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SachtbMouseClicked(evt);
+            }
+        });
         scroll22.setViewportView(Sachtb);
         if (Sachtb.getColumnModel().getColumnCount() > 0) {
             Sachtb.getColumnModel().getColumn(0).setResizable(false);
@@ -318,6 +357,11 @@ public class BanHangPanel extends javax.swing.JPanel {
 
         searchSach.setBackground(new java.awt.Color(204, 255, 204));
         searchSach.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm Sách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        searchSach.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchSachActionPerformed(evt);
+            }
+        });
 
         panelImg.setBackground(new java.awt.Color(204, 255, 204));
         panelImg.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ảnh minh họa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
@@ -479,21 +523,6 @@ public class BanHangPanel extends javax.swing.JPanel {
             }
         });
 
-        SuaBtn.setBackground(new java.awt.Color(204, 255, 204));
-        SuaBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        SuaBtn.setForeground(new java.awt.Color(0, 51, 51));
-        SuaBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_support_30px.png"))); // NOI18N
-        SuaBtn.setText("Sửa Hóa Đơn");
-        SuaBtn.setToolTipText("Sửa hóa đơn nhập sai");
-        SuaBtn.setMaximumSize(new java.awt.Dimension(130, 37));
-        SuaBtn.setMinimumSize(new java.awt.Dimension(130, 37));
-        SuaBtn.setPreferredSize(new java.awt.Dimension(130, 37));
-        SuaBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SuaBtnActionPerformed(evt);
-            }
-        });
-
         XoaBtn.setBackground(new java.awt.Color(204, 255, 204));
         XoaBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         XoaBtn.setForeground(new java.awt.Color(0, 51, 51));
@@ -516,32 +545,33 @@ public class BanHangPanel extends javax.swing.JPanel {
             .addGroup(ThongTinBanHangLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(ThongTinBanHangLayout.createSequentialGroup()
-                            .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(Dacotaikhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(ttKH, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Chuacotaikhoan))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(ThongTinBanHangLayout.createSequentialGroup()
+                        .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(NhaptenKH)
-                                .addComponent(comboxKH, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(ThongTinBanHangLayout.createSequentialGroup()
-                            .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(ttNV, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(maHD, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(44, 44, 44)
-                            .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(nv)
-                                .addComponent(maHDtext))))
-                    .addComponent(newKH)
+                                .addGroup(ThongTinBanHangLayout.createSequentialGroup()
+                                    .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(Dacotaikhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ttKH, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Chuacotaikhoan))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(NhaptenKH)
+                                        .addComponent(comboxKH, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(ThongTinBanHangLayout.createSequentialGroup()
+                                    .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(ttNV, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(maHD, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(44, 44, 44)
+                                    .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(nv)
+                                        .addComponent(maHDtext))))
+                            .addComponent(newKH))
+                        .addContainerGap(227, Short.MAX_VALUE))
                     .addGroup(ThongTinBanHangLayout.createSequentialGroup()
                         .addComponent(ThemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(SuaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(XoaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addComponent(XoaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))))
         );
         ThongTinBanHangLayout.setVerticalGroup(
             ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -569,7 +599,6 @@ public class BanHangPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ThemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SuaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(XoaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -598,23 +627,23 @@ public class BanHangPanel extends javax.swing.JPanel {
         selectedSach.setForeground(new java.awt.Color(0, 51, 51));
         selectedSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"S1", "Doraemon", "2", "25000", "KM1", "10", "45000"},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {"S1", "Doraemon", "2", "25000", "45000"},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã Sách", "Tên Sách", "Số Lượng", "Đơn Giá", "Mã Khuyến Mãi", "% Giảm Giá", "Thành Tiền"
+                "Mã Sách", "Tên Sách", "Số Lượng", "Đơn Giá", "Thành Tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -629,8 +658,6 @@ public class BanHangPanel extends javax.swing.JPanel {
             selectedSach.getColumnModel().getColumn(2).setResizable(false);
             selectedSach.getColumnModel().getColumn(3).setResizable(false);
             selectedSach.getColumnModel().getColumn(4).setResizable(false);
-            selectedSach.getColumnModel().getColumn(5).setResizable(false);
-            selectedSach.getColumnModel().getColumn(6).setResizable(false);
         }
 
         xoaspbtn.setBackground(new java.awt.Color(204, 255, 204));
@@ -715,7 +742,7 @@ public class BanHangPanel extends javax.swing.JPanel {
                         .addComponent(HoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
                         .addComponent(ChiTietHD, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -733,7 +760,62 @@ public class BanHangPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search1ActionPerformed
-        // TODO add your handling code here:
+    // Lấy nội dung từ JTextField
+    String searchText = searchHoaDon.getText();
+    loadHOADONToTable();
+    // Kiểm tra xem searchText có rỗng không
+    if (searchText == null || searchText.trim().isEmpty()) {
+        // Nếu rỗng, không làm gì cả và thoát phương thức
+        return;
+    }
+    
+    // Tạo một bảng tạm thời để lưu các dòng được lọc
+    DefaultTableModel tempModel = new DefaultTableModel();
+    tempModel.setColumnIdentifiers(new Object[]{"MAHOADON", "Manv", "TENTAIKHOAN", "NGAYLAP", "Makhuyenmai", "Phantramgiam", "TONGTIEN"});
+    
+    // Kiểm tra xem dataHoadon có rỗng không
+    if (dataHoadon != null) {
+        // Lặp qua từng dòng trong bảng dataHoadon
+        for (int i = 0; i < dataHoadon.getRowCount(); i++) {
+            // Kiểm tra xem giá trị có phải là String không và không rỗng
+String mahoadon = dataHoadon.getValueAt(i, 0) != null ? dataHoadon.getValueAt(i, 0).toString().trim() : "null";
+String manv = dataHoadon.getValueAt(i, 1) != null ? dataHoadon.getValueAt(i, 1).toString().trim() : "null";
+String makh = dataHoadon.getValueAt(i, 2) != null ? dataHoadon.getValueAt(i, 2).toString().trim() : "null";
+String ngaylap = dataHoadon.getValueAt(i, 3) != null ? dataHoadon.getValueAt(i, 3).toString().trim() : "null";
+String makm = dataHoadon.getValueAt(i, 4) != null ? dataHoadon.getValueAt(i, 4).toString().trim() : "null";
+String phantramgiam = dataHoadon.getValueAt(i, 5) != null ? dataHoadon.getValueAt(i, 5).toString().trim() : "null";
+String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i, 6).toString().trim() : "null";
+
+                // Kiểm tra xem nếu giá trị này chứa nội dung tìm kiếm
+                if (mahoadon.equalsIgnoreCase(searchText.trim()) || manv.equalsIgnoreCase(searchText.trim()) ||
+                        makh.equalsIgnoreCase(searchText.trim()) || ngaylap.equalsIgnoreCase(searchText.trim())||
+                        makm.equalsIgnoreCase(searchText.trim()) || phantramgiam.equalsIgnoreCase(searchText.trim())||
+                        tongtien.equalsIgnoreCase(searchText.trim())) {
+                    // Nếu có, thêm dòng này vào bảng tạm thời
+                    Object[] row = {
+                        dataHoadon.getValueAt(i, 0),
+                        dataHoadon.getValueAt(i, 1),
+                        dataHoadon.getValueAt(i, 2), // TENKHACHHANG
+                        dataHoadon.getValueAt(i, 3), // NGAYLAP
+                        dataHoadon.getValueAt(i, 4), // Makhuyenmai
+                        dataHoadon.getValueAt(i, 5), // Phantramgiam
+                        dataHoadon.getValueAt(i, 6)  // TONGTIEN;
+                    };
+                    tempModel.addRow(row);
+                }
+        }
+    }
+    // Xóa toàn bộ dòng trong dataHoadon
+    DefaultTableModel dataModel = (DefaultTableModel) dataHoadon.getModel();
+    dataModel.setRowCount(0);
+    // Thêm các dòng từ DefaultTableModel tạm thời vào dataHoadon
+    for (int i = 0; i < tempModel.getRowCount(); i++) {
+        Object[] row = new Object[dataModel.getColumnCount()];
+        for (int j = 0; j < dataModel.getColumnCount(); j++) {
+            row[j] = tempModel.getValueAt(i, j);
+        }
+        dataModel.addRow(row);
+    }
     }//GEN-LAST:event_search1ActionPerformed
 
     private void dataHoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataHoadonMouseClicked
@@ -793,18 +875,69 @@ public class BanHangPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         submit.setVisible(true);
         xoaspbtn.setVisible(true);
+        DefaultTableModel model = (DefaultTableModel) selectedSach.getModel();
+        // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
+        model.setRowCount(0);
+
     }//GEN-LAST:event_ThemBtnActionPerformed
 
     private void XoaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_XoaBtnActionPerformed
 
-    private void SuaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SuaBtnActionPerformed
-
     private void search2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search2ActionPerformed
         // TODO add your handling code here:
+                // Lấy nội dung từ JTextField
+        String searchText = searchSach.getText();
+        loadBooksToTable();
+        System.out.println("co bam tim sach");
+        // Kiểm tra xem searchText có rỗng không
+        if (searchText == null || searchText.trim().isEmpty()) {
+            // Nếu rỗng, không làm gì cả và thoát phương thức
+            return;
+        }
+
+        // Tạo một bảng tạm thời để lưu các dòng được lọc
+        DefaultTableModel tempModel = new DefaultTableModel();
+        tempModel.setColumnIdentifiers(new Object[]{"MaSach","TenSach","Soluong","DonGia","NhaXB"});
+
+        // Kiểm tra xem dataHoadon có rỗng không
+        if (Sachtb != null) {
+            // Lặp qua từng dòng trong bảng dataHoadon
+            for (int i = 0; i < Sachtb.getRowCount(); i++) {
+                // Kiểm tra xem giá trị có phải là String không và không rỗng
+                String mahoadon = Sachtb.getValueAt(i, 0).toString().trim();
+                String tensach=Sachtb.getValueAt(i,1).toString().trim();
+                String soluong=Sachtb.getValueAt(i,2).toString().trim();
+                String dongia=Sachtb.getValueAt(i,3).toString().trim();
+                String nhaxb=Sachtb.getValueAt(i,4).toString().trim();
+                // Kiểm tra xem nếu giá trị này chứa nội dung tìm kiếm
+                if (mahoadon.equalsIgnoreCase(searchText.trim()) || tensach.equalsIgnoreCase(searchText.trim())||
+                        soluong.equalsIgnoreCase(searchText.trim()) || dongia.equalsIgnoreCase(searchText.trim())||
+                        nhaxb.equalsIgnoreCase(searchText.trim())) {
+                    // Nếu có, thêm dòng này vào bảng tạm thời
+                    Object[] row = {
+                        Sachtb.getValueAt(i, 0),
+                        Sachtb.getValueAt(i, 1),
+                        Sachtb.getValueAt(i, 2), 
+                        Sachtb.getValueAt(i, 3), 
+                        Sachtb.getValueAt(i, 4), 
+                    };
+                    tempModel.addRow(row);
+                }
+            }
+        }
+        // Xóa toàn bộ dòng trong dataHoadon
+        DefaultTableModel dataModel = (DefaultTableModel) Sachtb.getModel();
+        dataModel.setRowCount(0);
+        // Thêm các dòng từ DefaultTableModel tạm thời vào dataHoadon
+        for (int i = 0; i < tempModel.getRowCount(); i++) {
+            Object[] row = new Object[dataModel.getColumnCount()];
+            for (int j = 0; j < dataModel.getColumnCount(); j++) {
+                row[j] = tempModel.getValueAt(i, j);
+            }
+            dataModel.addRow(row);
+        }
     }//GEN-LAST:event_search2ActionPerformed
 
     private void xoaspbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaspbtnActionPerformed
@@ -815,6 +948,23 @@ public class BanHangPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_submitActionPerformed
 
+    private void searchSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchSachActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchSachActionPerformed
+
+    private void SachtbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SachtbMouseClicked
+        // TODO add your handling code here:
+                // TODO add your handling code here:
+        int row = Sachtb.rowAtPoint(evt.getPoint());
+        if (row >= 0) { // Chỉ xử lý khi chọn hàng hợp lệ
+            String maHoaDonStr = Sachtb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
+            int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
+            SACH hd = new SACH(maHoaDon);
+            loadAnh(hd);
+        }
+
+    }//GEN-LAST:event_SachtbMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ChiTietHD;
@@ -824,7 +974,6 @@ public class BanHangPanel extends javax.swing.JPanel {
     private javax.swing.JPanel HoaDon;
     private javax.swing.JTextField NhaptenKH;
     private javax.swing.JTable Sachtb;
-    private javax.swing.JButton SuaBtn;
     private javax.swing.JButton ThemBtn;
     private javax.swing.JPanel ThongTinBanHang;
     private javax.swing.JButton XoaBtn;

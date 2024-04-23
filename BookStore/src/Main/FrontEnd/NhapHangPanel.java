@@ -64,7 +64,6 @@ public class NhapHangPanel extends javax.swing.JPanel {
         SL = new javax.swing.JTextField();
         NV = new javax.swing.JTextField();
         ThemBtn = new javax.swing.JButton();
-        SuaBtn = new javax.swing.JButton();
         XoaBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
@@ -561,21 +560,6 @@ public class NhapHangPanel extends javax.swing.JPanel {
             }
         });
 
-        SuaBtn.setBackground(new java.awt.Color(204, 255, 204));
-        SuaBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        SuaBtn.setForeground(new java.awt.Color(0, 51, 51));
-        SuaBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_wrench_30px.png"))); // NOI18N
-        SuaBtn.setText("Sửa");
-        SuaBtn.setToolTipText("Sửa hóa đơn nhập sai");
-        SuaBtn.setMaximumSize(new java.awt.Dimension(130, 37));
-        SuaBtn.setMinimumSize(new java.awt.Dimension(130, 37));
-        SuaBtn.setPreferredSize(new java.awt.Dimension(130, 37));
-        SuaBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SuaBtnActionPerformed(evt);
-            }
-        });
-
         XoaBtn.setBackground(new java.awt.Color(204, 255, 204));
         XoaBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         XoaBtn.setForeground(new java.awt.Color(0, 51, 51));
@@ -602,9 +586,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
                         .addGroup(ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ThongTinNhapHangPanelLayout.createSequentialGroup()
                                 .addComponent(ThemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(SuaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(30, 30, 30)
                                 .addComponent(XoaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(tongtien))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -650,7 +632,6 @@ public class NhapHangPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ThemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SuaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(XoaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0))
         );
@@ -703,10 +684,6 @@ public class NhapHangPanel extends javax.swing.JPanel {
     private void XoaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_XoaBtnActionPerformed
-
-    private void SuaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SuaBtnActionPerformed
 
     private void maNhapHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maNhapHangActionPerformed
         // TODO add your handling code here:
@@ -774,7 +751,6 @@ public class NhapHangPanel extends javax.swing.JPanel {
     private javax.swing.JTextField SL;
     private javax.swing.JButton Search;
     private javax.swing.JButton Search1;
-    private javax.swing.JButton SuaBtn;
     private javax.swing.JButton SuaBtn1;
     private javax.swing.JButton ThemBtn;
     private javax.swing.JPanel ThongTinNhapHangPanel;

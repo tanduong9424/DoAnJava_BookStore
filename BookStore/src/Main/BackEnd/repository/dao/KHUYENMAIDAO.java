@@ -1,5 +1,6 @@
 package Main.BackEnd.repository.dao;
 
+import static Main.BackEnd.repository.dao.SACHDAO.checkSACH;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -15,6 +16,9 @@ import Main.BackEnd.repository.database.JDBCUtil;
 import Main.BackEnd.repository.modal.KHUYENMAI;
 
 public class KHUYENMAIDAO implements DAOInterface<KHUYENMAI>{
+    	public static KHUYENMAIDAO getInstance() {
+		return new KHUYENMAIDAO();
+	}
 
     @Override
     public int insert(KHUYENMAI t) {
