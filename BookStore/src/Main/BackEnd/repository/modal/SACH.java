@@ -1,4 +1,4 @@
-package modal;
+package Main.BackEnd.repository.modal;
 
 import java.sql.Date;
 
@@ -8,7 +8,6 @@ public class SACH {
 	private String TENSACH;
 	private String IMAGE;
 	private int SOLUONG;
-	private String TENLOAISACH;
 	private String TENNHAXUATBAN;
 	private int GIABIA;
 	private int LANTAIBAN;
@@ -23,13 +22,12 @@ public class SACH {
 	}
 
 	public SACH(int mASACH, String tENSACH, String iMAGE, int sOLUONG,
-			String tENLOAISACH, String tENNHAXUATBAN, int gIABIA, int lANTAIBAN, Date nAMXUATBAN,
+			 String tENNHAXUATBAN, int gIABIA, int lANTAIBAN, Date nAMXUATBAN,
 			boolean iSHIDDEN) {
 		MASACH = mASACH;
 		TENSACH = tENSACH;
 		IMAGE = iMAGE;
 		SOLUONG = sOLUONG;
-		TENLOAISACH = tENLOAISACH;
 		TENNHAXUATBAN = tENNHAXUATBAN;
 		GIABIA = gIABIA;
 		LANTAIBAN = lANTAIBAN;
@@ -37,13 +35,12 @@ public class SACH {
 		ISHIDDEN = iSHIDDEN;
 	}
 
-	public SACH(String tENSACH, String iMAGE, int sOLUONG, String tENLOAISACH,
+	public SACH(String tENSACH, String iMAGE, int sOLUONG,
 			String tENNHAXUATBAN, int gIABIA, int lANTAIBAN, Date nAMXUATBAN,
 			boolean iSHIDDEN) {
-		TENSACH = tENSACH;
+    		TENSACH = tENSACH;
 		IMAGE = iMAGE;
 		SOLUONG = sOLUONG;
-		TENLOAISACH = tENLOAISACH;
 		TENNHAXUATBAN = tENNHAXUATBAN;
 		GIABIA = gIABIA;
 		LANTAIBAN = lANTAIBAN;
@@ -89,16 +86,6 @@ public class SACH {
 		SOLUONG = sOLUONG;
 	}
 
-
-
-
-	public String getTENLOAISACH() {
-		return TENLOAISACH;
-	}
-
-	public void setTENLOAISACH(String tENLOAISACH) {
-		TENLOAISACH = tENLOAISACH;
-	}
 
 	public String getTENNHAXUATBAN() {
 		return TENNHAXUATBAN;

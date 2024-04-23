@@ -3,17 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Main/BackEnd/repository/database/JDBCUtil.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Main/GiaoDienChinh.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Main/BackEnd/Bus/khachHang.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Main/BackEnd/Bus/BanHang.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Main/BackEnd/Bus/Impl/khachHangImpl.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Main/FrontEnd/KhachHangPanel.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/test/Main/BackEnd/Bus/Impl/khachHangImplTest.java</file>
-=======
-            <file>file:/C:/Users/xuand/OneDrive/Desktop/java/DoAnJava_BookStore-main/BookStore/src/Main/GiaoDienChinh.java</file>
->>>>>>> ac1125811accce79eaaebefc6833c16df277f6ec
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/src/Main/FrontEnd/BanHangPanel.java</file>
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/src/Main/FrontEnd/NhapHangPanel.java</file>
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/test/Main/BackEnd/Bus/Impl/khachHangImplTest.java</file>
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/src/Main/GiaoDienChinh.java</file>
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/src/Main/FrontEnd/FormAdd/AddSach.java</file>
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/src/Main/BackEnd/repository/dao/THONGKE.java</file>
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/src/Main/BackEnd/repository/database/JDBCUtil.java</file>
         </group>
     </open-files>
 </project-private>
