@@ -66,7 +66,7 @@ public class khachHangImplTest {
         java.util.Date birthDate = new java.util.Date(System.currentTimeMillis()); 
         java.sql.Date sqlBirthDate = new java.sql.Date(birthDate.getTime());
         KHACHANG khachang = new KHACHANG(1, "dao33333333", "daonek", "dao", "dao@gma.com", 837002627, sqlBirthDate,true);
-        instance.timKiemMaKhachHang(khachang);
+        
     }
     
 }

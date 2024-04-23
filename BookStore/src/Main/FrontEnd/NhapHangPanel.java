@@ -4,9 +4,24 @@
  */
 package Main.FrontEnd;
 
+import Main.BackEnd.repository.dao.CHITIETHOADONDAO;
+import Main.BackEnd.repository.dao.CHITIETPHIEUNHAPDAO;
+import Main.BackEnd.repository.dao.HOADONDAO;
+import Main.BackEnd.repository.dao.KHUYENMAIDAO;
+import Main.BackEnd.repository.dao.PHIEUNHAPDAO;
+import Main.BackEnd.repository.dao.SACHDAO;
+import Main.BackEnd.repository.modal.CHITIETHOADON;
+import Main.BackEnd.repository.modal.CHITIETPHIEUNHAP;
+import Main.BackEnd.repository.modal.HOADON;
+import Main.BackEnd.repository.modal.KHUYENMAI;
+import Main.BackEnd.repository.modal.PHIEUNHAP;
+import Main.BackEnd.repository.modal.SACH;
 import Main.FrontEnd.FormAdd.AddNhaCungCap;
 import Main.FrontEnd.FormAdd.AddSach;
 import Main.FrontEnd.FormEdit.EditSach;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,7 +31,77 @@ public class NhapHangPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form NhapHangPanel
-     */
+     */int status=0;
+        public void loadBooksToTable() {
+        DefaultTableModel model = (DefaultTableModel) Nhaptb.getModel();
+        // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
+        model.setRowCount(0);
+
+        try {
+            System.out.print("hoạt động");
+            ArrayList<SACH> sachList = SACHDAO.getInstance().selectAllExceptISHIDDEN();
+
+            for (SACH sach : sachList) {
+                Object[] row = {sach.getMASACH(), sach.getTENSACH(),sach.getGIABIA(), sach.getTENNHAXUATBAN()};
+                model.addRow(row);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+        public void loadPHIEUNHAPToTable() {
+        DefaultTableModel model = (DefaultTableModel) PhieuNhaptb.getModel();
+        // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
+        model.setRowCount(0);
+
+        try {
+            System.out.print("hoạt động");
+            ArrayList<PHIEUNHAP> hoadonList = PHIEUNHAPDAO.getInstance().selectAll();
+            
+            for (PHIEUNHAP hoadon : hoadonList) {             
+                Object[] row = {hoadon.getMapn(),hoadon.getManv(),hoadon.getNoinhap(),hoadon.getNgaynhap(),hoadon.getTongtien()};
+                model.addRow(row);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }    
+    public void loadCHITIETPHIEUNHAPToTable(PHIEUNHAP t) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
+        model.setRowCount(0);
+
+        try {
+            System.out.print("hoạt động");
+            ArrayList<CHITIETPHIEUNHAP> chitiethoadonList = CHITIETPHIEUNHAPDAO.getInstance().selectAllByPHIEUNHAP(t);
+            for (CHITIETPHIEUNHAP chitiethoadon : chitiethoadonList) {
+                SACH sach=new SACH(chitiethoadon.getMASACH());
+                SACH result=SACHDAO.getInstance().selectById(sach);
+                Object[] row = {chitiethoadon.getMASACH(),result.getTENSACH(),result.getGIABIA(),chitiethoadon.getSoluong(),chitiethoadon.getTongtien()};
+                model.addRow(row);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }  
+public void loadAnh(SACH t) {
+    String url = t.getIMAGE(); // Lấy đường dẫn ảnh từ đối tượng SACH
+    
+    try {
+        if(url !=null){
+                    // Tạo một đối tượng ImageIcon từ đường dẫn ảnh
+        ImageIcon icon = new ImageIcon(getClass().getResource(url));
+        
+        // Đặt hình ảnh lên jLabel1
+        jLabel1.setIcon(icon);
+        }
+    } catch (Exception ex) {
+        // Nếu có lỗi xảy ra, in ra thông báo lỗi
+        ex.printStackTrace();
+    }
+} 
+    
+    
     public NhapHangPanel() {
         initComponents();
         submit.setVisible(false);
@@ -139,6 +224,11 @@ public class NhapHangPanel extends javax.swing.JPanel {
         inputsearch1.setBackground(new java.awt.Color(204, 255, 204));
         inputsearch1.setForeground(new java.awt.Color(0, 51, 51));
         inputsearch1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm Kiếm Phiếu Nhập", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        inputsearch1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputsearch1ActionPerformed(evt);
+            }
+        });
 
         Search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-magnifying-glass-30.png"))); // NOI18N
         Search.setToolTipText("Tìm kiếm");
@@ -232,6 +322,11 @@ public class NhapHangPanel extends javax.swing.JPanel {
             }
         });
         Nhaptb.setShowGrid(true);
+        Nhaptb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NhaptbMouseClicked(evt);
+            }
+        });
         scroll2.setViewportView(Nhaptb);
         if (Nhaptb.getColumnModel().getColumnCount() > 0) {
             Nhaptb.getColumnModel().getColumn(0).setResizable(false);
@@ -669,10 +764,69 @@ public class NhapHangPanel extends javax.swing.JPanel {
 
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         // TODO add your handling code here:
+            // Lấy nội dung từ JTextField
+    String searchText = inputsearch1.getText();
+    loadPHIEUNHAPToTable();
+    // Kiểm tra xem searchText có rỗng không
+    if (searchText == null || searchText.trim().isEmpty()) {
+        // Nếu rỗng, không làm gì cả và thoát phương thức
+        return;
+    }
+    
+    // Tạo một bảng tạm thời để lưu các dòng được lọc
+    DefaultTableModel tempModel = new DefaultTableModel();
+    tempModel.setColumnIdentifiers(new Object[]{"MAPHIEUNHAP","MANV","NHACUNGCAP","NGAYLAP","TONGTIEN"});
+    
+    // Kiểm tra xem dataHoadon có rỗng không
+    if (PhieuNhaptb != null) {
+        // Lặp qua từng dòng trong bảng dataHoadon
+        for (int i = 0; i < PhieuNhaptb.getRowCount(); i++) {
+            // Kiểm tra xem giá trị có phải là String không và không rỗng
+    String maphieunhap = PhieuNhaptb.getValueAt(i, 0) != null ? PhieuNhaptb.getValueAt(i, 0).toString().trim() : "null";
+    String manv = PhieuNhaptb.getValueAt(i, 1) != null ? PhieuNhaptb.getValueAt(i, 1).toString().trim() : "null";
+    String nhacungcap = PhieuNhaptb.getValueAt(i, 2) != null ? PhieuNhaptb.getValueAt(i, 2).toString().trim() : "null";
+    String ngaylap = PhieuNhaptb.getValueAt(i, 3) != null ? PhieuNhaptb.getValueAt(i, 3).toString().trim() : "null";
+    String tongtien = PhieuNhaptb.getValueAt(i, 4) != null ? PhieuNhaptb.getValueAt(i, 4).toString().trim() : "null";
+
+                // Kiểm tra xem nếu giá trị này chứa nội dung tìm kiếm
+                if (maphieunhap.equalsIgnoreCase(searchText.trim()) || manv.equalsIgnoreCase(searchText.trim()) ||
+                        nhacungcap.equalsIgnoreCase(searchText.trim()) || ngaylap.equalsIgnoreCase(searchText.trim())||
+                        tongtien.equalsIgnoreCase(searchText.trim())) {
+                    // Nếu có, thêm dòng này vào bảng tạm thời
+                    Object[] row = {
+                        PhieuNhaptb.getValueAt(i, 0),
+                        PhieuNhaptb.getValueAt(i, 1),
+                        PhieuNhaptb.getValueAt(i, 2), // TENKHACHHANG
+                        PhieuNhaptb.getValueAt(i, 3), // NGAYLAP
+                        PhieuNhaptb.getValueAt(i, 4), // Makhuyenmai
+                    };
+                    tempModel.addRow(row);
+                }
+        }
+    }
+    // Xóa toàn bộ dòng trong dataHoadon
+    DefaultTableModel dataModel = (DefaultTableModel) PhieuNhaptb.getModel();
+    dataModel.setRowCount(0);
+    // Thêm các dòng từ DefaultTableModel tạm thời vào dataHoadon
+    for (int i = 0; i < tempModel.getRowCount(); i++) {
+        Object[] row = new Object[dataModel.getColumnCount()];
+        for (int j = 0; j < dataModel.getColumnCount(); j++) {
+            row[j] = tempModel.getValueAt(i, j);
+        }
+        dataModel.addRow(row);
+    }
     }//GEN-LAST:event_SearchActionPerformed
 
     private void PhieuNhaptbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PhieuNhaptbMouseClicked
         // TODO add your handling code here:
+        int row = PhieuNhaptb.rowAtPoint(evt.getPoint());
+        if (row >= 0) { // Chỉ xử lý khi chọn hàng hợp lệ
+            String maPHIEUNHAPStr = PhieuNhaptb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
+            int maPn = Integer.parseInt(maPHIEUNHAPStr); // Chuyển đổi thành số nguyên
+            PHIEUNHAP hd = new PHIEUNHAP(maPn);
+            loadCHITIETPHIEUNHAPToTable(hd);
+        }
+
     }//GEN-LAST:event_PhieuNhaptbMouseClicked
 
     private void ThemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemBtnActionPerformed
@@ -705,6 +859,54 @@ public class NhapHangPanel extends javax.swing.JPanel {
 
     private void Search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search1ActionPerformed
         // TODO add your handling code here:
+                            // Lấy nội dung từ JTextField
+    String searchText = inputsearch2.getText();
+    loadBooksToTable();
+    // Kiểm tra xem searchText có rỗng không
+    if (searchText == null || searchText.trim().isEmpty()) {
+        // Nếu rỗng, không làm gì cả và thoát phương thức
+        return;
+    }
+    
+    // Tạo một bảng tạm thời để lưu các dòng được lọc
+    DefaultTableModel tempModel = new DefaultTableModel();
+    tempModel.setColumnIdentifiers(new Object[]{"MASACH","TENSACH","DONGIA","NHACUNGCAP"});
+    
+    // Kiểm tra xem dataHoadon có rỗng không
+    if (Nhaptb != null) {
+        // Lặp qua từng dòng trong bảng dataHoadon
+        for (int i = 0; i < Nhaptb.getRowCount(); i++) {
+            // Kiểm tra xem giá trị có phải là String không và không rỗng
+    String masach = Nhaptb.getValueAt(i, 0) != null ? Nhaptb.getValueAt(i, 0).toString().trim() : "null";
+    String tensach = Nhaptb.getValueAt(i, 1) != null ? Nhaptb.getValueAt(i, 1).toString().trim() : "null";
+    String dongia = Nhaptb.getValueAt(i, 2) != null ? Nhaptb.getValueAt(i, 2).toString().trim() : "null";
+    String nhacungcap = Nhaptb.getValueAt(i, 3) != null ? Nhaptb.getValueAt(i, 3).toString().trim() : "null";
+
+                // Kiểm tra xem nếu giá trị này chứa nội dung tìm kiếm
+                if (masach.equalsIgnoreCase(searchText.trim()) || tensach.equalsIgnoreCase(searchText.trim()) ||
+                        dongia.equalsIgnoreCase(searchText.trim()) || nhacungcap.equalsIgnoreCase(searchText.trim())) {
+                    // Nếu có, thêm dòng này vào bảng tạm thời
+                    Object[] row = {
+                        Nhaptb.getValueAt(i, 0),
+                        Nhaptb.getValueAt(i, 1),
+                        Nhaptb.getValueAt(i, 2), // TENKHACHHANG
+                        Nhaptb.getValueAt(i, 3), // NGAYLAP
+                    };
+                    tempModel.addRow(row);
+                }
+        }
+    }
+    // Xóa toàn bộ dòng trong dataHoadon
+    DefaultTableModel dataModel = (DefaultTableModel) Nhaptb.getModel();
+    dataModel.setRowCount(0);
+    // Thêm các dòng từ DefaultTableModel tạm thời vào dataHoadon
+    for (int i = 0; i < tempModel.getRowCount(); i++) {
+        Object[] row = new Object[dataModel.getColumnCount()];
+        for (int j = 0; j < dataModel.getColumnCount(); j++) {
+            row[j] = tempModel.getValueAt(i, j);
+        }
+        dataModel.addRow(row);
+    }
     }//GEN-LAST:event_Search1ActionPerformed
 
     private void inputsearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputsearch2ActionPerformed
@@ -738,6 +940,29 @@ public class NhapHangPanel extends javax.swing.JPanel {
     private void xoaspbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaspbtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_xoaspbtnActionPerformed
+
+    private void NhaptbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NhaptbMouseClicked
+        // TODO add your handling code here:
+                int row = Nhaptb.rowAtPoint(evt.getPoint());
+        if (row >= 0) { // Chỉ xử lý khi chọn hàng hợp lệ
+            if(status==0){
+            String maHoaDonStr = Nhaptb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
+            int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
+            SACH hd = new SACH(maHoaDon);
+            loadAnh(hd);
+            }
+            else{
+            String maHoaDonStr = Nhaptb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
+            int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
+            System.out.println("da nhap them sach"+maHoaDon);
+            }
+        }
+    }//GEN-LAST:event_NhaptbMouseClicked
+
+    private void inputsearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputsearch1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_inputsearch1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

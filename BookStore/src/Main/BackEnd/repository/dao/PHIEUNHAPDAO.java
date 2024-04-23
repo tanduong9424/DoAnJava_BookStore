@@ -17,7 +17,9 @@ import Main.BackEnd.repository.modal.NHANVIEN;
 import Main.BackEnd.repository.modal.PHIEUNHAP;
 import Main.BackEnd.repository.modal.SACH;
 public class PHIEUNHAPDAO implements DAOInterface<PHIEUNHAP>{
-
+    	public static PHIEUNHAPDAO getInstance() {
+		return new PHIEUNHAPDAO();
+	}
     @Override
     public int insert(PHIEUNHAP t) {
         int ketqua=0;

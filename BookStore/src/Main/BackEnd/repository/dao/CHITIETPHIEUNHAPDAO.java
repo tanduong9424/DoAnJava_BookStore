@@ -10,10 +10,15 @@ import java.util.ArrayList;
 
 import Main.BackEnd.repository.database.JDBCUtil;
 import Main.BackEnd.repository.modal.CHITIETPHIEUNHAP;
+import Main.BackEnd.repository.modal.PHIEUNHAP;
 import Main.BackEnd.repository.modal.SACH;
 
 
 public class CHITIETPHIEUNHAPDAO implements DAOInterface<CHITIETPHIEUNHAP>{
+    
+        public static CHITIETPHIEUNHAPDAO getInstance() {
+		return new CHITIETPHIEUNHAPDAO();
+	}
 //thêm số lượng vào sách
     @Override
     public int insert(CHITIETPHIEUNHAP t) {
@@ -95,7 +100,34 @@ public class CHITIETPHIEUNHAPDAO implements DAOInterface<CHITIETPHIEUNHAP>{
 		}
 		return ketqua;
     }
-
+    public ArrayList selectAllByPHIEUNHAP(PHIEUNHAP t) {
+		ArrayList<CHITIETPHIEUNHAP> ketqua=new ArrayList<CHITIETPHIEUNHAP>();
+		try {
+			Connection con=JDBCUtil.getConnection();
+			String sql="SELECT * FROM chitietphieunhap WHERE mapn=?";
+			
+			PreparedStatement pst=con.prepareStatement(sql);
+                        pst.setInt(1, t.getMapn());
+			ResultSet rs=pst.executeQuery();
+			while(rs.next()) {
+				int mapn=rs.getInt("mapn");
+                int MASACH=rs.getInt("MASACH");
+				int gianhap=rs.getInt("gianhap");
+                int soluong=rs.getInt("soluong");
+                int tongtien=rs.getInt("tongtien");
+                CHITIETPHIEUNHAP ctpn= new CHITIETPHIEUNHAP(mapn,MASACH,gianhap,soluong,tongtien);
+				ketqua.add(ctpn);
+			}
+			JDBCUtil.closeConnection(con);
+		}
+		catch(Exception e) {
+			// TODO Auto-generated catch block
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class CHITIETHOADONDAO \n");
+			e.printStackTrace();
+		}
+		return ketqua;
+    }
+    
     @Override
     public CHITIETPHIEUNHAP selectById(CHITIETPHIEUNHAP t) {
 		CHITIETPHIEUNHAP ketqua=null;
@@ -105,6 +137,7 @@ public class CHITIETPHIEUNHAPDAO implements DAOInterface<CHITIETPHIEUNHAP>{
                 "WHERE mapn=?";
 			
 			PreparedStatement pst=con.prepareStatement(sql);
+                        pst.setInt(1, t.getMapn());
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
 				int mapn=rs.getInt("mapn");
