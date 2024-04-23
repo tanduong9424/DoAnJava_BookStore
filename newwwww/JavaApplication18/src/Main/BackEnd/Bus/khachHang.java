@@ -6,6 +6,7 @@ package Main.BackEnd.Bus;
 
 import Main.BackEnd.repository.modal.KHACHANG;
 import Main.BackEnd.repository.modal.TAIKHOAN;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,4 +20,5 @@ public interface khachHang {
     Boolean suaKhachHangCoTK(KHACHANG khachang,TAIKHOAN tk);
     KHACHANG timKiemMaKhachHang(KHACHANG khachang);
     String xuatExcel();
+    ArrayList<KHACHANG> NhapExcel(String filePath);
 }

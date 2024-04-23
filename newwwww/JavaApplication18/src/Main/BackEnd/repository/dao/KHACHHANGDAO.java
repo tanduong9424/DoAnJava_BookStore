@@ -35,9 +35,7 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
         }
         return ketqua;
     }
-    public static KHACHHANGDAO getInstance() {
-        return new KHACHHANGDAO();
-    }
+
     public int insertCOTK(KHACHANG t,TAIKHOAN tk) {
         int ketqua=0;
         try {
