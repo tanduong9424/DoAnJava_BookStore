@@ -14,8 +14,8 @@ import Main.BackEnd.repository.database.JDBCUtil;
 import Main.BackEnd.repository.modal.HOADON;
 import Main.BackEnd.repository.modal.KHACHANG;
 import Main.BackEnd.repository.modal.NHANVIEN;
+import Main.BackEnd.repository.modal.SACH;
 import Main.BackEnd.repository.modal.TAIKHOAN;
-import modal.SACH;
 
 public class HOADONDAO implements DAOInterface<HOADON>{
 	public static HOADONDAO getInstance() {

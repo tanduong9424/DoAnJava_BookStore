@@ -3,8 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Main/BackEnd/Bus/Impl/khachHangImpl.java</file>
             <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Main/FrontEnd/KhachHangPanel.java</file>
+=======
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/src/Main/FrontEnd/BanHangPanel.java</file>
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/src/Main/FrontEnd/NhapHangPanel.java</file>
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/test/Main/BackEnd/Bus/Impl/khachHangImplTest.java</file>
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/src/Main/GiaoDienChinh.java</file>
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/src/Main/FrontEnd/FormAdd/AddSach.java</file>
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/src/Main/BackEnd/repository/dao/THONGKE.java</file>
+            <file>file:/D:/CODE/Resposity_GitHub/tmp-java/BookStore/src/Main/BackEnd/repository/database/JDBCUtil.java</file>
+>>>>>>> 4eba6caa9d6b1cba451618ea457939b4314c4c99
         </group>
     </open-files>
 </project-private>

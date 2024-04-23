@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 import Main.BackEnd.repository.database.JDBCUtil;
 import Main.BackEnd.repository.modal.CHITIETPHIEUNHAP;
-import modal.SACH;
+import Main.BackEnd.repository.modal.SACH;
+
 
 public class CHITIETPHIEUNHAPDAO implements DAOInterface<CHITIETPHIEUNHAP>{
 //thêm số lượng vào sách

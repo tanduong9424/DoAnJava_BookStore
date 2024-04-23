@@ -15,7 +15,8 @@ import Main.FrontEnd.FormAdd.AddKhachHang;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import modal.SACH;
+import Main.BackEnd.repository.modal.SACH;
+
 
 /**
  *
