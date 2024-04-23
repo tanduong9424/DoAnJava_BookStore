@@ -4,9 +4,14 @@
  */
 package Main.FrontEnd;
 
+import Main.BackEnd.Bus.Impl.khachHangImpl;
+import Main.BackEnd.repository.dao.KHACHHANGDAO;
+import Main.BackEnd.repository.modal.KHACHANG;
 import Main.FrontEnd.FormAdd.AddKhachHang;
 import Main.FrontEnd.FormAdd.AddKhachHang;
 import Main.FrontEnd.FormEdit.EditKhachHang;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,7 +25,22 @@ public class KhachHangPanel extends javax.swing.JPanel {
     public KhachHangPanel() {
         initComponents();
     }
+    public void loadBooksToTable() {
+        DefaultTableModel model = (DefaultTableModel) KhachHangtb.getModel();
+        model.setRowCount(0);
 
+        try {
+            System.out.print("hoạt động");
+            ArrayList<KHACHANG> sachList = KHACHHANGDAO.getInstance().selectAll();
+
+            for (KHACHANG khachang : sachList) {
+                Object[] row = {khachang.getMakh(), khachang.getHoten(), khachang.getDiachi(), khachang.getDienthoai(), khachang.getEmail()};
+                model.addRow(row);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,7 +51,6 @@ public class KhachHangPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         XuatExcel = new javax.swing.JButton();
-        NhapExcel = new javax.swing.JButton();
         dataKH = new javax.swing.JPanel();
         scroll1 = new javax.swing.JScrollPane();
         KhachHangtb = new javax.swing.JTable();
@@ -53,16 +72,6 @@ public class KhachHangPanel extends javax.swing.JPanel {
         XuatExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 XuatExcelActionPerformed(evt);
-            }
-        });
-
-        NhapExcel.setBackground(new java.awt.Color(204, 255, 204));
-        NhapExcel.setForeground(new java.awt.Color(0, 51, 51));
-        NhapExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_ms_excel_30px.png"))); // NOI18N
-        NhapExcel.setText("Nhập Excel");
-        NhapExcel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NhapExcelActionPerformed(evt);
             }
         });
 
@@ -249,9 +258,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panelSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(XuatExcel)
-                        .addGap(18, 18, 18)
-                        .addComponent(NhapExcel))
+                        .addComponent(XuatExcel))
                     .addComponent(dataKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -262,9 +269,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
                     .addComponent(panelSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(XuatExcel)
-                            .addComponent(NhapExcel))))
+                        .addComponent(XuatExcel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dataKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -273,11 +278,9 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
     private void XuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XuatExcelActionPerformed
         // TODO add your handling code here:
+        khachHangImpl khachHangImpl1 = new khachHangImpl();
+        khachHangImpl1.xuatExcel();
     }//GEN-LAST:event_XuatExcelActionPerformed
-
-    private void NhapExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NhapExcelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NhapExcelActionPerformed
 
     private void ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemActionPerformed
         // TODO add your handling code here:
@@ -306,7 +309,6 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable KhachHangtb;
-    private javax.swing.JButton NhapExcel;
     private javax.swing.JButton Sua;
     private javax.swing.JButton Them;
     private javax.swing.JButton Xoa;
