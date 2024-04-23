@@ -11,6 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 import Main.BackEnd.repository.modal.HOADON;
 import Main.BackEnd.repository.database.JDBCUtil;
+import javax.swing.JFrame;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class THONGKE {
     public static ArrayList<Integer> thongketheotuansum(int month) {
@@ -404,7 +411,51 @@ public class THONGKE {
 
 
     // vẽ
-    public static void drawlayouttheotuan(){
-
+    public static JFreeChart createChart() {
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "BIỂU ĐỒ THỐNG KÊ DOANH THU THEO TUẦN",
+                "TUẦN", "DOANH THU",
+                createDataset(), PlotOrientation.VERTICAL, false, false, false);
+        return barChart;
     }
+
+    private static CategoryDataset createDataset() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        // Thay đổi month thành tháng mà bạn muốn thống kê
+        int month = 4; // ví dụ tháng 4
+        ArrayList<Integer> doanhThuTheoTuan = thongketheotuansum(month);
+
+        // Thêm dữ liệu vào dataset
+        for (int i = 0; i < doanhThuTheoTuan.size(); i++) {
+            dataset.addValue(doanhThuTheoTuan.get(i), "Doanh thu", "Tuần " + (i + 1));
+        }
+        return dataset;
+    }
+    public static void drawcharttheotuan(){
+        ChartPanel chartPanel = new ChartPanel(createChart());
+        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+        JFrame frame = new JFrame();
+        frame.add(chartPanel);
+        frame.setTitle("BIỂU ĐỒ DOANH THU");
+        frame.setSize(600, 400);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setVisible(true);
+    }
+    
 }
+
+/*
+public static void main(String[] args) {
+        ChartPanel chartPanel = new ChartPanel(createChart());
+        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+        JFrame frame = new JFrame();
+        frame.add(chartPanel);
+        frame.setTitle("Biểu đồ JFreeChart trong Java Swing");
+        frame.setSize(600, 400);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setVisible(true);
+    }
+*/
+

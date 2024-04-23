@@ -19,7 +19,6 @@ public class EditSach extends javax.swing.JFrame {
      */
     public EditSach() {
         setUndecorated(true);
-        //setAlwaysOnTop(true);
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -41,6 +40,7 @@ public class EditSach extends javax.swing.JFrame {
         mail = new javax.swing.JTextField();
         phone = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        exit = new javax.swing.JLabel();
         bot = new javax.swing.JPanel();
         submitbtn = new javax.swing.JLabel();
 
@@ -52,21 +52,17 @@ public class EditSach extends javax.swing.JFrame {
 
         MaNV.setEditable(false);
         MaNV.setBackground(new java.awt.Color(204, 255, 204));
-        MaNV.setForeground(new java.awt.Color(0, 0, 0));
         MaNV.setText("S1");
         MaNV.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Sách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         MaNV.setFocusable(false);
 
         name.setBackground(new java.awt.Color(204, 255, 204));
-        name.setForeground(new java.awt.Color(0, 0, 0));
         name.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tên Sách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         dchi.setBackground(new java.awt.Color(204, 255, 204));
-        dchi.setForeground(new java.awt.Color(0, 0, 0));
         dchi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhà Xuất Bản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         mail.setBackground(new java.awt.Color(204, 255, 204));
-        mail.setForeground(new java.awt.Color(0, 0, 0));
         mail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lần tái bản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         phone.setBackground(new java.awt.Color(204, 255, 204));
@@ -87,6 +83,13 @@ public class EditSach extends javax.swing.JFrame {
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jLabel1MouseExited(evt);
+            }
+        });
+
+        exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_cancel_30px_1.png"))); // NOI18N
+        exit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitMouseClicked(evt);
             }
         });
 
@@ -111,11 +114,16 @@ public class EditSach extends javax.swing.JFrame {
                             .addGap(30, 30, 30)
                             .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(14, 14, 14))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         midLayout.setVerticalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addComponent(exit)
+                .addGap(50, 50, 50)
                 .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dchi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -205,6 +213,11 @@ public class EditSach extends javax.swing.JFrame {
         jLabel1.setForeground(new Color(0,51,51));
     }//GEN-LAST:event_jLabel1MouseExited
 
+    private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_exitMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -246,6 +259,7 @@ public class EditSach extends javax.swing.JFrame {
     private javax.swing.JPanel PanelAdd;
     private javax.swing.JPanel bot;
     private javax.swing.JTextField dchi;
+    private javax.swing.JLabel exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField mail;
     private javax.swing.JPanel mid;

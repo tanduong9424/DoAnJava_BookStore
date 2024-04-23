@@ -18,7 +18,6 @@ public class AddKhachHang extends javax.swing.JFrame {
      */
     public AddKhachHang() {
         this.setUndecorated(true);
-        this.setAlwaysOnTop(true);
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -39,6 +38,7 @@ public class AddKhachHang extends javax.swing.JFrame {
         dchi = new javax.swing.JTextField();
         mail = new javax.swing.JTextField();
         phone = new javax.swing.JTextField();
+        exit = new javax.swing.JLabel();
         bot = new javax.swing.JPanel();
         submitbtn = new javax.swing.JLabel();
 
@@ -50,25 +50,28 @@ public class AddKhachHang extends javax.swing.JFrame {
 
         MaKH.setEditable(false);
         MaKH.setBackground(new java.awt.Color(204, 255, 204));
-        MaKH.setForeground(new java.awt.Color(0, 0, 0));
         MaKH.setText("KH01");
         MaKH.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         MaKH.setFocusable(false);
 
         name.setBackground(new java.awt.Color(204, 255, 204));
-        name.setForeground(new java.awt.Color(0, 0, 0));
         name.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Họ và Tên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         dchi.setBackground(new java.awt.Color(204, 255, 204));
-        dchi.setForeground(new java.awt.Color(0, 0, 0));
         dchi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Địa Chỉ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         mail.setBackground(new java.awt.Color(204, 255, 204));
-        mail.setForeground(new java.awt.Color(0, 0, 0));
         mail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         phone.setBackground(new java.awt.Color(204, 255, 204));
         phone.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Số Điện Thoại", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+
+        exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_cancel_30px_1.png"))); // NOI18N
+        exit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout midLayout = new javax.swing.GroupLayout(mid);
         mid.setLayout(midLayout);
@@ -83,11 +86,15 @@ public class AddKhachHang extends javax.swing.JFrame {
                     .addComponent(mail)
                     .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(130, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         midLayout.setVerticalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addComponent(exit)
+                .addGap(28, 28, 28)
                 .addComponent(MaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -97,7 +104,7 @@ public class AddKhachHang extends javax.swing.JFrame {
                 .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         PanelAdd.add(mid, java.awt.BorderLayout.CENTER);
@@ -163,6 +170,11 @@ public class AddKhachHang extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_submitbtnMouseClicked
 
+    private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_exitMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -204,6 +216,7 @@ public class AddKhachHang extends javax.swing.JFrame {
     private javax.swing.JPanel PanelAdd;
     private javax.swing.JPanel bot;
     private javax.swing.JTextField dchi;
+    private javax.swing.JLabel exit;
     private javax.swing.JTextField mail;
     private javax.swing.JPanel mid;
     private javax.swing.JTextField name;

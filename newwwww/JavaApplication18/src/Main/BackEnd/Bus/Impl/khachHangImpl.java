@@ -103,5 +103,77 @@ public class khachHangImpl implements khachHang{
         }
         return "";
     }
-    
+
+    @Override
+    public ArrayList<KHACHANG> NhapExcel(String filePath) {
+        ArrayList<KHACHANG> khachangList = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+         try{
+            FileInputStream fis = new FileInputStream(filePath);
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            
+            boolean skipHeader = true;
+            
+            for (Row row : sheet) {
+                if (skipHeader) {
+                    skipHeader = false; 
+                    continue;
+                }
+                
+                int numCells = row.getPhysicalNumberOfCells()+1;
+                String[] rowData = new String[numCells];
+
+                for (int i = 0; i < numCells; i++) {
+                    Cell cell = row.getCell(i);
+                    if (cell != null) {
+                        switch (cell.getCellType()) {
+                            case STRING:
+                                rowData[i] = cell.getStringCellValue();
+                                break;
+                            case NUMERIC:
+                                if (DateUtil.isCellDateFormatted(cell)) {
+                                    rowData[i] = cell.getDateCellValue().toString();
+                                } else {
+                                    rowData[i] = Double.toString(cell.getNumericCellValue());
+                                }
+                                break;
+                            case BOOLEAN:
+                                rowData[i] = Boolean.toString(cell.getBooleanCellValue());
+                                break;
+                            default:
+                                rowData[i] = null; 
+                                break;
+                        }
+                    } else {
+                        rowData[i] = null;
+                    }
+                }
+
+                KHACHANG khachang = new KHACHANG();
+                khachang.setMakh((int) Double.parseDouble(rowData[0]));
+                khachang.setUsername(rowData[1]);
+                khachang.setHoten(rowData[2]);
+                khachang.setDiachi(rowData[3]);
+                khachang.setEmail(rowData[4]);
+                khachang.setDienthoai((int) Double.parseDouble(rowData[5]));
+                if(rowData[6]!=null){
+                    java.util.Date parsedDate = dateFormat.parse(rowData[6]);
+                    java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+                    khachang.setNgaytao(sqlDate);
+                }
+                khachang.setTttk(Boolean.parseBoolean(rowData[7]));
+
+                khachangList.add(khachang); 
+            }
+         }
+         catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+         
+        return khachangList;
+    }
 }
