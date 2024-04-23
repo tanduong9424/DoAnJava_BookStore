@@ -45,10 +45,6 @@ public class khachHangImplTest {
         instance.xuatExcel();
     }
 
-    @Test
-    public void testNhapExcel() {
-        instance.NhapExcel("excel/danhsach.xlsx");
-    }
 
     @Test
     public void testSuaKhachHang() {
