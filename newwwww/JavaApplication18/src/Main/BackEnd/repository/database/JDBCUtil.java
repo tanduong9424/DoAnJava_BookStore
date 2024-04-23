@@ -12,7 +12,7 @@ public class JDBCUtil {
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 			String url="jdbc:mySQL://localhost:3306/bookstore";
 			String user="root";
-			String password="";
+			String password="dao1";
 			c=DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
 			System.out.print("\nket noi khong thanh cong\n");
