@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2024 at 10:54 AM
+-- Generation Time: Apr 23, 2024 at 09:17 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,6 +35,14 @@ CREATE TABLE `chitiethoadon` (
   `THANHTIEN` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `chitiethoadon`
+--
+
+INSERT INTO `chitiethoadon` (`MAHOADON`, `MASACH`, `SOLUONG`, `GIATIEN`, `THANHTIEN`) VALUES
+(9, 2, 1, 25000, 25000),
+(9, 1, 2, 22000, 44000);
+
 -- --------------------------------------------------------
 
 --
@@ -65,6 +73,14 @@ CREATE TABLE `hoadon` (
   `tthd` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `hoadon`
+--
+
+INSERT INTO `hoadon` (`MAHOADON`, `TENKHACHHAHNG`, `manv`, `NGAYLAP`, `TONGTIEN`, `makhuyenmai`, `tthd`) VALUES
+(9, NULL, 1, '2024-04-20', 35000, NULL, 1),
+(10, 'huy', 2, '2024-04-20', 35000, NULL, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -78,9 +94,16 @@ CREATE TABLE `khachhang` (
   `diachi` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `dienthoai` int(11) NOT NULL,
-  `ngaytao` date NOT NULL,
   `tttk` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `khachhang`
+--
+
+INSERT INTO `khachhang` (`makh`, `username`, `hoten`, `diachi`, `email`, `dienthoai`, `tttk`) VALUES
+(1, 'dương', 'huỳnh tấn dương', '12', 'sadfsdf@gmail.com', 1213323, 0),
+(2, 'dương', 'HUY', '1221', 'HUY@', 239492394, 0);
 
 -- --------------------------------------------------------
 
@@ -94,27 +117,9 @@ CREATE TABLE `khuyenmai` (
   `ngaybatdau` date NOT NULL,
   `ngayketthuc` date NOT NULL,
   `tongtiencanthiet` int(11) NOT NULL,
-  `phantramgiam` int(11) NOT NULL,
+  `phantramgiam` int(11) NOT NULL DEFAULT 1,
   `ISHIDDEN` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `loaisach`
---
-
-CREATE TABLE `loaisach` (
-  `TENLOAISACH` varchar(100) NOT NULL,
-  `ISHIDDEN` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `loaisach`
---
-
-INSERT INTO `loaisach` (`TENLOAISACH`, `ISHIDDEN`) VALUES
-('truyện thiếu nhi', 0);
 
 -- --------------------------------------------------------
 
@@ -129,7 +134,6 @@ CREATE TABLE `nhanvien` (
   `diachi` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `dienthoai` int(11) NOT NULL,
-  `ngaytao` date NOT NULL,
   `tttk` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -137,9 +141,9 @@ CREATE TABLE `nhanvien` (
 -- Dumping data for table `nhanvien`
 --
 
-INSERT INTO `nhanvien` (`manv`, `username`, `hoten`, `diachi`, `email`, `dienthoai`, `ngaytao`, `tttk`) VALUES
-(1, 'huy', 'huy', '179', '@gmail.com', 9, '2024-04-02', 1),
-(2, 'dương', 'dương', '1', '1', 1, '2024-04-08', 1);
+INSERT INTO `nhanvien` (`manv`, `username`, `hoten`, `diachi`, `email`, `dienthoai`, `tttk`) VALUES
+(1, 'huy', 'huy', '179', '@gmail.com', 9, 1),
+(2, 'dương', 'dương', '1', '1', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -173,6 +177,13 @@ CREATE TABLE `phieunhap` (
   `ngaynhap` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `phieunhap`
+--
+
+INSERT INTO `phieunhap` (`mapn`, `manv`, `noinhap`, `tongtien`, `ngaynhap`) VALUES
+(1, 1, 'ĐẠI HỌC SÀI GÒN', 50000, '2024-04-23');
+
 -- --------------------------------------------------------
 
 --
@@ -184,7 +195,6 @@ CREATE TABLE `sach` (
   `TENSACH` varchar(100) NOT NULL,
   `IMAGE` varchar(255) DEFAULT NULL,
   `SOLUONG` int(11) NOT NULL DEFAULT 0,
-  `TENLOAISACH` varchar(100) DEFAULT NULL,
   `GIABIA` int(11) NOT NULL,
   `LANTAIBAN` int(11) DEFAULT NULL,
   `TENNHAXUATBAN` varchar(100) DEFAULT NULL,
@@ -196,8 +206,9 @@ CREATE TABLE `sach` (
 -- Dumping data for table `sach`
 --
 
-INSERT INTO `sach` (`MASACH`, `TENSACH`, `IMAGE`, `SOLUONG`, `TENLOAISACH`, `GIABIA`, `LANTAIBAN`, `TENNHAXUATBAN`, `NAMXUATBAN`, `ISHIDDEN`) VALUES
-(1, 'Doreamon', NULL, 0, 'truyện thiếu nhi', 25000, 5, 'Kim Đồng', '2024-04-19', 0);
+INSERT INTO `sach` (`MASACH`, `TENSACH`, `IMAGE`, `SOLUONG`, `GIABIA`, `LANTAIBAN`, `TENNHAXUATBAN`, `NAMXUATBAN`, `ISHIDDEN`) VALUES
+(1, 'Doreamon', NULL, 0, 25000, 5, 'Kim Đồng', '2024-04-19', 0),
+(2, 'Conan', NULL, 0, 22000, 2, 'Kim Đồng', '2024-04-18', 0);
 
 -- --------------------------------------------------------
 
@@ -260,12 +271,6 @@ ALTER TABLE `khuyenmai`
   ADD PRIMARY KEY (`makhuyenmai`);
 
 --
--- Indexes for table `loaisach`
---
-ALTER TABLE `loaisach`
-  ADD PRIMARY KEY (`TENLOAISACH`);
-
---
 -- Indexes for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
@@ -290,7 +295,6 @@ ALTER TABLE `phieunhap`
 --
 ALTER TABLE `sach`
   ADD PRIMARY KEY (`MASACH`),
-  ADD KEY `FK_SACH_LOAISACH` (`TENLOAISACH`),
   ADD KEY `FK_SACH_NHAXUATBAN` (`TENNHAXUATBAN`);
 
 --
@@ -307,13 +311,13 @@ ALTER TABLE `taikhoan`
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MAHOADON` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `MAHOADON` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `khuyenmai`
@@ -331,13 +335,13 @@ ALTER TABLE `nhanvien`
 -- AUTO_INCREMENT for table `phieunhap`
 --
 ALTER TABLE `phieunhap`
-  MODIFY `mapn` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mapn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sach`
 --
 ALTER TABLE `sach`
-  MODIFY `MASACH` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MASACH` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -387,7 +391,6 @@ ALTER TABLE `phieunhap`
 -- Constraints for table `sach`
 --
 ALTER TABLE `sach`
-  ADD CONSTRAINT `FK_SACH_LOAISACH` FOREIGN KEY (`TENLOAISACH`) REFERENCES `loaisach` (`TENLOAISACH`),
   ADD CONSTRAINT `FK_SACH_NHAXUATBAN` FOREIGN KEY (`TENNHAXUATBAN`) REFERENCES `nhaxuatban` (`TENNHAXUATBAN`);
 COMMIT;
 

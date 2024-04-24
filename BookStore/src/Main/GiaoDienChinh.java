@@ -4,12 +4,8 @@
  */
 package Main;
 
-import Main.FrontEnd.ThongKePanel;
-import Main.FrontEnd.TaiKhoanPanel;
-import Main.FrontEnd.NhapHangPanel;
-import Main.FrontEnd.NhanVienPanel;
-import Main.FrontEnd.KhachHangPanel;
-import Main.FrontEnd.BanHangPanel;
+
+import Gui.FormChinh.*;
 import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -97,7 +93,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
                 .addComponent(logout)
                 .addGap(456, 456, 456)
                 .addComponent(Title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 765, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 960, Short.MAX_VALUE)
                 .addComponent(exit)
                 .addContainerGap())
         );
@@ -262,10 +258,12 @@ public class GiaoDienChinh extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
-        jLabel1.setFont(new java.awt.Font("Palatino Linotype", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Palatino Linotype", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 255, 102));
         jLabel1.setText("Chào mừng đến với phần mềm quản lý cửa hàng bán sách ");
 
-        jLabel2.setFont(new java.awt.Font("Palatino Linotype", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Palatino Linotype", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 255, 102));
         jLabel2.setText("Vui lòng chọn thao tác");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -273,22 +271,23 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(280, 280, 280)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(jLabel2))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0))
+                        .addGap(153, 153, 153)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 967, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(411, 411, 411)
+                        .addComponent(jLabel2)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(193, 193, 193)
+                .addGap(181, 181, 181)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(485, Short.MAX_VALUE))
+                .addContainerGap(463, Short.MAX_VALUE))
         );
 
         Middle.add(jPanel1, "card2");
@@ -337,7 +336,6 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         Middle.add(taikhoan, "taikhoan");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
         cardLayout.show(Middle, "taikhoan");
-        taikhoan.loadTaiKhoanToTable();
     }//GEN-LAST:event_TaiKhoanMouseClicked
 
     private void NhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NhanVienMouseClicked
@@ -356,7 +354,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         Middle.add(khachhang, "khachhang");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
         cardLayout.show(Middle, "khachhang");
-        khachhang.loadKhachHangToTable();
+        khachhang.loadBooksToTable();
     }//GEN-LAST:event_KhachHangMouseClicked
 
     private void ThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThongKeMouseClicked
