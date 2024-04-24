@@ -4,9 +4,15 @@
  */
 package Main.FrontEnd.FormEdit;
 
+import Main.BackEnd.repository.dao.SACHDAO;
+import Main.BackEnd.repository.modal.SACH;
 import Main.FrontEnd.FormAdd.*;
+import Main.FrontEnd.NhapHangPanel;
 import java.awt.Color;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -17,10 +23,19 @@ public class EditSach extends javax.swing.JFrame {
     /**
      * Creates new form EditNhanVien
      */
-    public EditSach() {
+        private NhapHangPanel nhaphang;
+        private SACH sach;
+        String url=null;
+    public EditSach(NhapHangPanel nhaphang1,SACH masachclicked) {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.nhaphang=nhaphang1;
+        this.sach=masachclicked;
+        dchi.setText(this.sach.getTENNHAXUATBAN());
+        name.setText(this.sach.getTENSACH());
+        mail.setText(""+this.sach.getLANTAIBAN());
+        phone.setText(""+this.sach.getGIABIA());
     }
 
     /**
@@ -81,6 +96,9 @@ public class EditSach extends javax.swing.JFrame {
             }
         });
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jLabel1MouseExited(evt);
             }
@@ -191,14 +209,25 @@ public class EditSach extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
-        this.dispose();
-        if(true){
-            int failSach=JOptionPane.showConfirmDialog(null,"Đã có lỗi xảy ra\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
-            if (failSach == JOptionPane.YES_OPTION) {
-                EditSach y = new EditSach();
-                y.setVisible(true);
-            }
+        int masach=this.sach.getMASACH();
+        String nhaxuatban=dchi.getText();
+        String nameSach=name.getText();
+        String lantaibanStr=mail.getText();
+        int lantaiban=Integer.parseInt(lantaibanStr);
+        String giabiaStr=phone.getText();
+        int giabiaSach=Integer.parseInt(giabiaStr);
+        if(url!=null){
+            SACH sach=new SACH(masach,nameSach,url,nhaxuatban,giabiaSach,lantaiban,false);
+            SACHDAO.getInstance().update(sach);
         }
+        else{
+            url=this.sach.getIMAGE();
+            SACH sach=new SACH(masach,nameSach,url,nhaxuatban,giabiaSach,lantaiban,false);
+            SACHDAO.getInstance().update(sach);
+        }
+        this.nhaphang.loadBooksToTable();
+        System.out.println("da thuc hien sua");
+        this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void jLabel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseMoved
@@ -217,6 +246,33 @@ public class EditSach extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_exitMouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+                // TODO add your handling code here:\
+    JFileChooser fileChooser = new JFileChooser();
+
+    // Set the file chooser to select files only
+    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+    // Set filter to display only image files
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "gif", "jpeg");
+    fileChooser.setFileFilter(filter);
+
+    // Show the file chooser dialog to the user
+    int result = fileChooser.showOpenDialog(null);
+
+    // Check if the user selected a file
+    if (result == JFileChooser.APPROVE_OPTION) {
+        // Get the selected file
+        File selectedFile = fileChooser.getSelectedFile();
+
+        // Get the path of the selected file
+        String selectedFilePath = selectedFile.getAbsolutePath();
+
+         url = selectedFilePath;
+    }
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments

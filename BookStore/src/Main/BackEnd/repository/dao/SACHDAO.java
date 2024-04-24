@@ -164,30 +164,29 @@ public int insertSACH(SACH t) {
 	int ketqua=0;
 	try {
 		Connection con=JDBCUtil.getConnection();
-		ArrayList<SACH> dathem=SACHDAO.getInstance().selectByCondition("TENSACH="+t.getTENSACH()+" GIABIA="+t.getGIABIA()+" LANTAIBAN="+t.getLANTAIBAN()+" TENNHAXUATBAN="+t.getTENNHAXUATBAN()+" NAMXUATBAN="+t.getNAMXUATBAN()+"ISHIDDEN=true");
-		if(dathem!=null) {
+                ArrayList<SACH> dathem = SACHDAO.getInstance().selectByCondition("TENSACH='" + t.getTENSACH() + "' AND GIABIA=" + t.getGIABIA() + " AND LANTAIBAN=" + t.getLANTAIBAN() + " AND TENNHAXUATBAN='" + t.getTENNHAXUATBAN() + "' AND ISHIDDEN=true");
+		if(!dathem.isEmpty()) {
 			String sql="UPDATE sach "+
 					"SET ISHIDDEN=false"+
 					"WHERE MASACH=?";
 			PreparedStatement pst=con.prepareStatement(sql);
-			ketqua=pst.executeUpdate();
 			System.out.print("thuc hien cau lenh "+sql+"\n");
 			pst.setInt(1,dathem.get(0).getMASACH());
+                        ketqua=pst.executeUpdate();
+
 		}
 		else{
-				String sql="INSERT INTO sach(TENSACH,IMAGE,SOLUONG,GIABIA,LANTAIBAN,TENNHAXUATBAN,NAMXUATBAN,ISHIDDEN"+
-						"VALUES (?,?,?,?,?,?,?,?)";
-				PreparedStatement pst=con.prepareStatement(sql);
-				ketqua=pst.executeUpdate();
-				pst.setString(1, t.getTENSACH());
-				pst.setString(2, t.getIMAGE());
-				pst.setInt(3, 0);
-				pst.setInt(4, t.getGIABIA());
-				pst.setInt(5, t.getLANTAIBAN());
-				pst.setString(6, t.getTENNHAXUATBAN());
-				pst.setDate(7,t.getNAMXUATBAN());
-				pst.setBoolean(8, false);
-
+                    String sql = "INSERT INTO sach(TENSACH, IMAGE, SOLUONG, GIABIA, LANTAIBAN, TENNHAXUATBAN, ISHIDDEN) " +
+                                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    PreparedStatement pst = con.prepareStatement(sql);
+                    pst.setString(1, t.getTENSACH());
+                    pst.setString(2, t.getIMAGE());
+                    pst.setInt(3, 0);
+                    pst.setInt(4, t.getGIABIA());
+                    pst.setInt(5, t.getLANTAIBAN());
+                    pst.setString(6, t.getTENNHAXUATBAN());
+                    pst.setBoolean(7, false);
+                    ketqua = pst.executeUpdate(); // Thêm dòng này để thực hiện câu lệnh SQL
 		}
 
 		
@@ -221,7 +220,7 @@ public int insertSACH(SACH t) {
 			}
 	
 			// Nếu không có giá trị nào giống, thực hiện cập nhật
-			String sql = "UPDATE sach " + " SET " + " TENSACH=?, IMAGE=?,   GIABIA=?, LANTAIBAN=?, TENNHAXUATBAN=?, NAMXUATBAN=? " + " WHERE MASACH=?";
+			String sql = "UPDATE sach SET TENSACH=?, IMAGE=?,   GIABIA=?, LANTAIBAN=?, TENNHAXUATBAN=? " + " WHERE MASACH=?";
 			
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setString(1, t.getTENSACH());
@@ -229,8 +228,7 @@ public int insertSACH(SACH t) {
 			pst.setInt(3, t.getGIABIA());
 			pst.setInt(4, t.getLANTAIBAN());
 			pst.setString(5, t.getTENNHAXUATBAN());
-			pst.setDate(6, t.getNAMXUATBAN());
-			pst.setInt(7, t.getMASACH());
+			pst.setInt(6, t.getMASACH());
 			ketqua = pst.executeUpdate();
 			JDBCUtil.closeConnection(con);
 		} catch(Exception e) {
@@ -267,13 +265,6 @@ public int insertSACH(SACH t) {
 				int value1=Integer.parseInt(value);
 				pst.setInt(2, value1);
 			}
-			else if(column.equals("NAMXUATBAN")){
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-				java.util.Date ngayUtil = sdf.parse(value); // Phân tích cú pháp chuỗi thành Date
-				Date ngaySQL = new Date(ngayUtil.getTime()); // Chuyển đổi thành java.sql.Date
-				pst.setDate(2, ngaySQL);
-			}
 			else if(column.equals("SOLUONG")){
 				pst.setInt(2, 0);
 			}
@@ -308,18 +299,17 @@ public int insertSACH(SACH t) {
 						"SET ISHIDDEN=true"+
 						"WHERE MASACH=?";
 				PreparedStatement pst1=con.prepareStatement(sql1);
-				ketqua=pst1.executeUpdate();
 				System.out.print("thuc hien cau lenh "+sql1+"\n");
 				pst1.setInt(1,t.getMASACH());
+				ketqua=pst1.executeUpdate();
 				JDBCUtil.closeConnection(con);
 			}
 			else{
-				String sql1="DELETE sach"+
-				"WHERE MASACH=?";
+				String sql1="DELETE FROM sach WHERE MASACH=?";
 				PreparedStatement pst1=con.prepareStatement(sql1);
-				ketqua=pst1.executeUpdate();
 				System.out.print("thuc hien cau lenh "+sql1+"\n");
 				pst1.setInt(1,t.getMASACH());
+				ketqua=pst1.executeUpdate();
 				JDBCUtil.closeConnection(con);
 			}
 
@@ -408,15 +398,14 @@ public int insertSACH(SACH t) {
 				int GIABIA=rs.getInt("GIABIA");
 				int LANTAIBAN=rs.getInt("LANTAIBAN");
 				String TENNHAXUATBAN=rs.getString("TENNHAXUATBAN");
-				Date NAMXUATBAN=rs.getDate("NAMXUATBAN");
 				boolean ISHIDDEN=rs.getBoolean("ISHIDDEN");
-				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,NAMXUATBAN,ISHIDDEN);
+				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,ISHIDDEN);
 				ketqua.add(sach);
 			}
 			JDBCUtil.closeConnection(con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class SACHDAO \n");
 			e.printStackTrace();
 		}
 		return ketqua;
@@ -442,9 +431,8 @@ public int insertSACH(SACH t) {
 				int GIABIA=rs.getInt("GIABIA");
 				int LANTAIBAN=rs.getInt("LANTAIBAN");
 				String TENNHAXUATBAN=rs.getString("TENNHAXUATBAN");
-				Date NAMXUATBAN=rs.getDate("NAMXUATBAN");
 				boolean ISHIDDEN=rs.getBoolean("ISHIDDEN");
-				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,NAMXUATBAN,ISHIDDEN);
+				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,ISHIDDEN);
 				ketqua.add(sach);
 			}
 			JDBCUtil.closeConnection(con);
@@ -477,9 +465,8 @@ public int insertSACH(SACH t) {
 				int GIABIA=rs.getInt("GIABIA");
 				int LANTAIBAN=rs.getInt("LANTAIBAN");
 				String TENNHAXUATBAN=rs.getString("TENNHAXUATBAN");
-				Date NAMXUATBAN=rs.getDate("NAMXUATBAN");
 				boolean ISHIDDEN=rs.getBoolean("ISHIDDEN");
-				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,NAMXUATBAN,ISHIDDEN);
+				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,ISHIDDEN);
 				ketqua=sach;
 			}
 			JDBCUtil.closeConnection(con);
@@ -502,7 +489,7 @@ public int insertSACH(SACH t) {
 			
 			Statement pst=con.createStatement();
 			
-			
+                        System.out.println("da thuc hien cau lenh "+sql);
 			ResultSet rs=pst.executeQuery(sql);
 			while(rs.next()) {
 				int MASACH=rs.getInt("MASACH");
@@ -512,15 +499,14 @@ public int insertSACH(SACH t) {
 				int GIABIA=rs.getInt("GIABIA");
 				int LANTAIBAN=rs.getInt("LANTAIBAN");
 				String TENNHAXUATBAN=rs.getString("TENNHAXUATBAN");
-				Date NAMXUATBAN=rs.getDate("NAMXUATBAN");
 				boolean ISHIDDEN=rs.getBoolean("ISHIDDEN");
-				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,NAMXUATBAN,ISHIDDEN);
+				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,ISHIDDEN);
 				ketqua.add(sach);
 			}
 			JDBCUtil.closeConnection(con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o CONDITION class SACHDAO \n");
 			e.printStackTrace();
 		}
 		return ketqua;

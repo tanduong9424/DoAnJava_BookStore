@@ -4,8 +4,14 @@
  */
 package Main.FrontEnd.FormAdd;
 
+import Main.BackEnd.repository.dao.SACHDAO;
+import Main.BackEnd.repository.modal.SACH;
+import Main.FrontEnd.NhapHangPanel;
 import java.awt.Color;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -16,10 +22,13 @@ public class AddSach extends javax.swing.JFrame {
     /**
      * Creates new form AddNhanVien
      */
-    public AddSach() {
+    String url=null;
+    private NhapHangPanel nhaphang;
+    public AddSach(NhapHangPanel nhaphang1) {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.nhaphang=nhaphang1;
     }
 
     /**
@@ -37,7 +46,7 @@ public class AddSach extends javax.swing.JFrame {
         name = new javax.swing.JTextField();
         dchi = new javax.swing.JTextField();
         mail = new javax.swing.JTextField();
-        phone = new javax.swing.JTextField();
+        giabia = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         exit = new javax.swing.JLabel();
         bot = new javax.swing.JPanel();
@@ -69,8 +78,13 @@ public class AddSach extends javax.swing.JFrame {
         mail.setBackground(new java.awt.Color(204, 255, 204));
         mail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lần tái bản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
-        phone.setBackground(new java.awt.Color(204, 255, 204));
-        phone.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Năm xuất bản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        giabia.setBackground(new java.awt.Color(204, 255, 204));
+        giabia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Năm xuất bản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        giabia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                giabiaActionPerformed(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(204, 255, 204));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -85,6 +99,9 @@ public class AddSach extends javax.swing.JFrame {
             }
         });
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jLabel1MouseExited(evt);
             }
@@ -107,7 +124,7 @@ public class AddSach extends javax.swing.JFrame {
                     .addGroup(midLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(giabia, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(midLayout.createSequentialGroup()
                             .addComponent(MaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,10 +154,13 @@ public class AddSach extends javax.swing.JFrame {
                     .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55)
                 .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(giabia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(226, 226, 226))
         );
+
+        giabia.getAccessibleContext().setAccessibleName("Gía bìa");
+        giabia.getAccessibleContext().setAccessibleDescription("");
 
         PanelAdd.add(mid, java.awt.BorderLayout.CENTER);
 
@@ -191,14 +211,27 @@ public class AddSach extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
-        this.dispose();
-        if(true){
-            int trungSach=JOptionPane.showConfirmDialog(null,"Sách này đã tồn tại\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
-            if (trungSach == JOptionPane.YES_OPTION) {
-                AddSach y = new AddSach();
-                y.setVisible(true);
-            }
+        System.out.println("da them sach moi");
+        String nameSach=name.getText();
+        System.out.println(nameSach);
+        String nhaxuatban=dchi.getText();
+        System.out.println(nhaxuatban);
+        String lantaibanStr=mail.getText();
+        String giabiaSachstr=giabia.getText();
+        int giabiaSach=Integer.parseInt(giabiaSachstr);
+        int lantaiban=Integer.parseInt(lantaibanStr);
+        System.out.println(lantaiban);
+        System.out.println("Selected file: " + url);
+        if(url!=null){
+            SACH sach=new SACH(nameSach,url,nhaxuatban,giabiaSach,lantaiban,false);
+            SACHDAO.getInstance().insertSACH(sach);
         }
+        else{
+            SACH sach=new SACH(nameSach,nhaxuatban,giabiaSach,lantaiban,false);
+            SACHDAO.getInstance().insertSACH(sach);
+        }
+        nhaphang.loadBooksToTable();
+        this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void jLabel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseMoved
@@ -221,6 +254,36 @@ public class AddSach extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_exitMouseClicked
+
+    private void giabiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giabiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_giabiaActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:\
+            JFileChooser fileChooser = new JFileChooser();
+
+    // Set the file chooser to select files only
+    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+    // Set filter to display only image files
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "gif", "jpeg");
+    fileChooser.setFileFilter(filter);
+
+    // Show the file chooser dialog to the user
+    int result = fileChooser.showOpenDialog(null);
+
+    // Check if the user selected a file
+    if (result == JFileChooser.APPROVE_OPTION) {
+        // Get the selected file
+        File selectedFile = fileChooser.getSelectedFile();
+
+        // Get the path of the selected file
+        String selectedFilePath = selectedFile.getAbsolutePath();
+
+         url = selectedFilePath;
+    }
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -263,11 +326,11 @@ public class AddSach extends javax.swing.JFrame {
     private javax.swing.JPanel bot;
     private javax.swing.JTextField dchi;
     private javax.swing.JLabel exit;
+    private javax.swing.JTextField giabia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField mail;
     private javax.swing.JPanel mid;
     private javax.swing.JTextField name;
-    private javax.swing.JTextField phone;
     private javax.swing.JLabel submitbtn;
     // End of variables declaration//GEN-END:variables
 }

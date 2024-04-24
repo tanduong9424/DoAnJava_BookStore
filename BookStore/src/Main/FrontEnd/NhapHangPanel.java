@@ -19,6 +19,7 @@ import Main.BackEnd.repository.modal.SACH;
 import Main.FrontEnd.FormAdd.AddNhaCungCap;
 import Main.FrontEnd.FormAdd.AddSach;
 import Main.FrontEnd.FormEdit.EditSach;
+import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -32,13 +33,13 @@ public class NhapHangPanel extends javax.swing.JPanel {
     /**
      * Creates new form NhapHangPanel
      */int status=0;
+       SACH sachclicked=null;
         public void loadBooksToTable() {
         DefaultTableModel model = (DefaultTableModel) Nhaptb.getModel();
         // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
         model.setRowCount(0);
 
         try {
-            System.out.print("hoạt động");
             ArrayList<SACH> sachList = SACHDAO.getInstance().selectAllExceptISHIDDEN();
 
             for (SACH sach : sachList) {
@@ -84,22 +85,45 @@ public class NhapHangPanel extends javax.swing.JPanel {
             ex.printStackTrace();
         }
     }  
+public ImageIcon resizeImage(ImageIcon icon, int maxWidth, int maxHeight) {
+    Image image = icon.getImage();
+    int width = image.getWidth(null);
+    int height = image.getHeight(null);
+    
+    // Kiểm tra kích thước của hình ảnh và điều chỉnh nếu cần
+    if (width > maxWidth || height > maxHeight) {
+        double scale = Math.min((double) maxWidth / width, (double) maxHeight / height);
+        width = (int) (width * scale);
+        height = (int) (height * scale);
+        
+        // Thay đổi kích thước hình ảnh
+        image = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    }
+    
+    // Tạo ImageIcon mới với kích thước đã được điều chỉnh
+    return new ImageIcon(image);
+}
 public void loadAnh(SACH t) {
     String url = t.getIMAGE(); // Lấy đường dẫn ảnh từ đối tượng SACH
     
     try {
         if(url !=null){
-                    // Tạo một đối tượng ImageIcon từ đường dẫn ảnh
-        ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        
-        // Đặt hình ảnh lên jLabel1
-        jLabel1.setIcon(icon);
+            // Tạo một đối tượng ImageIcon từ đường dẫn ảnh
+            ImageIcon icon = new ImageIcon(url);
+
+            // Đặt hình ảnh lên jLabel1
+            ImageIcon result=resizeImage(icon,180,273);
+            jLabel1.setIcon(result);
         }
+         else {
+            jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/doraemon.jpg")));
+        }        
     } catch (Exception ex) {
         // Nếu có lỗi xảy ra, in ra thông báo lỗi
         ex.printStackTrace();
     }
 } 
+
     
     
     public NhapHangPanel() {
@@ -853,7 +877,7 @@ public void loadAnh(SACH t) {
 
     private void addNewSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewSachActionPerformed
         // TODO add your handling code here:
-        AddSach x=new AddSach();
+        AddSach x=new AddSach(this);
         x.setVisible(true);
     }//GEN-LAST:event_addNewSachActionPerformed
 
@@ -915,12 +939,21 @@ public void loadAnh(SACH t) {
 
     private void SuaBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaBtn1ActionPerformed
         // TODO add your handling code here:
-        EditSach y=new EditSach();
-        y.setVisible(true);
+        if(sachclicked!=null){
+            EditSach y=new EditSach(this,sachclicked);
+            y.setVisible(true);
+        }
+
+        
     }//GEN-LAST:event_SuaBtn1ActionPerformed
 
     private void XoaBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaBtn1ActionPerformed
         // TODO add your handling code here:
+        if(sachclicked!=null){
+            SACHDAO.getInstance().delete(sachclicked);
+            loadBooksToTable();
+            System.out.println("da xoa thanh cong");
+        }
     }//GEN-LAST:event_XoaBtn1ActionPerformed
 
     private void addNewNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewNCCActionPerformed
@@ -943,13 +976,15 @@ public void loadAnh(SACH t) {
 
     private void NhaptbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NhaptbMouseClicked
         // TODO add your handling code here:
-                int row = Nhaptb.rowAtPoint(evt.getPoint());
+        int row = Nhaptb.rowAtPoint(evt.getPoint());
         if (row >= 0) { // Chỉ xử lý khi chọn hàng hợp lệ
             if(status==0){
             String maHoaDonStr = Nhaptb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
             int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
             SACH hd = new SACH(maHoaDon);
-            loadAnh(hd);
+            SACH result=SACHDAO.getInstance().selectById(hd);
+            sachclicked=result;
+            loadAnh(result);
             }
             else{
             String maHoaDonStr = Nhaptb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
