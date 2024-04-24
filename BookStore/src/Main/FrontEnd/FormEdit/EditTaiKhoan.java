@@ -4,15 +4,15 @@
  */
 package Main.FrontEnd.FormEdit;
 
-import Main.FrontEnd.FormAdd.*;
-import javax.swing.JOptionPane;
+import Main.BackEnd.Bus.Impl.taiKhoanImpl;
+import Main.BackEnd.repository.modal.TAIKHOAN;
 
 /**
  *
  * @author DELL
  */
 public class EditTaiKhoan extends javax.swing.JFrame {
-
+    taiKhoanImpl taiKhoanImpl = new taiKhoanImpl();
     /**
      * Creates new form AddTaiKhoan
      */
@@ -152,17 +152,17 @@ public class EditTaiKhoan extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void addThongTin(String maKH){
+        name.setText(maKH);
+    }
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
+        String userName = name.getText();
+        String mkhau = dchi.getText();
+        String Role =(String) jComboBox1.getSelectedItem();
+        TAIKHOAN taikhoan = new TAIKHOAN( userName, mkhau,Role);
+        taiKhoanImpl.suaTaiKhoan(taikhoan);
         this.dispose();
-        if(true){
-            int failTK=JOptionPane.showConfirmDialog(null,"Đã có lỗi xảy ra\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
-            if (failTK == JOptionPane.YES_OPTION) {
-                EditTaiKhoan y = new EditTaiKhoan();
-                y.setVisible(true);
-            }
-        }
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked

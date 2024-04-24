@@ -138,6 +138,14 @@ public class khachHangImpl implements khachHang{
         return "";
     }
 
- 
+    @Override
+    public ArrayList<KHACHANG> getALLKhacHang() {
+        return khachHangDao.selectAll();
+    }
+
+    @Override
+    public KHACHANG getByUsername(TAIKHOAN t) {
+        return khachHangDao.selectByUsername(t);
+    }
     
 }

@@ -14,6 +14,7 @@ public class TAIKHOAN {
 	public TAIKHOAN() {
 		super();
 	}
+   
 	public TAIKHOAN(String uSERNAME) {
 		super();
 		USERNAME = uSERNAME;

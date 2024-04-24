@@ -16,8 +16,7 @@ public class KHACHANG {
     public KHACHANG(int makh) {
         this.makh = makh;
     }
-    
-    public KHACHANG(int makh, String username, String hoten, String diachi, String email, int dienthoai, Date ngaytao,
+       public KHACHANG(int makh, String username, String hoten, String diachi, String email, int dienthoai, Date ngaytao,
             boolean tttk) {
         this.makh = makh;
         this.username = username;

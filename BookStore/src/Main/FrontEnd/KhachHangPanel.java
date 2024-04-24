@@ -26,13 +26,14 @@ public class KhachHangPanel extends javax.swing.JPanel {
     public KhachHangPanel() {
         initComponents();
     }
-    public void loadBooksToTable() {
+    
+    public void loadKhachHangToTable() {
         DefaultTableModel model = (DefaultTableModel) KhachHangtb.getModel();
         model.setRowCount(0);
 
         try {
             System.out.print("hoạt động");
-            ArrayList<KHACHANG> sachList = KHACHHANGDAO.getInstance().selectAll();
+            ArrayList<KHACHANG> sachList = khaHangImpl.getALLKhacHang();
 
             for (KHACHANG khachang : sachList) {
                 Object[] row = {khachang.getMakh(), khachang.getHoten(), khachang.getDiachi(), khachang.getDienthoai(), khachang.getEmail()};
@@ -294,7 +295,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
         x.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                loadBooksToTable();
+                loadKhachHangToTable();
             }
         });
 
@@ -308,7 +309,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
             int intValue = Integer.parseInt(value.toString());
             KHACHANG khachang = new KHACHANG(intValue);
             khaHangImpl.xoaKhachHang(khachang);
-            loadBooksToTable();
+            loadKhachHangToTable();
         }
     }//GEN-LAST:event_XoaActionPerformed
 
@@ -324,7 +325,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
             y.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                loadBooksToTable();
+                loadKhachHangToTable();
             }
         });
         }

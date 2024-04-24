@@ -12,7 +12,6 @@ import Main.FrontEnd.KhachHangPanel;
 import Main.FrontEnd.BanHangPanel;
 import java.awt.CardLayout;
 import java.awt.Color;
-import static java.lang.System.exit;
 import javax.swing.JOptionPane;
 
 /**
@@ -338,6 +337,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         Middle.add(taikhoan, "taikhoan");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
         cardLayout.show(Middle, "taikhoan");
+        taikhoan.loadTaiKhoanToTable();
     }//GEN-LAST:event_TaiKhoanMouseClicked
 
     private void NhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NhanVienMouseClicked
@@ -356,7 +356,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         Middle.add(khachhang, "khachhang");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
         cardLayout.show(Middle, "khachhang");
-        khachhang.loadBooksToTable();
+        khachhang.loadKhachHangToTable();
     }//GEN-LAST:event_KhachHangMouseClicked
 
     private void ThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThongKeMouseClicked

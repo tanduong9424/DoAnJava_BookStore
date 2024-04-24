@@ -4,8 +4,15 @@
  */
 package Main.FrontEnd;
 
+import Main.BackEnd.Bus.Impl.khachHangImpl;
+import Main.BackEnd.Bus.Impl.taiKhoanImpl;
+import Main.BackEnd.repository.dao.TAIKHOANDAO;
+import Main.BackEnd.repository.modal.KHACHANG;
+import Main.BackEnd.repository.modal.TAIKHOAN;
 import Main.FrontEnd.FormAdd.AddTaiKhoan;
 import Main.FrontEnd.FormEdit.EditTaiKhoan;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,13 +20,38 @@ import Main.FrontEnd.FormEdit.EditTaiKhoan;
  */
 public class TaiKhoanPanel extends javax.swing.JPanel {
 
+    taiKhoanImpl taiKhoanImpl = new taiKhoanImpl();
+    khachHangImpl khaHangImpl = new khachHangImpl();
+
     /**
      * Creates new form TaiKhoanPanel
      */
     public TaiKhoanPanel() {
         initComponents();
     }
+    public void loadTaiKhoanToTable(){
+        DefaultTableModel model = (DefaultTableModel) account.getModel();
+        model.setRowCount(0);
 
+        try {
+            System.out.print("hoạt động");
+            ArrayList<TAIKHOAN> listTaiKhoan = taiKhoanImpl.getAllTaiKhoan();
+
+            for (TAIKHOAN taiKhoan : listTaiKhoan) {
+                KHACHANG khachang = khaHangImpl.getByUsername(new TAIKHOAN(taiKhoan.getUSERNAME()));
+                if(khachang!=null){
+                    Object[] row = {khachang.getMakh(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(), null};
+                    model.addRow(row);
+                }else{
+                    Object[] row = {null, taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(),null};
+                    model.addRow(row);
+                }
+                
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,6 +110,11 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-magnifying-glass-30.png"))); // NOI18N
         search.setBorder(null);
         search.setContentAreaFilled(false);
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
 
         thuoctinh.setBackground(new java.awt.Color(204, 255, 204));
         thuoctinh.setForeground(new java.awt.Color(0, 51, 51));
@@ -131,9 +168,6 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         account.setForeground(new java.awt.Color(0, 0, 51));
         account.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Nguyễn Xuân Duy", "nxd", "nxdsgu", "admin", "all"},
-                {"Lê Hoàng Huy", "lhh", "lhhsgu", "Khách hàng", "mua,xem kho sách"},
-                {"Lương Cẩm Đào", "lcd", "lcdsgu", "Nhân Viên", "mua,bán,nhập hàng,thống kê,xem kho sách"},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -243,16 +277,41 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         EditTaiKhoan y = new EditTaiKhoan();
         y.setVisible(true);
+        int selectedRowIdx = account.getSelectedRow();
+        if (selectedRowIdx != -1) { 
+            Object value = account.getModel().getValueAt(selectedRowIdx, 1); 
+            String valueAsString = value.toString();
+            y.addThongTin(valueAsString);
+            y.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                    loadTaiKhoanToTable();
+                }
+            });
+        }
     }//GEN-LAST:event_SuabtnActionPerformed
 
     private void XoabtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoabtnActionPerformed
         // TODO add your handling code here:
+        int selectedRowIdx = account.getSelectedRow();
+        if (selectedRowIdx != -1) { 
+            Object value = account.getModel().getValueAt(selectedRowIdx, 1); 
+            TAIKHOAN taikhoan = new TAIKHOAN(value.toString());
+            taiKhoanImpl.xoaTaiKhoan(taikhoan);
+            loadTaiKhoanToTable();
+        }
     }//GEN-LAST:event_XoabtnActionPerformed
 
     private void ThembtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThembtnActionPerformed
         // TODO add your handling code here:
         AddTaiKhoan x=new AddTaiKhoan();
         x.setVisible(true);
+        x.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                loadTaiKhoanToTable();
+            }
+        });
     }//GEN-LAST:event_ThembtnActionPerformed
 
     private void thuoctinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thuoctinhActionPerformed
@@ -262,6 +321,29 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
     private void inputsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputsearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputsearchActionPerformed
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) account.getModel();
+        model.setRowCount(0);
+        
+        String kieuTimKiem = (String) thuoctinh.getSelectedItem();
+        String inputText = inputsearch.getText();
+        
+        if(inputText!=null){
+            ArrayList<TAIKHOAN> tkList = taiKhoanImpl.timKiem(kieuTimKiem,inputText);
+            for (TAIKHOAN taiKhoan : tkList) {
+                KHACHANG khachang = khaHangImpl.getByUsername(new TAIKHOAN(taiKhoan.getUSERNAME()));
+                if(khachang!=null){
+                    Object[] row = {khachang.getMakh(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(), null};
+                    model.addRow(row);
+                }else{
+                    Object[] row = {null, taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(),null};
+                    model.addRow(row);
+                }
+            }
+        }
+    }//GEN-LAST:event_searchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
