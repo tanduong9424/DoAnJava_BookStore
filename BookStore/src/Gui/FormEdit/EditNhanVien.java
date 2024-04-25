@@ -5,13 +5,18 @@
 package Gui.FormEdit;
 
 
+import Dto.NHANVIEN;
 import javax.swing.JOptionPane;
+import static org.apache.logging.log4j.util.Strings.isBlank;
+import Bus.Impl.nhanVienImpl;
 
 /**
  *
  * @author DELL
  */
 public class EditNhanVien extends javax.swing.JFrame {
+    
+    nhanVienImpl nhanVienImpl1 = new nhanVienImpl();
 
     /**
      * Creates new form AddNhanVien
@@ -62,6 +67,11 @@ public class EditNhanVien extends javax.swing.JFrame {
 
         mail.setBackground(new java.awt.Color(204, 255, 204));
         mail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        mail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mailActionPerformed(evt);
+            }
+        });
 
         phone.setBackground(new java.awt.Color(204, 255, 204));
         phone.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Số Điện Thoại", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
@@ -84,7 +94,7 @@ public class EditNhanVien extends javax.swing.JFrame {
                     .addComponent(MaNV, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mail)
-                    .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(phone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(130, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -94,17 +104,17 @@ public class EditNhanVien extends javax.swing.JFrame {
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
                 .addComponent(exit)
-                .addGap(14, 14, 14)
+                .addGap(2, 2, 2)
                 .addComponent(MaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dchi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         PanelAdd.add(mid, java.awt.BorderLayout.CENTER);
@@ -160,20 +170,47 @@ public class EditNhanVien extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
-       this.dispose();
-        if(true){
-            int failNV=JOptionPane.showConfirmDialog(null,"Đã có lỗi xảy ra\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
-            if (failNV == JOptionPane.YES_OPTION) {
-                EditNhanVien y = new EditNhanVien();
-                y.setVisible(true);
-            }
+        int maKH = Integer.parseInt(MaNV.getText());
+        String userName = name.getText();
+        if (isBlank(userName)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập họ và tên.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        String diaChi = dchi.getText();
+        if (isBlank(diaChi)) {
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Địa Chỉ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String mailPerson = mail.getText();
+        if (isBlank(mailPerson)) {
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập mail", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String sdt = phone.getText();
+        if (isBlank(sdt)){
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập sdt", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int sdtInt;
+        try {
+            sdtInt = Integer.parseInt(sdt);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        NHANVIEN nhanvien = new NHANVIEN(maKH, null, userName, diaChi, mailPerson,sdtInt , null,true);
+        nhanVienImpl1.suaNhanVien(nhanvien);
+        this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_exitMouseClicked
+
+    private void mailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,4 +262,8 @@ public class EditNhanVien extends javax.swing.JFrame {
     private javax.swing.JTextField phone;
     private javax.swing.JLabel submitbtn;
     // End of variables declaration//GEN-END:variables
+
+    public void addThongTin(String valueAsString) {
+        MaNV.setText(valueAsString);
+    }
 }

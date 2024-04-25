@@ -4,13 +4,18 @@
  */
 package Gui.FormAdd;
 
+import Bus.Impl.nhanVienImpl;
+import Dto.NHANVIEN;
 import javax.swing.JOptionPane;
+import static org.apache.logging.log4j.util.Strings.isBlank;
 
 /**
  *
  * @author DELL
  */
 public class AddNhanVien extends javax.swing.JFrame {
+
+    nhanVienImpl nhanVienImpl1 = new nhanVienImpl();
 
     /**
      * Creates new form AddNhanVien
@@ -83,7 +88,7 @@ public class AddNhanVien extends javax.swing.JFrame {
                     .addComponent(MaNV, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mail)
-                    .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(phone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(130, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -94,17 +99,17 @@ public class AddNhanVien extends javax.swing.JFrame {
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
                 .addComponent(exit)
-                .addGap(14, 14, 14)
+                .addGap(2, 2, 2)
                 .addComponent(MaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dchi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         PanelAdd.add(mid, java.awt.BorderLayout.CENTER);
@@ -160,14 +165,37 @@ public class AddNhanVien extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
-       this.dispose();
-        if(true){
-            int trungNV=JOptionPane.showConfirmDialog(null,"Nhân Viên này đã tồn tại\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
-            if (trungNV == JOptionPane.YES_OPTION) {
-                AddNhanVien y = new AddNhanVien();
-                y.setVisible(true);
-            }
+       String hoVaten = name.getText();
+        if (isBlank(hoVaten)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập họ và tên.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        String diachi = dchi.getText();
+        if (isBlank(diachi)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập Địa Chỉ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String email = mail.getText();
+        if (isBlank(email)) {
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Email", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String sdt = phone.getText();
+        if (isBlank(sdt)){
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập sdt", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int sdtInt;
+        try {
+            sdtInt = Integer.parseInt(sdt);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        NHANVIEN nhanvien = new NHANVIEN(0,null,hoVaten,diachi,email,sdtInt,null,true);
+        nhanVienImpl1.themNhanVien(nhanvien);
+        this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked

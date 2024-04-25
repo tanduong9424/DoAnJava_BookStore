@@ -4,10 +4,11 @@
  */
 package Gui.FormAdd;
 
-import Bus.Impl.khachHangImpl;
+import Bus.Impl.nhanVienImpl;
 import Bus.Impl.taiKhoanImpl;
 import Dao.NHANVIENDAO;
 import Dto.KHACHANG;
+import Dto.NHANVIEN;
 import Dto.TAIKHOAN;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -20,7 +21,7 @@ import static org.apache.logging.log4j.util.Strings.isBlank;
 public class AddTaiKhoan extends javax.swing.JFrame {
 
     taiKhoanImpl taiKhoanImpl = new taiKhoanImpl();
-    khachHangImpl khaHangImpl = new khachHangImpl();    
+    nhanVienImpl nhanVienImpl1 = new nhanVienImpl();    
 
     /**
      * Creates new form AddTaiKhoan
@@ -217,8 +218,8 @@ public class AddTaiKhoan extends javax.swing.JFrame {
             return;          
         }
         
-        KHACHANG khachang = new KHACHANG(0, userName, hoVaten, null, null, 0, null,true);
-        khaHangImpl.themKhachHangCoTK(khachang,taikhoan);
+        NHANVIEN nhanvien = new NHANVIEN(0, userName, hoVaten, null, null, 0, null,true);
+        nhanVienImpl1.themNhanVienCoTK(nhanvien,taikhoan);
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 

@@ -4,8 +4,14 @@
  */
 package Gui.FormChinh;
 
+import Bus.Impl.nhanVienImpl;
+import Dto.NHANVIEN;
 import Gui.FormAdd.AddNhanVien;
 import Gui.FormEdit.EditNhanVien;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static org.apache.logging.log4j.util.Strings.isBlank;
 
 
 
@@ -15,6 +21,7 @@ import Gui.FormEdit.EditNhanVien;
  */
 public class NhanVienPanel extends javax.swing.JPanel {
 
+    nhanVienImpl nhanVienImpl1 = new nhanVienImpl();
     /**
      * Creates new form NhanVienPanel
      * 
@@ -22,7 +29,22 @@ public class NhanVienPanel extends javax.swing.JPanel {
     public NhanVienPanel() {
         initComponents();
     }
+    public void loadNhanVienToTable(){
+        DefaultTableModel model = (DefaultTableModel) DataNhanVien.getModel();
+        model.setRowCount(0);
 
+        try {
+            System.out.print("hoạt động");
+            ArrayList<NHANVIEN> listNhanVien = nhanVienImpl1.getAllTaiKhoan();
+
+            for (NHANVIEN nhanVien : listNhanVien) {
+                Object[] row = {nhanVien.getManv(), nhanVien.getHoten(), nhanVien.getNgaytao(),nhanVien.getDiachi(),nhanVien.getDienthoai(),nhanVien.getEmail()};
+                model.addRow(row);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,7 +59,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
         thuoctinh = new javax.swing.JComboBox<>();
         inputsearch = new javax.swing.JTextField();
         XuatExcel = new javax.swing.JButton();
-        NhapExcel = new javax.swing.JButton();
         dataNV = new javax.swing.JPanel();
         scroll1 = new javax.swing.JScrollPane();
         DataNhanVien = new javax.swing.JTable();
@@ -54,6 +75,11 @@ public class NhanVienPanel extends javax.swing.JPanel {
         search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-magnifying-glass-30.png"))); // NOI18N
         search.setBorder(null);
         search.setContentAreaFilled(false);
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
 
         thuoctinh.setBackground(new java.awt.Color(204, 255, 204));
         thuoctinh.setForeground(new java.awt.Color(0, 51, 51));
@@ -106,11 +132,6 @@ public class NhanVienPanel extends javax.swing.JPanel {
                 XuatExcelActionPerformed(evt);
             }
         });
-
-        NhapExcel.setBackground(new java.awt.Color(204, 255, 204));
-        NhapExcel.setForeground(new java.awt.Color(0, 51, 51));
-        NhapExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_ms_excel_30px.png"))); // NOI18N
-        NhapExcel.setText("Nhập Excel");
 
         dataNV.setBackground(new java.awt.Color(0, 204, 204));
 
@@ -252,9 +273,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(XuatExcel)
-                        .addGap(18, 18, 18)
-                        .addComponent(NhapExcel)))
+                        .addComponent(XuatExcel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -264,9 +283,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
                     .addComponent(PanelTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(XuatExcel)
-                            .addComponent(NhapExcel))))
+                        .addComponent(XuatExcel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(dataNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -283,29 +300,83 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
     private void XuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XuatExcelActionPerformed
         // TODO add your handling code here:
+        if(nhanVienImpl1.xuatExcel()==true){
+            JOptionPane.showMessageDialog(this, "Xuất Thành Công", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this, "đã xảy ra lỗi", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_XuatExcelActionPerformed
 
     private void ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemActionPerformed
         // TODO add your handling code here:
         AddNhanVien x=new AddNhanVien();
         x.setVisible(true);
+        x.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                loadNhanVienToTable();
+            }
+        });
     }//GEN-LAST:event_ThemActionPerformed
 
     private void XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaActionPerformed
         // TODO add your handling code here:\
-       
+       int selectedRowIdx = DataNhanVien.getSelectedRow();
+        if (selectedRowIdx != -1) { 
+            Object value = DataNhanVien.getModel().getValueAt(selectedRowIdx, 0); 
+            int manv = Integer.parseInt(value.toString());
+            NHANVIEN nhanvien = new NHANVIEN(manv);
+            nhanVienImpl1.xoaNhanVien(nhanvien);
+            loadNhanVienToTable();
+        }else{
+            JOptionPane.showMessageDialog(this, "Vui Lòng Chọn nhân viên muốn xóa", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
+
+        }
     }//GEN-LAST:event_XoaActionPerformed
 
     private void SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaActionPerformed
         // TODO add your handling code here:
-        EditNhanVien y = new EditNhanVien();
-        y.setVisible(true);
+       
+        int selectedRowIdx = DataNhanVien.getSelectedRow();
+        if (selectedRowIdx != -1) {
+            EditNhanVien y = new EditNhanVien();
+            y.setVisible(true);
+            Object value = DataNhanVien.getModel().getValueAt(selectedRowIdx, 0);
+            String valueAsString = value.toString();
+            y.addThongTin(valueAsString);
+            y.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                    loadNhanVienToTable();
+                }
+            });
+        }else{
+            JOptionPane.showMessageDialog(this, "Vui Lòng Chọn tài khoản muốn Sửa", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
+
+        }
     }//GEN-LAST:event_SuaActionPerformed
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) DataNhanVien.getModel();
+        model.setRowCount(0);
+
+        String kieuTimKiem = (String) thuoctinh.getSelectedItem();
+        String inputText = inputsearch.getText();
+        if (isBlank(inputText)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa cần tìm", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ArrayList<NHANVIEN> tkList = nhanVienImpl1.timKiem(kieuTimKiem,inputText);
+        for (NHANVIEN nhanVien : tkList) {
+            Object[] row = {nhanVien.getManv(), nhanVien.getHoten(), nhanVien.getNgaytao(),nhanVien.getDiachi(),nhanVien.getDienthoai(),nhanVien.getEmail()};
+            model.addRow(row);
+        }
+    }//GEN-LAST:event_searchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DataNhanVien;
-    private javax.swing.JButton NhapExcel;
     private javax.swing.JPanel PanelTimKiem;
     private javax.swing.JButton Sua;
     private javax.swing.JButton Them;

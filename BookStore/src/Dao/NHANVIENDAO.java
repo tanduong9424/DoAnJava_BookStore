@@ -251,7 +251,38 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 		}
 		return ketqua;
     }
-
+    public NHANVIEN selectByUsername(NHANVIEN t) {
+        NHANVIEN ketqua=null;
+        try {
+            Connection con=JDBCUtil.getConnection();
+            
+            String sql=" SELECT * FROM nhanvien WHERE username=? ";
+            
+            PreparedStatement pst=con.prepareStatement(sql);
+			pst.setString(1, t.getUsername());
+            
+            
+            ResultSet rs=pst.executeQuery();
+            while(rs.next()) {
+                int manv=rs.getInt("manv");	
+                String username=rs.getString("username");	
+                String hoten=rs.getString("hoten");	
+                String diachi=rs.getString("diachi");	
+                String email=rs.getString("email");	
+                int dienthoai=rs.getInt("dienthoai");	
+                Date ngaytao=rs.getDate("ngaytao");	
+                boolean tttk=rs.getBoolean("tttk");	
+                NHANVIEN nv=new NHANVIEN(manv,username,hoten,diachi,email,dienthoai,ngaytao,tttk);
+                ketqua=nv;
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
+            e.printStackTrace();
+        }
+        return ketqua;
+    }
     @Override
     public NHANVIEN selectById(NHANVIEN t) {
         NHANVIEN ketqua=null;
@@ -265,7 +296,7 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 			
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
-				int manv=rs.getInt("manv");	
+                int manv=rs.getInt("manv");	
                 String username=rs.getString("username");	
                 String hoten=rs.getString("hoten");	
                 String diachi=rs.getString("diachi");	

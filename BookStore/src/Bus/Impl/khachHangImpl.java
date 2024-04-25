@@ -6,7 +6,6 @@ package Bus.Impl;
 
 import Bus.khachHang;
 import Dao.KHACHHANGDAO;
-import Dao.TAIKHOANDAO;
 import Dto.KHACHANG;
 import Dto.TAIKHOAN;
 
@@ -53,12 +52,12 @@ public class khachHangImpl implements khachHang{
         ArrayList<KHACHANG> dskh = khachHangDao.selectAll();
         dskh.forEach((kh) -> {
          switch (kieuTimKiem) {
-            case "Mã Khách Hàng":
+            case "Mã Nhân Viên":
                 if (String.valueOf(kh.getMakh()).toLowerCase().contains(inputText.toLowerCase())) {
                     result.add(kh);
                 }
                 break;
-            case "Tên Khách Hàng":
+            case "Tên Nhân Viên":
                 if (kh.getHoten() != null && kh.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
                     result.add(kh);
                 }
@@ -100,7 +99,7 @@ public class khachHangImpl implements khachHang{
 
     @Override
     public Boolean xuatExcel() {
-                XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("danhSachKhachHang");
         
         XSSFRow row =null;
@@ -129,7 +128,7 @@ public class khachHangImpl implements khachHang{
             row.createCell(7).setCellValue(khachHang.isTttk());
         }
         try {
-            File f = new File("excel/danhsach.xlsx");
+            File f = new File("excel/khachhang.xlsx");
             FileOutputStream fis;
             fis = new FileOutputStream(f);
             workbook.write(fis);

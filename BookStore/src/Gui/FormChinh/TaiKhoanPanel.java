@@ -5,8 +5,10 @@
 package Gui.FormChinh;
 
 import Bus.Impl.khachHangImpl;
+import Bus.Impl.nhanVienImpl;
 import Bus.Impl.taiKhoanImpl;
 import Dto.KHACHANG;
+import Dto.NHANVIEN;
 import Dto.TAIKHOAN;
 import Gui.FormAdd.AddTaiKhoan;
 import Gui.FormEdit.EditTaiKhoan;
@@ -24,7 +26,7 @@ import static org.apache.logging.log4j.util.Strings.isNotBlank;
 public class TaiKhoanPanel extends javax.swing.JPanel {
     
     taiKhoanImpl taiKhoanImpl = new taiKhoanImpl();
-    khachHangImpl khaHangImpl = new khachHangImpl();
+    nhanVienImpl nhanVienImpl1 = new nhanVienImpl();
     /**
      * Creates new form TaiKhoanPanel
      */
@@ -40,9 +42,9 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
             ArrayList<TAIKHOAN> listTaiKhoan = taiKhoanImpl.getAllTaiKhoan();
 
             for (TAIKHOAN taiKhoan : listTaiKhoan) {
-                KHACHANG khachang = khaHangImpl.getByUsername(new TAIKHOAN(taiKhoan.getUSERNAME()));
-                if(khachang!=null){
-                    Object[] row = {khachang.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(), null};
+                NHANVIEN nhanvien = nhanVienImpl1.getByUsername(new NHANVIEN(taiKhoan.getUSERNAME()));
+                if(nhanvien!=null){
+                    Object[] row = {nhanvien.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(), null};
                     model.addRow(row);
                 }else{
                     Object[] row = {null, taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(),null};
@@ -344,9 +346,9 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         }
         ArrayList<TAIKHOAN> tkList = taiKhoanImpl.timKiem(kieuTimKiem,inputText);
         for (TAIKHOAN taiKhoan : tkList) {
-            KHACHANG khachang = khaHangImpl.getByUsername(new TAIKHOAN(taiKhoan.getUSERNAME()));
-            if(khachang!=null){
-                Object[] row = {khachang.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(), null};
+            NHANVIEN nhanvien = nhanVienImpl1.getByUsername(new NHANVIEN(taiKhoan.getUSERNAME()));
+            if(nhanvien!=null){
+                Object[] row = {nhanvien.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(), null};
                 model.addRow(row);
             }else{
                 Object[] row = {null, taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(),null};
