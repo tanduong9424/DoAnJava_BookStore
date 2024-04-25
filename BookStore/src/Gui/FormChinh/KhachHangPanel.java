@@ -13,6 +13,7 @@ import Gui.FormEdit.EditKhachHang;
 
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -194,7 +195,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
             dataKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataKHLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                .addComponent(scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dataKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Sua)
@@ -277,9 +278,9 @@ public class KhachHangPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(17, 17, 17)
                         .addComponent(XuatExcel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(dataKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -287,7 +288,11 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
     private void XuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XuatExcelActionPerformed
         // TODO add your handling code here:
-        khaHangImpl.xuatExcel();
+        if(khaHangImpl.xuatExcel()==true){
+            JOptionPane.showMessageDialog(this, "Xuất Thành Công", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this, "đã xảy ra lỗi", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_XuatExcelActionPerformed
 
     private void ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemActionPerformed
@@ -312,15 +317,18 @@ public class KhachHangPanel extends javax.swing.JPanel {
             KHACHANG khachang = new KHACHANG(intValue);
             khaHangImpl.xoaKhachHang(khachang);
             loadBooksToTable();
+        }else{
+            JOptionPane.showMessageDialog(this, "Vui Lòng Chọn tài khoản muốn xóa", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_XoaActionPerformed
 
     private void SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaActionPerformed
         // TODO add your handling code here:
-        EditKhachHang y = new EditKhachHang();
-        y.setVisible(true);
         int selectedRowIdx = KhachHangtb.getSelectedRow();
         if (selectedRowIdx != -1) { 
+            EditKhachHang y = new EditKhachHang();
+             y.setVisible(true);
             Object value = KhachHangtb.getModel().getValueAt(selectedRowIdx, 0); 
             String valueAsString = value.toString();
             y.addThongTin(valueAsString);
@@ -330,6 +338,9 @@ public class KhachHangPanel extends javax.swing.JPanel {
                 loadBooksToTable();
             }
         });
+        }else{
+            JOptionPane.showMessageDialog(this, "Vui Lòng Chọn tài khoản muốn Sửa", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_SuaActionPerformed
 

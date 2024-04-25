@@ -11,17 +11,13 @@ import Dto.KHACHANG;
 import Dto.TAIKHOAN;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -29,75 +25,82 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class khachHangImpl implements khachHang{
 
     KHACHHANGDAO khachHangDao = new KHACHHANGDAO();
-    TAIKHOANDAO taiKhoanDao = new TAIKHOANDAO();
     
+    @Override
+    public KHACHANG getByUsername(TAIKHOAN t) {
+        return khachHangDao.selectByUsername(t);
+    }
+    
+    @Override
     public Boolean themKhachHang(KHACHANG khachang) {
         return khachHangDao.insert(khachang)==0;
     }
     
+    @Override
     public Boolean suaKhachHang(KHACHANG khachang) {
         return khachHangDao.update(khachang)==0;
     }
 
-   
+   @Override
     public Boolean xoaKhachHang(KHACHANG khachang) {
          return khachHangDao.delete(khachang)==0;
     }   
 
-   
+   @Override
     public ArrayList<KHACHANG> timKiem(String kieuTimKiem,String inputText) {
         
         ArrayList<KHACHANG> result = new ArrayList<>();
         ArrayList<KHACHANG> dskh = khachHangDao.selectAll();
         dskh.forEach((kh) -> {
-            switch (kieuTimKiem) {
-                case "Mã Khách Hàng":
-                    if (String.valueOf(kh.getMakh()).toLowerCase().contains(inputText.toLowerCase())) {
-                        result.add(kh);
-                    }
-                    break;
-                case "Tên Khách Hàng":
-                    if (kh.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
-                        result.add(kh);
-                    }
-                    break;
-                case "Địa Chỉ":
-                    if (kh.getDiachi().toLowerCase().contains(inputText.toLowerCase())) {
-                        result.add(kh);
-                    }
-                    break;
-                case "Số Điện Thoại":
-                    if (String.valueOf(kh.getDienthoai()).toLowerCase().contains(inputText.toLowerCase())) {
-                        result.add(kh);
-                    }
-                    break;
-                case "Email":
-                    if (kh.getEmail().toLowerCase().contains(inputText.toLowerCase())) {
-                        result.add(kh);
-                    }
-                    break;        
-            }
+         switch (kieuTimKiem) {
+            case "Mã Khách Hàng":
+                if (String.valueOf(kh.getMakh()).toLowerCase().contains(inputText.toLowerCase())) {
+                    result.add(kh);
+                }
+                break;
+            case "Tên Khách Hàng":
+                if (kh.getHoten() != null && kh.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
+                    result.add(kh);
+                }
+                break;
+            case "Địa Chỉ":
+                if (kh.getDiachi() != null && kh.getDiachi().toLowerCase().contains(inputText.toLowerCase())) {
+                    result.add(kh);
+                }
+                break;
+            case "Số Điện Thoại":
+                if (String.valueOf(kh.getDienthoai()).toLowerCase().contains(inputText.toLowerCase())) {
+                    result.add(kh);
+                }
+                break;
+            case "Email":
+                if (kh.getEmail() != null && kh.getEmail().toLowerCase().contains(inputText.toLowerCase())) {
+                    result.add(kh);
+                }
+                break;        
+        }
+
         });
 
         return result;
     }   
 
 
-    
+    @Override
     public Boolean themKhachHangCoTK(KHACHANG khachang,TAIKHOAN tk) {
         //Kiem Tra tk Ton Tai
         
         return khachHangDao.insertCOTK(khachang,tk)==0;    
     }
 
-
+    @Override
     public Boolean suaKhachHangCoTK(KHACHANG khachang, TAIKHOAN tk) {
         return khachHangDao.updateCOTK(khachang,tk)==0;    
     }
-    
+
     @Override
-    public String xuatExcel() {
-        XSSFWorkbook workbook = new XSSFWorkbook();
+    public Boolean xuatExcel() {
+                XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("danhSachKhachHang");
         
         XSSFRow row =null;
@@ -133,12 +136,15 @@ public class khachHangImpl implements khachHang{
             fis.close();
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
+            return false;
+
         } catch (IOException ex) {
             ex.printStackTrace();
+            return false;
         }
-        return "";
+        return true;
     }
+    
 
- 
     
 }

@@ -6,6 +6,8 @@ package Gui.FormEdit;
 
 import Bus.Impl.khachHangImpl;
 import Dto.KHACHANG;
+import javax.swing.JOptionPane;
+import static org.apache.logging.log4j.util.Strings.isBlank;
 
 
 
@@ -87,32 +89,36 @@ public class EditKhachHang extends javax.swing.JFrame {
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
                 .addGap(99, 99, 99)
-                .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(dchi)
-                    .addComponent(MaKH, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mail)
-                    .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(130, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(midLayout.createSequentialGroup()
+                        .addComponent(MaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(midLayout.createSequentialGroup()
+                        .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(dchi)
+                            .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mail)
+                            .addComponent(phone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(130, Short.MAX_VALUE))))
         );
         midLayout.setVerticalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
-                .addComponent(exit)
-                .addGap(14, 14, 14)
-                .addComponent(MaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(exit)
+                    .addGroup(midLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(MaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dchi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         PanelAdd.add(mid, java.awt.BorderLayout.CENTER);
@@ -170,9 +176,33 @@ public class EditKhachHang extends javax.swing.JFrame {
         // TODO add your handling code here:
         int maKH = Integer.parseInt(MaKH.getText());
         String userName = name.getText();
+        if (isBlank(userName)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập họ và tên.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String diaChi = dchi.getText();
+        if (isBlank(diaChi)) {
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Địa Chỉ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String mailPerson = mail.getText();
-        KHACHANG khachang = new KHACHANG(maKH, null, userName, diaChi, mailPerson,0 , null,true);
+        if (isBlank(mailPerson)) {
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập mail", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String sdt = phone.getText();
+        if (isBlank(sdt)){
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập sdt", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int sdtInt;
+        try {
+            sdtInt = Integer.parseInt(sdt);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        KHACHANG khachang = new KHACHANG(maKH, null, userName, diaChi, mailPerson,sdtInt , null,true);
         khaHangImpl.suaKhachHang(khachang);
         this.dispose();
      

@@ -5,7 +5,10 @@
 package Gui.FormEdit;
 
 
+import Bus.Impl.taiKhoanImpl;
+import Dto.TAIKHOAN;
 import javax.swing.JOptionPane;
+import static org.apache.logging.log4j.util.Strings.isBlank;
 
 /**
  *
@@ -13,6 +16,8 @@ import javax.swing.JOptionPane;
  */
 public class EditTaiKhoan extends javax.swing.JFrame {
 
+    taiKhoanImpl taiKhoanImpl = new taiKhoanImpl();
+    
     /**
      * Creates new form AddTaiKhoan
      */
@@ -20,8 +25,11 @@ public class EditTaiKhoan extends javax.swing.JFrame {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        dchi.requestFocus();
     }
-
+    public void addThongTin(String maKH){
+        name.setText(maKH);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,8 +61,10 @@ public class EditTaiKhoan extends javax.swing.JFrame {
         MaKH.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Nhân Viên /Mã Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         MaKH.setFocusable(false);
 
+        name.setEditable(false);
         name.setBackground(new java.awt.Color(204, 255, 204));
         name.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tài Khoản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        name.setRequestFocusEnabled(false);
 
         dchi.setBackground(new java.awt.Color(204, 255, 204));
         dchi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mật Khẩu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
@@ -155,14 +165,20 @@ public class EditTaiKhoan extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
-        this.dispose();
-        if(true){
-            int failTK=JOptionPane.showConfirmDialog(null,"Đã có lỗi xảy ra\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
-            if (failTK == JOptionPane.YES_OPTION) {
-                EditTaiKhoan y = new EditTaiKhoan();
-                y.setVisible(true);
-            }
+        String userName = name.getText();
+        if (isBlank(userName)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tk.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        String mkhau = dchi.getText();
+        if (isBlank(mkhau)) {
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Mật Khẩu", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String Role =(String) jComboBox1.getSelectedItem();
+        TAIKHOAN taikhoan = new TAIKHOAN( userName, mkhau,Role);
+        taiKhoanImpl.suaTaiKhoan(taikhoan);
+        this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
@@ -219,4 +235,6 @@ public class EditTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JTextField name;
     private javax.swing.JLabel submitbtn;
     // End of variables declaration//GEN-END:variables
+
+
 }

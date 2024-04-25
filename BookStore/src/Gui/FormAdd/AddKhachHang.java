@@ -4,7 +4,11 @@
  */
 package Gui.FormAdd;
 
+import Bus.Impl.khachHangImpl;
+import Bus.Impl.taiKhoanImpl;
+import Dto.KHACHANG;
 import javax.swing.JOptionPane;
+import static org.apache.logging.log4j.util.Strings.isBlank;
 
 
 /**
@@ -13,6 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class AddKhachHang extends javax.swing.JFrame {
 
+    khachHangImpl khaHangImpl = new khachHangImpl();    
     /**
      * Creates new form AddKhachHang1
      */
@@ -160,14 +165,36 @@ public class AddKhachHang extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
-        this.dispose();
-        if(true){
-            int trungKH=JOptionPane.showConfirmDialog(null,"Khách Hàng này đã tồn tại\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
-            if (trungKH == JOptionPane.YES_OPTION) {
-                AddKhachHang y = new AddKhachHang();
-                y.setVisible(true);
-            }
+        String userName = name.getText();
+        if (isBlank(userName)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập họ và tên.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        String diaChi = dchi.getText();
+        if (isBlank(diaChi)) {
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Địa Chỉ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String mailPerson = mail.getText();
+        if (isBlank(mailPerson)) {
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập mail", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String sdt = phone.getText();
+        if (isBlank(sdt)){
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập sdt", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int sdtInt;
+        try {
+            sdtInt = Integer.parseInt(sdt);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        KHACHANG khachang = new KHACHANG(0, null, userName, diaChi, mailPerson, sdtInt, null,true);
+        khaHangImpl.themKhachHang(khachang);
+        this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked

@@ -336,6 +336,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         Middle.add(taikhoan, "taikhoan");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
         cardLayout.show(Middle, "taikhoan");
+        taikhoan.loadTaiKhoanToTable();
     }//GEN-LAST:event_TaiKhoanMouseClicked
 
     private void NhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NhanVienMouseClicked

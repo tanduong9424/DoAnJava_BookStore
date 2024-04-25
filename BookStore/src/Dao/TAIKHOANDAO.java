@@ -22,16 +22,18 @@ public class TAIKHOANDAO implements DAOInterface<TAIKHOAN> {
 		try {
 			Connection con=JDBCUtil.getConnection();
 			String sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE) "+
-			"VALUES (?,?)";
+			"VALUES (?,?,?)";
 			PreparedStatement pst =con.prepareStatement(sql);
 			pst.setString(1, t.getUSERNAME());
 			pst.setString(2, t.getPASSWORD());
 			pst.setString(3, t.getROLE());
+                        ketqua=pst.executeUpdate();
 		}
 		catch (SQLException e){
 			// TODO Auto-generated catch block
 			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o insert() class TAIKHOANDAO \n");
 			e.printStackTrace();
+                        return 1;
 		}
 		return 0;
 	}
@@ -41,7 +43,7 @@ public class TAIKHOANDAO implements DAOInterface<TAIKHOAN> {
 		try {
 			Connection con=JDBCUtil.getConnection();
 			String sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE) "+
-			"VALUES (?,?)";
+			"VALUES (?,?,?)";
 			PreparedStatement pst =con.prepareStatement(sql);
 			pst.setString(1, t.getUSERNAME());
 			pst.setString(2, t.getPASSWORD());
@@ -60,7 +62,7 @@ public int insertNV(TAIKHOAN t) {
 	try {
 		Connection con=JDBCUtil.getConnection();
 		String sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE) "+
-		"VALUES (?,?)";
+		"VALUES (?,?,?)";
 		PreparedStatement pst =con.prepareStatement(sql);
 		pst.setString(1, t.getUSERNAME());
 		pst.setString(2, t.getPASSWORD());
@@ -214,7 +216,7 @@ public int insertNV(TAIKHOAN t) {
 		try {
 			Connection con=JDBCUtil.getConnection();
 			
-			String sql=" SELECT * FROM linhvuc ";
+			String sql=" SELECT * FROM taikhoan ";
 			
 			PreparedStatement pst=con.prepareStatement(sql);
 			

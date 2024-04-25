@@ -4,16 +4,23 @@
  */
 package Gui.FormAdd;
 
+import Bus.Impl.khachHangImpl;
+import Bus.Impl.taiKhoanImpl;
 import Dao.NHANVIENDAO;
-import Dto.NHANVIEN;
+import Dto.KHACHANG;
+import Dto.TAIKHOAN;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import static org.apache.logging.log4j.util.Strings.isBlank;
 
 /**
  *
  * @author DELL
  */
 public class AddTaiKhoan extends javax.swing.JFrame {
+
+    taiKhoanImpl taiKhoanImpl = new taiKhoanImpl();
+    khachHangImpl khaHangImpl = new khachHangImpl();    
 
     /**
      * Creates new form AddTaiKhoan
@@ -23,7 +30,6 @@ public class AddTaiKhoan extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -189,14 +195,31 @@ public class AddTaiKhoan extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
-        this.dispose();
-        if(true){
-            int trungTK=JOptionPane.showConfirmDialog(null,"Tài khoản này đã tồn tại\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
-            if (trungTK == JOptionPane.YES_OPTION) {
-                AddTaiKhoan y = new AddTaiKhoan();
-                y.setVisible(true);
-            }
+        String hoVaten = name.getText();
+        if (isBlank(hoVaten)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập họ và tên.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        String userName = TaiKhoan.getText();
+        if (isBlank(userName)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập Tài Khoản", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String mkhau = dchi.getText();
+        if (isBlank(mkhau)) {
+            JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Mật Khẩu", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String Role =(String) SelectRole.getSelectedItem();
+        TAIKHOAN taikhoan = new TAIKHOAN( userName, mkhau,Role);
+        if(taiKhoanImpl.themTaiKhoan(taikhoan)==false){
+            JOptionPane.showMessageDialog(this, "Tài Khoản đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;          
+        }
+        
+        KHACHANG khachang = new KHACHANG(0, userName, hoVaten, null, null, 0, null,true);
+        khaHangImpl.themKhachHangCoTK(khachang,taikhoan);
+        this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked

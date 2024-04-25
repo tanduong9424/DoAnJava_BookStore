@@ -20,5 +20,6 @@ public interface khachHang {
     Boolean suaKhachHang(KHACHANG khachang);
     Boolean suaKhachHangCoTK(KHACHANG khachang,TAIKHOAN tk);
     ArrayList<KHACHANG> timKiem(String kieuTimKiem,String inputText);
-    String xuatExcel();
+    Boolean xuatExcel();
+    KHACHANG getByUsername(TAIKHOAN t);
 }

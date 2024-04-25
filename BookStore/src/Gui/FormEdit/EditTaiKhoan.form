@@ -123,6 +123,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="name">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="ff" red="cc" type="rgb"/>
                 </Property>
@@ -134,6 +135,7 @@
                     </TitledBorder>
                   </Border>
                 </Property>
+                <Property name="requestFocusEnabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="dchi">
