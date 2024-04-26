@@ -6,16 +6,11 @@ package Gui.FormChinh;
 
 
 import Bus.Impl.NhapHanglmpl;
-import Dao.CHITIETPHIEUNHAPDAO;
-import Dao.PHIEUNHAPDAO;
-import Dao.SACHDAO;
-import Dto.CHITIETPHIEUNHAP;
 import Dto.PHIEUNHAP;
 import Dto.SACH;
 import Gui.FormAdd.AddNhaCungCap;
 import Gui.FormAdd.AddSach;
 import Gui.FormEdit.EditSach;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,7 +19,9 @@ import javax.swing.table.DefaultTableModel;
  * @author DELL
  */
 public class NhapHangPanel extends javax.swing.JPanel {
-
+    
+    NhapHanglmpl nhaphang=new NhapHanglmpl();
+    
     /**
      * Creates new form NhapHangPanel
      */int status=0;
@@ -35,7 +32,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         try {
-            NhapHanglmpl nhaphang=new NhapHanglmpl();
+            
             nhaphang.danhSachSanPham(model);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -47,7 +44,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         try {
-            NhapHanglmpl nhaphang=new NhapHanglmpl();
+            
             nhaphang.danhSachPhieuNhap(model);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -59,7 +56,7 @@ public class NhapHangPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         try {
-            NhapHanglmpl nhaphang=new NhapHanglmpl();
+            
             nhaphang.danhSachChiTietPhieuNhap(model,t);
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -7,7 +7,6 @@ package Gui.FormAdd;
 import Bus.Impl.nhanVienImpl;
 import Bus.Impl.taiKhoanImpl;
 import Dao.NHANVIENDAO;
-import Dto.KHACHANG;
 import Dto.NHANVIEN;
 import Dto.TAIKHOAN;
 import java.util.ArrayList;

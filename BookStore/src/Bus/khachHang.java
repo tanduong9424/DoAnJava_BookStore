@@ -22,4 +22,5 @@ public interface khachHang {
     ArrayList<KHACHANG> timKiem(String kieuTimKiem,String inputText);
     Boolean xuatExcel();
     KHACHANG getByUsername(TAIKHOAN t);
+    ArrayList<KHACHANG> selectAll();
 }

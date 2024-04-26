@@ -5,7 +5,6 @@
 package Gui.FormChinh;
 
 import Bus.Impl.khachHangImpl;
-import Dao.KHACHHANGDAO;
 import Dto.KHACHANG;
 import Gui.FormAdd.AddKhachHang;
 import Gui.FormEdit.EditKhachHang;
@@ -36,7 +35,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
         try {
             System.out.print("hoạt động");
-            ArrayList<KHACHANG> sachList = KHACHHANGDAO.getInstance().selectAll();
+            ArrayList<KHACHANG> sachList = khaHangImpl.selectAll();
 
             for (KHACHANG khachang : sachList) {
                 Object[] row = {khachang.getMakh(), khachang.getHoten(), khachang.getDiachi(), khachang.getDienthoai(), khachang.getEmail()};

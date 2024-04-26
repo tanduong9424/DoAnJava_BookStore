@@ -143,7 +143,9 @@ public class khachHangImpl implements khachHang{
         }
         return true;
     }
-    
-
+    @Override
+    public ArrayList<KHACHANG> selectAll() {
+        return khachHangDao.selectAll();
+    }
     
 }

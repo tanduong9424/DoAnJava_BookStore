@@ -7,7 +7,6 @@ package Gui.FormChinh;
 import Bus.Impl.khachHangImpl;
 import Bus.Impl.nhanVienImpl;
 import Bus.Impl.taiKhoanImpl;
-import Dto.KHACHANG;
 import Dto.NHANVIEN;
 import Dto.TAIKHOAN;
 import Gui.FormAdd.AddTaiKhoan;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static org.apache.logging.log4j.util.Strings.isBlank;
-import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
 
 /**

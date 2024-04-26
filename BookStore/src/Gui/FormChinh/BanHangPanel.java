@@ -6,21 +6,13 @@ package Gui.FormChinh;
 
 
 import Bus.Impl.BanHanglmpl;
-import Dao.CHITIETHOADONDAO;
-import Dao.HOADONDAO;
-import Dao.KHUYENMAIDAO;
-import Dao.SACHDAO;
-import Dto.CHITIETHOADON;
 import Dto.HOADON;
-import Dto.KHACHANG;
-import Dto.KHUYENMAI;
 import Dto.NHANVIEN;
 import Dto.SACH;
 import Dto.TAIKHOAN;
 import Gui.FormAdd.AddKhachHang;
 import Gui.FormNhapSL.PanelNhapSL_BanHang;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Date;
@@ -35,6 +27,8 @@ public class BanHangPanel extends javax.swing.JPanel {
     int status=0;
     int selected_sach_row=0;
     int ma_clicked_hoadon=0;
+    BanHanglmpl banhang=new BanHanglmpl();
+    
     /**
      * Creates new form BanHangPanel
      */
@@ -48,7 +42,7 @@ public class BanHangPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         try {
-            BanHanglmpl banhang=new BanHanglmpl();
+            
             banhang.danhSachSanPham(model);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -59,7 +53,7 @@ public class BanHangPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         try {
-            BanHanglmpl banhang=new BanHanglmpl();
+            
             banhang.danhSachHoaDon(model);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -71,7 +65,7 @@ public class BanHangPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         try {
-            BanHanglmpl banhang=new BanHanglmpl();
+            
             banhang.chiTietHoaDon(t,model,sum);    
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -708,7 +702,7 @@ public void loadtongtien(){
     loadHOADONToTable();
     DefaultTableModel model = (DefaultTableModel) dataHoadon.getModel();
     // Kiểm tra xem searchText có rỗng không
-    BanHanglmpl banhang=new BanHanglmpl();
+    
     banhang.timHoaDon(dataHoadon, searchText,model);
     }//GEN-LAST:event_search1ActionPerformed
 
@@ -757,7 +751,7 @@ public void loadtongtien(){
     private void XoaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaBtnActionPerformed
         // TODO add your handling code here:
         if(ma_clicked_hoadon!=0){
-                BanHanglmpl banhang=new BanHanglmpl();
+                
                 HOADON t=new HOADON(ma_clicked_hoadon);
                 banhang.XoaHoaDonDatabase(t);
         }
@@ -773,7 +767,7 @@ public void loadtongtien(){
         String searchText = searchSach.getText();
         loadBooksToTable();
     DefaultTableModel model = (DefaultTableModel) Sachtb.getModel();
-    BanHanglmpl banhang=new BanHanglmpl();
+    
     banhang.timSanPham(Sachtb, searchText,model);        
     }//GEN-LAST:event_search2ActionPerformed
 
@@ -781,7 +775,7 @@ public void loadtongtien(){
         // TODO add your handling code here:
         DefaultTableModel dataModel=(DefaultTableModel) this.selectedSach.getModel();
         if(selected_sach_row>0){
-            BanHanglmpl banhang=new BanHanglmpl();
+            
             banhang.BoChiTietHoaDon(dataModel, selected_sach_row);
         }
     }//GEN-LAST:event_xoaspbtnActionPerformed
@@ -802,7 +796,7 @@ public void loadtongtien(){
         HOADON t=new HOADON(TENTAIKHOAN,manv,sqlDate,tongtien,false);
         DefaultTableModel dataModel = (DefaultTableModel) selectedSach.getModel();
         DefaultTableModel model = (DefaultTableModel) dataHoadon.getModel();
-        BanHanglmpl banhang=new BanHanglmpl();
+        
         banhang.TaoHoaDonDatabase(t, nv, tk, dataModel);
 //        banhang.danhSachHoaDon(model);
         loadHOADONToTable();

@@ -11,13 +11,11 @@ import Dao.KHUYENMAIDAO;
 import Dao.SACHDAO;
 import Dto.CHITIETHOADON;
 import Dto.HOADON;
-import Dto.KHACHANG;
 import Dto.KHUYENMAI;
 import Dto.NHANVIEN;
 import Dto.SACH;
 import Dto.TAIKHOAN;
 import java.util.ArrayList;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
