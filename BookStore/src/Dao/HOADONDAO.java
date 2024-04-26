@@ -169,17 +169,17 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 		int ketqua=0;
 		try {
 			Connection con=JDBCUtil.getConnection();
-			String sqlKho="SELECT MASACH,SOLUONG FROM hoadon,chitiethoadon "+
-						"WHERE hoadon.MAHOADON=chitiethoadon.MAHOADON AND hoadon.MAHOADON=?";
-			PreparedStatement pst1=con.prepareStatement(sqlKho);
-			pst1.setInt(1, t.getMAHOADON());
-			ResultSet rs=pst1.executeQuery();
-			while(rs.next()) {
-				int MASACH=rs.getInt("MASACH");
-				int SOLUONG=rs.getInt("SOLUONG");
-				SACH kho=new SACH(MASACH);
-				SACHDAO.getInstance().thuhoiSACH(kho,SOLUONG);
-			}
+//			String sqlKho="SELECT MASACH,SOLUONG FROM hoadon,chitiethoadon "+
+//						"WHERE hoadon.MAHOADON=chitiethoadon.MAHOADON AND hoadon.MAHOADON=?";
+//			PreparedStatement pst1=con.prepareStatement(sqlKho);
+//			pst1.setInt(1, t.getMAHOADON());
+//			ResultSet rs=pst1.executeQuery();
+//			while(rs.next()) {
+//				int MASACH=rs.getInt("MASACH");
+//				int SOLUONG=rs.getInt("SOLUONG");
+//				SACH kho=new SACH(MASACH);
+//				SACHDAO.getInstance().thuhoiSACH(kho,SOLUONG);
+//			}
 			
 			
 			
@@ -195,7 +195,7 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 			JDBCUtil.closeConnection(con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.print("\nco loi xay ra, thuc hien cau lenh khong thanh cong o update() class HOADONDAO \n");
+			System.out.print("\nco loi xay ra, thuc hien cau lenh khong thanh cong o delete() class HOADONDAO \n");
 			e.printStackTrace();
 		}
 		return 0;

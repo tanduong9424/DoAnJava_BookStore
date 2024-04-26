@@ -4,7 +4,9 @@
  */
 package Gui.FormEdit;
 
+import Dto.SACH;
 import Gui.FormAdd.*;
+import Gui.FormChinh.NhapHangPanel;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -17,10 +19,19 @@ public class EditSach extends javax.swing.JFrame {
     /**
      * Creates new form AddNhanVien
      */
-    public EditSach() {
+        private NhapHangPanel nhaphang;
+        private SACH sach;
+        String url=null;
+    public EditSach(NhapHangPanel nhaphang1,SACH masachclicked) {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.nhaphang=nhaphang1;
+        this.sach=masachclicked;
+//        NhaCungCap.setText(this.sach.getTENNHAXUATBAN());
+        TenSach.setText(this.sach.getTENSACH());
+        LanTaiBan.setText(""+this.sach.getLANTAIBAN());
+        GiaBia.setText(""+this.sach.getGIABIA());
     }
 
     /**
@@ -37,7 +48,7 @@ public class EditSach extends javax.swing.JFrame {
         MaSach = new javax.swing.JTextField();
         TenSach = new javax.swing.JTextField();
         LanTaiBan = new javax.swing.JTextField();
-        NamXuatBan = new javax.swing.JTextField();
+        GiaBia = new javax.swing.JTextField();
         URL_img = new javax.swing.JLabel();
         exit = new javax.swing.JLabel();
         NhaCungCap = new javax.swing.JComboBox<>();
@@ -70,9 +81,14 @@ public class EditSach extends javax.swing.JFrame {
         LanTaiBan.setForeground(new java.awt.Color(0, 51, 51));
         LanTaiBan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lần tái bản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
-        NamXuatBan.setBackground(new java.awt.Color(204, 255, 204));
-        NamXuatBan.setForeground(new java.awt.Color(0, 51, 51));
-        NamXuatBan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Năm xuất bản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        GiaBia.setBackground(new java.awt.Color(204, 255, 204));
+        GiaBia.setForeground(new java.awt.Color(0, 51, 51));
+        GiaBia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gía Bìa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        GiaBia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GiaBiaActionPerformed(evt);
+            }
+        });
 
         URL_img.setBackground(new java.awt.Color(204, 255, 204));
         URL_img.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -114,7 +130,7 @@ public class EditSach extends javax.swing.JFrame {
                     .addGroup(midLayout.createSequentialGroup()
                         .addComponent(URL_img, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(NamXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(GiaBia, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(midLayout.createSequentialGroup()
                         .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TenSach, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,7 +159,7 @@ public class EditSach extends javax.swing.JFrame {
                     .addComponent(LanTaiBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(NamXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(GiaBia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(URL_img, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(226, 226, 226))
         );
@@ -197,14 +213,8 @@ public class EditSach extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
+        
         this.dispose();
-        if(true){
-            int trungSach=JOptionPane.showConfirmDialog(null,"Sách này đã tồn tại\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
-            if (trungSach == JOptionPane.YES_OPTION) {
-                EditSach y = new EditSach();
-                y.setVisible(true);
-            }
-        }
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void URL_imgMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_URL_imgMouseMoved
@@ -227,6 +237,10 @@ public class EditSach extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_exitMouseClicked
+
+    private void GiaBiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GiaBiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GiaBiaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,9 +278,9 @@ public class EditSach extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField GiaBia;
     private javax.swing.JTextField LanTaiBan;
     private javax.swing.JTextField MaSach;
-    private javax.swing.JTextField NamXuatBan;
     private javax.swing.JComboBox<String> NhaCungCap;
     private javax.swing.JPanel PanelAdd;
     private javax.swing.JTextField TenSach;

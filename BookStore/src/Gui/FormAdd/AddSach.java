@@ -102,6 +102,11 @@ public class AddSach extends javax.swing.JFrame {
         NhaCungCap.setForeground(new java.awt.Color(0, 51, 51));
         NhaCungCap.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhà cung cấp 1", "Nhà cung cấp 2", "Nhà cung cấp 3" }));
         NhaCungCap.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhà Cung Cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        NhaCungCap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NhaCungCapActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout midLayout = new javax.swing.GroupLayout(mid);
         mid.setLayout(midLayout);
@@ -196,14 +201,8 @@ public class AddSach extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
+        
         this.dispose();
-        if(true){
-            int trungSach=JOptionPane.showConfirmDialog(null,"Sách này đã tồn tại\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
-            if (trungSach == JOptionPane.YES_OPTION) {
-                AddSach y = new AddSach();
-                y.setVisible(true);
-            }
-        }
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void URL_imgMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_URL_imgMouseMoved
@@ -226,6 +225,10 @@ public class AddSach extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_exitMouseClicked
+
+    private void NhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NhaCungCapActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NhaCungCapActionPerformed
 
     /**
      * @param args the command line arguments

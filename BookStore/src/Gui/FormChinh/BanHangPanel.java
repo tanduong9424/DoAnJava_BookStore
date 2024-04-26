@@ -33,6 +33,8 @@ import java.sql.Date;
  */
 public class BanHangPanel extends javax.swing.JPanel {
     int status=0;
+    int selected_sach_row=0;
+    int ma_clicked_hoadon=0;
     /**
      * Creates new form BanHangPanel
      */
@@ -589,6 +591,11 @@ public void loadtongtien(){
             }
         });
         selectedSach.setShowGrid(true);
+        selectedSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                selectedSachMouseClicked(evt);
+            }
+        });
         scroll3.setViewportView(selectedSach);
         if (selectedSach.getColumnModel().getColumnCount() > 0) {
             selectedSach.getColumnModel().getColumn(0).setResizable(false);
@@ -677,7 +684,7 @@ public void loadtongtien(){
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(HoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
-                        .addComponent(ChiTietHD, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(ChiTietHD, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -711,6 +718,7 @@ public void loadtongtien(){
         if (row >= 0) { // Chỉ xử lý khi chọn hàng hợp lệ
             String maHoaDonStr = dataHoadon.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
             int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
+            ma_clicked_hoadon=maHoaDon;
             HOADON hd = new HOADON(maHoaDon);
             loadCHITIETHOADONToTable(hd);
         }
@@ -748,6 +756,15 @@ public void loadtongtien(){
 
     private void XoaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaBtnActionPerformed
         // TODO add your handling code here:
+        if(ma_clicked_hoadon!=0){
+                BanHanglmpl banhang=new BanHanglmpl();
+                HOADON t=new HOADON(ma_clicked_hoadon);
+                banhang.XoaHoaDonDatabase(t);
+        }
+        loadHOADONToTable();
+        DefaultTableModel model = (DefaultTableModel) selectedSach.getModel();
+        // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
+        model.setRowCount(0);
     }//GEN-LAST:event_XoaBtnActionPerformed
 
     private void search2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search2ActionPerformed
@@ -762,6 +779,11 @@ public void loadtongtien(){
 
     private void xoaspbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaspbtnActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel dataModel=(DefaultTableModel) this.selectedSach.getModel();
+        if(selected_sach_row>0){
+            BanHanglmpl banhang=new BanHanglmpl();
+            banhang.BoChiTietHoaDon(dataModel, selected_sach_row);
+        }
     }//GEN-LAST:event_xoaspbtnActionPerformed
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
@@ -779,8 +801,11 @@ public void loadtongtien(){
         TAIKHOAN tk=new TAIKHOAN(TENTAIKHOAN);
         HOADON t=new HOADON(TENTAIKHOAN,manv,sqlDate,tongtien,false);
         DefaultTableModel dataModel = (DefaultTableModel) selectedSach.getModel();
+        DefaultTableModel model = (DefaultTableModel) dataHoadon.getModel();
         BanHanglmpl banhang=new BanHanglmpl();
         banhang.TaoHoaDonDatabase(t, nv, tk, dataModel);
+//        banhang.danhSachHoaDon(model);
+        loadHOADONToTable();
     }//GEN-LAST:event_submitActionPerformed
 
     private void searchSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchSachActionPerformed
@@ -815,6 +840,11 @@ public void loadtongtien(){
     private void searchHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchHoaDonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchHoaDonActionPerformed
+
+    private void selectedSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectedSachMouseClicked
+        // TODO add your handling code here:
+        int selected_sach_row = dataHoadon.rowAtPoint(evt.getPoint());
+    }//GEN-LAST:event_selectedSachMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

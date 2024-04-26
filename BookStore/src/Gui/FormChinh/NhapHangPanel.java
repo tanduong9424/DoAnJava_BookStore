@@ -5,6 +5,7 @@
 package Gui.FormChinh;
 
 
+import Bus.Impl.NhapHanglmpl;
 import Dao.CHITIETPHIEUNHAPDAO;
 import Dao.PHIEUNHAPDAO;
 import Dao.SACHDAO;
@@ -27,19 +28,15 @@ public class NhapHangPanel extends javax.swing.JPanel {
     /**
      * Creates new form NhapHangPanel
      */int status=0;
+     SACH sachclicked=null;
         public void loadBooksToTable() {
         DefaultTableModel model = (DefaultTableModel) Nhaptb.getModel();
         // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
         model.setRowCount(0);
 
         try {
-            System.out.print("hoạt động");
-            ArrayList<SACH> sachList = SACHDAO.getInstance().selectAllExceptISHIDDEN();
-
-            for (SACH sach : sachList) {
-                Object[] row = {sach.getMASACH(), sach.getTENSACH(),sach.getGIABIA(), sach.getTENNHAXUATBAN()};
-                model.addRow(row);
-            }
+            NhapHanglmpl nhaphang=new NhapHanglmpl();
+            nhaphang.danhSachSanPham(model);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -50,13 +47,8 @@ public class NhapHangPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         try {
-            System.out.print("hoạt động");
-            ArrayList<PHIEUNHAP> hoadonList = PHIEUNHAPDAO.getInstance().selectAll();
-            
-            for (PHIEUNHAP hoadon : hoadonList) {             
-                Object[] row = {hoadon.getMapn(),hoadon.getManv(),hoadon.getNoinhap(),hoadon.getNgaynhap(),hoadon.getTongtien()};
-                model.addRow(row);
-            }
+            NhapHanglmpl nhaphang=new NhapHanglmpl();
+            nhaphang.danhSachPhieuNhap(model);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -67,14 +59,8 @@ public class NhapHangPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         try {
-            System.out.print("hoạt động");
-            ArrayList<CHITIETPHIEUNHAP> chitiethoadonList = CHITIETPHIEUNHAPDAO.getInstance().selectAllByPHIEUNHAP(t);
-            for (CHITIETPHIEUNHAP chitiethoadon : chitiethoadonList) {
-                SACH sach=new SACH(chitiethoadon.getMASACH());
-                SACH result=SACHDAO.getInstance().selectById(sach);
-                Object[] row = {chitiethoadon.getMASACH(),result.getTENSACH(),result.getGIABIA(),chitiethoadon.getSoluong(),chitiethoadon.getTongtien()};
-                model.addRow(row);
-            }
+            NhapHanglmpl nhaphang=new NhapHanglmpl();
+            nhaphang.danhSachChiTietPhieuNhap(model,t);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -910,8 +896,10 @@ public void loadAnh(SACH t) {
 
     private void SuaBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaBtn1ActionPerformed
         // TODO add your handling code here:
-        EditSach y=new EditSach();
-        y.setVisible(true);
+        if(sachclicked!=null){
+            EditSach y=new EditSach(this,sachclicked);
+            y.setVisible(true);
+        }
     }//GEN-LAST:event_SuaBtn1ActionPerformed
 
     private void XoaBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaBtn1ActionPerformed

@@ -72,7 +72,7 @@
                           <Group type="102" attributes="0">
                               <Component id="URL_img" min="-2" pref="171" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="NamXuatBan" min="-2" pref="171" max="-2" attributes="0"/>
+                              <Component id="GiaBia" min="-2" pref="171" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -111,7 +111,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="NamXuatBan" min="-2" max="-2" attributes="0"/>
+                          <Component id="GiaBia" min="-2" max="-2" attributes="0"/>
                           <Component id="URL_img" min="-2" pref="47" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
@@ -177,7 +177,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="NamXuatBan">
+            <Component class="javax.swing.JTextField" name="GiaBia">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="ff" red="cc" type="rgb"/>
@@ -187,13 +187,16 @@
                 </Property>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="N&#x103;m xu&#x1ea5;t b&#x1ea3;n">
+                    <TitledBorder title="G&#xed;a B&#xec;a">
                       <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
                       <Color PropertyName="color" blue="33" green="33" red="0" type="rgb"/>
                     </TitledBorder>
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GiaBiaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="URL_img">
               <Properties>

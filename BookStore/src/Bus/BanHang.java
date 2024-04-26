@@ -22,5 +22,7 @@ public interface BanHang {
     void timHoaDon(javax.swing.JTable dataModel,String searchText,DefaultTableModel model);
     void chiTietHoaDon(HOADON t,DefaultTableModel model,javax.swing.JTextField sum);
     void TaomoiChiTietHoaDon(DefaultTableModel dataModel,SACH t,int sl);
+    void BoChiTietHoaDon(DefaultTableModel dataModel,int row);
     void TaoHoaDonDatabase(HOADON t,NHANVIEN nv,TAIKHOAN tk,DefaultTableModel dataModel);
+    void XoaHoaDonDatabase(HOADON t);
 }
