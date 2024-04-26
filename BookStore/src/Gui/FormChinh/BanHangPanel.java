@@ -6,6 +6,7 @@ package Gui.FormChinh;
 
 
 import Bus.Impl.BanHanglmpl;
+import Dao.SACHDAO;
 import Dto.HOADON;
 import Dto.NHANVIEN;
 import Dto.SACH;
@@ -73,14 +74,13 @@ public class BanHangPanel extends javax.swing.JPanel {
     }  
 public void loadAnh(SACH t) {
     String url = t.getIMAGE(); // Lấy đường dẫn ảnh từ đối tượng SACH
-    
     try {
         if(url !=null){
                     // Tạo một đối tượng ImageIcon từ đường dẫn ảnh
-        ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        
-        // Đặt hình ảnh lên jLabel1
-        jLabel1.setIcon(icon);
+        //ImageIcon icon = new ImageIcon(getClass().getResource(url));
+        ImageIcon icon = new ImageIcon(url);
+        // Đặt hình ảnh lên label img
+        img.setIcon(icon);
         }
     } catch (Exception ex) {
         // Nếu có lỗi xảy ra, in ra thông báo lỗi
@@ -91,7 +91,6 @@ public void loadtongtien(){
     int tongtien=0;
     for(int i=0;i<selectedSach.getRowCount();i++){
         tongtien+=(int) selectedSach.getValueAt(i, 4);
-        
     }
     sum.setText(""+tongtien);
 }
@@ -117,7 +116,7 @@ public void loadtongtien(){
         search2 = new javax.swing.JButton();
         searchSach = new javax.swing.JTextField();
         panelImg = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        img = new javax.swing.JLabel();
         ThongTinBanHang = new javax.swing.JPanel();
         ttKH = new javax.swing.JLabel();
         maHD = new javax.swing.JLabel();
@@ -128,6 +127,8 @@ public void loadtongtien(){
         newKH = new javax.swing.JButton();
         ThemBtn = new javax.swing.JButton();
         XoaBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        comboxKH1 = new javax.swing.JComboBox<>();
         ChiTietHD = new javax.swing.JPanel();
         tongtien = new javax.swing.JLabel();
         sum = new javax.swing.JTextField();
@@ -168,35 +169,7 @@ public void loadtongtien(){
         dataHoadon.setForeground(new java.awt.Color(0, 51, 51));
         dataHoadon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã Hóa Đơn", "Mã Nhân Viên", "Tên Tài Khoản", "Ngày lập", "Mã khuyế mãi", "% giảm giá", "Tổng tiền"
@@ -232,15 +205,15 @@ public void loadtongtien(){
         HoaDonLayout.setHorizontalGroup(
             HoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(HoaDonLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(HoaDonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(searchHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(search1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(HoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(HoaDonLayout.createSequentialGroup()
+                        .addComponent(searchHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(search1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(scroll1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         HoaDonLayout.setVerticalGroup(
             HoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,35 +237,7 @@ public void loadtongtien(){
         Sachtb.setForeground(new java.awt.Color(0, 51, 51));
         Sachtb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Mã Sách", "Tên Sách", "Số Lượng Còn Lại", "Đơn giá", "Nhà Xuất Bản"
@@ -350,7 +295,7 @@ public void loadtongtien(){
         panelImg.setBackground(new java.awt.Color(204, 255, 204));
         panelImg.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ảnh minh họa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Book_img/doraemon.jpg"))); // NOI18N
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Book_img/img_default.png"))); // NOI18N
 
         javax.swing.GroupLayout panelImgLayout = new javax.swing.GroupLayout(panelImg);
         panelImg.setLayout(panelImgLayout);
@@ -358,14 +303,14 @@ public void loadtongtien(){
             panelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImgLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(img)
                 .addGap(0, 0, 0))
         );
         panelImgLayout.setVerticalGroup(
             panelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelImgLayout.createSequentialGroup()
                 .addGap(9, 9, 9)
-                .addComponent(jLabel1)
+                .addComponent(img)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -493,6 +438,19 @@ public void loadtongtien(){
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel2.setText("Mã Khuyến Mãi");
+
+        comboxKH1.setBackground(new java.awt.Color(204, 255, 204));
+        comboxKH1.setForeground(new java.awt.Color(0, 51, 51));
+        comboxKH1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "KM1", "KM2" }));
+        comboxKH1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboxKH1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ThongTinBanHangLayout = new javax.swing.GroupLayout(ThongTinBanHang);
         ThongTinBanHang.setLayout(ThongTinBanHangLayout);
         ThongTinBanHangLayout.setHorizontalGroup(
@@ -500,10 +458,6 @@ public void loadtongtien(){
             .addGroup(ThongTinBanHangLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ThongTinBanHangLayout.createSequentialGroup()
-                        .addComponent(ttKH, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboxKH, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ThongTinBanHangLayout.createSequentialGroup()
                         .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(ttNV, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -516,7 +470,15 @@ public void loadtongtien(){
                     .addGroup(ThongTinBanHangLayout.createSequentialGroup()
                         .addComponent(ThemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(XoaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(XoaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ThongTinBanHangLayout.createSequentialGroup()
+                        .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ttKH, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboxKH1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboxKH, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(165, Short.MAX_VALUE))
         );
         ThongTinBanHangLayout.setVerticalGroup(
@@ -534,13 +496,17 @@ public void loadtongtien(){
                 .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ttKH)
                     .addComponent(comboxKH, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
+                .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboxKH1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(30, 30, 30)
                 .addComponent(newKH, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ThemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(XoaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         ChiTietHD.setBackground(new java.awt.Color(0, 204, 204));
@@ -562,15 +528,7 @@ public void loadtongtien(){
         selectedSach.setForeground(new java.awt.Color(0, 51, 51));
         selectedSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Mã Sách", "Tên Sách", "Số Lượng", "Đơn Giá", "Thành Tiền"
@@ -633,9 +591,6 @@ public void loadtongtien(){
         ChiTietHD.setLayout(ChiTietHDLayout);
         ChiTietHDLayout.setHorizontalGroup(
             ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ChiTietHDLayout.createSequentialGroup()
-                .addComponent(scroll3, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
             .addGroup(ChiTietHDLayout.createSequentialGroup()
                 .addGroup(ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ChiTietHDLayout.createSequentialGroup()
@@ -647,8 +602,11 @@ public void loadtongtien(){
                         .addContainerGap()
                         .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(xoaspbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(377, 377, 377))
+                        .addComponent(xoaspbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ChiTietHDLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(scroll3, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ChiTietHDLayout.setVerticalGroup(
             ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -675,10 +633,10 @@ public void loadtongtien(){
                         .addComponent(DanhSachSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ThongTinBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(HoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(ChiTietHD, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(HoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ChiTietHD, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -766,9 +724,9 @@ public void loadtongtien(){
                 // Lấy nội dung từ JTextField
         String searchText = searchSach.getText();
         loadBooksToTable();
-    DefaultTableModel model = (DefaultTableModel) Sachtb.getModel();
-    
-    banhang.timSanPham(Sachtb, searchText,model);        
+        DefaultTableModel model = (DefaultTableModel) Sachtb.getModel();
+
+        banhang.timSanPham(Sachtb, searchText,model);        
     }//GEN-LAST:event_search2ActionPerformed
 
     private void xoaspbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaspbtnActionPerformed
@@ -807,28 +765,35 @@ public void loadtongtien(){
     }//GEN-LAST:event_searchSachActionPerformed
 
     private void SachtbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SachtbMouseClicked
-        // TODO add your handling code here:
-                // TODO add your handling code here:
+        
         int row = Sachtb.rowAtPoint(evt.getPoint());
         if (row >= 0) { // Chỉ xử lý khi chọn hàng hợp lệ
             if(status==0){
-            String maHoaDonStr = Sachtb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
-            int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
-            SACH hd = new SACH(maHoaDon);
-            loadAnh(hd);
+                String maHoaDonStr = Sachtb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
+                int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
+                SACH hd = new SACH(maHoaDon);
+                loadAnh(hd);
             }
             else{
-                String maSachStr = Sachtb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
+                String maSachStr = Sachtb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Sách"
                 String tenSachStr = Sachtb.getValueAt(row, 1).toString(); // Lấy giá trị của cột "Tên Sách"
                 String SLconStr = Sachtb.getValueAt(row, 2).toString(); // Lấy giá trị của cột "Số Lượng còn"
                 String DonGiaStr = Sachtb.getValueAt(row, 3).toString(); // Lấy giá trị của cột "Đơn Giá"
                 String NXBStr = Sachtb.getValueAt(row, 4).toString(); // Lấy giá trị của cột "Nhà Xuất Bản"
-            PanelNhapSL_BanHang x=new PanelNhapSL_BanHang(this,selectedSach,maSachStr,tenSachStr ,DonGiaStr,NXBStr);
+                PanelNhapSL_BanHang x=new PanelNhapSL_BanHang(this,selectedSach,maSachStr,tenSachStr ,DonGiaStr,NXBStr);
                 x.setVisible(true);
                 x.setThongTinPanel(maSachStr,tenSachStr ,DonGiaStr,NXBStr);
             }
         }
+        /* chả hiểu sao cứ ấn là đóng kết nổi
+        String maSach = Sachtb.getValueAt(row, 0).toString();
+        // Sử dụng giá trị chuỗi để tạo một đối tượng SACH
+        SACH tmp = new SACH(Integer.parseInt(maSach));
+        loadAnh(tmp);
 
+        //ImageIcon icon = new ImageIcon("C:\\Users\\DELL\\Desktop\\DoAnJava_BookStore-main\\DoAnJava_BookStore-main\\BookStore\\src\\images\\Book_img\\doraemon.jpg");
+        //img.setIcon(icon);
+        */
     }//GEN-LAST:event_SachtbMouseClicked
 
     private void searchHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchHoaDonActionPerformed
@@ -840,6 +805,10 @@ public void loadtongtien(){
         int selected_sach_row = dataHoadon.rowAtPoint(evt.getPoint());
     }//GEN-LAST:event_selectedSachMouseClicked
 
+    private void comboxKH1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxKH1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboxKH1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ChiTietHD;
@@ -850,8 +819,10 @@ public void loadtongtien(){
     private javax.swing.JPanel ThongTinBanHang;
     private javax.swing.JButton XoaBtn;
     private javax.swing.JComboBox<String> comboxKH;
+    private javax.swing.JComboBox<String> comboxKH1;
     private javax.swing.JTable dataHoadon;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel img;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel maHD;
     private javax.swing.JTextField maHDtext;
     private javax.swing.JButton newKH;

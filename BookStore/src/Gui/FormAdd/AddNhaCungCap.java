@@ -34,8 +34,6 @@ public class AddNhaCungCap extends javax.swing.JFrame {
         mid = new javax.swing.JPanel();
         MaNCC = new javax.swing.JTextField();
         name = new javax.swing.JTextField();
-        dchi = new javax.swing.JTextField();
-        mail = new javax.swing.JTextField();
         exit = new javax.swing.JLabel();
         bot = new javax.swing.JPanel();
         submitbtn = new javax.swing.JLabel();
@@ -48,18 +46,13 @@ public class AddNhaCungCap extends javax.swing.JFrame {
 
         MaNCC.setEditable(false);
         MaNCC.setBackground(new java.awt.Color(204, 255, 204));
+        MaNCC.setForeground(new java.awt.Color(0, 51, 51));
         MaNCC.setText("NCC1");
         MaNCC.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Nhà Cung Cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         MaNCC.setFocusable(false);
 
         name.setBackground(new java.awt.Color(204, 255, 204));
         name.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tên Nhà Cung Cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-
-        dchi.setBackground(new java.awt.Color(204, 255, 204));
-        dchi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Địa Chỉ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-
-        mail.setBackground(new java.awt.Color(204, 255, 204));
-        mail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_cancel_30px_1.png"))); // NOI18N
         exit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -72,31 +65,25 @@ public class AddNhaCungCap extends javax.swing.JFrame {
         mid.setLayout(midLayout);
         midLayout.setHorizontalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(midLayout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(dchi, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                    .addComponent(MaNCC, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mail))
-                .addContainerGap(130, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 363, Short.MAX_VALUE)
                 .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(midLayout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(MaNCC, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         midLayout.setVerticalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
                 .addComponent(exit)
-                .addGap(14, 14, 14)
+                .addGap(73, 73, 73)
                 .addComponent(MaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(dchi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         PanelAdd.add(mid, java.awt.BorderLayout.CENTER);
@@ -206,9 +193,7 @@ public class AddNhaCungCap extends javax.swing.JFrame {
     private javax.swing.JTextField MaNCC;
     private javax.swing.JPanel PanelAdd;
     private javax.swing.JPanel bot;
-    private javax.swing.JTextField dchi;
     private javax.swing.JLabel exit;
-    private javax.swing.JTextField mail;
     private javax.swing.JPanel mid;
     private javax.swing.JTextField name;
     private javax.swing.JLabel submitbtn;

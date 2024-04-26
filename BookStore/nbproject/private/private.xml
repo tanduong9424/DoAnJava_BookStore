@@ -3,19 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormEdit/EditKhachHang.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormAdd/AddNhanVien.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormEdit/EditNhanVien.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormChinh/ThongKePanel.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormChinh/NhanVienPanel.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormAdd/AddSach.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormAdd/AddKhachHang.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormAdd/AddNhaCungCap.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormChinh/NhapHangPanel.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormAdd/AddTaiKhoan.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormEdit/EditSach.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormEdit/EditTaiKhoan.java</file>
-            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormChinh/TaiKhoanPanel.java</file>
+            <file>file:/C:/Users/DELL/Desktop/DoAnJava_BookStore-main/1.DoAnJava_BookStore-main/BookStore/src/Main/GiaoDienChinh.java</file>
+            <file>file:/C:/Users/DELL/Desktop/DoAnJava_BookStore-main/1.DoAnJava_BookStore-main/BookStore/src/Gui/FormChinh/KhuyenMaiPanel.java</file>
+            <file>file:/C:/Users/DELL/Desktop/DoAnJava_BookStore-main/1.DoAnJava_BookStore-main/BookStore/src/Gui/FormAdd/AddSach.java</file>
+            <file>file:/C:/Users/DELL/Desktop/DoAnJava_BookStore-main/1.DoAnJava_BookStore-main/BookStore/src/Gui/FormChinh/ThongKePanel.java</file>
         </group>
     </open-files>
 </project-private>

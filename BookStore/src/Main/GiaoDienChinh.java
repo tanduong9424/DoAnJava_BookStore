@@ -46,6 +46,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         TaiKhoan = new javax.swing.JLabel();
         NhanVien = new javax.swing.JLabel();
         KhachHang = new javax.swing.JLabel();
+        KhuyenMai = new javax.swing.JLabel();
         ThongKe = new javax.swing.JLabel();
         Middle = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -93,7 +94,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
                 .addComponent(logout)
                 .addGap(456, 456, 456)
                 .addComponent(Title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 960, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1081, Short.MAX_VALUE)
                 .addComponent(exit)
                 .addContainerGap())
         );
@@ -230,6 +231,28 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         });
         Left.add(KhachHang);
 
+        KhuyenMai.setBackground(new java.awt.Color(0, 51, 51));
+        KhuyenMai.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        KhuyenMai.setForeground(new java.awt.Color(204, 255, 204));
+        KhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_us_dollar_30px.png"))); // NOI18N
+        KhuyenMai.setText("Khuyến Mãi");
+        KhuyenMai.setOpaque(true);
+        KhuyenMai.setPreferredSize(new java.awt.Dimension(150, 75));
+        KhuyenMai.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                KhuyenMaiMouseMoved(evt);
+            }
+        });
+        KhuyenMai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                KhuyenMaiMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                KhuyenMaiMouseExited(evt);
+            }
+        });
+        Left.add(KhuyenMai);
+
         ThongKe.setBackground(new java.awt.Color(0, 51, 51));
         ThongKe.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         ThongKe.setForeground(new java.awt.Color(204, 255, 204));
@@ -259,11 +282,11 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
         jLabel1.setFont(new java.awt.Font("Palatino Linotype", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 255, 102));
+        jLabel1.setForeground(new java.awt.Color(51, 0, 0));
         jLabel1.setText("Chào mừng đến với phần mềm quản lý cửa hàng bán sách ");
 
         jLabel2.setFont(new java.awt.Font("Palatino Linotype", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 255, 102));
+        jLabel2.setForeground(new java.awt.Color(51, 0, 0));
         jLabel2.setText("Vui lòng chọn thao tác");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -440,6 +463,27 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         ThongKe.setForeground(new Color(204,255,204));
     }//GEN-LAST:event_ThongKeMouseExited
 
+    private void KhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KhuyenMaiMouseClicked
+        // TODO add your handling code here:
+        Title.setText("Khuyến Mãi");
+        KhuyenMaiPanel khuyenmai = new KhuyenMaiPanel();
+        Middle.add(khuyenmai, "khuyenmai");
+        CardLayout cardLayout = (CardLayout) Middle.getLayout();
+        cardLayout.show(Middle, "khuyenmai");
+    }//GEN-LAST:event_KhuyenMaiMouseClicked
+
+    private void KhuyenMaiMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KhuyenMaiMouseMoved
+        // TODO add your handling code here:
+        KhuyenMai.setBackground(new Color(255,255,255));
+        KhuyenMai.setForeground(new Color(204,0,51));
+    }//GEN-LAST:event_KhuyenMaiMouseMoved
+
+    private void KhuyenMaiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KhuyenMaiMouseExited
+        // TODO add your handling code here:
+        KhuyenMai.setBackground(new Color(0,51,51));
+        KhuyenMai.setForeground(new Color(204,255,204));
+    }//GEN-LAST:event_KhuyenMaiMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -479,6 +523,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
     private javax.swing.JLabel BanHang;
     private javax.swing.JPanel Header;
     private javax.swing.JLabel KhachHang;
+    private javax.swing.JLabel KhuyenMai;
     private javax.swing.JPanel Left;
     private javax.swing.JPanel Middle;
     private javax.swing.ButtonGroup NavBar;

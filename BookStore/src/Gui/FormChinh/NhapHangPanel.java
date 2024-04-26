@@ -142,26 +142,7 @@ public void loadAnh(SACH t) {
         PhieuNhaptb.setForeground(new java.awt.Color(0, 51, 51));
         PhieuNhaptb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"PN1", "NV1", "Kim Đồng", "16-04-2024", "500000"},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Mã Phiếu Nhập", "Người Nhập", "Nhà Cung Cấp", "Ngày Lập", "Tổng tiền"
@@ -259,26 +240,7 @@ public void loadAnh(SACH t) {
         Nhaptb.setForeground(new java.awt.Color(0, 51, 51));
         Nhaptb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"S1", "Doraemon",  new Long(25000), "Kim Đồng"},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Mã Sách", "Tên Sách", "Đơn giá", "Nhà Cung Cấp"
@@ -335,7 +297,7 @@ public void loadAnh(SACH t) {
         panelImg.setBackground(new java.awt.Color(204, 255, 204));
         panelImg.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ảnh minh họa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Book_img/doraemon.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Book_img/img_default.png"))); // NOI18N
 
         javax.swing.GroupLayout panelImgLayout = new javax.swing.GroupLayout(panelImg);
         panelImg.setLayout(panelImgLayout);
@@ -449,18 +411,7 @@ public void loadAnh(SACH t) {
         jTable1.setForeground(new java.awt.Color(0, 51, 51));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Mã Sách", "Tên Sách", "Đơn Giá", "Số Lượng", "Thành Tiền"
