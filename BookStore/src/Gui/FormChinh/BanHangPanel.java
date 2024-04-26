@@ -5,19 +5,25 @@
 package Gui.FormChinh;
 
 
+import Bus.Impl.BanHanglmpl;
 import Dao.CHITIETHOADONDAO;
 import Dao.HOADONDAO;
 import Dao.KHUYENMAIDAO;
 import Dao.SACHDAO;
 import Dto.CHITIETHOADON;
 import Dto.HOADON;
+import Dto.KHACHANG;
 import Dto.KHUYENMAI;
+import Dto.NHANVIEN;
 import Dto.SACH;
-import GUI.FormNhapSL.PanelNhapSL_BanHang;
+import Dto.TAIKHOAN;
 import Gui.FormAdd.AddKhachHang;
+import Gui.FormNhapSL.PanelNhapSL_BanHang;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Date;
 
 
 
@@ -37,41 +43,22 @@ public class BanHangPanel extends javax.swing.JPanel {
     }
     public void loadBooksToTable() {
         DefaultTableModel model = (DefaultTableModel) Sachtb.getModel();
-        // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
         model.setRowCount(0);
 
         try {
-            System.out.print("hoạt động");
-            ArrayList<SACH> sachList = SACHDAO.getInstance().selectAllExceptISHIDDEN();
-
-            for (SACH sach : sachList) {
-                Object[] row = {sach.getMASACH(), sach.getTENSACH(), sach.getSOLUONG(), sach.getGIABIA(), sach.getTENNHAXUATBAN()};
-                model.addRow(row);
-            }
+            BanHanglmpl banhang=new BanHanglmpl();
+            banhang.danhSachSanPham(model);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
     public void loadHOADONToTable() {
         DefaultTableModel model = (DefaultTableModel) dataHoadon.getModel();
-        // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
         model.setRowCount(0);
 
         try {
-            System.out.print("hoạt động");
-            ArrayList<HOADON> hoadonList = HOADONDAO.getInstance().selectAllHOANTHANH();
-            
-            for (HOADON hoadon : hoadonList) {
-                int makhuyenmai=0;
-                int phantramgiam=0;
-                    makhuyenmai=hoadon.getMakhuyenmai();
-                    KHUYENMAI km=KHUYENMAIDAO.getInstance().selectById(new KHUYENMAI(hoadon.getMakhuyenmai()));
-                    if(km!=null){
-                        phantramgiam=km.getPhantramgiam();
-                    }                
-                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),hoadon.getTENTAIKHOAN(),hoadon.getNGAYLAP(),makhuyenmai,phantramgiam,hoadon.getTONGTIEN()};
-                model.addRow(row);
-            }
+            BanHanglmpl banhang=new BanHanglmpl();
+            banhang.danhSachHoaDon(model);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -82,17 +69,8 @@ public class BanHangPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         try {
-            System.out.print("hoạt động");
-            ArrayList<CHITIETHOADON> chitiethoadonList = CHITIETHOADONDAO.getInstance().selectByIDHOADON(t);
-            int tongtien=0;
-            for (CHITIETHOADON chitiethoadon : chitiethoadonList) {
-                SACH sach=new SACH(chitiethoadon.getMASACH());
-                SACH result=SACHDAO.getInstance().selectById(sach);
-                Object[] row = {chitiethoadon.getMASACH(),result.getTENSACH(),chitiethoadon.getSOLUONG(),chitiethoadon.getGIATIEN(),chitiethoadon.getTHANHTIEN()};
-                model.addRow(row);
-                tongtien+=chitiethoadon.getTHANHTIEN();
-            }
-            sum.setText(""+tongtien);
+            BanHanglmpl banhang=new BanHanglmpl();
+            banhang.chiTietHoaDon(t,model,sum);    
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -113,6 +91,14 @@ public void loadAnh(SACH t) {
         ex.printStackTrace();
     }
 } 
+public void loadtongtien(){
+    int tongtien=0;
+    for(int i=0;i<selectedSach.getRowCount();i++){
+        tongtien+=(int) selectedSach.getValueAt(i, 4);
+        
+    }
+    sum.setText(""+tongtien);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -186,8 +172,6 @@ public void loadAnh(SACH t) {
         dataHoadon.setForeground(new java.awt.Color(0, 51, 51));
         dataHoadon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"HD1", "NV1", "KH1", "20-03-2024", null, null,  new Integer(300000)},
-                {"HD2", "NV2", "KH2", "30-03-2023", null, null,  new Integer(320000)},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -284,7 +268,6 @@ public void loadAnh(SACH t) {
         Sachtb.setForeground(new java.awt.Color(0, 51, 51));
         Sachtb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"S1", "Doraemon",  new Integer(20),  new Long(25000), "Kim Đồng"},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -464,7 +447,7 @@ public void loadAnh(SACH t) {
         nv.setEditable(false);
         nv.setBackground(new java.awt.Color(204, 255, 204));
         nv.setForeground(new java.awt.Color(0, 51, 51));
-        nv.setText("User");
+        nv.setText("1");
         nv.setFocusable(false);
         nv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -583,7 +566,6 @@ public void loadAnh(SACH t) {
         selectedSach.setForeground(new java.awt.Color(0, 51, 51));
         selectedSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"S1", "Doraemon", "2", "25000", "45000"},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -695,7 +677,7 @@ public void loadAnh(SACH t) {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(HoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
-                        .addComponent(ChiTietHD, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(ChiTietHD, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -717,59 +699,10 @@ public void loadAnh(SACH t) {
     // Lấy nội dung từ JTextField
     String searchText = searchHoaDon.getText();
     loadHOADONToTable();
+    DefaultTableModel model = (DefaultTableModel) dataHoadon.getModel();
     // Kiểm tra xem searchText có rỗng không
-    if (searchText == null || searchText.trim().isEmpty()) {
-        // Nếu rỗng, không làm gì cả và thoát phương thức
-        return;
-    }
-    
-    // Tạo một bảng tạm thời để lưu các dòng được lọc
-    DefaultTableModel tempModel = new DefaultTableModel();
-    tempModel.setColumnIdentifiers(new Object[]{"MAHOADON", "Manv", "TENTAIKHOAN", "NGAYLAP", "Makhuyenmai", "Phantramgiam", "TONGTIEN"});
-    
-    // Kiểm tra xem dataHoadon có rỗng không
-    if (dataHoadon != null) {
-        // Lặp qua từng dòng trong bảng dataHoadon
-        for (int i = 0; i < dataHoadon.getRowCount(); i++) {
-            // Kiểm tra xem giá trị có phải là String không và không rỗng
-String mahoadon = dataHoadon.getValueAt(i, 0) != null ? dataHoadon.getValueAt(i, 0).toString().trim() : "null";
-String manv = dataHoadon.getValueAt(i, 1) != null ? dataHoadon.getValueAt(i, 1).toString().trim() : "null";
-String makh = dataHoadon.getValueAt(i, 2) != null ? dataHoadon.getValueAt(i, 2).toString().trim() : "null";
-String ngaylap = dataHoadon.getValueAt(i, 3) != null ? dataHoadon.getValueAt(i, 3).toString().trim() : "null";
-String makm = dataHoadon.getValueAt(i, 4) != null ? dataHoadon.getValueAt(i, 4).toString().trim() : "null";
-String phantramgiam = dataHoadon.getValueAt(i, 5) != null ? dataHoadon.getValueAt(i, 5).toString().trim() : "null";
-String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i, 6).toString().trim() : "null";
-
-                // Kiểm tra xem nếu giá trị này chứa nội dung tìm kiếm
-                if (mahoadon.equalsIgnoreCase(searchText.trim()) || manv.equalsIgnoreCase(searchText.trim()) ||
-                        makh.equalsIgnoreCase(searchText.trim()) || ngaylap.equalsIgnoreCase(searchText.trim())||
-                        makm.equalsIgnoreCase(searchText.trim()) || phantramgiam.equalsIgnoreCase(searchText.trim())||
-                        tongtien.equalsIgnoreCase(searchText.trim())) {
-                    // Nếu có, thêm dòng này vào bảng tạm thời
-                    Object[] row = {
-                        dataHoadon.getValueAt(i, 0),
-                        dataHoadon.getValueAt(i, 1),
-                        dataHoadon.getValueAt(i, 2), // TENKHACHHANG
-                        dataHoadon.getValueAt(i, 3), // NGAYLAP
-                        dataHoadon.getValueAt(i, 4), // Makhuyenmai
-                        dataHoadon.getValueAt(i, 5), // Phantramgiam
-                        dataHoadon.getValueAt(i, 6)  // TONGTIEN;
-                    };
-                    tempModel.addRow(row);
-                }
-        }
-    }
-    // Xóa toàn bộ dòng trong dataHoadon
-    DefaultTableModel dataModel = (DefaultTableModel) dataHoadon.getModel();
-    dataModel.setRowCount(0);
-    // Thêm các dòng từ DefaultTableModel tạm thời vào dataHoadon
-    for (int i = 0; i < tempModel.getRowCount(); i++) {
-        Object[] row = new Object[dataModel.getColumnCount()];
-        for (int j = 0; j < dataModel.getColumnCount(); j++) {
-            row[j] = tempModel.getValueAt(i, j);
-        }
-        dataModel.addRow(row);
-    }
+    BanHanglmpl banhang=new BanHanglmpl();
+    banhang.timHoaDon(dataHoadon, searchText,model);
     }//GEN-LAST:event_search1ActionPerformed
 
     private void dataHoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataHoadonMouseClicked
@@ -810,7 +743,6 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
         // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
         model.setRowCount(0);
         status=1;
-        System.out.println(status);
 
     }//GEN-LAST:event_ThemBtnActionPerformed
 
@@ -823,54 +755,9 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
                 // Lấy nội dung từ JTextField
         String searchText = searchSach.getText();
         loadBooksToTable();
-        System.out.println("co bam tim sach");
-        // Kiểm tra xem searchText có rỗng không
-        if (searchText == null || searchText.trim().isEmpty()) {
-            // Nếu rỗng, không làm gì cả và thoát phương thức
-            return;
-        }
-
-        // Tạo một bảng tạm thời để lưu các dòng được lọc
-        DefaultTableModel tempModel = new DefaultTableModel();
-        tempModel.setColumnIdentifiers(new Object[]{"MaSach","TenSach","Soluong","DonGia","NhaXB"});
-
-        // Kiểm tra xem dataHoadon có rỗng không
-        if (Sachtb != null) {
-            // Lặp qua từng dòng trong bảng dataHoadon
-            for (int i = 0; i < Sachtb.getRowCount(); i++) {
-                // Kiểm tra xem giá trị có phải là String không và không rỗng
-                String mahoadon = Sachtb.getValueAt(i, 0).toString().trim();
-                String tensach=Sachtb.getValueAt(i,1).toString().trim();
-                String soluong=Sachtb.getValueAt(i,2).toString().trim();
-                String dongia=Sachtb.getValueAt(i,3).toString().trim();
-                String nhaxb=Sachtb.getValueAt(i,4).toString().trim();
-                // Kiểm tra xem nếu giá trị này chứa nội dung tìm kiếm
-                if (mahoadon.equalsIgnoreCase(searchText.trim()) || tensach.equalsIgnoreCase(searchText.trim())||
-                        soluong.equalsIgnoreCase(searchText.trim()) || dongia.equalsIgnoreCase(searchText.trim())||
-                        nhaxb.equalsIgnoreCase(searchText.trim())) {
-                    // Nếu có, thêm dòng này vào bảng tạm thời
-                    Object[] row = {
-                        Sachtb.getValueAt(i, 0),
-                        Sachtb.getValueAt(i, 1),
-                        Sachtb.getValueAt(i, 2), 
-                        Sachtb.getValueAt(i, 3), 
-                        Sachtb.getValueAt(i, 4), 
-                    };
-                    tempModel.addRow(row);
-                }
-            }
-        }
-        // Xóa toàn bộ dòng trong dataHoadon
-        DefaultTableModel dataModel = (DefaultTableModel) Sachtb.getModel();
-        dataModel.setRowCount(0);
-        // Thêm các dòng từ DefaultTableModel tạm thời vào dataHoadon
-        for (int i = 0; i < tempModel.getRowCount(); i++) {
-            Object[] row = new Object[dataModel.getColumnCount()];
-            for (int j = 0; j < dataModel.getColumnCount(); j++) {
-                row[j] = tempModel.getValueAt(i, j);
-            }
-            dataModel.addRow(row);
-        }
+    DefaultTableModel model = (DefaultTableModel) Sachtb.getModel();
+    BanHanglmpl banhang=new BanHanglmpl();
+    banhang.timSanPham(Sachtb, searchText,model);        
     }//GEN-LAST:event_search2ActionPerformed
 
     private void xoaspbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaspbtnActionPerformed
@@ -882,6 +769,18 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
         submit.setVisible(false);
         xoaspbtn.setVisible(false);
         status=0;
+        int tongtien=Integer.parseInt(sum.getText());
+        int manv=Integer.parseInt(nv.getText());
+        String TENTAIKHOAN=(String) comboxKH.getSelectedItem();
+        LocalDate today = LocalDate.now();
+        Date sqlDate = Date.valueOf(today);
+//      int makm
+        NHANVIEN nv=new NHANVIEN(manv);
+        TAIKHOAN tk=new TAIKHOAN(TENTAIKHOAN);
+        HOADON t=new HOADON(TENTAIKHOAN,manv,sqlDate,tongtien,false);
+        DefaultTableModel dataModel = (DefaultTableModel) selectedSach.getModel();
+        BanHanglmpl banhang=new BanHanglmpl();
+        banhang.TaoHoaDonDatabase(t, nv, tk, dataModel);
     }//GEN-LAST:event_submitActionPerformed
 
     private void searchSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchSachActionPerformed
@@ -900,13 +799,13 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
             loadAnh(hd);
             }
             else{
-            PanelNhapSL_BanHang x=new PanelNhapSL_BanHang();
-                x.setVisible(true);
                 String maSachStr = Sachtb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
                 String tenSachStr = Sachtb.getValueAt(row, 1).toString(); // Lấy giá trị của cột "Tên Sách"
                 String SLconStr = Sachtb.getValueAt(row, 2).toString(); // Lấy giá trị của cột "Số Lượng còn"
                 String DonGiaStr = Sachtb.getValueAt(row, 3).toString(); // Lấy giá trị của cột "Đơn Giá"
                 String NXBStr = Sachtb.getValueAt(row, 4).toString(); // Lấy giá trị của cột "Nhà Xuất Bản"
+            PanelNhapSL_BanHang x=new PanelNhapSL_BanHang(this,selectedSach,maSachStr,tenSachStr ,DonGiaStr,NXBStr);
+                x.setVisible(true);
                 x.setThongTinPanel(maSachStr,tenSachStr ,DonGiaStr,NXBStr);
             }
         }

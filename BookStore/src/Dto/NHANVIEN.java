@@ -14,12 +14,13 @@ public class NHANVIEN {
     public NHANVIEN() {
         
     }
-    public NHANVIEN(int manv) {
-        this.manv = manv;
+    public NHANVIEN(int mANV) {
+        manv=mANV;
     }
-    public NHANVIEN(String username) {
-        this.username = username;
+    public NHANVIEN(String uSERNAME) {
+        username=uSERNAME;
     }
+    
 
     public NHANVIEN(String username, String hoten, String diachi, String email, int dienthoai, Date ngaytao,
             boolean tttk) {

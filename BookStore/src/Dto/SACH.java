@@ -11,7 +11,6 @@ public class SACH {
 	private String TENNHAXUATBAN;
 	private int GIABIA;
 	private int LANTAIBAN;
-	private java.sql.Date NAMXUATBAN;
 	private boolean ISHIDDEN;
 	
 	public SACH() {
@@ -22,7 +21,7 @@ public class SACH {
 	}
 
 	public SACH(int mASACH, String tENSACH, String iMAGE, int sOLUONG,
-			 String tENNHAXUATBAN, int gIABIA, int lANTAIBAN, Date nAMXUATBAN,
+			 String tENNHAXUATBAN, int gIABIA, int lANTAIBAN,
 			boolean iSHIDDEN) {
 		MASACH = mASACH;
 		TENSACH = tENSACH;
@@ -31,12 +30,11 @@ public class SACH {
 		TENNHAXUATBAN = tENNHAXUATBAN;
 		GIABIA = gIABIA;
 		LANTAIBAN = lANTAIBAN;
-		NAMXUATBAN = nAMXUATBAN;
 		ISHIDDEN = iSHIDDEN;
 	}
 
 	public SACH(String tENSACH, String iMAGE, int sOLUONG,
-			String tENNHAXUATBAN, int gIABIA, int lANTAIBAN, Date nAMXUATBAN,
+			String tENNHAXUATBAN, int gIABIA, int lANTAIBAN,
 			boolean iSHIDDEN) {
     		TENSACH = tENSACH;
 		IMAGE = iMAGE;
@@ -44,13 +42,18 @@ public class SACH {
 		TENNHAXUATBAN = tENNHAXUATBAN;
 		GIABIA = gIABIA;
 		LANTAIBAN = lANTAIBAN;
-		NAMXUATBAN = nAMXUATBAN;
 		ISHIDDEN = iSHIDDEN;
 	}
         public SACH(int mASACH, String tENSACH, int sOLUONG, String tENNHAXUATBAN, int gIABIA) {
 		MASACH = mASACH;
 		TENSACH = tENSACH;
 		SOLUONG = sOLUONG;
+		TENNHAXUATBAN = tENNHAXUATBAN;
+		GIABIA = gIABIA;
+	}
+        public SACH(int mASACH, String tENSACH, String tENNHAXUATBAN, int gIABIA) {
+		MASACH = mASACH;
+		TENSACH = tENSACH;
 		TENNHAXUATBAN = tENNHAXUATBAN;
 		GIABIA = gIABIA;
 	}
@@ -110,13 +113,7 @@ public class SACH {
 		LANTAIBAN = lANTAIBAN;
 	}
 
-	public java.sql.Date getNAMXUATBAN() {
-		return NAMXUATBAN;
-	}
 
-	public void setNAMXUATBAN(java.sql.Date nAMXUATBAN) {
-		NAMXUATBAN = nAMXUATBAN;
-	}
 
 	public boolean isISHIDDEN() {
 		return ISHIDDEN;

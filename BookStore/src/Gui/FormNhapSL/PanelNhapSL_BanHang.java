@@ -2,7 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUI.FormNhapSL;
+package Gui.FormNhapSL;
+
+import Bus.Impl.BanHanglmpl;
+import Dto.SACH;
+import Gui.FormChinh.BanHangPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,10 +18,28 @@ public class PanelNhapSL_BanHang extends javax.swing.JFrame {
     /**
      * Creates new form FrameNhapSL
      */
-    public PanelNhapSL_BanHang() {
+    javax.swing.JTable selectedSach;
+    String masach;
+    String tensach;
+    String dongia;
+    String nxb;
+    BanHangPanel banhangs;
+    public PanelNhapSL_BanHang(BanHangPanel banhangs,javax.swing.JTable selectedSach,String masach,String tensach,String dongia,String nxb) {
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.selectedSach=selectedSach;
+        this.masach=masach;
+        this.tensach=tensach;
+        this.dongia=dongia;
+        this.nxb=nxb;
+        this.banhangs=banhangs;
+    }
+        public PanelNhapSL_BanHang() {
+        this.setUndecorated(true);
+        initComponents();
+        this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -49,24 +72,20 @@ public class PanelNhapSL_BanHang extends javax.swing.JFrame {
 
         MaSach.setEditable(false);
         MaSach.setBackground(new java.awt.Color(204, 255, 204));
-        MaSach.setForeground(new java.awt.Color(0, 0, 0));
         MaSach.setText("S1");
         MaSach.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Sách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         MaSach.setFocusable(false);
 
         TenSach.setEditable(false);
         TenSach.setBackground(new java.awt.Color(204, 255, 204));
-        TenSach.setForeground(new java.awt.Color(0, 0, 0));
         TenSach.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tên Sách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         TenSach.setFocusable(false);
 
         DonGia.setBackground(new java.awt.Color(204, 255, 204));
-        DonGia.setForeground(new java.awt.Color(0, 0, 0));
         DonGia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đơn Giá", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         DonGia.setFocusable(false);
 
         NXB.setBackground(new java.awt.Color(204, 255, 204));
-        NXB.setForeground(new java.awt.Color(0, 0, 0));
         NXB.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhà Xuất Bản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         NXB.setFocusable(false);
 
@@ -196,6 +215,14 @@ public class PanelNhapSL_BanHang extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
+        DefaultTableModel dataModel=(DefaultTableModel) this.selectedSach.getModel();
+        int sl=Integer.parseInt(inputSL.getText());
+        int masach=Integer.parseInt(this.masach);
+        int gia=Integer.parseInt(this.dongia);
+        SACH t=new SACH(masach,this.tensach,this.nxb,gia);
+        BanHanglmpl banhang=new BanHanglmpl();
+        banhang.TaomoiChiTietHoaDon(dataModel, t, sl);
+        this.banhangs.loadtongtien();
         this.dispose();
 
     }//GEN-LAST:event_submitbtnMouseClicked

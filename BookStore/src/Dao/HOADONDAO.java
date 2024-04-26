@@ -47,7 +47,7 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 		int ketqua=0;
 		try {
 			Connection con=JDBCUtil.getConnection();
-			String sql="INSERT INTO hoadon (TENKHACHHAHNG,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd) "+
+			String sql="INSERT INTO hoadon (TENTAIKHOAN,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd) "+
 			"VALUES (?,?,?,?,?,?)";
 			PreparedStatement pst =con.prepareStatement(sql);
 			pst.setString(1, tk.getUSERNAME());
@@ -66,7 +66,7 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 		}
 		return 0;
 	}
-	public int insertHOADONKHONGTKCOMAKM(HOADON t,KHACHANG kh,NHANVIEN nv) {
+	public int insertHOADONKHONGTKCOMAKM(HOADON t,NHANVIEN nv) {
 		int ketqua=0;
 		try {
 			Connection con=JDBCUtil.getConnection();
@@ -108,29 +108,34 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o insert() class HOADONDAO \n");
 			e.printStackTrace();
 		}
-		return 0;
+                System.out.println(ketqua);
+		return ketqua;
 	}
-	public int insertHOADONKHONGTKKOMAKM(HOADON t,KHACHANG kh,NHANVIEN nv) {
-		int ketqua=0;
-		try {
-			Connection con=JDBCUtil.getConnection();
-			String sql="INSERT INTO hoadon (manv,NGAYLAP,TONGTIEN,tthd) "+
-			"VALUES (?,?,?,?)";
-			PreparedStatement pst =con.prepareStatement(sql);
-			pst.setInt(1, nv.getManv());
-			pst.setDate(2, t.getNGAYLAP());
-			pst.setInt(3, t.getTONGTIEN());
-			pst.setBoolean(4, t.isTthd());
-			ketqua=pst.executeUpdate();
-			JDBCUtil.closeConnection(con);
-		}
-		catch (SQLException e){
-			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o insert() class HOADONDAO \n");
-			e.printStackTrace();
-		}
-		return 0;
-	}
+        public int insertHOADONKHONGTKKOMAKM(HOADON t, NHANVIEN nv) {
+            int mahoadon = 0;
+            try {
+                Connection con = JDBCUtil.getConnection();
+                String sql = "INSERT INTO hoadon (manv, NGAYLAP, TONGTIEN, tthd) VALUES (?, ?, ?, ?)";
+                PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                pst.setInt(1, nv.getManv());
+                pst.setDate(2, t.getNGAYLAP());
+                pst.setInt(3, t.getTONGTIEN());
+                pst.setBoolean(4, t.isTthd());
+                pst.executeUpdate();
+
+                ResultSet generatedKeys = pst.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    mahoadon = generatedKeys.getInt(1);
+                }
+
+                JDBCUtil.closeConnection(con);
+            } catch (SQLException e) {
+                System.out.print("Có lỗi xảy ra khi thực hiện câu lệnh SQL.");
+                e.printStackTrace();
+            }
+            return mahoadon;
+        }
+
 // hoa don khong thay doi
 	@Override
 	public int update(HOADON t) {
@@ -211,13 +216,13 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
 				int MAHOADON=rs.getInt("MAHOADON");
-				String TENKHACHHANG=rs.getString("TENKHACHHANG");
+				String TENTAIKHOAN=rs.getString("TENKHACHHAHNG");
 				int manv=rs.getInt("manv");
 				Date NGAYLAP=rs.getDate("NGAYLAP");
 				int TONGTIEN=rs.getInt("TONGTIEN");
 				int makhuyenmai=rs.getInt("makhuyenmai");
 				boolean tthd=rs.getBoolean("tthd");
-				HOADON hoadon=new HOADON(MAHOADON,TENKHACHHANG,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd);
+				HOADON hoadon=new HOADON(MAHOADON,TENTAIKHOAN,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd);
 				ketqua.add(hoadon);
 			}
 			JDBCUtil.closeConnection(con);
@@ -242,13 +247,13 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
 				int MAHOADON=rs.getInt("MAHOADON");
-				String TENKHACHHANG=rs.getString("TENKHACHHAHNG");
+				String TENTAIKHOAN=rs.getString("TENKHACHHAHNG");
 				int manv=rs.getInt("manv");
 				Date NGAYLAP=rs.getDate("NGAYLAP");
 				int TONGTIEN=rs.getInt("TONGTIEN");
 				int makhuyenmai=rs.getInt("makhuyenmai");
 				boolean tthd=rs.getBoolean("tthd");
-				HOADON hoadon=new HOADON(MAHOADON,TENKHACHHANG,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd);
+				HOADON hoadon=new HOADON(MAHOADON,TENTAIKHOAN,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd);
 				ketqua.add(hoadon);
 			}
 			JDBCUtil.closeConnection(con);
@@ -272,13 +277,13 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
 				int MAHOADON=rs.getInt("MAHOADON");
-				String TENKHACHHANG=rs.getString("TENKHACHHANG");
+				String TENTAIKHOAN=rs.getString("TENKHACHHAHNG ");
 				int manv=rs.getInt("manv");
 				Date NGAYLAP=rs.getDate("NGAYLAP");
 				int TONGTIEN=rs.getInt("TONGTIEN");
 				int makhuyenmai=rs.getInt("makhuyenmai");
 				boolean tthd=rs.getBoolean("tthd");
-				HOADON hoadon=new HOADON(MAHOADON,TENKHACHHANG,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd);
+				HOADON hoadon=new HOADON(MAHOADON,TENTAIKHOAN,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd);
 				ketqua.add(hoadon);
 			}
 			JDBCUtil.closeConnection(con);
@@ -295,7 +300,7 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 		HOADON ketqua=null;
 		try {
 			Connection con=JDBCUtil.getConnection();
-			
+			System.out.print("hoat dong selectbyid"+t.getMAHOADON());
 			String sql=" SELECT * FROM hoadon "+
 					"WHERE MAHOADON=?";
 			PreparedStatement pst=con.prepareStatement(sql);
@@ -304,13 +309,13 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
 				int MAHOADON=rs.getInt("MAHOADON");
-				String TENKHACHHANG=rs.getString("TENKHACHHANG");
+				String TENTAIKHOAN=rs.getString("TENKHACHHAHNG");
 				int manv=rs.getInt("manv");
 				Date NGAYLAP=rs.getDate("NGAYLAP");
 				int TONGTIEN=rs.getInt("TONGTIEN");
 				int makhuyenmai=rs.getInt("makhuyenmai");
 				boolean tthd=rs.getBoolean("tthd");
-				HOADON hoadon=new HOADON(MAHOADON,TENKHACHHANG,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd);
+				HOADON hoadon=new HOADON(MAHOADON,TENTAIKHOAN,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd);
 				ketqua=hoadon;
 			}
 			JDBCUtil.closeConnection(con);
@@ -337,13 +342,13 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 			ResultSet rs=pst.executeQuery(sql);
 			while(rs.next()) {
 				int MAHOADON=rs.getInt("MAHOADON");
-				String TENKHACHHANG=rs.getString("TENKHACHHANG");
+				String TENTAIKHOAN=rs.getString("TENKHACHHAHNG ");
 				int manv=rs.getInt("manv");
 				Date NGAYLAP=rs.getDate("NGAYLAP");
 				int TONGTIEN=rs.getInt("TONGTIEN");
 				int makhuyenmai=rs.getInt("makhuyenmai");
 				boolean tthd=rs.getBoolean("tthd");
-				HOADON hoadon=new HOADON(MAHOADON,TENKHACHHANG,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd);
+				HOADON hoadon=new HOADON(MAHOADON,TENTAIKHOAN,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd);
 				ketqua.add(hoadon);
 			}
 			JDBCUtil.closeConnection(con);

@@ -164,7 +164,7 @@ public int insertSACH(SACH t) {
 	int ketqua=0;
 	try {
 		Connection con=JDBCUtil.getConnection();
-		ArrayList<SACH> dathem=SACHDAO.getInstance().selectByCondition("TENSACH="+t.getTENSACH()+" GIABIA="+t.getGIABIA()+" LANTAIBAN="+t.getLANTAIBAN()+" TENNHAXUATBAN="+t.getTENNHAXUATBAN()+" NAMXUATBAN="+t.getNAMXUATBAN()+"ISHIDDEN=true");
+		ArrayList<SACH> dathem=SACHDAO.getInstance().selectByCondition("TENSACH="+t.getTENSACH()+" GIABIA="+t.getGIABIA()+" LANTAIBAN="+t.getLANTAIBAN()+" TENNHAXUATBAN="+t.getTENNHAXUATBAN()+"ISHIDDEN=true");
 		if(dathem!=null) {
 			String sql="UPDATE sach "+
 					"SET ISHIDDEN=false"+
@@ -175,8 +175,8 @@ public int insertSACH(SACH t) {
 			pst.setInt(1,dathem.get(0).getMASACH());
 		}
 		else{
-				String sql="INSERT INTO sach(TENSACH,IMAGE,SOLUONG,GIABIA,LANTAIBAN,TENNHAXUATBAN,NAMXUATBAN,ISHIDDEN"+
-						"VALUES (?,?,?,?,?,?,?,?)";
+				String sql="INSERT INTO sach(TENSACH,IMAGE,SOLUONG,GIABIA,LANTAIBAN,TENNHAXUATBAN,ISHIDDEN"+
+						"VALUES (?,?,?,?,?,?,?)";
 				PreparedStatement pst=con.prepareStatement(sql);
 				ketqua=pst.executeUpdate();
 				pst.setString(1, t.getTENSACH());
@@ -185,8 +185,7 @@ public int insertSACH(SACH t) {
 				pst.setInt(4, t.getGIABIA());
 				pst.setInt(5, t.getLANTAIBAN());
 				pst.setString(6, t.getTENNHAXUATBAN());
-				pst.setDate(7,t.getNAMXUATBAN());
-				pst.setBoolean(8, false);
+				pst.setBoolean(7, false);
 
 		}
 
@@ -221,7 +220,7 @@ public int insertSACH(SACH t) {
 			}
 	
 			// Nếu không có giá trị nào giống, thực hiện cập nhật
-			String sql = "UPDATE sach " + " SET " + " TENSACH=?, IMAGE=?,   GIABIA=?, LANTAIBAN=?, TENNHAXUATBAN=?, NAMXUATBAN=? " + " WHERE MASACH=?";
+			String sql = "UPDATE sach " + " SET " + " TENSACH=?, IMAGE=?,   GIABIA=?, LANTAIBAN=?, TENNHAXUATBAN=?" + " WHERE MASACH=?";
 			
 			PreparedStatement pst = con.prepareStatement(sql);
 			pst.setString(1, t.getTENSACH());
@@ -229,8 +228,7 @@ public int insertSACH(SACH t) {
 			pst.setInt(3, t.getGIABIA());
 			pst.setInt(4, t.getLANTAIBAN());
 			pst.setString(5, t.getTENNHAXUATBAN());
-			pst.setDate(6, t.getNAMXUATBAN());
-			pst.setInt(7, t.getMASACH());
+			pst.setInt(6, t.getMASACH());
 			ketqua = pst.executeUpdate();
 			JDBCUtil.closeConnection(con);
 		} catch(Exception e) {
@@ -266,13 +264,6 @@ public int insertSACH(SACH t) {
 			if(column.equals("GIABIA") || column.equals("LANTAIBAN")){
 				int value1=Integer.parseInt(value);
 				pst.setInt(2, value1);
-			}
-			else if(column.equals("NAMXUATBAN")){
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-				java.util.Date ngayUtil = sdf.parse(value); // Phân tích cú pháp chuỗi thành Date
-				Date ngaySQL = new Date(ngayUtil.getTime()); // Chuyển đổi thành java.sql.Date
-				pst.setDate(2, ngaySQL);
 			}
 			else if(column.equals("SOLUONG")){
 				pst.setInt(2, 0);
@@ -408,9 +399,8 @@ public int insertSACH(SACH t) {
 				int GIABIA=rs.getInt("GIABIA");
 				int LANTAIBAN=rs.getInt("LANTAIBAN");
 				String TENNHAXUATBAN=rs.getString("TENNHAXUATBAN");
-				Date NAMXUATBAN=rs.getDate("NAMXUATBAN");
 				boolean ISHIDDEN=rs.getBoolean("ISHIDDEN");
-				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,NAMXUATBAN,ISHIDDEN);
+				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,ISHIDDEN);
 				ketqua.add(sach);
 			}
 			JDBCUtil.closeConnection(con);
@@ -442,9 +432,8 @@ public int insertSACH(SACH t) {
 				int GIABIA=rs.getInt("GIABIA");
 				int LANTAIBAN=rs.getInt("LANTAIBAN");
 				String TENNHAXUATBAN=rs.getString("TENNHAXUATBAN");
-				Date NAMXUATBAN=rs.getDate("NAMXUATBAN");
 				boolean ISHIDDEN=rs.getBoolean("ISHIDDEN");
-				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,NAMXUATBAN,ISHIDDEN);
+				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,ISHIDDEN);
 				ketqua.add(sach);
 			}
 			JDBCUtil.closeConnection(con);
@@ -477,9 +466,8 @@ public int insertSACH(SACH t) {
 				int GIABIA=rs.getInt("GIABIA");
 				int LANTAIBAN=rs.getInt("LANTAIBAN");
 				String TENNHAXUATBAN=rs.getString("TENNHAXUATBAN");
-				Date NAMXUATBAN=rs.getDate("NAMXUATBAN");
 				boolean ISHIDDEN=rs.getBoolean("ISHIDDEN");
-				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,NAMXUATBAN,ISHIDDEN);
+				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,ISHIDDEN);
 				ketqua=sach;
 			}
 			JDBCUtil.closeConnection(con);
@@ -512,9 +500,8 @@ public int insertSACH(SACH t) {
 				int GIABIA=rs.getInt("GIABIA");
 				int LANTAIBAN=rs.getInt("LANTAIBAN");
 				String TENNHAXUATBAN=rs.getString("TENNHAXUATBAN");
-				Date NAMXUATBAN=rs.getDate("NAMXUATBAN");
 				boolean ISHIDDEN=rs.getBoolean("ISHIDDEN");
-				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,NAMXUATBAN,ISHIDDEN);
+				SACH sach=new SACH(MASACH,TENSACH,IMAGE,SOLUONG,TENNHAXUATBAN,GIABIA,LANTAIBAN,ISHIDDEN);
 				ketqua.add(sach);
 			}
 			JDBCUtil.closeConnection(con);

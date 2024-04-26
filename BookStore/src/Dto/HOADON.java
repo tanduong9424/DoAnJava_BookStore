@@ -5,7 +5,7 @@ import java.sql.Date;
 public class HOADON {
 	@Override
 	public String toString() {
-		return "HOADON [MAHOADON=" + MAHOADON + ", TENKHACHHANG=" + TENTAIKHOAN + ", NGAYLAP=" + NGAYLAP
+		return "HOADON [MAHOADON=" + MAHOADON  + ", NGAYLAP=" + NGAYLAP
 				+ ", TONGTIEN=" + TONGTIEN + "]";
 	}
 	private int MAHOADON;
@@ -21,7 +21,7 @@ public class HOADON {
 	public HOADON(int mAHOADON) {
 		MAHOADON = mAHOADON;
 	}
-	public HOADON(int mAHOADON, String tENTAIKHOAN, int manv, Date nGAYLAP, int tONGTIEN, int makhuyenmai,
+	public HOADON(int mAHOADON,String tENTAIKHOAN, int manv, Date nGAYLAP, int tONGTIEN, int makhuyenmai,
 			boolean tthd) {
 		MAHOADON = mAHOADON;
 		TENTAIKHOAN = tENTAIKHOAN;
@@ -31,23 +31,24 @@ public class HOADON {
 		this.makhuyenmai = makhuyenmai;
 		this.tthd = tthd;
 	}
+
 	public HOADON(String tENTAIKHOAN, int manv, Date nGAYLAP, int tONGTIEN, int makhuyenmai, boolean tthd) {
-		TENTAIKHOAN = tENTAIKHOAN;
+		TENTAIKHOAN =  tENTAIKHOAN;
 		this.manv = manv;
 		NGAYLAP = nGAYLAP;
 		TONGTIEN = tONGTIEN;
 		this.makhuyenmai = makhuyenmai;
 		this.tthd = tthd;
 	}
-	public HOADON(int manv, Date nGAYLAP, int tONGTIEN, int makhuyenmai, boolean tthd) {
+	public HOADON(String tENTAIKHOAN,int manv, Date nGAYLAP, int tONGTIEN, boolean tthd) {
+                TENTAIKHOAN =  tENTAIKHOAN;
 		this.manv = manv;
 		NGAYLAP = nGAYLAP;
 		TONGTIEN = tONGTIEN;
-		this.makhuyenmai = makhuyenmai;
 		this.tthd = tthd;
 	}
-	public HOADON(String tENTAIKHOAN, int manv, Date nGAYLAP, int tONGTIEN, boolean tthd) {
-		TENTAIKHOAN = tENTAIKHOAN;
+	public HOADON(int makh, int manv, Date nGAYLAP, int tONGTIEN, boolean tthd) {
+		makh = makh;
 		this.manv = manv;
 		NGAYLAP = nGAYLAP;
 		TONGTIEN = tONGTIEN;
@@ -65,11 +66,11 @@ public class HOADON {
 	public void setMAHOADON(int mAHOADON) {
 		MAHOADON = mAHOADON;
 	}
-	public String getTENTAIKHOAN() {
+	public String  getTENTAIKHOAN() {
 		return TENTAIKHOAN;
 	}
-	public void setTENTAIKHOAN(String tENTAIKHOAN) {
-		TENTAIKHOAN = tENTAIKHOAN;
+	public void setTENTAIKHOAN(String TENTAIKHOAN) {
+		TENTAIKHOAN = TENTAIKHOAN;
 	}
 	public int getManv() {
 		return manv;
