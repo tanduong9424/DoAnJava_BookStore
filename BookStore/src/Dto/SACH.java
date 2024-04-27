@@ -44,6 +44,16 @@ public class SACH {
 		LANTAIBAN = lANTAIBAN;
 		ISHIDDEN = iSHIDDEN;
 	}
+        public SACH(String tENSACH, int sOLUONG,
+			String tENNHAXUATBAN, int gIABIA, int lANTAIBAN,
+			boolean iSHIDDEN) {
+    		TENSACH = tENSACH;
+		SOLUONG = sOLUONG;
+		TENNHAXUATBAN = tENNHAXUATBAN;
+		GIABIA = gIABIA;
+		LANTAIBAN = lANTAIBAN;
+		ISHIDDEN = iSHIDDEN;
+	}
         public SACH(int mASACH, String tENSACH, int sOLUONG, String tENNHAXUATBAN, int gIABIA) {
 		MASACH = mASACH;
 		TENSACH = tENSACH;

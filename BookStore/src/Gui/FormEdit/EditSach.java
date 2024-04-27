@@ -4,10 +4,15 @@
  */
 package Gui.FormEdit;
 
+import Bus.Impl.NhaXuatBanlmpl;
+import Dao.SACHDAO;
 import Dto.SACH;
 import Gui.FormAdd.*;
 import Gui.FormChinh.NhapHangPanel;
 import java.awt.Color;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -31,6 +36,8 @@ public class EditSach extends javax.swing.JFrame {
         TenSach.setText(this.sach.getTENSACH());
         LanTaiBan.setText(""+this.sach.getLANTAIBAN());
         GiaBia.setText(""+this.sach.getGIABIA());
+        NhaXuatBanlmpl nxb=new NhaXuatBanlmpl();
+        nxb.danhsachNHAXUATBAN(NhaCungCap);
     }
 
     /**
@@ -102,6 +109,9 @@ public class EditSach extends javax.swing.JFrame {
             }
         });
         URL_img.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                URL_imgMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 URL_imgMouseExited(evt);
             }
@@ -211,8 +221,24 @@ public class EditSach extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
-        // TODO add your handling code here:
-        
+        int masach=this.sach.getMASACH();
+        String nhaxuatban=(String) NhaCungCap.getSelectedItem();
+        String nameSach=TenSach.getText();
+        String lantaibanStr=LanTaiBan.getText();
+        int lantaiban=Integer.parseInt(lantaibanStr);
+        String giabiaStr=GiaBia.getText();
+        int giabiaSach=Integer.parseInt(giabiaStr);
+        if(url!=null){
+            SACH sach=new SACH(masach,nameSach,url,0,nhaxuatban,giabiaSach,lantaiban,false);
+            SACHDAO.getInstance().update(sach);
+        }
+        else{
+            url=this.sach.getIMAGE();
+            SACH sach=new SACH(masach,nameSach,url,0,nhaxuatban,giabiaSach,lantaiban,false);
+            SACHDAO.getInstance().update(sach);
+        }
+        this.nhaphang.loadBooksToTable();
+        System.out.println("da thuc hien sua");
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 
@@ -240,6 +266,33 @@ public class EditSach extends javax.swing.JFrame {
     private void GiaBiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GiaBiaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_GiaBiaActionPerformed
+
+    private void URL_imgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_URL_imgMouseClicked
+        // TODO add your handling code here:
+                // TODO add your handling code here:\
+    JFileChooser fileChooser = new JFileChooser();
+
+    // Set the file chooser to select files only
+    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+    // Set filter to display only image files
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "gif", "jpeg");
+    fileChooser.setFileFilter(filter);
+
+    // Show the file chooser dialog to the user
+    int result = fileChooser.showOpenDialog(null);
+
+    // Check if the user selected a file
+    if (result == JFileChooser.APPROVE_OPTION) {
+        // Get the selected file
+        File selectedFile = fileChooser.getSelectedFile();
+
+        // Get the path of the selected file
+        String selectedFilePath = selectedFile.getAbsolutePath();
+
+         url = selectedFilePath;
+    }        
+    }//GEN-LAST:event_URL_imgMouseClicked
 
     /**
      * @param args the command line arguments

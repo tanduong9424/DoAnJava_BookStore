@@ -8,15 +8,20 @@ package Gui.FormChinh;
 import Bus.Impl.BanHanglmpl;
 import Dao.SACHDAO;
 import Dto.HOADON;
+import Dto.KHACHANG;
+import Dto.KHUYENMAI;
 import Dto.NHANVIEN;
 import Dto.SACH;
 import Dto.TAIKHOAN;
 import Gui.FormAdd.AddKhachHang;
 import Gui.FormNhapSL.PanelNhapSL_BanHang;
+import java.awt.Image;
 import java.time.LocalDate;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 
@@ -72,16 +77,39 @@ public class BanHangPanel extends javax.swing.JPanel {
             ex.printStackTrace();
         }
     }  
+public ImageIcon resizeImage(ImageIcon icon, int maxWidth, int maxHeight) {
+    Image image = icon.getImage();
+    int width = image.getWidth(null);
+    int height = image.getHeight(null);
+    
+    // Kiểm tra kích thước của hình ảnh và điều chỉnh nếu cần
+    if (width > maxWidth || height > maxHeight) {
+        double scale = Math.min((double) maxWidth / width, (double) maxHeight / height);
+        width = (int) (width * scale);
+        height = (int) (height * scale);
+        
+        // Thay đổi kích thước hình ảnh
+        image = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    }
+    
+    // Tạo ImageIcon mới với kích thước đã được điều chỉnh
+    return new ImageIcon(image);
+}
 public void loadAnh(SACH t) {
     String url = t.getIMAGE(); // Lấy đường dẫn ảnh từ đối tượng SACH
+    
     try {
         if(url !=null){
-                    // Tạo một đối tượng ImageIcon từ đường dẫn ảnh
-        //ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        ImageIcon icon = new ImageIcon(url);
-        // Đặt hình ảnh lên label img
-        img.setIcon(icon);
+            // Tạo một đối tượng ImageIcon từ đường dẫn ảnh
+            ImageIcon icon = new ImageIcon(url);
+
+            // Đặt hình ảnh lên jLabel1
+            ImageIcon result=resizeImage(icon,180,273);
+            img.setIcon(result);
         }
+         else {
+            img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images.Book_img/doraemon.jpg")));
+        }        
     } catch (Exception ex) {
         // Nếu có lỗi xảy ra, in ra thông báo lỗi
         ex.printStackTrace();
@@ -91,8 +119,13 @@ public void loadtongtien(){
     int tongtien=0;
     for(int i=0;i<selectedSach.getRowCount();i++){
         tongtien+=(int) selectedSach.getValueAt(i, 4);
+        
     }
     sum.setText(""+tongtien);
+}
+public void loadKhachHang(){
+            BanHanglmpl banhang=new BanHanglmpl();
+            banhang.danhsachKhachHang(comboxKH);
 }
 
     /**
@@ -566,6 +599,11 @@ public void loadtongtien(){
         xoaspbtn.setMaximumSize(new java.awt.Dimension(130, 37));
         xoaspbtn.setMinimumSize(new java.awt.Dimension(130, 37));
         xoaspbtn.setPreferredSize(new java.awt.Dimension(130, 37));
+        xoaspbtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                xoaspbtnMouseClicked(evt);
+            }
+        });
         xoaspbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 xoaspbtnActionPerformed(evt);
@@ -737,25 +775,43 @@ public void loadtongtien(){
             banhang.BoChiTietHoaDon(dataModel, selected_sach_row);
         }
     }//GEN-LAST:event_xoaspbtnActionPerformed
+    
+    public static String extractMakhFromString(String input) {
+        // Biểu thức chính quy để tìm chuỗi makh=xxxx
+        Pattern pattern = Pattern.compile("(\\d+)-([^\\s]+)");
+        Matcher matcher = pattern.matcher(input);
 
+
+        if (matcher.find()) {
+            return matcher.group(1); // Trả về phần trùng khớp đầu tiên, tức là số sau dấu '='
+        } else {
+            // Không tìm thấy makh trong chuỗi
+            return null; // hoặc bạn có thể trả về một giá trị mặc định hoặc thông báo lỗi tùy ý
+        }
+    }    
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
         submit.setVisible(false);
         xoaspbtn.setVisible(false);
-        status=0;
-        int tongtien=Integer.parseInt(sum.getText());
-        int manv=Integer.parseInt(nv.getText());
-        String TENTAIKHOAN=(String) comboxKH.getSelectedItem();
-        LocalDate today = LocalDate.now();
-        Date sqlDate = Date.valueOf(today);
-//      int makm
-        NHANVIEN nv=new NHANVIEN(manv);
-        TAIKHOAN tk=new TAIKHOAN(TENTAIKHOAN);
-        HOADON t=new HOADON(TENTAIKHOAN,manv,sqlDate,tongtien,false);
         DefaultTableModel dataModel = (DefaultTableModel) selectedSach.getModel();
-        DefaultTableModel model = (DefaultTableModel) dataHoadon.getModel();
-        
-        banhang.TaoHoaDonDatabase(t, nv, tk, dataModel);
+        if(status==1 && dataModel.getRowCount()>0){
+            int tongtien=Integer.parseInt(sum.getText());
+            int manv=Integer.parseInt(nv.getText());
+            String makhStr= extractMakhFromString((String)comboxKH.getSelectedItem());
+            System.out.println("makh: "+makhStr);
+            int makh=Integer.parseInt(makhStr);
+            LocalDate today = LocalDate.now();
+            Date sqlDate = Date.valueOf(today);
+            int makm=0;
+            KHUYENMAI km=new KHUYENMAI(makm);
+            NHANVIEN nv=new NHANVIEN(manv);
+            KHACHANG tk=new KHACHANG(makh);
+            HOADON t=new HOADON(makh,manv,sqlDate,tongtien,false);
+            DefaultTableModel model = (DefaultTableModel) dataHoadon.getModel();
+            BanHanglmpl banhang=new BanHanglmpl();
+            banhang.TaoHoaDonDatabase(t, nv, tk,km, dataModel);
+        }
+        status=0;
 //        banhang.danhSachHoaDon(model);
         loadHOADONToTable();
     }//GEN-LAST:event_submitActionPerformed
@@ -765,35 +821,28 @@ public void loadtongtien(){
     }//GEN-LAST:event_searchSachActionPerformed
 
     private void SachtbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SachtbMouseClicked
-        
+                // TODO add your handling code here:
         int row = Sachtb.rowAtPoint(evt.getPoint());
         if (row >= 0) { // Chỉ xử lý khi chọn hàng hợp lệ
             if(status==0){
-                String maHoaDonStr = Sachtb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
-                int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
-                SACH hd = new SACH(maHoaDon);
-                loadAnh(hd);
+            String maHoaDonStr = Sachtb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
+            int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
+            SACH hd = new SACH(maHoaDon);
+            SACH R=SACHDAO.getInstance().selectById(hd);
+            loadAnh(R);
             }
             else{
-                String maSachStr = Sachtb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Sách"
+                String maSachStr = Sachtb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
                 String tenSachStr = Sachtb.getValueAt(row, 1).toString(); // Lấy giá trị của cột "Tên Sách"
                 String SLconStr = Sachtb.getValueAt(row, 2).toString(); // Lấy giá trị của cột "Số Lượng còn"
                 String DonGiaStr = Sachtb.getValueAt(row, 3).toString(); // Lấy giá trị của cột "Đơn Giá"
                 String NXBStr = Sachtb.getValueAt(row, 4).toString(); // Lấy giá trị của cột "Nhà Xuất Bản"
-                PanelNhapSL_BanHang x=new PanelNhapSL_BanHang(this,selectedSach,maSachStr,tenSachStr ,DonGiaStr,NXBStr);
+            PanelNhapSL_BanHang x=new PanelNhapSL_BanHang(this,selectedSach,maSachStr,tenSachStr ,DonGiaStr,NXBStr);
                 x.setVisible(true);
                 x.setThongTinPanel(maSachStr,tenSachStr ,DonGiaStr,NXBStr);
             }
         }
-        /* chả hiểu sao cứ ấn là đóng kết nổi
-        String maSach = Sachtb.getValueAt(row, 0).toString();
-        // Sử dụng giá trị chuỗi để tạo một đối tượng SACH
-        SACH tmp = new SACH(Integer.parseInt(maSach));
-        loadAnh(tmp);
 
-        //ImageIcon icon = new ImageIcon("C:\\Users\\DELL\\Desktop\\DoAnJava_BookStore-main\\DoAnJava_BookStore-main\\BookStore\\src\\images\\Book_img\\doraemon.jpg");
-        //img.setIcon(icon);
-        */
     }//GEN-LAST:event_SachtbMouseClicked
 
     private void searchHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchHoaDonActionPerformed
@@ -802,12 +851,19 @@ public void loadtongtien(){
 
     private void selectedSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectedSachMouseClicked
         // TODO add your handling code here:
-        int selected_sach_row = dataHoadon.rowAtPoint(evt.getPoint());
+        selected_sach_row = selectedSach.rowAtPoint(evt.getPoint());
     }//GEN-LAST:event_selectedSachMouseClicked
 
     private void comboxKH1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxKH1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboxKH1ActionPerformed
+
+    private void xoaspbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaspbtnMouseClicked
+        // TODO add your handling code here:
+            DefaultTableModel dataModel=(DefaultTableModel) selectedSach.getModel();
+            BanHanglmpl banhang=new BanHanglmpl();
+            banhang.BoChiTietHoaDon(dataModel, selected_sach_row);
+    }//GEN-LAST:event_xoaspbtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

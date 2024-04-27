@@ -9,7 +9,6 @@ public class KHACHANG {
     private String diachi;
     private String email;
     private int dienthoai;
-    private java.sql.Date ngaytao;
     private boolean tttk;
     public KHACHANG() {
     }
@@ -17,7 +16,7 @@ public class KHACHANG {
         this.makh = makh;
     }
     
-    public KHACHANG(int makh, String username, String hoten, String diachi, String email, int dienthoai, Date ngaytao,
+    public KHACHANG(int makh, String username, String hoten, String diachi, String email, int dienthoai,
             boolean tttk) {
         this.makh = makh;
         this.username = username;
@@ -25,19 +24,17 @@ public class KHACHANG {
         this.diachi = diachi;
         this.email = email;
         this.dienthoai = dienthoai;
-        this.ngaytao = ngaytao;
         this.tttk = tttk;
     }
 
 
-    public KHACHANG(String username, String hoten, String diachi, String email, int dienthoai, Date ngaytao,
+    public KHACHANG(String username, String hoten, String diachi, String email, int dienthoai,
             boolean tttk) {
         this.username = username;
         this.hoten = hoten;
         this.diachi = diachi;
         this.email = email;
         this.dienthoai = dienthoai;
-        this.ngaytao = ngaytao;
         this.tttk = tttk;
     }
     public int getMakh() {
@@ -76,17 +73,15 @@ public class KHACHANG {
     public void setDienthoai(int dienthoai) {
         this.dienthoai = dienthoai;
     }
-    public java.sql.Date getNgaytao() {
-        return ngaytao;
-    }
-    public void setNgaytao(java.sql.Date ngaytao) {
-        this.ngaytao = ngaytao;
-    }
+
     public boolean isTttk() {
         return tttk;
     }
     public void setTttk(boolean tttk) {
         this.tttk = tttk;
     }
-    
+        @Override
+	public String toString() {
+		return makh + "-"+ hoten;
+	}
 }

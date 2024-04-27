@@ -32,7 +32,10 @@ public class NhapHanglmpl implements NhapHang{
 
     @Override
     public void XoaSach(SACH t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(t!=null){
+            SACHDAO.getInstance().delete(t);
+            System.out.println("da xoa thanh cong");
+        }
     }
 
     @Override

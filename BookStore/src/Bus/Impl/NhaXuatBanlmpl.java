@@ -5,7 +5,10 @@
 package Bus.Impl;
 
 import Bus.NhaXuatBan;
+import Dao.NHAXUATBANDAO;
 import Dto.NHAXUATBAN;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,22 +19,27 @@ public class NhaXuatBanlmpl implements NhaXuatBan{
 
     @Override
     public void themNhaXuatBan(NHAXUATBAN t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        NHAXUATBANDAO.getInstance().insert(t);
     }
 
     @Override
     public void updateNhaXuatBan(NHAXUATBAN t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        NHAXUATBANDAO.getInstance().update(t);
     }
 
     @Override
     public void xoaNhaXuatBan(NHAXUATBAN t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        NHAXUATBANDAO.getInstance().delete(t);
     }
 
     @Override
-    public void danhsachNHAXUATBAN(DefaultTableModel model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void danhsachNHAXUATBAN(JComboBox model) {
+        model.removeAllItems();
+        ArrayList<NHAXUATBAN> result=NHAXUATBANDAO.getInstance().selectAll();
+        for (NHAXUATBAN nxb : result) {
+            String row = nxb.getTENNHAXUATBAN(); // Điều chỉnh dữ liệu tùy thuộc vào cách bạn muốn hiển thị
+            model.addItem(row);
+        }
     }
     
 }

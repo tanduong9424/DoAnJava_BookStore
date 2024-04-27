@@ -9,7 +9,7 @@ public class HOADON {
 				+ ", TONGTIEN=" + TONGTIEN + "]";
 	}
 	private int MAHOADON;
-	private String TENTAIKHOAN;
+	private int makh;
 	private int manv;
 	private java.sql.Date NGAYLAP;
 	private int TONGTIEN;
@@ -21,10 +21,10 @@ public class HOADON {
 	public HOADON(int mAHOADON) {
 		MAHOADON = mAHOADON;
 	}
-	public HOADON(int mAHOADON,String tENTAIKHOAN, int manv, Date nGAYLAP, int tONGTIEN, int makhuyenmai,
+	public HOADON(int mAHOADON,int mAKH, int manv, Date nGAYLAP, int tONGTIEN, int makhuyenmai,
 			boolean tthd) {
 		MAHOADON = mAHOADON;
-		TENTAIKHOAN = tENTAIKHOAN;
+		makh =  mAKH;
 		this.manv = manv;
 		NGAYLAP = nGAYLAP;
 		TONGTIEN = tONGTIEN;
@@ -32,28 +32,22 @@ public class HOADON {
 		this.tthd = tthd;
 	}
 
-	public HOADON(String tENTAIKHOAN, int manv, Date nGAYLAP, int tONGTIEN, int makhuyenmai, boolean tthd) {
-		TENTAIKHOAN =  tENTAIKHOAN;
+	public HOADON(int mAKH, int manv, Date nGAYLAP, int tONGTIEN, int makhuyenmai, boolean tthd) {
+		makh =   mAKH;
 		this.manv = manv;
 		NGAYLAP = nGAYLAP;
 		TONGTIEN = tONGTIEN;
 		this.makhuyenmai = makhuyenmai;
 		this.tthd = tthd;
 	}
-	public HOADON(String tENTAIKHOAN,int manv, Date nGAYLAP, int tONGTIEN, boolean tthd) {
-                TENTAIKHOAN =  tENTAIKHOAN;
+	public HOADON(int mAKH,int manv, Date nGAYLAP, int tONGTIEN, boolean tthd) {
+                makh =  mAKH;
 		this.manv = manv;
 		NGAYLAP = nGAYLAP;
 		TONGTIEN = tONGTIEN;
 		this.tthd = tthd;
 	}
-	public HOADON(int makh, int manv, Date nGAYLAP, int tONGTIEN, boolean tthd) {
-		makh = makh;
-		this.manv = manv;
-		NGAYLAP = nGAYLAP;
-		TONGTIEN = tONGTIEN;
-		this.tthd = tthd;
-	}
+
 	public HOADON(int manv, Date nGAYLAP, int tONGTIEN, boolean tthd) {
 		this.manv = manv;
 		NGAYLAP = nGAYLAP;
@@ -66,11 +60,11 @@ public class HOADON {
 	public void setMAHOADON(int mAHOADON) {
 		MAHOADON = mAHOADON;
 	}
-	public String  getTENTAIKHOAN() {
-		return TENTAIKHOAN;
+	public int  getmakh() {
+		return makh;
 	}
-	public void setTENTAIKHOAN(String TENTAIKHOAN) {
-		TENTAIKHOAN = TENTAIKHOAN;
+	public void setmakh(int mAKH) {
+		makh =  mAKH;
 	}
 	public int getManv() {
 		return manv;

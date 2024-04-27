@@ -335,6 +335,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
 //        load hoadon và sách
         banhang.loadBooksToTable();
         banhang.loadHOADONToTable();
+        banhang.loadKhachHang();
 //kết thúc
         Middle.add(banhang, "banhang");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
@@ -350,6 +351,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         cardLayout.show(Middle, "nhaphang");
         nhaphang.loadBooksToTable();
         nhaphang.loadPHIEUNHAPToTable();
+        nhaphang.loadNCC();
     }//GEN-LAST:event_NhapHangMouseClicked
 
     private void TaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TaiKhoanMouseClicked

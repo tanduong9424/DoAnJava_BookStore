@@ -192,7 +192,7 @@ public class AddKhachHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        KHACHANG khachang = new KHACHANG(0, null, userName, diaChi, mailPerson, sdtInt, null,true);
+        KHACHANG khachang = new KHACHANG(0, null, userName, diaChi, mailPerson, sdtInt, true);
         khaHangImpl.themKhachHang(khachang);
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked

@@ -5,6 +5,7 @@
 package Bus;
 
 import Dto.NHAXUATBAN;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,5 +16,5 @@ public interface NhaXuatBan {
     void themNhaXuatBan(NHAXUATBAN t);
     void updateNhaXuatBan(NHAXUATBAN t);
     void xoaNhaXuatBan(NHAXUATBAN t);
-    void danhsachNHAXUATBAN(DefaultTableModel model);
+    void danhsachNHAXUATBAN(JComboBox model);
 }

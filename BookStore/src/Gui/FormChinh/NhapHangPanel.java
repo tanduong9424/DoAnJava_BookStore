@@ -5,12 +5,15 @@
 package Gui.FormChinh;
 
 
+import Bus.Impl.NhaXuatBanlmpl;
 import Bus.Impl.NhapHanglmpl;
+import Dao.SACHDAO;
 import Dto.PHIEUNHAP;
 import Dto.SACH;
 import Gui.FormAdd.AddNhaCungCap;
 import Gui.FormAdd.AddSach;
 import Gui.FormEdit.EditSach;
+import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
@@ -62,22 +65,54 @@ public class NhapHangPanel extends javax.swing.JPanel {
             ex.printStackTrace();
         }
     }  
+public ImageIcon resizeImage(ImageIcon icon, int maxWidth, int maxHeight) {
+    Image image = icon.getImage();
+    int width = image.getWidth(null);
+    int height = image.getHeight(null);
+    
+    // Kiểm tra kích thước của hình ảnh và điều chỉnh nếu cần
+    if (width > maxWidth || height > maxHeight) {
+        double scale = Math.min((double) maxWidth / width, (double) maxHeight / height);
+        width = (int) (width * scale);
+        height = (int) (height * scale);
+        
+        // Thay đổi kích thước hình ảnh
+        image = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    }
+    
+    // Tạo ImageIcon mới với kích thước đã được điều chỉnh
+    return new ImageIcon(image);
+}
 public void loadAnh(SACH t) {
     String url = t.getIMAGE(); // Lấy đường dẫn ảnh từ đối tượng SACH
-    
     try {
         if(url !=null){
-                    // Tạo một đối tượng ImageIcon từ đường dẫn ảnh
-        ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        
-        // Đặt hình ảnh lên jLabel1
-        jLabel1.setIcon(icon);
+            // Tạo một đối tượng ImageIcon từ đường dẫn ảnh
+            ImageIcon icon = new ImageIcon(url);
+
+            // Đặt hình ảnh lên jLabel1
+            ImageIcon result=resizeImage(icon,180,273);
+            jLabel1.setIcon(result);
         }
+         else {
+            jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images.Book_img/doraemon.jpg")));
+        }        
     } catch (Exception ex) {
         // Nếu có lỗi xảy ra, in ra thông báo lỗi
         ex.printStackTrace();
     }
 } 
+    public void loadNCC() {
+
+        try {
+            NhaXuatBanlmpl nxb=new NhaXuatBanlmpl();
+            nxb.danhsachNHAXUATBAN(selectNCC);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }  
+    
+    
     
     
     public NhapHangPanel() {
@@ -324,6 +359,11 @@ public void loadAnh(SACH t) {
         SuaBtn1.setMaximumSize(new java.awt.Dimension(130, 37));
         SuaBtn1.setMinimumSize(new java.awt.Dimension(130, 37));
         SuaBtn1.setPreferredSize(new java.awt.Dimension(130, 37));
+        SuaBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SuaBtn1MouseClicked(evt);
+            }
+        });
         SuaBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SuaBtn1ActionPerformed(evt);
@@ -338,6 +378,11 @@ public void loadAnh(SACH t) {
         XoaBtn1.setMaximumSize(new java.awt.Dimension(130, 37));
         XoaBtn1.setMinimumSize(new java.awt.Dimension(130, 37));
         XoaBtn1.setPreferredSize(new java.awt.Dimension(130, 37));
+        XoaBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                XoaBtn1MouseClicked(evt);
+            }
+        });
         XoaBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 XoaBtn1ActionPerformed(evt);
@@ -760,6 +805,7 @@ public void loadAnh(SACH t) {
 
     private void ThemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemBtnActionPerformed
         // TODO add your handling code here:
+        status=1;
         submit.setVisible(true);
         xoaspbtn.setVisible(true);
     }//GEN-LAST:event_ThemBtnActionPerformed
@@ -782,7 +828,7 @@ public void loadAnh(SACH t) {
 
     private void addNewSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewSachActionPerformed
         // TODO add your handling code here:
-        AddSach x=new AddSach();
+        AddSach x=new AddSach(this);
         x.setVisible(true);
     }//GEN-LAST:event_addNewSachActionPerformed
 
@@ -844,10 +890,6 @@ public void loadAnh(SACH t) {
 
     private void SuaBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaBtn1ActionPerformed
         // TODO add your handling code here:
-        if(sachclicked!=null){
-            EditSach y=new EditSach(this,sachclicked);
-            y.setVisible(true);
-        }
     }//GEN-LAST:event_SuaBtn1ActionPerformed
 
     private void XoaBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaBtn1ActionPerformed
@@ -866,6 +908,9 @@ public void loadAnh(SACH t) {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
+        status=0;
+        submit.setVisible(false);
+        xoaspbtn.setVisible(false);        
     }//GEN-LAST:event_submitActionPerformed
 
     private void xoaspbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaspbtnActionPerformed
@@ -879,7 +924,9 @@ public void loadAnh(SACH t) {
             if(status==0){
             String maHoaDonStr = Nhaptb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
             int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
-            SACH hd = new SACH(maHoaDon);
+            SACH test=new SACH(maHoaDon);
+            SACH hd = SACHDAO.getInstance().selectById(test);
+            sachclicked=hd;
             loadAnh(hd);
             }
             else{
@@ -894,6 +941,23 @@ public void loadAnh(SACH t) {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_inputsearch1ActionPerformed
+
+    private void SuaBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SuaBtn1MouseClicked
+        // TODO add your handling code here:
+        System.out.println("click sua");
+        if(sachclicked!=null){
+            EditSach y=new EditSach(this,sachclicked);
+            y.setVisible(true);
+        }        
+    }//GEN-LAST:event_SuaBtn1MouseClicked
+
+    private void XoaBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_XoaBtn1MouseClicked
+        if(sachclicked!=null){
+        NhapHanglmpl nhaphang=new NhapHanglmpl();
+        nhaphang.XoaSach(sachclicked);
+        }
+            loadBooksToTable();        // TODO add your handling code here:
+    }//GEN-LAST:event_XoaBtn1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

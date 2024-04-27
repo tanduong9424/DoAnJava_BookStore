@@ -164,28 +164,30 @@ public int insertSACH(SACH t) {
 	int ketqua=0;
 	try {
 		Connection con=JDBCUtil.getConnection();
-		ArrayList<SACH> dathem=SACHDAO.getInstance().selectByCondition("TENSACH="+t.getTENSACH()+" GIABIA="+t.getGIABIA()+" LANTAIBAN="+t.getLANTAIBAN()+" TENNHAXUATBAN="+t.getTENNHAXUATBAN()+"ISHIDDEN=true");
-		if(dathem!=null) {
+                ArrayList<SACH> dathem = SACHDAO.getInstance().selectByCondition("TENSACH='" + t.getTENSACH() + "' AND GIABIA=" + t.getGIABIA() + " AND LANTAIBAN=" + t.getLANTAIBAN() + " AND TENNHAXUATBAN='" + t.getTENNHAXUATBAN() + "' AND ISHIDDEN=true");
+	
+                if(!dathem.isEmpty()) {
 			String sql="UPDATE sach "+
 					"SET ISHIDDEN=false"+
 					"WHERE MASACH=?";
 			PreparedStatement pst=con.prepareStatement(sql);
-			ketqua=pst.executeUpdate();
 			System.out.print("thuc hien cau lenh "+sql+"\n");
 			pst.setInt(1,dathem.get(0).getMASACH());
+			ketqua=pst.executeUpdate();
 		}
 		else{
-				String sql="INSERT INTO sach(TENSACH,IMAGE,SOLUONG,GIABIA,LANTAIBAN,TENNHAXUATBAN,ISHIDDEN"+
-						"VALUES (?,?,?,?,?,?,?)";
-				PreparedStatement pst=con.prepareStatement(sql);
-				ketqua=pst.executeUpdate();
-				pst.setString(1, t.getTENSACH());
-				pst.setString(2, t.getIMAGE());
-				pst.setInt(3, 0);
-				pst.setInt(4, t.getGIABIA());
-				pst.setInt(5, t.getLANTAIBAN());
-				pst.setString(6, t.getTENNHAXUATBAN());
-				pst.setBoolean(7, false);
+                    String sql = "INSERT INTO sach(TENSACH, IMAGE, SOLUONG, GIABIA, LANTAIBAN, TENNHAXUATBAN, ISHIDDEN) " +
+                                 "VALUES (?,?,?,?,?,?,?)";
+                    PreparedStatement pst = con.prepareStatement(sql);
+                    pst.setString(1, t.getTENSACH());
+                    pst.setString(2, t.getIMAGE());
+                    pst.setInt(3, 0);
+                    pst.setInt(4, t.getGIABIA());
+                    pst.setInt(5, t.getLANTAIBAN());
+                    pst.setString(6, t.getTENNHAXUATBAN());
+                    pst.setBoolean(7, false);
+                    ketqua = pst.executeUpdate();
+
 
 		}
 
@@ -296,21 +298,21 @@ public int insertSACH(SACH t) {
 			if (rs.next()) {
 				// Nếu có, in ra thông báo và trả về một giá trị ngay tại thời điểm đó mà không tiếp tục thực hiện các lệnh SQL tiếp theo
 				String sql1="UPDATE sach"+
-						"SET ISHIDDEN=true"+
-						"WHERE MASACH=?";
+						" SET ISHIDDEN=true"+
+						" WHERE MASACH=?";
 				PreparedStatement pst1=con.prepareStatement(sql1);
-				ketqua=pst1.executeUpdate();
 				System.out.print("thuc hien cau lenh "+sql1+"\n");
 				pst1.setInt(1,t.getMASACH());
+				ketqua=pst1.executeUpdate();
 				JDBCUtil.closeConnection(con);
 			}
 			else{
-				String sql1="DELETE sach"+
-				"WHERE MASACH=?";
+				String sql1="DELETE FROM sach"+
+				" WHERE MASACH=?";
 				PreparedStatement pst1=con.prepareStatement(sql1);
-				ketqua=pst1.executeUpdate();
 				System.out.print("thuc hien cau lenh "+sql1+"\n");
 				pst1.setInt(1,t.getMASACH());
+				ketqua=pst1.executeUpdate();
 				JDBCUtil.closeConnection(con);
 			}
 
@@ -485,8 +487,7 @@ public int insertSACH(SACH t) {
 		try {
 			Connection con=JDBCUtil.getConnection();
 			
-			String sql=" SELECT * FROM sach "+
-					"WHERE "+condition;
+			String sql=" SELECT * FROM sach WHERE "+condition;
 			
 			Statement pst=con.createStatement();
 			
@@ -507,7 +508,7 @@ public int insertSACH(SACH t) {
 			JDBCUtil.closeConnection(con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class SACHDAO \n");
 			e.printStackTrace();
 		}
 		return ketqua;

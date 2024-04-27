@@ -7,15 +7,22 @@ package Bus.Impl;
 import Bus.BanHang;
 import Dao.CHITIETHOADONDAO;
 import Dao.HOADONDAO;
+import Dao.KHACHHANGDAO;
 import Dao.KHUYENMAIDAO;
+import Dao.NHAXUATBANDAO;
 import Dao.SACHDAO;
+import Dao.TAIKHOANDAO;
 import Dto.CHITIETHOADON;
 import Dto.HOADON;
+import Dto.KHACHANG;
 import Dto.KHUYENMAI;
 import Dto.NHANVIEN;
+import Dto.NHAXUATBAN;
 import Dto.SACH;
 import Dto.TAIKHOAN;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,7 +42,7 @@ public class BanHanglmpl implements BanHang{
                     if(km!=null){
                         phantramgiam=km.getPhantramgiam();
                     }                
-                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),hoadon.getTENTAIKHOAN(),hoadon.getNGAYLAP(),makhuyenmai,phantramgiam,hoadon.getTONGTIEN()};
+                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),hoadon.getmakh(),hoadon.getNGAYLAP(),makhuyenmai,phantramgiam,hoadon.getTONGTIEN()};
                 model.addRow(row);
             }
     }
@@ -172,10 +179,10 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
         Object[] row={t.getMASACH(),t.getTENSACH(),sl,t.getGIABIA(),t.getGIABIA()*sl};
         dataModel.addRow(row);
     }
-
+//chưa xong
     @Override
-    public void TaoHoaDonDatabase(HOADON t,NHANVIEN nv,TAIKHOAN kh,DefaultTableModel dataModel) {
-        int kq=HOADONDAO.getInstance().insertHOADONKHONGTKKOMAKM(t,nv);
+    public void TaoHoaDonDatabase(HOADON t,NHANVIEN nv,KHACHANG tk,KHUYENMAI km,DefaultTableModel dataModel) {
+        int kq=HOADONDAO.getInstance().insertHOADONCOTKKOMAKM(t,tk,nv);
 //        thêm các trường hợp có tài khoản và có mã khuyến mãi
         if(kq!=0){         
         HOADON hd=new HOADON(kq);
@@ -185,7 +192,7 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
             int sl=(int) dataModel.getValueAt(i, 2);
             int giatien=(int) dataModel.getValueAt(i, 3);
             int tongtien=(int) dataModel.getValueAt(i, 4);
-            CHITIETHOADON ct=new CHITIETHOADON(result.getMAHOADON(),masach,sl,giatien,tongtien);
+            CHITIETHOADON ct=new CHITIETHOADON(result.getMAHOADON(),masach,giatien,tongtien,sl);
             CHITIETHOADONDAO.getInstance().insert(ct);
         }
         }
@@ -199,6 +206,16 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
     @Override
     public void XoaHoaDonDatabase(HOADON t) {
         HOADONDAO.getInstance().delete(t);
+    }
+
+    @Override
+    public void danhsachKhachHang(JComboBox model) {
+        model.removeAllItems();
+        ArrayList<KHACHANG> result=KHACHHANGDAO.getInstance().selectAll();
+        for (KHACHANG tk : result) {
+            String row = tk.toString(); // Điều chỉnh dữ liệu tùy thuộc vào cách bạn muốn hiển thị
+            model.addItem(row);
+        }
     }
 
 

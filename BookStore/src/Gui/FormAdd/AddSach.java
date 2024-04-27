@@ -4,7 +4,14 @@
  */
 package Gui.FormAdd;
 
+import Bus.Impl.NhaXuatBanlmpl;
+import Dao.SACHDAO;
+import Dto.SACH;
+import Gui.FormChinh.NhapHangPanel;
 import java.awt.Color;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -15,10 +22,15 @@ public class AddSach extends javax.swing.JFrame {
     /**
      * Creates new form AddNhanVien
      */
-    public AddSach() {
+    String url=null;
+    private NhapHangPanel nhaphang;
+    public AddSach(NhapHangPanel nhaphang1) {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.nhaphang=nhaphang1;
+        NhaXuatBanlmpl nxb=new NhaXuatBanlmpl();
+        nxb.danhsachNHAXUATBAN(NhaCungCap);
     }
 
     /**
@@ -70,7 +82,7 @@ public class AddSach extends javax.swing.JFrame {
 
         NamXuatBan.setBackground(new java.awt.Color(204, 255, 204));
         NamXuatBan.setForeground(new java.awt.Color(0, 51, 51));
-        NamXuatBan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Năm xuất bản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        NamXuatBan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gía Bìa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         URL_img.setBackground(new java.awt.Color(204, 255, 204));
         URL_img.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -85,6 +97,9 @@ public class AddSach extends javax.swing.JFrame {
             }
         });
         URL_img.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                URL_imgMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 URL_imgMouseExited(evt);
             }
@@ -199,8 +214,26 @@ public class AddSach extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
-        // TODO add your handling code here:
-        
+        System.out.println("da them sach moi");
+        String nameSach=TenSach.getText();
+        System.out.println(nameSach);
+        String nhaxuatban=(String) NhaCungCap.getSelectedItem();
+        System.out.println(nhaxuatban);
+        String lantaibanStr=LanTaiBan.getText();
+        int lantaiban=Integer.parseInt(lantaibanStr);
+        String giabiaSachstr=NamXuatBan.getText();
+        int giabiaSach=Integer.parseInt(giabiaSachstr);
+        System.out.println(lantaiban);
+        System.out.println("Selected file: " + url);
+        if(url!=null){
+            SACH sach=new SACH(nameSach,url,0,nhaxuatban,giabiaSach,lantaiban,false);
+            SACHDAO.getInstance().insertSACH(sach);
+        }
+        else{
+            SACH sach=new SACH(nameSach,0,nhaxuatban,giabiaSach,lantaiban,false);
+            SACHDAO.getInstance().insertSACH(sach);
+        }
+        nhaphang.loadBooksToTable();
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 
@@ -228,6 +261,33 @@ public class AddSach extends javax.swing.JFrame {
     private void NhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NhaCungCapActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NhaCungCapActionPerformed
+
+    private void URL_imgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_URL_imgMouseClicked
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+    JFileChooser fileChooser = new JFileChooser();
+
+    // Set the file chooser to select files only
+    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+    // Set filter to display only image files
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "gif", "jpeg");
+    fileChooser.setFileFilter(filter);
+
+    // Show the file chooser dialog to the user
+    int result = fileChooser.showOpenDialog(null);
+
+    // Check if the user selected a file
+    if (result == JFileChooser.APPROVE_OPTION) {
+        // Get the selected file
+        File selectedFile = fileChooser.getSelectedFile();
+
+        // Get the path of the selected file
+        String selectedFilePath = selectedFile.getAbsolutePath();
+
+         url = selectedFilePath;
+    }
+    }//GEN-LAST:event_URL_imgMouseClicked
 
     /**
      * @param args the command line arguments

@@ -122,10 +122,7 @@ public class khachHangImpl implements khachHang{
             row.createCell(3).setCellValue(khachHang.getDiachi());
             row.createCell(4).setCellValue(khachHang.getEmail());
             row.createCell(5).setCellValue(khachHang.getDienthoai());
-            if(khachHang.getNgaytao()!=null){
-                row.createCell(6).setCellValue(dateFormat.format(khachHang.getNgaytao()));
-            }
-            row.createCell(7).setCellValue(khachHang.isTttk());
+            row.createCell(6).setCellValue(khachHang.isTttk());
         }
         try {
             File f = new File("excel/khachhang.xlsx");
@@ -143,9 +140,13 @@ public class khachHangImpl implements khachHang{
         }
         return true;
     }
+
     @Override
     public ArrayList<KHACHANG> selectAll() {
-        return khachHangDao.selectAll();
+        ArrayList<KHACHANG> dskh = khachHangDao.selectAll();
+        return dskh;
     }
+    
+
     
 }

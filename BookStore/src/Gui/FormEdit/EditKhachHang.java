@@ -202,7 +202,7 @@ public class EditKhachHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        KHACHANG khachang = new KHACHANG(maKH, null, userName, diaChi, mailPerson,sdtInt , null,true);
+        KHACHANG khachang = new KHACHANG(maKH, null, userName, diaChi, mailPerson,sdtInt , true);
         khaHangImpl.suaKhachHang(khachang);
         this.dispose();
      
