@@ -234,14 +234,14 @@ public class AddTaiKhoan extends javax.swing.JFrame {
             return;          
         }
         else {
-            if( Role=="Nhân Viên"){
+            if( "Nhân Viên".equals(Role)){
                 NHANVIEN nhanvien = new NHANVIEN(userName, hoVaten, null, null, 0,true);
-                nhanVienImpl1.suaNhanViencoTK(nhanvien,taikhoan);
+                nhanVienImpl1.themNhanVienCoTK(nhanvien, taikhoan);
                 
             }
-            else if (Role=="Khách Hàng"){
+            else if ("Khách Hàng".equals(Role)){
                 KHACHANG khachhang =new KHACHANG(userName,hoVaten,null,null,0,true);
-                khachHangImpl1.suaKhachHangCoTK(khachhang,taikhoan);
+                khachHangImpl1.themKhachHangCoTK(khachhang,taikhoan);
             }
         }
         this.dispose();

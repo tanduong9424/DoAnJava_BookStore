@@ -7,6 +7,7 @@ package Gui.FormChinh;
 import Bus.Impl.khachHangImpl;
 import Bus.Impl.nhanVienImpl;
 import Bus.Impl.taiKhoanImpl;
+import Dto.KHACHANG;
 import Dto.NHANVIEN;
 import Dto.TAIKHOAN;
 import Gui.FormAdd.AddTaiKhoan;
@@ -25,6 +26,7 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
     
     taiKhoanImpl taiKhoanImpl = new taiKhoanImpl();
     nhanVienImpl nhanVienImpl1 = new nhanVienImpl();
+    khachHangImpl khaHangImpl = new khachHangImpl();
     /**
      * Creates new form TaiKhoanPanel
      */
@@ -41,12 +43,19 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
 
             for (TAIKHOAN taiKhoan : listTaiKhoan) {
                 NHANVIEN nhanvien = nhanVienImpl1.getByUsername(new NHANVIEN(taiKhoan.getUSERNAME()));
+                KHACHANG khachhang = khaHangImpl.getByUsername(new TAIKHOAN(taiKhoan.getUSERNAME()));
                 if(nhanvien!=null){
                     Object[] row = {nhanvien.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(), null};
                     model.addRow(row);
                 }else{
-                    Object[] row = {null, taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(),null};
-                    model.addRow(row);
+                    if(khachhang!= null){
+                        Object[] row = {khachhang.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(), null};
+                        model.addRow(row);
+                    }
+                    else{
+                        Object[] row = {null, taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(),null};
+                        model.addRow(row);
+                    }
                 }
             }
         } catch (Exception ex) {
