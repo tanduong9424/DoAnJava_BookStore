@@ -13,6 +13,7 @@ import Dto.SACH;
 import Gui.FormAdd.AddNhaCungCap;
 import Gui.FormAdd.AddSach;
 import Gui.FormEdit.EditSach;
+import Main.FrontEnd.FormNhapSL.PanelNhapSL_NhapHang;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +30,10 @@ public class NhapHangPanel extends javax.swing.JPanel {
      * Creates new form NhapHangPanel
      */int status=0;
      SACH sachclicked=null;
+     int selected_sach_row=0;
+    int ma_clicked_hoadon=0;
+     
+
         public void loadBooksToTable() {
         DefaultTableModel model = (DefaultTableModel) Nhaptb.getModel();
         // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
@@ -111,6 +116,14 @@ public void loadAnh(SACH t) {
             ex.printStackTrace();
         }
     }  
+    public void loadtongtien(){
+    int tongtien=0;
+    for(int i=0;i<jTable1.getRowCount();i++){
+        tongtien+=(int) jTable1.getValueAt(i, 4);
+        
+    }
+    sum.setText(""+tongtien);
+}
     
     
     
@@ -471,6 +484,11 @@ public void loadAnh(SACH t) {
             }
         });
         jTable1.setShowGrid(true);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         scroll3.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -504,6 +522,11 @@ public void loadAnh(SACH t) {
         xoaspbtn.setMaximumSize(new java.awt.Dimension(130, 37));
         xoaspbtn.setMinimumSize(new java.awt.Dimension(130, 37));
         xoaspbtn.setPreferredSize(new java.awt.Dimension(130, 37));
+        xoaspbtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                xoaspbtnMouseClicked(evt);
+            }
+        });
         xoaspbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 xoaspbtnActionPerformed(evt);
@@ -598,7 +621,7 @@ public void loadAnh(SACH t) {
 
         SL.setBackground(new java.awt.Color(204, 255, 204));
         SL.setForeground(new java.awt.Color(0, 51, 51));
-        SL.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Số Lượng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        SL.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nơi nhập", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         SL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SLActionPerformed(evt);
@@ -609,7 +632,7 @@ public void loadAnh(SACH t) {
         NV.setBackground(new java.awt.Color(204, 255, 204));
         NV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         NV.setForeground(new java.awt.Color(0, 51, 51));
-        NV.setText("User");
+        NV.setText("1");
         NV.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhân Viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         NV.setFocusable(false);
 
@@ -638,6 +661,11 @@ public void loadAnh(SACH t) {
         XoaBtn.setMaximumSize(new java.awt.Dimension(130, 37));
         XoaBtn.setMinimumSize(new java.awt.Dimension(130, 37));
         XoaBtn.setPreferredSize(new java.awt.Dimension(130, 37));
+        XoaBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                XoaBtnMouseClicked(evt);
+            }
+        });
         XoaBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 XoaBtnActionPerformed(evt);
@@ -797,6 +825,7 @@ public void loadAnh(SACH t) {
         if (row >= 0) { // Chỉ xử lý khi chọn hàng hợp lệ
             String maPHIEUNHAPStr = PhieuNhaptb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
             int maPn = Integer.parseInt(maPHIEUNHAPStr); // Chuyển đổi thành số nguyên
+            ma_clicked_hoadon=maPn;
             PHIEUNHAP hd = new PHIEUNHAP(maPn);
             loadCHITIETPHIEUNHAPToTable(hd);
         }
@@ -930,9 +959,13 @@ public void loadAnh(SACH t) {
             loadAnh(hd);
             }
             else{
-            String maHoaDonStr = Nhaptb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
-            int maHoaDon = Integer.parseInt(maHoaDonStr); // Chuyển đổi thành số nguyên
-            System.out.println("da nhap them sach"+maHoaDon);
+                String maSachStr = Nhaptb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
+                String tenSachStr = Nhaptb.getValueAt(row, 1).toString(); // Lấy giá trị của cột "Tên Sách"
+                String DonGiaStr = Nhaptb.getValueAt(row, 2).toString(); // Lấy giá trị của cột "Đơn Giá"
+                String NhaCungCap = Nhaptb.getValueAt(row, 3).toString(); 
+            PanelNhapSL_NhapHang x=new PanelNhapSL_NhapHang(this,jTable1,maSachStr,tenSachStr,DonGiaStr ,NhaCungCap);
+                x.setVisible(true);
+                x.setThongTinPanel(maSachStr,tenSachStr,DonGiaStr ,NhaCungCap);
             }
         }
     }//GEN-LAST:event_NhaptbMouseClicked
@@ -958,6 +991,32 @@ public void loadAnh(SACH t) {
         }
             loadBooksToTable();        // TODO add your handling code here:
     }//GEN-LAST:event_XoaBtn1MouseClicked
+
+    private void xoaspbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaspbtnMouseClicked
+        // TODO add your handling code here:
+            DefaultTableModel dataModel=(DefaultTableModel) jTable1.getModel();
+            NhapHanglmpl banhang=new NhapHanglmpl();
+            banhang.BoChiTietHoaDon(dataModel, selected_sach_row);
+    }//GEN-LAST:event_xoaspbtnMouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+                selected_sach_row = jTable1.rowAtPoint(evt.getPoint());
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void XoaBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_XoaBtnMouseClicked
+        // TODO add your handling code here:
+        if(ma_clicked_hoadon!=0){
+                
+                PHIEUNHAP t=new PHIEUNHAP(ma_clicked_hoadon);
+                NhapHanglmpl banhang=new NhapHanglmpl();                
+                banhang.xoaPhieuNhap(t);
+        }
+        loadPHIEUNHAPToTable();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
+        model.setRowCount(0);
+    }//GEN-LAST:event_XoaBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

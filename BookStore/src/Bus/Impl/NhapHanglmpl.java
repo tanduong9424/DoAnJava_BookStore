@@ -9,6 +9,7 @@ import Dao.CHITIETPHIEUNHAPDAO;
 import Dao.PHIEUNHAPDAO;
 import Dao.SACHDAO;
 import Dto.CHITIETPHIEUNHAP;
+import Dto.NHANVIEN;
 import Dto.PHIEUNHAP;
 import Dto.SACH;
 import java.util.ArrayList;
@@ -69,14 +70,40 @@ public class NhapHanglmpl implements NhapHang{
             }
     }
 
-    @Override
-    public void themPhieuNhap(PHIEUNHAP t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
 
     @Override
     public void xoaPhieuNhap(PHIEUNHAP t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      PHIEUNHAPDAO.getInstance().delete(t);
+    }
+
+    @Override
+    public void PhieuNhapDatabase(PHIEUNHAP t, NHANVIEN nv, DefaultTableModel dataModel) {
+                int kq=PHIEUNHAPDAO.getInstance().insertCONOINHAP(t, nv);
+//        thêm các trường hợp có tài khoản và có mã khuyến mãi
+        if(kq!=0){         
+        PHIEUNHAP hd=new PHIEUNHAP(kq);
+        PHIEUNHAP result=PHIEUNHAPDAO.getInstance().selectById(hd);
+        for(int i=0;i<dataModel.getRowCount();i++){
+            int masach=(int) dataModel.getValueAt(i, 0);
+            int sl=(int) dataModel.getValueAt(i, 2);
+            int giatien=(int) dataModel.getValueAt(i, 3);
+            int tongtien=(int) dataModel.getValueAt(i, 4);
+            CHITIETPHIEUNHAP ct=new CHITIETPHIEUNHAP(result.getMapn(),masach,giatien,sl,tongtien);
+            CHITIETPHIEUNHAPDAO.getInstance().insert(ct);
+        }
+        }
+    }
+
+    @Override
+    public void TaoChiTietPhieuNhap(DefaultTableModel dataModel, SACH t, int sl) {
+        Object[] row={t.getMASACH(),t.getTENSACH(),t.getGIABIA(),sl,t.getGIABIA()*sl};
+        dataModel.addRow(row);
+    }
+
+    @Override
+    public void BoChiTietHoaDon(DefaultTableModel dataModel, int row) {
+        dataModel.removeRow(row);
     }
     
 }

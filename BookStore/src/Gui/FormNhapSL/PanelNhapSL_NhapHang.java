@@ -4,6 +4,12 @@
  */
 package Main.FrontEnd.FormNhapSL;
 
+import Bus.Impl.BanHanglmpl;
+import Bus.Impl.NhapHanglmpl;
+import Dto.SACH;
+import Gui.FormChinh.NhapHangPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author DELL
@@ -13,12 +19,30 @@ public class PanelNhapSL_NhapHang extends javax.swing.JFrame {
     /**
      * Creates new form FrameNhapSL
      */
+    javax.swing.JTable jTable1;
+    NhapHangPanel nhaphang;
+    String masach;
+    String tensach;
+    String dongia;
+    String NCC;
+    public PanelNhapSL_NhapHang(NhapHangPanel nhaphang,javax.swing.JTable jTable1,String masach,String tensach,String dongia,String NCC) {
+        this.setUndecorated(true);
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.nhaphang=nhaphang;
+        this.jTable1=jTable1;
+        this.masach=masach;
+        this.tensach=tensach;
+        this.dongia=dongia;
+        this.NCC=NCC;
+    }
+
     public PanelNhapSL_NhapHang() {
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
-    }
 
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,24 +73,24 @@ public class PanelNhapSL_NhapHang extends javax.swing.JFrame {
 
         MaSach.setEditable(false);
         MaSach.setBackground(new java.awt.Color(204, 255, 204));
-        MaSach.setForeground(new java.awt.Color(0, 0, 0));
         MaSach.setText("S1");
         MaSach.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Sách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         MaSach.setFocusable(false);
 
         TenSach.setEditable(false);
         TenSach.setBackground(new java.awt.Color(204, 255, 204));
-        TenSach.setForeground(new java.awt.Color(0, 0, 0));
         TenSach.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tên Sách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         TenSach.setFocusable(false);
 
         DonGia.setBackground(new java.awt.Color(204, 255, 204));
-        DonGia.setForeground(new java.awt.Color(0, 0, 0));
         DonGia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đơn Giá", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        DonGia.setFocusable(false);
+        DonGia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DonGiaActionPerformed(evt);
+            }
+        });
 
         NXB.setBackground(new java.awt.Color(204, 255, 204));
-        NXB.setForeground(new java.awt.Color(0, 0, 0));
         NXB.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhà Cung Cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         NXB.setFocusable(false);
 
@@ -196,6 +220,14 @@ public class PanelNhapSL_NhapHang extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
+        DefaultTableModel dataModel=(DefaultTableModel) this.jTable1.getModel();
+        int sl=Integer.parseInt(inputSL.getText());
+        int masach=Integer.parseInt(this.masach);
+        int gia=Integer.parseInt(DonGia.getText());
+        SACH t=new SACH(masach,this.tensach,this.NCC,gia);
+        NhapHanglmpl banhang=new NhapHanglmpl();
+        banhang.TaoChiTietPhieuNhap(dataModel, t, sl);
+        this.nhaphang.loadtongtien();
         this.dispose();
 
     }//GEN-LAST:event_submitbtnMouseClicked
@@ -209,6 +241,16 @@ public class PanelNhapSL_NhapHang extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputSLActionPerformed
 
+    private void DonGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DonGiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DonGiaActionPerformed
+    
+    public void setThongTinPanel(String s1,String s2,String s3,String s4){
+        this.MaSach.setText(s1);
+        this.TenSach.setText(s2);
+        this.DonGia.setText(s3);
+        this.NXB.setText(s4);
+    }
     /**
      * @param args the command line arguments
      */

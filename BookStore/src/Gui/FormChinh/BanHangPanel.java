@@ -205,14 +205,14 @@ public void loadKhachHang(){
 
             },
             new String [] {
-                "Mã Hóa Đơn", "Mã Nhân Viên", "Tên Tài Khoản", "Ngày lập", "Mã khuyế mãi", "% giảm giá", "Tổng tiền"
+                "Mã Hóa Đơn", "Mã Nhân Viên", "Tên Tài Khoản", "Ngày lập", "Mã khuyế mãi", "% giảm giá", "Tổng tiền", "tttk"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

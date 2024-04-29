@@ -4,6 +4,7 @@
  */
 package Bus;
 
+import Dto.NHANVIEN;
 import Dto.PHIEUNHAP;
 import Dto.SACH;
 import javax.swing.table.DefaultTableModel;
@@ -19,6 +20,8 @@ public interface NhapHang {
     void danhSachSanPham(DefaultTableModel model);
     void danhSachPhieuNhap(DefaultTableModel model);
     void danhSachChiTietPhieuNhap(DefaultTableModel model,PHIEUNHAP t);
-    void themPhieuNhap(PHIEUNHAP t);
     void xoaPhieuNhap(PHIEUNHAP t);
+    void PhieuNhapDatabase(PHIEUNHAP t,NHANVIEN nv,DefaultTableModel dataModel);
+    void TaoChiTietPhieuNhap(DefaultTableModel dataModel, SACH t, int sl);
+    public void BoChiTietHoaDon(DefaultTableModel dataModel, int row);
 }

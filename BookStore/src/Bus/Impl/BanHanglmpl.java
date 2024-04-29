@@ -42,7 +42,7 @@ public class BanHanglmpl implements BanHang{
                     if(km!=null){
                         phantramgiam=km.getPhantramgiam();
                     }                
-                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),hoadon.getmakh(),hoadon.getNGAYLAP(),makhuyenmai,phantramgiam,hoadon.getTONGTIEN()};
+                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),hoadon.getmakh(),hoadon.getNGAYLAP(),makhuyenmai,phantramgiam,hoadon.getTONGTIEN(),hoadon.isTthd()};
                 model.addRow(row);
             }
     }

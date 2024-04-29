@@ -38,22 +38,27 @@ public class PHIEUNHAPDAO implements DAOInterface<PHIEUNHAP>{
         return ketqua;
     }
 	public int insertCONOINHAP(PHIEUNHAP t,NHANVIEN nv) {
-        int ketqua=0;
+		int mahoadon = 0;
         try {
             Connection con=JDBCUtil.getConnection();
             String sql="INSERT phieunhap (manv,noinhap,tongtien,ngaynhap) VALUES (?,?,?,?) ";
-            PreparedStatement pst=con.prepareStatement(sql);
+                        PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, nv.getManv());
 			pst.setString(2, t.getNoinhap());
             pst.setInt(3, t.getTongtien());
             pst.setDate(4, t.getNgaynhap());
+            			pst.executeUpdate();
+                        ResultSet generatedKeys = pst.getGeneratedKeys();
+                        if (generatedKeys.next()) {
+                            mahoadon = generatedKeys.getInt(1);
+                        }
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println("có lỗi xảy ra, không thể insert phiếu nhập");
             e.printStackTrace();
         }
-        return ketqua;
+        return mahoadon;
     }
 	public int insertKONOINHAP(PHIEUNHAP t,NHANVIEN nv) {
         int ketqua=0;
@@ -84,17 +89,17 @@ public class PHIEUNHAPDAO implements DAOInterface<PHIEUNHAP>{
 		int ketqua=0;
 		try {
 			Connection con=JDBCUtil.getConnection();
-			String sqlKho="SELECT MASACH,SOLUONG FROM phieunhap,chitietphieunhap "+
-						"WHERE phieunhap.mapn=chitietphieunhap.mapn AND phieunhap.mapn=?";
-			PreparedStatement pst1=con.prepareStatement(sqlKho);
-			pst1.setInt(1, t.getMapn());
-			ResultSet rs=pst1.executeQuery();
-			while(rs.next()) {
-				int MASACH=rs.getInt("MASACH");
-				int SOLUONG=rs.getInt("SOLUONG");
-				SACH kho=new SACH(MASACH);
-				SACHDAO.getInstance().muaSACH(kho,SOLUONG);
-			}
+//			String sqlKho="SELECT MASACH,SOLUONG FROM phieunhap,chitietphieunhap "+
+//						"WHERE phieunhap.mapn=chitietphieunhap.mapn AND phieunhap.mapn=?";
+//			PreparedStatement pst1=con.prepareStatement(sqlKho);
+//			pst1.setInt(1, t.getMapn());
+//			ResultSet rs=pst1.executeQuery();
+//			while(rs.next()) {
+//				int MASACH=rs.getInt("MASACH");
+//				int SOLUONG=rs.getInt("SOLUONG");
+//				SACH kho=new SACH(MASACH);
+//				SACHDAO.getInstance().muaSACH(kho,SOLUONG);
+//			}
 			
 			
 			

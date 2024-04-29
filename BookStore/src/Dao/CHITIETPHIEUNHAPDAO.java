@@ -26,17 +26,17 @@ public class CHITIETPHIEUNHAPDAO implements DAOInterface<CHITIETPHIEUNHAP>{
 		try {
 			Connection con=JDBCUtil.getConnection();
 
-			String sqlKho="SELECT MASACH,SOLUONG FROM phieunhap,chitietphieunhap "+
-						"WHERE phieunhap.mapn=chitietphieunhap.mapn AND phieunhap.mapn=?";
-			PreparedStatement pst1=con.prepareStatement(sqlKho);
-			pst1.setInt(1, t.getMapn());
-			ResultSet rs=pst1.executeQuery();
-			while(rs.next()) {
-				int MASACH=rs.getInt("MASACH");
-				int SOLUONG=rs.getInt("SOLUONG");
-				SACH kho=new SACH(MASACH);
-				SACHDAO.getInstance().thuhoiSACH(kho,SOLUONG);
-			}
+//			String sqlKho="SELECT MASACH,SOLUONG FROM phieunhap,chitietphieunhap "+
+//						"WHERE phieunhap.mapn=chitietphieunhap.mapn AND phieunhap.mapn=?";
+//			PreparedStatement pst1=con.prepareStatement(sqlKho);
+//			pst1.setInt(1, t.getMapn());
+//			ResultSet rs=pst1.executeQuery();
+//			while(rs.next()) {
+//				int MASACH=rs.getInt("MASACH");
+//				int SOLUONG=rs.getInt("SOLUONG");
+//				SACH kho=new SACH(MASACH);
+//				SACHDAO.getInstance().thuhoiSACH(kho,SOLUONG);
+//			}
 
 
 			String sql="INSERT INTO chitietphieunhap (mapn,MASACH,gianhap,soluong,tongtien) "+
