@@ -59,20 +59,25 @@ public class AddNhanVien extends javax.swing.JFrame {
 
         MaNV.setEditable(false);
         MaNV.setBackground(new java.awt.Color(204, 255, 204));
+        MaNV.setForeground(new java.awt.Color(0, 51, 5));
         MaNV.setText("NV1");
         MaNV.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Nhân Viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         MaNV.setFocusable(false);
 
         name.setBackground(new java.awt.Color(204, 255, 204));
+        name.setForeground(new java.awt.Color(0, 51, 5));
         name.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Họ và Tên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         dchi.setBackground(new java.awt.Color(204, 255, 204));
+        dchi.setForeground(new java.awt.Color(0, 51, 5));
         dchi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Địa Chỉ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         mail.setBackground(new java.awt.Color(204, 255, 204));
+        mail.setForeground(new java.awt.Color(0, 51, 5));
         mail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         phone.setBackground(new java.awt.Color(204, 255, 204));
+        phone.setForeground(new java.awt.Color(0, 51, 5));
         phone.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Số Điện Thoại", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_cancel_30px_1.png"))); // NOI18N
@@ -193,7 +198,7 @@ public class AddNhanVien extends javax.swing.JFrame {
             return;
         }
         
-        NHANVIEN nhanvien = new NHANVIEN(0,null,hoVaten,diachi,email,sdtInt,null,true);
+        NHANVIEN nhanvien = new NHANVIEN(0,null,hoVaten,diachi,email,sdtInt,true);
         nhanVienImpl1.themNhanVien(nhanvien);
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked

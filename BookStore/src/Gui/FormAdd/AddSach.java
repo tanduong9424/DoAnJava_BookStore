@@ -12,7 +12,6 @@ import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 /**
  *
  * @author DELL
@@ -82,7 +81,7 @@ public class AddSach extends javax.swing.JFrame {
 
         NamXuatBan.setBackground(new java.awt.Color(204, 255, 204));
         NamXuatBan.setForeground(new java.awt.Color(0, 51, 51));
-        NamXuatBan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gía Bìa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        NamXuatBan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Năm xuất bản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         URL_img.setBackground(new java.awt.Color(204, 255, 204));
         URL_img.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -214,7 +213,8 @@ public class AddSach extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
-        System.out.println("da them sach moi");
+        // TODO add your handling code here:
+           System.out.println("da them sach moi");
         String nameSach=TenSach.getText();
         System.out.println(nameSach);
         String nhaxuatban=(String) NhaCungCap.getSelectedItem();
@@ -264,8 +264,7 @@ public class AddSach extends javax.swing.JFrame {
 
     private void URL_imgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_URL_imgMouseClicked
         // TODO add your handling code here:
-        // TODO add your handling code here:
-    JFileChooser fileChooser = new JFileChooser();
+         JFileChooser fileChooser = new JFileChooser();
 
     // Set the file chooser to select files only
     fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);

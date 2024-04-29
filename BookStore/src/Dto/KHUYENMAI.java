@@ -10,6 +10,7 @@ public class KHUYENMAI {
     private int tongtiencanthiet;
     private int phantramgiam;
     private boolean ISHIDDEN;
+    
     public KHUYENMAI() {
     }
     public KHUYENMAI(int makhuyenmai) {

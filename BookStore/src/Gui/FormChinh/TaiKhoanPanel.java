@@ -48,7 +48,6 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
                     Object[] row = {null, taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(),null};
                     model.addRow(row);
                 }
-
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -173,7 +172,7 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Họ  và Tên", "Tên TK", "Mật khẩu", "Chức năng", "Quyền"
+                "Họ  và Tên", "Tên TK", "Mật khẩu", "Vai Trò", "Quyền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -294,6 +293,8 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
 
     private void thuoctinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thuoctinhActionPerformed
         // TODO add your handling code here:
+        //String 
+                
     }//GEN-LAST:event_thuoctinhActionPerformed
 
     private void inputsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputsearchActionPerformed

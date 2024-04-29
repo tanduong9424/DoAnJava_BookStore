@@ -17,24 +17,22 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 		return new NHANVIENDAO();
 	}
     @Override
-    //không có tài khoản
-    public int insert(NHANVIEN t) {
+    public int insert(NHANVIEN t) {//không có tài khoản
         int ketqua=0;
         try {
             Connection con=JDBCUtil.getConnection();
-            String sql="INSERT INTO nhanvien (hoten,diachi,email,dienthoai,ngaytao,tttk) VALUES (?,?,?,?,?,?)";
+            String sql="INSERT INTO nhanvien (hoten,diachi,email,dienthoai,tttk) VALUES (?,?,?,?,?)";
             PreparedStatement pst=con.prepareStatement(sql);
             pst.setString(1, t.getHoten());
             pst.setString(2, t.getDiachi());
             pst.setString(3, t.getEmail());
             pst.setInt(4, t.getDienthoai());
-            pst.setDate(5, t.getNgaytao());
-            pst.setBoolean(6, t.isTttk());
+            pst.setBoolean(5, t.isTttk());
             ketqua=pst.executeUpdate();
 			JDBCUtil.closeConnection(con);
 
         } catch (Exception e) {
-            System.out.println("có lỗi xảy ra, không thể insert nhân viên");
+            System.out.println("updateCOTK");
             e.printStackTrace();
         }
         return ketqua;
@@ -45,20 +43,19 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
         int ketqua=0;
         try {
             Connection con=JDBCUtil.getConnection();
-            String sql="INSERT INTO nhanvien (username,hoten,diachi,email,dienthoai,ngaytao,tttk) VALUES (?,?,?,?,?,?,?)";
+            String sql="INSERT INTO nhanvien (username,hoten,diachi,email,dienthoai,tttk) VALUES (?,?,?,?,?,?)";
             PreparedStatement pst=con.prepareStatement(sql);
             pst.setString(1, tk.getUSERNAME());
             pst.setString(2, t.getHoten());
             pst.setString(3, t.getDiachi());
             pst.setString(4, t.getEmail());
             pst.setInt(5, t.getDienthoai());
-            pst.setDate(6, t.getNgaytao());
-            pst.setBoolean(7, t.isTttk());
+            pst.setBoolean(6, t.isTttk());
             ketqua=pst.executeUpdate();
 			JDBCUtil.closeConnection(con);
 
         } catch (Exception e) {
-            System.out.println("có lỗi xảy ra, không thể insert nhân viên");
+            System.out.println("delete");
             e.printStackTrace();
         }
         return ketqua;
@@ -88,26 +85,24 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 				return -1; // hoặc trả về một giá trị khác thích hợp
 			}
 
-            String sql="UPDATE nhanvien SET hoten=?,diachi=?,email=?,dienthoai=?,ngaytao=?,tttk=? WHERE manv=?";
+            String sql="UPDATE nhanvien SET hoten=?,diachi=?,email=?,dienthoai=?,tttk=? WHERE manv=?";
             PreparedStatement pst=con.prepareStatement(sql);
             pst.setString(1, t.getHoten());
             pst.setString(2, t.getDiachi());
             pst.setString(3, t.getEmail());
             pst.setInt(4, t.getDienthoai());
-            pst.setDate(5, t.getNgaytao());
-            pst.setBoolean(6, t.isTttk());
-            pst.setInt(7, t.getManv());
+            pst.setBoolean(5, t.isTttk());
+            pst.setInt(6, t.getManv());
             ketqua=pst.executeUpdate();
 			JDBCUtil.closeConnection(con);
 
         } catch (Exception e) {
-            System.out.println("có lỗi xảy ra, không thể insert nhân viên");
+            System.out.println("có lỗi xảy ra, không thể update nhân viên");
             e.printStackTrace();
         }
         return ketqua;
     }
-    //có tài khoản
-    public int updateCOTK(NHANVIEN t,TAIKHOAN tk) {
+    public int updateCOTK(NHANVIEN t,TAIKHOAN tk) {//có tài khoản
         int ketqua=0;
         try {
             Connection con=JDBCUtil.getConnection();
@@ -119,32 +114,31 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 			if (rs.next()) {
 				// Nếu có, in ra thông báo và trả về một giá trị ngay tại thời điểm đó mà không tiếp tục thực hiện các lệnh SQL tiếp theo
 				System.out.println("NHÂN VIÊN đã tồn tại trong hóa đơn, không thể thay đổi.");
-                String sql="UPDATE nhanvien SET tttk=? WHERE manv=?";
-                PreparedStatement pst=con.prepareStatement(sql);
-                pst.setBoolean(1, false);
-                pst.setInt(2, t.getManv());
-                ketqua=pst.executeUpdate();
-                JDBCUtil.closeConnection(con);
+                                String sql="UPDATE nhanvien SET tttk=? WHERE manv=?";
+                                PreparedStatement pst=con.prepareStatement(sql);
+                                pst.setBoolean(1, false);
+                                pst.setInt(2, t.getManv());
+                                ketqua=pst.executeUpdate();
+                                JDBCUtil.closeConnection(con);
 
 				return -1; // hoặc trả về một giá trị khác thích hợp
 			}
 
-
-            String sql="UPDATE nhanvien SET username=?,hoten=?,diachi=?,email=?,dienthoai=?,ngaytao=?,tttk=? WHERE manv=?";
+            String sql="UPDATE nhanvien"+" SET"+" username=?,"+"hoten=?,"+"diachi=?,"+"email=?,"+"dienthoai=?,"+"tttk=?"+" WHERE manv=?";
             PreparedStatement pst=con.prepareStatement(sql);
             pst.setString(1, tk.getUSERNAME());
             pst.setString(2, t.getHoten());
             pst.setString(3, t.getDiachi());
             pst.setString(4, t.getEmail());
             pst.setInt(5, t.getDienthoai());
-            pst.setDate(6, t.getNgaytao());
-            pst.setBoolean(7, t.isTttk());
-            pst.setInt(8, t.getManv());
+            pst.setBoolean(6, t.isTttk());
+            pst.setInt(7, t.getManv());
             ketqua=pst.executeUpdate();
-			JDBCUtil.closeConnection(con);
+            System.out.println("đã chạm đến role nhân viên");
+            JDBCUtil.closeConnection(con);
 
         } catch (Exception e) {
-            System.out.println("có lỗi xảy ra, không thể insert nhân viên");
+            System.out.println("có lỗi xảy ra, không thể  nhân viên");
             e.printStackTrace();
         }
         return ketqua;
@@ -181,7 +175,7 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 			JDBCUtil.closeConnection(con);
 
         } catch (Exception e) {
-            System.out.println("có lỗi xảy ra, không thể insert nhân viên");
+            System.out.println("có lỗi xảy ra, không thể  nhân viên");
             e.printStackTrace();
         }
         return ketqua;
@@ -201,14 +195,13 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
 				int manv=rs.getInt("manv");	
-                String username=rs.getString("username");	
-                String hoten=rs.getString("hoten");	
-                String diachi=rs.getString("diachi");	
-                String email=rs.getString("email");	
-                int dienthoai=rs.getInt("dienthoai");	
-                Date ngaytao=rs.getDate("ngaytao");	
-                boolean tttk=rs.getBoolean("tttk");	
-				NHANVIEN nv=new NHANVIEN(manv,username,hoten,diachi,email,dienthoai,ngaytao,tttk);
+                                String username=rs.getString("username");	
+                                String hoten=rs.getString("hoten");	
+                                String diachi=rs.getString("diachi");	
+                                String email=rs.getString("email");	
+                                int dienthoai=rs.getInt("dienthoai");		
+                                boolean tttk=rs.getBoolean("tttk");	
+				NHANVIEN nv=new NHANVIEN(manv,username,hoten,diachi,email,dienthoai,tttk);
 				ketqua.add(nv);
 			}
 			JDBCUtil.closeConnection(con);
@@ -233,14 +226,13 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
 				int manv=rs.getInt("manv");	
-                String username=rs.getString("username");	
-                String hoten=rs.getString("hoten");	
-                String diachi=rs.getString("diachi");	
-                String email=rs.getString("email");	
-                int dienthoai=rs.getInt("dienthoai");	
-                Date ngaytao=rs.getDate("ngaytao");	
-                boolean tttk=rs.getBoolean("tttk");	
-				NHANVIEN nv=new NHANVIEN(manv,username,hoten,diachi,email,dienthoai,ngaytao,tttk);
+                                String username=rs.getString("username");	
+                                String hoten=rs.getString("hoten");	
+                                String diachi=rs.getString("diachi");	
+                                String email=rs.getString("email");	
+                                int dienthoai=rs.getInt("dienthoai");	
+                                boolean tttk=rs.getBoolean("tttk");	
+				NHANVIEN nv=new NHANVIEN(manv,username,hoten,diachi,email,dienthoai,tttk);
 				ketqua.add(nv);
 			}
 			JDBCUtil.closeConnection(con);
@@ -270,9 +262,8 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
                 String diachi=rs.getString("diachi");	
                 String email=rs.getString("email");	
                 int dienthoai=rs.getInt("dienthoai");	
-                Date ngaytao=rs.getDate("ngaytao");	
                 boolean tttk=rs.getBoolean("tttk");	
-                NHANVIEN nv=new NHANVIEN(manv,username,hoten,diachi,email,dienthoai,ngaytao,tttk);
+                NHANVIEN nv=new NHANVIEN(manv,username,hoten,diachi,email,dienthoai,tttk);
                 ketqua=nv;
             }
             JDBCUtil.closeConnection(con);
@@ -296,15 +287,14 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 			
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
-                int manv=rs.getInt("manv");	
-                String username=rs.getString("username");	
-                String hoten=rs.getString("hoten");	
-                String diachi=rs.getString("diachi");	
-                String email=rs.getString("email");	
-                int dienthoai=rs.getInt("dienthoai");	
-                Date ngaytao=rs.getDate("ngaytao");	
-                boolean tttk=rs.getBoolean("tttk");	
-				NHANVIEN nv=new NHANVIEN(manv,username,hoten,diachi,email,dienthoai,ngaytao,tttk);
+                                int manv=rs.getInt("manv");	
+                                String username=rs.getString("username");	
+                                String hoten=rs.getString("hoten");	
+                                String diachi=rs.getString("diachi");	
+                                String email=rs.getString("email");	
+                                int dienthoai=rs.getInt("dienthoai");	
+                                boolean tttk=rs.getBoolean("tttk");	
+				NHANVIEN nv=new NHANVIEN(manv,username,hoten,diachi,email,dienthoai,tttk);
 				ketqua=nv;
 			}
 			JDBCUtil.closeConnection(con);
@@ -331,14 +321,13 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
 				int manv=rs.getInt("manv");	
-                String username=rs.getString("username");	
-                String hoten=rs.getString("hoten");	
-                String diachi=rs.getString("diachi");	
-                String email=rs.getString("email");	
-                int dienthoai=rs.getInt("dienthoai");	
-                Date ngaytao=rs.getDate("ngaytao");	
-                boolean tttk=rs.getBoolean("tttk");	
-				NHANVIEN nv=new NHANVIEN(manv,username,hoten,diachi,email,dienthoai,ngaytao,tttk);
+                                String username=rs.getString("username");	
+                                String hoten=rs.getString("hoten");	
+                                String diachi=rs.getString("diachi");	
+                                String email=rs.getString("email");	
+                                int dienthoai=rs.getInt("dienthoai");		
+                                boolean tttk=rs.getBoolean("tttk");	
+				NHANVIEN nv=new NHANVIEN(manv,username,hoten,diachi,email,dienthoai,tttk);
 				ketqua.add(nv);
 			}
 			JDBCUtil.closeConnection(con);

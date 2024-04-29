@@ -1,3 +1,4 @@
+
 package Dao;
 
 import Dto.KHACHANG;
@@ -291,5 +292,21 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
 		}
 		return ketqua;
     }
-    
+    public ArrayList getIDkh(){
+        ArrayList <Integer> ketqua=new ArrayList<Integer>();
+        try {
+            Connection con=JDBCUtil.getConnection();
+            String sql="SELECT makh FROM khachhang";
+            PreparedStatement pst=con.prepareStatement(sql);
+            ResultSet rs=pst.executeQuery();
+            while(rs.next()){
+                int id=rs.getInt("makh");
+                ketqua.add(id);
+            }
+        }catch(SQLException e){
+            System.out.print("co loi xay ra , thuc hien khong thanh cong getIDkh ow KHACHHANGDAO \n");
+            e.printStackTrace();
+        }
+       return ketqua;
+    }
 }

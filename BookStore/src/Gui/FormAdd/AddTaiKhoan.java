@@ -4,9 +4,12 @@
  */
 package Gui.FormAdd;
 
+import Bus.Impl.khachHangImpl;
 import Bus.Impl.nhanVienImpl;
 import Bus.Impl.taiKhoanImpl;
+import Dao.KHACHHANGDAO;
 import Dao.NHANVIENDAO;
+import Dto.KHACHANG;
 import Dto.NHANVIEN;
 import Dto.TAIKHOAN;
 import java.util.ArrayList;
@@ -18,10 +21,10 @@ import static org.apache.logging.log4j.util.Strings.isBlank;
  * @author DELL
  */
 public class AddTaiKhoan extends javax.swing.JFrame {
-
+    Integer mode;
     taiKhoanImpl taiKhoanImpl = new taiKhoanImpl();
     nhanVienImpl nhanVienImpl1 = new nhanVienImpl();    
-
+    khachHangImpl khachHangImpl1=new khachHangImpl();
     /**
      * Creates new form AddTaiKhoan
      */
@@ -42,11 +45,13 @@ public class AddTaiKhoan extends javax.swing.JFrame {
         PanelAdd = new javax.swing.JPanel();
         mid = new javax.swing.JPanel();
         name = new javax.swing.JTextField();
-        dchi = new javax.swing.JTextField();
+        mkhau = new javax.swing.JTextField();
         SelectRole = new javax.swing.JComboBox<>();
         exit = new javax.swing.JLabel();
         TaiKhoan = new javax.swing.JTextField();
         SelectID = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        id = new javax.swing.JLabel();
         bot = new javax.swing.JPanel();
         submitbtn = new javax.swing.JLabel();
 
@@ -60,15 +65,15 @@ public class AddTaiKhoan extends javax.swing.JFrame {
         name.setForeground(new java.awt.Color(0, 51, 51));
         name.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Họ và Tên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
-        dchi.setBackground(new java.awt.Color(204, 255, 204));
-        dchi.setForeground(new java.awt.Color(0, 51, 51));
-        dchi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mật Khẩu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        mkhau.setBackground(new java.awt.Color(204, 255, 204));
+        mkhau.setForeground(new java.awt.Color(0, 51, 51));
+        mkhau.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mật Khẩu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         SelectRole.setBackground(new java.awt.Color(204, 255, 204));
         SelectRole.setForeground(new java.awt.Color(0, 51, 51));
         SelectRole.setMaximumRowCount(3);
         SelectRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Khách Hàng", "Quản Trị Viên" }));
-        SelectRole.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chọn vai trò cho tài khoản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        SelectRole.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         SelectRole.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SelectRoleActionPerformed(evt);
@@ -94,52 +99,63 @@ public class AddTaiKhoan extends javax.swing.JFrame {
         SelectID.setBackground(new java.awt.Color(204, 255, 204));
         SelectID.setForeground(new java.awt.Color(0, 51, 51));
         SelectID.setMaximumRowCount(3);
-        SelectID.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Nhân VIên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         SelectID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SelectIDActionPerformed(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel1.setText("Chọn vai trò");
+
+        id.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        id.setForeground(new java.awt.Color(0, 51, 51));
+        id.setText("Mã Nhân Viên");
+
         javax.swing.GroupLayout midLayout = new javax.swing.GroupLayout(mid);
         mid.setLayout(midLayout);
         midLayout.setHorizontalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addContainerGap(98, Short.MAX_VALUE)
                 .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(midLayout.createSequentialGroup()
-                        .addComponent(SelectID, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(midLayout.createSequentialGroup()
-                        .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(SelectRole, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                                .addComponent(dchi, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TaiKhoan, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                        .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(TaiKhoan)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SelectRole, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(mkhau, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
+                        .addComponent(id)
+                        .addGap(18, 18, 18)
+                        .addComponent(SelectID, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(name, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65)
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         midLayout.setVerticalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
                 .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(exit)
                     .addGroup(midLayout.createSequentialGroup()
-                        .addComponent(exit)
-                        .addGap(0, 50, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(SelectRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(16, 16, 16)
+                        .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SelectRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(5, 5, 5)
+                        .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SelectID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(id))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5)
-                .addComponent(SelectID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(TaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(dchi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99))
+                .addComponent(mkhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(161, 161, 161))
         );
 
         PanelAdd.add(mid, java.awt.BorderLayout.CENTER);
@@ -205,20 +221,29 @@ public class AddTaiKhoan extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập Tài Khoản", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String mkhau = dchi.getText();
-        if (isBlank(mkhau)) {
+        String matkhau = mkhau.getText();
+        if (isBlank(matkhau)) {
             JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Mật Khẩu", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
         String Role =(String) SelectRole.getSelectedItem();
-        TAIKHOAN taikhoan = new TAIKHOAN( userName, mkhau,Role);
+        TAIKHOAN taikhoan = new TAIKHOAN( userName, matkhau,Role);
+        
         if(taiKhoanImpl.themTaiKhoan(taikhoan)==false){
             JOptionPane.showMessageDialog(this, "Tài Khoản đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;          
         }
-        
-        NHANVIEN nhanvien = new NHANVIEN(0, userName, hoVaten, null, null, 0, null,true);
-        nhanVienImpl1.themNhanVienCoTK(nhanvien,taikhoan);
+        else {
+            if( Role=="Nhân Viên"){
+                NHANVIEN nhanvien = new NHANVIEN(userName, hoVaten, null, null, 0,true);
+                nhanVienImpl1.suaNhanViencoTK(nhanvien,taikhoan);
+                
+            }
+            else if (Role=="Khách Hàng"){
+                KHACHANG khachhang =new KHACHANG(userName,hoVaten,null,null,0,true);
+                khachHangImpl1.suaKhachHangCoTK(khachhang,taikhoan);
+            }
+        }
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 
@@ -232,29 +257,64 @@ public class AddTaiKhoan extends javax.swing.JFrame {
     }//GEN-LAST:event_TaiKhoanActionPerformed
 
     private void SelectRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectRoleActionPerformed
-      int choose = SelectRole.getSelectedIndex();
+        int choose = SelectRole.getSelectedIndex();
         switch (choose) {
             case 0:
-                SelectID.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Nhân Viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Bold", 0, 12), new java.awt.Color(0, 51, 51)));
+                id.setText("Mã Nhân Viên");
+                mode=0;
+                name.setText("");
+                TaiKhoan.setText("");
+                mkhau.setText("");
+                id.setVisible(true);
+                SelectID.setVisible(true);
+                SelectID.removeAllItems();
+                ArrayList<Integer> IDnv=NHANVIENDAO.getInstance().getIDnv();
+                for(Integer nv : IDnv){
+                    String strNV = Integer.toString(nv);
+                    SelectID.addItem(strNV);
+                }
                 break;
             case 1:
-                SelectID.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Bold", 0, 12), new java.awt.Color(0, 51, 51)));
+                id.setText("Mã Khách Hàng");
+                mode=1;
+                name.setText("");
+                TaiKhoan.setText("");
+                mkhau.setText("");
+                id.setVisible(true);
+                SelectID.setVisible(true);
+                SelectID.removeAllItems();
+                ArrayList<Integer> IDkh=KHACHHANGDAO.getInstance().getIDkh();
+                for(Integer kh : IDkh){
+                    String strKH = Integer.toString(kh);
+                    SelectID.addItem(strKH);
+                }
                 break;
             case 2:
-                SelectID.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Quản Trị Viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Bold", 0, 12), new java.awt.Color(0, 51, 51)));
+                id.setText("Mã Người Quản Trị");
+                mode=2;
+                id.setVisible(false);
+                SelectID.setVisible(false);
+                SelectID.removeAllItems();
+                TaiKhoan.setText("admin");
+                mkhau.setText("admin");
                 break;
-        }
-        
-        ArrayList<Integer> IDnv=NHANVIENDAO.getInstance().getIDnv();
-        for(Integer nv : IDnv){
-            String strNV = Integer.toString(nv);
-            SelectID.addItem(strNV);
-        }
-        
+        }      
     }//GEN-LAST:event_SelectRoleActionPerformed
 
     private void SelectIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectIDActionPerformed
         // TODO add your handling code here:
+        if (mode == 0) {
+            int choose = Integer.parseInt((String) SelectID.getSelectedItem());
+            NHANVIEN tmp = new NHANVIEN(choose);
+            NHANVIEN nv = NHANVIENDAO.getInstance().selectById(tmp);
+            name.setText(nv.getHoten());
+        }
+        else if (mode == 1) {
+            int choose = Integer.parseInt((String) SelectID.getSelectedItem());
+            KHACHANG tmp = new KHACHANG(choose);
+            KHACHANG kh = KHACHHANGDAO.getInstance().selectById(tmp);
+            name.setText(kh.getHoten());
+        }
     }//GEN-LAST:event_SelectIDActionPerformed
 
     /**
@@ -301,9 +361,11 @@ public class AddTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> SelectRole;
     private javax.swing.JTextField TaiKhoan;
     private javax.swing.JPanel bot;
-    private javax.swing.JTextField dchi;
     private javax.swing.JLabel exit;
+    private javax.swing.JLabel id;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel mid;
+    private javax.swing.JTextField mkhau;
     private javax.swing.JTextField name;
     private javax.swing.JLabel submitbtn;
     // End of variables declaration//GEN-END:variables

@@ -42,6 +42,11 @@ public class nhanVienImpl implements NhanVien{
     public Boolean suaNhanVien(NHANVIEN taiKhoan) {
         return nhanVienDao.update(taiKhoan)==0;
     }
+    
+   
+    public Boolean suaNhanViencoTK(NHANVIEN nv,TAIKHOAN tk) {
+        return nhanVienDao.updateCOTK(nv,tk)==0;
+    }
 
     @Override
     public ArrayList<NHANVIEN> timKiem(String kieuTimKiem, String inputText) {
@@ -101,7 +106,7 @@ public class nhanVienImpl implements NhanVien{
         XSSFRow row =null;
         Cell cell=null;
         
-        String []colums ={"MNV","username","hoten","diachi","email","dienthoai","ngaytao","tttk"};
+        String []colums ={"MNV","username","hoten","diachi","email","dienthoai","tttk"};
         row=sheet.createRow(0);
         for(int i =0;i<colums.length;i++){
             cell=row.createCell(i);
@@ -118,10 +123,7 @@ public class nhanVienImpl implements NhanVien{
             row.createCell(3).setCellValue(nhanvien.getDiachi());
             row.createCell(4).setCellValue(nhanvien.getEmail());
             row.createCell(5).setCellValue(nhanvien.getDienthoai());
-            if(nhanvien.getNgaytao()!=null){
-                row.createCell(6).setCellValue(dateFormat.format(nhanvien.getNgaytao()));
-            }
-            row.createCell(7).setCellValue(nhanvien.isTttk());
+            row.createCell(6).setCellValue(nhanvien.isTttk());
         }
         try {
             File f = new File("excel/nhanvien.xlsx");

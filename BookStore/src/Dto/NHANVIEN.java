@@ -9,7 +9,6 @@ public class NHANVIEN {
     private String diachi;
     private String email;
     private int dienthoai;
-    private java.sql.Date ngaytao;
     private boolean tttk;
     public NHANVIEN() {
         
@@ -22,39 +21,30 @@ public class NHANVIEN {
     }
     
 
-    public NHANVIEN(String username, String hoten, String diachi, String email, int dienthoai, Date ngaytao,
-            boolean tttk) {
+    public NHANVIEN(String username, String hoten, String diachi, String email, int dienthoai,boolean tttk) {
         this.username = username;
         this.hoten = hoten;
         this.diachi = diachi;
         this.email = email;
         this.dienthoai = dienthoai;
-        this.ngaytao = ngaytao;
         this.tttk = tttk;
     }
 
-
-
-    public NHANVIEN(String hoten, String diachi, String email, int dienthoai, Date ngaytao, boolean tttk) {
+    public NHANVIEN(String hoten, String diachi, String email, int dienthoai, boolean tttk) {
         this.hoten = hoten;
         this.diachi = diachi;
         this.email = email;
         this.dienthoai = dienthoai;
-        this.ngaytao = ngaytao;
         this.tttk = tttk;
     }
 
-
-
-    public NHANVIEN(int manv, String username, String hoten, String diachi, String email, int dienthoai, Date ngaytao,
-            boolean tttk) {
+    public NHANVIEN(int manv, String username, String hoten, String diachi, String email, int dienthoai,boolean tttk) {
         this.manv = manv;
         this.username = username;
         this.hoten = hoten;
         this.diachi = diachi;
         this.email = email;
         this.dienthoai = dienthoai;
-        this.ngaytao = ngaytao;
         this.tttk = tttk;
     }
     
@@ -94,20 +84,10 @@ public class NHANVIEN {
     public void setDienthoai(int dienthoai) {
         this.dienthoai = dienthoai;
     }
-    public java.sql.Date getNgaytao() {
-        return ngaytao;
-    }
-    public void setNgaytao(java.sql.Date ngaytao) {
-        this.ngaytao = ngaytao;
-    }
     public boolean isTttk() {
         return tttk;
     }
     public void setTttk(boolean tttk) {
         this.tttk = tttk;
-    }
-
-    
-
-    
+    }  
 }

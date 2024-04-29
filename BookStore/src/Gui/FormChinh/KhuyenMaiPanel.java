@@ -4,6 +4,7 @@
  */
 package Gui.FormChinh;
 
+import Gui.FormAdd.AddKhuyenMai;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static org.apache.logging.log4j.util.Strings.isBlank;
@@ -290,12 +291,12 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
 
     private void ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemActionPerformed
         // TODO add your handling code here:
-       /* AddKhachHang x = new AddKhachHang();
+        AddKhuyenMai x = new AddKhuyenMai();
         x.setVisible(true);
-        x.addWindowListener(new java.awt.event.WindowAdapter() {
+        /*x.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                loadBooksToTable();
+                loadKhuyenMaiToTable();
             }
         });*/
     }//GEN-LAST:event_ThemActionPerformed

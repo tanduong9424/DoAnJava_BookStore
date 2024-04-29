@@ -38,7 +38,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             ArrayList<NHANVIEN> listNhanVien = nhanVienImpl1.getAllTaiKhoan();
 
             for (NHANVIEN nhanVien : listNhanVien) {
-                Object[] row = {nhanVien.getManv(), nhanVien.getHoten(), nhanVien.getNgaytao(),nhanVien.getDiachi(),nhanVien.getDienthoai(),nhanVien.getEmail()};
+                Object[] row = {nhanVien.getManv(), nhanVien.getHoten(),nhanVien.getDiachi(),nhanVien.getDienthoai(),nhanVien.getEmail()};
                 model.addRow(row);
             }
         } catch (Exception ex) {
@@ -145,11 +145,11 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã nhân viên", "Tên nhân viên", "Ngày sinh", "Địa chỉ", "Số điện thoại", "Email"
+                "Mã nhân viên", "Tên nhân viên", "Địa chỉ", "Số điện thoại", "Email"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -332,7 +332,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
         }
         ArrayList<NHANVIEN> tkList = nhanVienImpl1.timKiem(kieuTimKiem,inputText);
         for (NHANVIEN nhanVien : tkList) {
-            Object[] row = {nhanVien.getManv(), nhanVien.getHoten(), nhanVien.getNgaytao(),nhanVien.getDiachi(),nhanVien.getDienthoai(),nhanVien.getEmail()};
+            Object[] row = {nhanVien.getManv(), nhanVien.getHoten(),nhanVien.getDiachi(),nhanVien.getDienthoai(),nhanVien.getEmail()};
             model.addRow(row);
         }
     }//GEN-LAST:event_searchActionPerformed
