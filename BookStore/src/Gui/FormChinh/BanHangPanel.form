@@ -77,23 +77,18 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="scroll1" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="searchHoaDon" min="-2" pref="147" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="search1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="Finish" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="scroll1" alignment="1" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="378" max="32767" attributes="0"/>
-                      <Component id="UnFinish" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -112,13 +107,6 @@
                   </Group>
                   <Component id="scroll1" min="-2" pref="304" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                      <Component id="UnFinish" min="-2" pref="50" max="-2" attributes="0"/>
-                      <EmptySpace pref="306" max="32767" attributes="0"/>
-                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -286,34 +274,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FinishActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="UnFinish">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="ff" red="cc" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="33" red="0" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/icons8_ok_30px.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ch&#x1b0;a xong"/>
-            <Property name="toolTipText" type="java.lang.String" value="Th&#xea;m m&#x1edb;i h&#xf3;a &#x111;&#x1a1;n b&#xe1;n h&#xe0;ng"/>
-            <Property name="hideActionText" type="boolean" value="true"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[130, 37]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[130, 37]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[130, 37]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UnFinishActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

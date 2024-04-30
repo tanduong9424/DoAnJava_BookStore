@@ -222,6 +222,7 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
     @Override
     public void HOANTHANHHOADON(HOADON t) {
         HOADONDAO.getInstance().updateHOANTHANH(t);
+        HOADONDAO.getInstance().XacNhanHoaDon(t);
     }
 
     @Override

@@ -86,11 +86,13 @@ public class NhapHanglmpl implements NhapHang{
         PHIEUNHAP result=PHIEUNHAPDAO.getInstance().selectById(hd);
         for(int i=0;i<dataModel.getRowCount();i++){
             int masach=(int) dataModel.getValueAt(i, 0);
-            int sl=(int) dataModel.getValueAt(i, 2);
-            int giatien=(int) dataModel.getValueAt(i, 3);
+            int giatien=(int) dataModel.getValueAt(i, 2);
+            int sl=(int) dataModel.getValueAt(i, 3);
             int tongtien=(int) dataModel.getValueAt(i, 4);
             CHITIETPHIEUNHAP ct=new CHITIETPHIEUNHAP(result.getMapn(),masach,giatien,sl,tongtien);
             CHITIETPHIEUNHAPDAO.getInstance().insert(ct);
+            SACH sach=new SACH(masach);
+            SACHDAO.getInstance().thuhoiSACH(sach, sl);
         }
         }
     }

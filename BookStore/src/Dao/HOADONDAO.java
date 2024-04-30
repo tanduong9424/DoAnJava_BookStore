@@ -57,7 +57,7 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 			pst.setDate(3, t.getNGAYLAP());
 			pst.setInt(4, t.getTONGTIEN()*(100-km.getPhantramgiam())/100);
 			pst.setInt(5, km.getMakhuyenmai());
-			pst.setBoolean(6, t.isTthd());
+			pst.setBoolean(6, false);
 			pst.executeUpdate();
                         ResultSet generatedKeys = pst.getGeneratedKeys();
                         if (generatedKeys.next()) {
@@ -195,17 +195,17 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 		int ketqua=0;
 		try {
 			Connection con=JDBCUtil.getConnection();
-//			String sqlKho="SELECT MASACH,SOLUONG FROM hoadon,chitiethoadon "+
-//						"WHERE hoadon.MAHOADON=chitiethoadon.MAHOADON AND hoadon.MAHOADON=?";
-//			PreparedStatement pst1=con.prepareStatement(sqlKho);
-//			pst1.setInt(1, t.getMAHOADON());
-//			ResultSet rs=pst1.executeQuery();
-//			while(rs.next()) {
-//				int MASACH=rs.getInt("MASACH");
-//				int SOLUONG=rs.getInt("SOLUONG");
-//				SACH kho=new SACH(MASACH);
-//				SACHDAO.getInstance().thuhoiSACH(kho,SOLUONG);
-//			}
+			String sqlKho="SELECT MASACH,SOLUONG FROM hoadon,chitiethoadon "+
+						"WHERE hoadon.MAHOADON=chitiethoadon.MAHOADON AND hoadon.MAHOADON=?";
+			PreparedStatement pst1=con.prepareStatement(sqlKho);
+			pst1.setInt(1, t.getMAHOADON());
+			ResultSet rs=pst1.executeQuery();
+			while(rs.next()) {
+				int MASACH=rs.getInt("MASACH");
+				int SOLUONG=rs.getInt("SOLUONG");
+				SACH kho=new SACH(MASACH);
+				SACHDAO.getInstance().thuhoiSACH(kho,SOLUONG);
+			}
 			
 			
 			
@@ -226,6 +226,31 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 		}
 		return 0;
 	}
+	public int XacNhanHoaDon(HOADON t) {
+		int ketqua=0;
+		try {
+			Connection con=JDBCUtil.getConnection();
+			String sqlKho="SELECT MASACH,SOLUONG FROM hoadon,chitiethoadon "+
+						"WHERE hoadon.MAHOADON=chitiethoadon.MAHOADON AND hoadon.MAHOADON=?";
+			PreparedStatement pst1=con.prepareStatement(sqlKho);
+			pst1.setInt(1, t.getMAHOADON());
+			ResultSet rs=pst1.executeQuery();
+			while(rs.next()) {
+				int MASACH=rs.getInt("MASACH");
+				int SOLUONG=rs.getInt("SOLUONG");
+				SACH sach=new SACH(MASACH);
+				SACHDAO.getInstance().muaSACH(sach,SOLUONG);
+			}
+			
+			JDBCUtil.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.print("\nco loi xay ra, thuc hien cau lenh khong thanh cong o delete() class HOADONDAO \n");
+			e.printStackTrace();
+		}
+		return 0;
+	}        
+        
 
 
 	@Override

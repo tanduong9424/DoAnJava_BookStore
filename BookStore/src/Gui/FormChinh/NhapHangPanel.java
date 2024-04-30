@@ -840,6 +840,8 @@ public void loadAnh(SACH t) {
         status=1;
         submit.setVisible(true);
         xoaspbtn.setVisible(true);
+    DefaultTableModel dataModel = (DefaultTableModel) jTable1.getModel();
+    dataModel.setRowCount(0);
     }//GEN-LAST:event_ThemBtnActionPerformed
 
     private void XoaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaBtnActionPerformed
