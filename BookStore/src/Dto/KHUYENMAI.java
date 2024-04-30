@@ -79,6 +79,6 @@ public class KHUYENMAI {
     }
         @Override
 	public String toString() {
-		return ""+makhuyenmai+"-"+phantramgiam;
+		return ""+makhuyenmai+"-"+phantramgiam+"%";
 	}    
 }

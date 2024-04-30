@@ -21,6 +21,10 @@ public class NHAXUATBAN {
 		super();
 	}
 
+	public NHAXUATBAN(String tENNHAXUATBAN) {
+		super();
+		TENNHAXUATBAN = tENNHAXUATBAN;
+	}        
 	public NHAXUATBAN(String tENNHAXUATBAN,boolean iSHIDDEN) {
 		super();
 		TENNHAXUATBAN = tENNHAXUATBAN;

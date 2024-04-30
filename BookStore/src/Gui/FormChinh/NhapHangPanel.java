@@ -930,7 +930,7 @@ public void loadAnh(SACH t) {
 
     private void addNewNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewNCCActionPerformed
         // TODO add your handling code here:
-        AddNhaCungCap x=new AddNhaCungCap();
+        AddNhaCungCap x=new AddNhaCungCap(this);
         x.setVisible(true);
     }//GEN-LAST:event_addNewNCCActionPerformed
 

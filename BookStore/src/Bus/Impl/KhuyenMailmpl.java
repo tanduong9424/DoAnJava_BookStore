@@ -19,7 +19,7 @@ public class KhuyenMailmpl implements KhuyenMai{
     @Override
     public void danhsachKhuyenMai(JComboBox model) {
         model.removeAllItems();
-        ArrayList<KHUYENMAI> result=KHUYENMAIDAO.getInstance().selectAll();
+        ArrayList<KHUYENMAI> result=KHUYENMAIDAO.getInstance().selectActivePromotionsToday();
         for (KHUYENMAI tk : result) {
             String row = tk.toString(); // Điều chỉnh dữ liệu tùy thuộc vào cách bạn muốn hiển thị
             model.addItem(row);

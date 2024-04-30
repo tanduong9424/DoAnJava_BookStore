@@ -182,7 +182,8 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
 //chưa xong
     @Override
     public void TaoHoaDonDatabase(HOADON t,NHANVIEN nv,KHACHANG tk,KHUYENMAI km,DefaultTableModel dataModel) {
-        int kq=HOADONDAO.getInstance().insertHOADONCOTKCOMAKM(t,tk,km,nv);
+        KHUYENMAI resultkm=KHUYENMAIDAO.getInstance().selectById(km);
+        int kq=HOADONDAO.getInstance().insertHOADONCOTKCOMAKM(t,tk,resultkm,nv);
 //        thêm các trường hợp có tài khoản và có mã khuyến mãi
         if(kq!=0){         
         HOADON hd=new HOADON(kq);

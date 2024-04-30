@@ -195,6 +195,37 @@ public class KHUYENMAIDAO implements DAOInterface<KHUYENMAI>{
 		}
 		return ketqua;
     }
+    public ArrayList<KHUYENMAI> selectActivePromotionsToday() {
+        ArrayList<KHUYENMAI> ketqua = new ArrayList<KHUYENMAI>();
+        try {
+            Connection con = JDBCUtil.getConnection();
+            Date homNay = new Date(System.currentTimeMillis()); // Lấy ngày hôm nay
+
+            String sql = "SELECT * FROM khuyenmai WHERE ngaybatdau <= ? AND ngayketthuc >= ?";
+            
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setDate(1, homNay);
+            pst.setDate(2, homNay);
+            
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int makhuyenmai = rs.getInt("makhuyenmai");
+                Date ngaytao = rs.getDate("ngaytao");
+                Date ngaybatdau = rs.getDate("ngaybatdau");
+                Date ngayketthuc = rs.getDate("ngayketthuc");
+                int tongtiencanthiet = rs.getInt("tongtiencanthiet");
+                int phantramgiam = rs.getInt("phantramgiam");
+                boolean ISHIDDEN = rs.getBoolean("ISHIDDEN");
+                KHUYENMAI km = new KHUYENMAI(makhuyenmai, ngaytao, ngaybatdau, ngayketthuc, tongtiencanthiet, phantramgiam, ISHIDDEN);
+                ketqua.add(km);
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.print("Có lỗi xảy ra, thực hiện câu lệnh không thành công ở selectActivePromotionsToday\n");
+            e.printStackTrace();
+        }
+        return ketqua;
+    }
     public ArrayList<KHUYENMAI> selectAllEXCEPTISHIDDEN() {
 		ArrayList<KHUYENMAI> ketqua=new ArrayList<KHUYENMAI>();
 		try {

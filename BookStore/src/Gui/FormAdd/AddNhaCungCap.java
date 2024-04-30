@@ -4,6 +4,9 @@
  */
 package Gui.FormAdd;
 
+import Dao.NHAXUATBANDAO;
+import Dto.NHAXUATBAN;
+import Gui.FormChinh.NhapHangPanel;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,11 +18,18 @@ public class AddNhaCungCap extends javax.swing.JFrame {
     /**
      * Creates new form AddNhaCungCap
      */
+    NhapHangPanel nhaphang;
+    public AddNhaCungCap(NhapHangPanel nhaphang) {
+        setUndecorated(true);
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.nhaphang=nhaphang;
+    }
     public AddNhaCungCap() {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
-    }
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -139,14 +149,11 @@ public class AddNhaCungCap extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
+        String tennhaxuatban=name.getText();
+        NHAXUATBAN nxb=new NHAXUATBAN(tennhaxuatban);
+        NHAXUATBANDAO.getInstance().insert(nxb);
+        this.nhaphang.loadNCC();
         this.dispose();
-        if(true){
-            int trungNCC=JOptionPane.showConfirmDialog(null,"Nhà cung cấp này đã tồn tại\nYes để nhập lại \nNo để thoát","Lỗi",JOptionPane.YES_OPTION);
-            if (trungNCC == JOptionPane.YES_OPTION) {
-                AddNhaCungCap y = new AddNhaCungCap();
-                y.setVisible(true);
-            }
-        }
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked

@@ -55,7 +55,7 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 			pst.setInt(1, kh.getMakh());
 			pst.setInt(2, nv.getManv());
 			pst.setDate(3, t.getNGAYLAP());
-			pst.setInt(4, t.getTONGTIEN());
+			pst.setInt(4, t.getTONGTIEN()*(100-km.getPhantramgiam())/100);
 			pst.setInt(5, km.getMakhuyenmai());
 			pst.setBoolean(6, t.isTthd());
 			pst.executeUpdate();
