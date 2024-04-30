@@ -77,5 +77,8 @@ public class KHUYENMAI {
     public void setISHIDDEN(boolean iSHIDDEN) {
         ISHIDDEN = iSHIDDEN;
     }
-    
+        @Override
+	public String toString() {
+		return ""+makhuyenmai+"-"+phantramgiam;
+	}    
 }

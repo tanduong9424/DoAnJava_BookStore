@@ -336,6 +336,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         banhang.loadBooksToTable();
         banhang.loadHOADONToTable();
         banhang.loadKhachHang();
+        banhang.loadKhuyenMai();
 //kết thúc
         Middle.add(banhang, "banhang");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();

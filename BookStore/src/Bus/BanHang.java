@@ -28,4 +28,6 @@ public interface BanHang {
     void TaoHoaDonDatabase(HOADON t,NHANVIEN nv,KHACHANG tk,KHUYENMAI km,DefaultTableModel dataModel);
     void XoaHoaDonDatabase(HOADON t);
     void danhsachKhachHang(JComboBox model);
+    void HOANTHANHHOADON(HOADON t);
+    void CHUAHOANTHANHHOADON(HOADON t);
 }

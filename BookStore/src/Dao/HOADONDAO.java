@@ -3,6 +3,7 @@ package Dao;
 
 import Dto.HOADON;
 import Dto.KHACHANG;
+import Dto.KHUYENMAI;
 import Dto.NHANVIEN;
 import Dto.SACH;
 import Dto.TAIKHOAN;
@@ -44,18 +45,18 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 		// }
 		return 0;
 	}
-	public int insertHOADONCOTKCOMAKM(HOADON t,TAIKHOAN tk,NHANVIEN nv) {
+	public int insertHOADONCOTKCOMAKM(HOADON t,KHACHANG kh,KHUYENMAI km,NHANVIEN nv) {
 		int mahoadon = 0;
 		try {
 			Connection con=JDBCUtil.getConnection();
-			String sql="INSERT INTO hoadon (TENTAIKHOAN,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd) "+
+			String sql="INSERT INTO hoadon (makh,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd) "+
 			"VALUES (?,?,?,?,?,?)";
                         PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			pst.setString(1, tk.getUSERNAME());
+			pst.setInt(1, kh.getMakh());
 			pst.setInt(2, nv.getManv());
 			pst.setDate(3, t.getNGAYLAP());
 			pst.setInt(4, t.getTONGTIEN());
-			pst.setInt(5, t.getMakhuyenmai());
+			pst.setInt(5, km.getMakhuyenmai());
 			pst.setBoolean(6, t.isTthd());
 			pst.executeUpdate();
                         ResultSet generatedKeys = pst.getGeneratedKeys();
@@ -151,21 +152,38 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 		return 0;
 	}
 
-	public int updateHOANTHANH(HOADON t) {
+        public int updateHOANTHANH(HOADON t) {
+            int ketqua = 0;
+            try {
+                Connection con = JDBCUtil.getConnection();
+                String sql = "UPDATE hoadon SET tthd=? WHERE MAHOADON=?";
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.setBoolean(1, true);
+                pst.setInt(2, t.getMAHOADON());
+                ketqua = pst.executeUpdate();
+                JDBCUtil.closeConnection(con);
+            } catch (SQLException e) {
+                System.out.print("Có lỗi xảy ra, thực hiện câu lệnh không thành công trong phương thức updateHOANTHANH() của lớp HOADONDAO \n");
+                e.printStackTrace();
+            }
+            return ketqua;
+        }
+
+        	public int updateCHUAHOANTHANH(HOADON t) {
 		int ketqua=0;
 		try {
 			Connection con=JDBCUtil.getConnection();
-			String sql="UPDATE hoadon SET tthd=? WHERE MAHOADON=? "+
-			"VALUES (?,?)";
+                        String sql = "UPDATE hoadon SET tthd=? WHERE MAHOADON=?";
+
 			PreparedStatement pst =con.prepareStatement(sql);
-			pst.setBoolean(1, true);
+			pst.setBoolean(1, false);
 			pst.setInt(2, t.getMAHOADON());
 			ketqua=pst.executeUpdate();
 			JDBCUtil.closeConnection(con);
 		}
 		catch (SQLException e){
 			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o insert() class HOADONDAO \n");
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o updatehuahoanthanh() class HOADONDAO \n");
 			e.printStackTrace();
 		}
 		return 0;

@@ -103,6 +103,7 @@ public class NhapHanglmpl implements NhapHang{
 
     @Override
     public void BoChiTietHoaDon(DefaultTableModel dataModel, int row) {
+        System.out.println("da xoa "+row);
         dataModel.removeRow(row);
     }
     

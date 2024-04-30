@@ -8,6 +8,7 @@ package Gui.FormChinh;
 import Bus.Impl.NhaXuatBanlmpl;
 import Bus.Impl.NhapHanglmpl;
 import Dao.SACHDAO;
+import Dto.NHANVIEN;
 import Dto.PHIEUNHAP;
 import Dto.SACH;
 import Gui.FormAdd.AddNhaCungCap;
@@ -15,6 +16,8 @@ import Gui.FormAdd.AddSach;
 import Gui.FormEdit.EditSach;
 import Main.FrontEnd.FormNhapSL.PanelNhapSL_NhapHang;
 import java.awt.Image;
+import java.time.LocalDate;
+import java.sql.Date;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
@@ -937,9 +940,24 @@ public void loadAnh(SACH t) {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
-        status=0;
         submit.setVisible(false);
-        xoaspbtn.setVisible(false);        
+        xoaspbtn.setVisible(false);       
+                DefaultTableModel dataModel = (DefaultTableModel) jTable1.getModel();
+        if(status==1 && dataModel.getRowCount()>0){
+            int tongtien=Integer.parseInt(sum.getText());
+            int manv=Integer.parseInt(NV.getText());
+            LocalDate today = LocalDate.now();
+            Date sqlDate = Date.valueOf(today);
+            String noinhap=SL.getText();
+            NHANVIEN nv=new NHANVIEN(manv);
+            PHIEUNHAP t=new PHIEUNHAP(nv.getManv(),noinhap,tongtien,sqlDate);
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            NhapHanglmpl banhang=new NhapHanglmpl();
+            banhang.PhieuNhapDatabase(t,nv,model);
+        }
+        status=0;
+//        banhang.danhSachHoaDon(model);
+        loadPHIEUNHAPToTable();
     }//GEN-LAST:event_submitActionPerformed
 
     private void xoaspbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaspbtnActionPerformed
@@ -1002,6 +1020,7 @@ public void loadAnh(SACH t) {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
                 selected_sach_row = jTable1.rowAtPoint(evt.getPoint());
+                System.out.println(selected_sach_row);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void XoaBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_XoaBtnMouseClicked

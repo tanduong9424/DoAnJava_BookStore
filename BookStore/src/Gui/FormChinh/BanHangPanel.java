@@ -6,6 +6,7 @@ package Gui.FormChinh;
 
 
 import Bus.Impl.BanHanglmpl;
+import Bus.Impl.KhuyenMailmpl;
 import Dao.SACHDAO;
 import Dto.HOADON;
 import Dto.KHACHANG;
@@ -127,6 +128,10 @@ public void loadKhachHang(){
             BanHanglmpl banhang=new BanHanglmpl();
             banhang.danhsachKhachHang(comboxKH);
 }
+public void loadKhuyenMai(){
+    KhuyenMailmpl km=new KhuyenMailmpl();
+    km.danhsachKhuyenMai(comboxKH1);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -143,6 +148,8 @@ public void loadKhachHang(){
         searchHoaDon = new javax.swing.JTextField();
         scroll1 = new javax.swing.JScrollPane();
         dataHoadon = new javax.swing.JTable();
+        Finish = new javax.swing.JButton();
+        UnFinish = new javax.swing.JButton();
         DanhSachSP = new javax.swing.JPanel();
         scroll22 = new javax.swing.JScrollPane();
         Sachtb = new javax.swing.JTable();
@@ -233,6 +240,36 @@ public void loadKhachHang(){
         });
         scroll1.setViewportView(dataHoadon);
 
+        Finish.setBackground(new java.awt.Color(204, 255, 204));
+        Finish.setForeground(new java.awt.Color(0, 51, 51));
+        Finish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_ok_30px.png"))); // NOI18N
+        Finish.setText("Xong");
+        Finish.setToolTipText("Thêm mới hóa đơn bán hàng");
+        Finish.setHideActionText(true);
+        Finish.setMaximumSize(new java.awt.Dimension(130, 37));
+        Finish.setMinimumSize(new java.awt.Dimension(130, 37));
+        Finish.setPreferredSize(new java.awt.Dimension(130, 37));
+        Finish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FinishActionPerformed(evt);
+            }
+        });
+
+        UnFinish.setBackground(new java.awt.Color(204, 255, 204));
+        UnFinish.setForeground(new java.awt.Color(0, 51, 51));
+        UnFinish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_ok_30px.png"))); // NOI18N
+        UnFinish.setText("Chưa xong");
+        UnFinish.setToolTipText("Thêm mới hóa đơn bán hàng");
+        UnFinish.setHideActionText(true);
+        UnFinish.setMaximumSize(new java.awt.Dimension(130, 37));
+        UnFinish.setMinimumSize(new java.awt.Dimension(130, 37));
+        UnFinish.setPreferredSize(new java.awt.Dimension(130, 37));
+        UnFinish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UnFinishActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout HoaDonLayout = new javax.swing.GroupLayout(HoaDon);
         HoaDon.setLayout(HoaDonLayout);
         HoaDonLayout.setHorizontalGroup(
@@ -244,20 +281,34 @@ public void loadKhachHang(){
                         .addComponent(searchHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(search1)
+                        .addGap(18, 18, 18)
+                        .addComponent(Finish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(scroll1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
+            .addGroup(HoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HoaDonLayout.createSequentialGroup()
+                    .addContainerGap(378, Short.MAX_VALUE)
+                    .addComponent(UnFinish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(16, 16, 16)))
         );
         HoaDonLayout.setVerticalGroup(
             HoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HoaDonLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addGroup(HoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(search1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
+                    .addComponent(searchHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(HoaDonLayout.createSequentialGroup()
+                        .addComponent(Finish, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(HoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(HoaDonLayout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(UnFinish, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(306, Short.MAX_VALUE)))
         );
 
         DanhSachSP.setBackground(new java.awt.Color(0, 204, 204));
@@ -377,7 +428,7 @@ public void loadKhachHang(){
                             .addComponent(searchSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(search2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scroll22, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)))
+                        .addComponent(scroll22, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -802,7 +853,8 @@ public void loadKhachHang(){
             int makh=Integer.parseInt(makhStr);
             LocalDate today = LocalDate.now();
             Date sqlDate = Date.valueOf(today);
-            int makm=0;
+            String makmStr=extractMakhFromString((String) comboxKH1.getSelectedItem());
+            int makm=Integer.parseInt(makmStr);
             KHUYENMAI km=new KHUYENMAI(makm);
             NHANVIEN nv=new NHANVIEN(manv);
             KHACHANG tk=new KHACHANG(makh);
@@ -865,14 +917,32 @@ public void loadKhachHang(){
             banhang.BoChiTietHoaDon(dataModel, selected_sach_row);
     }//GEN-LAST:event_xoaspbtnMouseClicked
 
+    private void FinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinishActionPerformed
+        // TODO add your handling code here:
+        HOADON t=new HOADON(ma_clicked_hoadon);
+        BanHanglmpl banhang=new BanHanglmpl();
+        banhang.HOANTHANHHOADON(t);
+        loadHOADONToTable();
+    }//GEN-LAST:event_FinishActionPerformed
+
+    private void UnFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnFinishActionPerformed
+        // TODO add your handling code here:
+        HOADON t=new HOADON(ma_clicked_hoadon);
+        BanHanglmpl banhang=new BanHanglmpl();
+        banhang.CHUAHOANTHANHHOADON(t);
+        loadHOADONToTable();
+    }//GEN-LAST:event_UnFinishActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ChiTietHD;
     private javax.swing.JPanel DanhSachSP;
+    private javax.swing.JButton Finish;
     private javax.swing.JPanel HoaDon;
     private javax.swing.JTable Sachtb;
     private javax.swing.JButton ThemBtn;
     private javax.swing.JPanel ThongTinBanHang;
+    private javax.swing.JButton UnFinish;
     private javax.swing.JButton XoaBtn;
     private javax.swing.JComboBox<String> comboxKH;
     private javax.swing.JComboBox<String> comboxKH1;
