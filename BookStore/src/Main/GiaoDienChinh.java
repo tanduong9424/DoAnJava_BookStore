@@ -20,7 +20,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
      * Creates new form GiaoDienChinh
      */
     public GiaoDienChinh() {
-        setUndecorated(true);
+        this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -72,6 +72,11 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_exit_30px.png"))); // NOI18N
         logout.setBorder(null);
         logout.setContentAreaFilled(false);
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
 
         exit.setBackground(new java.awt.Color(0, 51, 51));
         exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_cancel_30px_1.png"))); // NOI18N
@@ -319,7 +324,8 @@ public class GiaoDienChinh extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+            KhuyenMaiPanel khuyenmai = new KhuyenMaiPanel();
+            BanHangPanel banhang = new BanHangPanel();
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
         int confirmResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thoát không?", "Xác nhận thoát", JOptionPane.YES_NO_OPTION);
@@ -331,13 +337,10 @@ public class GiaoDienChinh extends javax.swing.JFrame {
     private void BanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BanHangMouseClicked
         // TODO add your handling code here:
         Title.setText("Bán Hàng");
-        BanHangPanel banhang = new BanHangPanel();
-//        load hoadon và sách
-        banhang.loadBooksToTable();
+        banhang.loadBooksToTable();//load hoadon và sách
         banhang.loadHOADONToTable();
         banhang.loadKhachHang();
-        banhang.loadKhuyenMai();
-//kết thúc
+        banhang.loadKhuyenMai();//kết thúc
         Middle.add(banhang, "banhang");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
         cardLayout.show(Middle, "banhang");
@@ -382,7 +385,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         Middle.add(khachhang, "khachhang");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
         cardLayout.show(Middle, "khachhang");
-        khachhang.loadBooksToTable();
+        khachhang.loadKhachHangToTable();
     }//GEN-LAST:event_KhachHangMouseClicked
 
     private void ThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThongKeMouseClicked
@@ -469,7 +472,6 @@ public class GiaoDienChinh extends javax.swing.JFrame {
     private void KhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KhuyenMaiMouseClicked
         // TODO add your handling code here:
         Title.setText("Khuyến Mãi");
-        KhuyenMaiPanel khuyenmai = new KhuyenMaiPanel();
         Middle.add(khuyenmai, "khuyenmai");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
         cardLayout.show(Middle, "khuyenmai");
@@ -487,6 +489,30 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         KhuyenMai.setForeground(new Color(204,255,204));
     }//GEN-LAST:event_KhuyenMaiMouseExited
 
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        GiaoDienLogin x=new GiaoDienLogin();
+        x.setVisible(true);
+    }//GEN-LAST:event_logoutActionPerformed
+    public void display(String role){
+        if(role.equals("Nhân Viên")){
+            TaiKhoan.setVisible(false);
+            ThongKe.setVisible(false);
+        }
+        else if(role.equals("Khách Hàng")){
+            NhapHang.setVisible(false);
+            TaiKhoan.setVisible(false);
+            ThongKe.setVisible(false);
+            NhanVien.setVisible(false);
+            KhachHang.setVisible(false);
+            khuyenmai.hide_button();
+            banhang.hide_button();
+        }
+    }
+    public void setCauchao(String name){
+        cauchao.setText("Hello "+name);
+    }
     /**
      * @param args the command line arguments
      */

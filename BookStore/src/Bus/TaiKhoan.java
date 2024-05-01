@@ -17,4 +17,5 @@ public interface TaiKhoan {
     Boolean suaTaiKhoan(TAIKHOAN taiKhoan);
     ArrayList<TAIKHOAN> timKiem(String kieuTimKiem,String inputText);
     ArrayList<TAIKHOAN> getAllTaiKhoan();
+    TAIKHOAN checkDangNhap(TAIKHOAN taiKhoan);
 }

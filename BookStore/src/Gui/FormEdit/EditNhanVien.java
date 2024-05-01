@@ -56,7 +56,6 @@ public class EditNhanVien extends javax.swing.JFrame {
         MaNV.setEditable(false);
         MaNV.setBackground(new java.awt.Color(204, 255, 204));
         MaNV.setForeground(new java.awt.Color(0, 51, 5));
-        MaNV.setText("NV1");
         MaNV.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Nhân Viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         MaNV.setFocusable(false);
 

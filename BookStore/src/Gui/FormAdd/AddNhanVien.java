@@ -37,7 +37,6 @@ public class AddNhanVien extends javax.swing.JFrame {
 
         PanelAdd = new javax.swing.JPanel();
         mid = new javax.swing.JPanel();
-        MaNV = new javax.swing.JTextField();
         name = new javax.swing.JTextField();
         dchi = new javax.swing.JTextField();
         mail = new javax.swing.JTextField();
@@ -56,13 +55,6 @@ public class AddNhanVien extends javax.swing.JFrame {
         PanelAdd.setLayout(new java.awt.BorderLayout());
 
         mid.setBackground(new java.awt.Color(51, 255, 255));
-
-        MaNV.setEditable(false);
-        MaNV.setBackground(new java.awt.Color(204, 255, 204));
-        MaNV.setForeground(new java.awt.Color(0, 51, 5));
-        MaNV.setText("NV1");
-        MaNV.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Nhân Viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        MaNV.setFocusable(false);
 
         name.setBackground(new java.awt.Color(204, 255, 204));
         name.setForeground(new java.awt.Color(0, 51, 5));
@@ -86,26 +78,23 @@ public class AddNhanVien extends javax.swing.JFrame {
         mid.setLayout(midLayout);
         midLayout.setHorizontalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
+                .addContainerGap(357, Short.MAX_VALUE)
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(midLayout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(101, 101, 101)
                 .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(dchi)
-                    .addComponent(MaNV, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mail)
                     .addComponent(phone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(130, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         midLayout.setVerticalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
                 .addComponent(exit)
-                .addGap(2, 2, 2)
-                .addComponent(MaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -114,7 +103,7 @@ public class AddNhanVien extends javax.swing.JFrame {
                 .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         PanelAdd.add(mid, java.awt.BorderLayout.CENTER);
@@ -244,7 +233,6 @@ public class AddNhanVien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField MaNV;
     private javax.swing.JPanel PanelAdd;
     private javax.swing.JPanel bot;
     private javax.swing.JTextField dchi;

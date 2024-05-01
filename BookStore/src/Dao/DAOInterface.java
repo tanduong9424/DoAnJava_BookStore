@@ -1,4 +1,5 @@
 package Dao;
+import Dto.TAIKHOAN;
 import java.util.ArrayList;
 public interface DAOInterface<T> {
 	public int insert(T t);
@@ -12,4 +13,5 @@ public interface DAOInterface<T> {
 	public T selectById(T t);
 	
 	public ArrayList<T> selectByCondition(String condition);
+
 }

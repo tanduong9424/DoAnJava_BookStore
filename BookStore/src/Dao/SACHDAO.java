@@ -391,7 +391,6 @@ public int insertSACH(SACH t) {
 			
 			PreparedStatement pst=con.prepareStatement(sql);
 			
-			
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
 				int MASACH=rs.getInt("MASACH");

@@ -26,7 +26,7 @@ public class khachHangImpl implements khachHang{
     KHACHHANGDAO khachHangDao = new KHACHHANGDAO();
     
     @Override
-    public KHACHANG getByUsername(TAIKHOAN t) {
+    public KHACHANG getByUsername(KHACHANG t) {
         return khachHangDao.selectByUsername(t);
     }
     
@@ -44,6 +44,10 @@ public class khachHangImpl implements khachHang{
     public Boolean xoaKhachHang(KHACHANG khachang) {
          return khachHangDao.delete(khachang)==0;
     }   
+    @Override
+    public KHACHANG getByID(KHACHANG khachang) {
+        return khachHangDao.selectById(khachang);
+    }
 
    @Override
     public ArrayList<KHACHANG> timKiem(String kieuTimKiem,String inputText) {
@@ -87,8 +91,6 @@ public class khachHangImpl implements khachHang{
 
     @Override
     public Boolean themKhachHangCoTK(KHACHANG khachang,TAIKHOAN tk) {
-        //Kiem Tra tk Ton Tai
-        
         return khachHangDao.insertCOTK(khachang,tk)==0;    
     }
 
@@ -143,10 +145,7 @@ public class khachHangImpl implements khachHang{
 
     @Override
     public ArrayList<KHACHANG> selectAll() {
-        ArrayList<KHACHANG> dskh = khachHangDao.selectAll();
-        return dskh;
+        return khachHangDao.selectAll();
     }
-    
-
-    
+        
 }

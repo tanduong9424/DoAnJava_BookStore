@@ -38,7 +38,6 @@ public class AddKhachHang extends javax.swing.JFrame {
 
         PanelAdd = new javax.swing.JPanel();
         mid = new javax.swing.JPanel();
-        MaKH = new javax.swing.JTextField();
         name = new javax.swing.JTextField();
         dchi = new javax.swing.JTextField();
         mail = new javax.swing.JTextField();
@@ -52,13 +51,6 @@ public class AddKhachHang extends javax.swing.JFrame {
         PanelAdd.setLayout(new java.awt.BorderLayout());
 
         mid.setBackground(new java.awt.Color(51, 255, 255));
-
-        MaKH.setEditable(false);
-        MaKH.setBackground(new java.awt.Color(204, 255, 204));
-        MaKH.setForeground(new java.awt.Color(0, 51, 51));
-        MaKH.setText("KH01");
-        MaKH.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        MaKH.setFocusable(false);
 
         name.setBackground(new java.awt.Color(204, 255, 204));
         name.setForeground(new java.awt.Color(0, 51, 51));
@@ -87,26 +79,23 @@ public class AddKhachHang extends javax.swing.JFrame {
         mid.setLayout(midLayout);
         midLayout.setHorizontalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
+                .addGap(0, 363, Short.MAX_VALUE)
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(midLayout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(96, 96, 96)
                 .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(dchi)
-                    .addComponent(MaKH, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mail)
                     .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(130, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         midLayout.setVerticalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
                 .addComponent(exit)
-                .addGap(0, 0, 0)
-                .addComponent(MaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(dchi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -114,7 +103,7 @@ public class AddKhachHang extends javax.swing.JFrame {
                 .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         PanelAdd.add(mid, java.awt.BorderLayout.CENTER);
@@ -250,7 +239,6 @@ public class AddKhachHang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField MaKH;
     private javax.swing.JPanel PanelAdd;
     private javax.swing.JPanel bot;
     private javax.swing.JTextField dchi;

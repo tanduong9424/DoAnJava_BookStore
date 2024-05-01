@@ -41,10 +41,9 @@ public class EditTaiKhoan extends javax.swing.JFrame {
 
         PanelAdd = new javax.swing.JPanel();
         mid = new javax.swing.JPanel();
-        MaKH = new javax.swing.JTextField();
         name = new javax.swing.JTextField();
         dchi = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        selectrole = new javax.swing.JComboBox<>();
         exit = new javax.swing.JLabel();
         bot = new javax.swing.JPanel();
         submitbtn = new javax.swing.JLabel();
@@ -55,12 +54,6 @@ public class EditTaiKhoan extends javax.swing.JFrame {
 
         mid.setBackground(new java.awt.Color(51, 255, 255));
 
-        MaKH.setEditable(false);
-        MaKH.setBackground(new java.awt.Color(204, 255, 204));
-        MaKH.setText("KH01");
-        MaKH.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Nhân Viên /Mã Khách Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        MaKH.setFocusable(false);
-
         name.setEditable(false);
         name.setBackground(new java.awt.Color(204, 255, 204));
         name.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tài Khoản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
@@ -69,10 +62,10 @@ public class EditTaiKhoan extends javax.swing.JFrame {
         dchi.setBackground(new java.awt.Color(204, 255, 204));
         dchi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mật Khẩu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
-        jComboBox1.setBackground(new java.awt.Color(204, 255, 204));
-        jComboBox1.setForeground(new java.awt.Color(0, 51, 51));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Khách Hàng", "Quản Trị Viên" }));
-        jComboBox1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chọn vai trò cho tài khoản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        selectrole.setBackground(new java.awt.Color(204, 255, 204));
+        selectrole.setForeground(new java.awt.Color(0, 51, 51));
+        selectrole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Khách Hàng", "Quản Trị Viên" }));
+        selectrole.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chọn vai trò cho tài khoản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
         exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_cancel_30px_1.png"))); // NOI18N
         exit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -85,31 +78,28 @@ public class EditTaiKhoan extends javax.swing.JFrame {
         mid.setLayout(midLayout);
         midLayout.setHorizontalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(midLayout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(MaKH, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dchi, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, 199, Short.MAX_VALUE))
-                .addContainerGap(102, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 370, Short.MAX_VALUE)
                 .addComponent(exit))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                    .addComponent(dchi, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(selectrole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(99, 99, 99))
         );
         midLayout.setVerticalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
                 .addComponent(exit)
-                .addGap(14, 14, 14)
-                .addComponent(MaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(34, 34, 34)
                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(dchi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(selectrole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         PanelAdd.add(mid, java.awt.BorderLayout.CENTER);
@@ -175,8 +165,8 @@ public class EditTaiKhoan extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Mật Khẩu", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        String Role =(String) jComboBox1.getSelectedItem();
-        TAIKHOAN taikhoan = new TAIKHOAN( userName, mkhau,Role);
+        String Role =(String) selectrole.getSelectedItem();
+        TAIKHOAN taikhoan = new TAIKHOAN( userName, mkhau,Role,false);
         taiKhoanImpl.suaTaiKhoan(taikhoan);
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
@@ -185,7 +175,9 @@ public class EditTaiKhoan extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_exitMouseClicked
-
+    public void hide_select_role(){
+        selectrole.setVisible(false);
+    }
     /**
      * @param args the command line arguments
      */
@@ -225,14 +217,13 @@ public class EditTaiKhoan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField MaKH;
     private javax.swing.JPanel PanelAdd;
     private javax.swing.JPanel bot;
     private javax.swing.JTextField dchi;
     private javax.swing.JLabel exit;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel mid;
     private javax.swing.JTextField name;
+    private javax.swing.JComboBox<String> selectrole;
     private javax.swing.JLabel submitbtn;
     // End of variables declaration//GEN-END:variables
 

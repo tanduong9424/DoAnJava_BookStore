@@ -47,6 +47,7 @@ public class nhanVienImpl implements NhanVien{
     public Boolean suaNhanViencoTK(NHANVIEN nv,TAIKHOAN tk) {
         return nhanVienDao.updateCOTK(nv,tk)==0;
     }
+    
 
     @Override
     public ArrayList<NHANVIEN> timKiem(String kieuTimKiem, String inputText) {
@@ -97,6 +98,10 @@ public class nhanVienImpl implements NhanVien{
     @Override
     public NHANVIEN getByUsername(NHANVIEN nhanvien) {
         return nhanVienDao.selectByUsername(nhanvien);
+    }
+    @Override
+    public NHANVIEN getByID(NHANVIEN nhanvien) {
+        return nhanVienDao.selectById(nhanvien);
     }
 
     public boolean xuatExcel() {

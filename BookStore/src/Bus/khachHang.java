@@ -21,6 +21,7 @@ public interface khachHang {
     Boolean suaKhachHangCoTK(KHACHANG khachang,TAIKHOAN tk);
     ArrayList<KHACHANG> timKiem(String kieuTimKiem,String inputText);
     Boolean xuatExcel();
-    KHACHANG getByUsername(TAIKHOAN t);
+    KHACHANG getByUsername(KHACHANG t);
     ArrayList<KHACHANG> selectAll();
+    KHACHANG getByID(KHACHANG khachang);
 }

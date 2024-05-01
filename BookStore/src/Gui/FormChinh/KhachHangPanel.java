@@ -29,7 +29,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
     public KhachHangPanel() {
         initComponents();
     }
-    public void loadBooksToTable() {
+    public void loadKhachHangToTable() {
         DefaultTableModel model = (DefaultTableModel) KhachHangtb.getModel();
         model.setRowCount(0);
 
@@ -272,7 +272,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
         x.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                loadBooksToTable();
+                loadKhachHangToTable();
             }
         });
 
@@ -286,7 +286,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
             int intValue = Integer.parseInt(value.toString());
             KHACHANG khachang = new KHACHANG(intValue);
             khaHangImpl.xoaKhachHang(khachang);
-            loadBooksToTable();
+            loadKhachHangToTable();
         }else{
             JOptionPane.showMessageDialog(this, "Vui Lòng Chọn tài khoản muốn xóa", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
 
@@ -305,7 +305,7 @@ public class KhachHangPanel extends javax.swing.JPanel {
             y.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                loadBooksToTable();
+                loadKhachHangToTable();
             }
         });
         }else{

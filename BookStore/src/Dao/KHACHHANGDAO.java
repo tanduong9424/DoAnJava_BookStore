@@ -118,7 +118,7 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
         int ketqua=0;
         try {
         Connection con=JDBCUtil.getConnection();
-
+        
         String sql="DELETE from khachhang WHERE makh=?";
         PreparedStatement pst=con.prepareStatement(sql);
         pst.setInt(1, t.getMakh());
@@ -138,7 +138,7 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
 		try {
 			Connection con=JDBCUtil.getConnection();
 			
-			String sql=" SELECT * FROM khachhang ";
+			String sql=" SELECT * FROM khachhang WHERE tttk=true";
 			
 			PreparedStatement pst=con.prepareStatement(sql);
 			
@@ -146,12 +146,12 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
 				int makh=rs.getInt("makh");	
-                String username=rs.getString("username");	
-                String hoten=rs.getString("hoten");	
-                String diachi=rs.getString("diachi");	
-                String email=rs.getString("email");	
-                int dienthoai=rs.getInt("dienthoai");	
-                boolean tttk=rs.getBoolean("tttk");	
+                                String username=rs.getString("username");	
+                                String hoten=rs.getString("hoten");	
+                                String diachi=rs.getString("diachi");	
+                                String email=rs.getString("email");	
+                                int dienthoai=rs.getInt("dienthoai");	
+                                boolean tttk=rs.getBoolean("tttk");	
 				KHACHANG nv=new KHACHANG(makh,username,hoten,diachi,email,dienthoai,tttk);
 				ketqua.add(nv);
 			}
@@ -228,27 +228,27 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
         }
         return ketqua;
     }
-        public KHACHANG selectByUsername(TAIKHOAN t) {
+        public KHACHANG selectByUsername(KHACHANG t) {
         KHACHANG ketqua=null;
         try {
             Connection con=JDBCUtil.getConnection();
             
-            String sql=" SELECT * FROM khachhang WHERE username=? ";
+            String sql=" SELECT * FROM khachhang WHERE username=? AND tttk=true ";
             
             PreparedStatement pst=con.prepareStatement(sql);
-			pst.setString(1, t.getUSERNAME());
+            pst.setString(1, t.getUsername());
             
             
             ResultSet rs=pst.executeQuery();
             while(rs.next()) {
-				int makh=rs.getInt("makh");	
+		int makh=rs.getInt("makh");	
                 String username=rs.getString("username");	
                 String hoten=rs.getString("hoten");	
                 String diachi=rs.getString("diachi");	
                 String email=rs.getString("email");	
                 int dienthoai=rs.getInt("dienthoai");	
                 boolean tttk=rs.getBoolean("tttk");	
-				KHACHANG nv=new KHACHANG(makh,username,hoten,diachi,email,dienthoai,tttk);
+		KHACHANG nv=new KHACHANG(makh,username,hoten,diachi,email,dienthoai,tttk);
                 ketqua=nv;
             }
             JDBCUtil.closeConnection(con);
@@ -296,7 +296,7 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
         ArrayList <Integer> ketqua=new ArrayList<Integer>();
         try {
             Connection con=JDBCUtil.getConnection();
-            String sql="SELECT makh FROM khachhang";
+            String sql="SELECT makh FROM khachhang WHERE tttk=true";
             PreparedStatement pst=con.prepareStatement(sql);
             ResultSet rs=pst.executeQuery();
             while(rs.next()){

@@ -26,7 +26,8 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
     
     taiKhoanImpl taiKhoanImpl = new taiKhoanImpl();
     nhanVienImpl nhanVienImpl1 = new nhanVienImpl();
-    khachHangImpl khaHangImpl = new khachHangImpl();
+    khachHangImpl khacHangImpl = new khachHangImpl();
+    
     /**
      * Creates new form TaiKhoanPanel
      */
@@ -43,7 +44,7 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
 
             for (TAIKHOAN taiKhoan : listTaiKhoan) {
                 NHANVIEN nhanvien = nhanVienImpl1.getByUsername(new NHANVIEN(taiKhoan.getUSERNAME()));
-                KHACHANG khachhang = khaHangImpl.getByUsername(new TAIKHOAN(taiKhoan.getUSERNAME()));
+                KHACHANG khachhang = khacHangImpl.getByUsername(new KHACHANG(taiKhoan.getUSERNAME()));
                 if(nhanvien!=null){
                     Object[] row = {nhanvien.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(), null};
                     model.addRow(row);
@@ -137,7 +138,7 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
 
         inputsearch.setBackground(new java.awt.Color(204, 255, 204));
         inputsearch.setForeground(new java.awt.Color(0, 51, 51));
-        inputsearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tất Cả", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Black", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        inputsearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Họ và Tên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Black", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         inputsearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputsearchActionPerformed(evt);
@@ -181,11 +182,11 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Họ  và Tên", "Tên TK", "Mật khẩu", "Vai Trò", "Quyền"
+                "Họ  và Tên", "Tên TK", "Mật khẩu", "Vai Trò"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -259,6 +260,11 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         if (selectedRowIdx != -1) {
             EditTaiKhoan y = new EditTaiKhoan();
             y.setVisible(true);
+            Object role = account.getValueAt(selectedRowIdx, 3);
+            if(role.equals("Quản Trị Viên")){
+                y.hide_select_role();
+            }
+            
             Object value = account.getModel().getValueAt(selectedRowIdx, 1);
             String valueAsString = value.toString();
             y.addThongTin(valueAsString);
@@ -302,8 +308,10 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
 
     private void thuoctinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thuoctinhActionPerformed
         // TODO add your handling code here:
-        //String 
-                
+        String title=(String) thuoctinh.getSelectedItem(); 
+        inputsearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, title, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Black", 0, 12), new java.awt.Color(0, 51, 51)));
+        inputsearch.setText("");
+        loadTaiKhoanToTable();
     }//GEN-LAST:event_thuoctinhActionPerformed
 
     private void inputsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputsearchActionPerformed
@@ -311,27 +319,34 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_inputsearchActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) account.getModel();
-        model.setRowCount(0);
-
+        
         String kieuTimKiem = (String) thuoctinh.getSelectedItem();
         String inputText = inputsearch.getText();
+        inputsearch.setText("");
         if (isBlank(inputText)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa cần tìm", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        ArrayList<TAIKHOAN> tkList = taiKhoanImpl.timKiem(kieuTimKiem,inputText);
-        for (TAIKHOAN taiKhoan : tkList) {
-            NHANVIEN nhanvien = nhanVienImpl1.getByUsername(new NHANVIEN(taiKhoan.getUSERNAME()));
-            if(nhanvien!=null){
-                Object[] row = {nhanvien.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(), null};
-                model.addRow(row);
-            }else{
-                Object[] row = {null, taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(),null};
-                model.addRow(row);
+        else{
+            DefaultTableModel model = (DefaultTableModel) account.getModel();
+            model.setRowCount(0);
+            
+            ArrayList<TAIKHOAN> tkList = taiKhoanImpl.timKiem(kieuTimKiem,inputText);
+            for (TAIKHOAN taiKhoan : tkList) {
+                NHANVIEN nhanvien = nhanVienImpl1.getByUsername(new NHANVIEN(taiKhoan.getUSERNAME()));
+                KHACHANG khachhang = khacHangImpl.getByUsername(new KHACHANG(taiKhoan.getUSERNAME()));
+                
+                if(nhanvien!=null){
+                    Object[] row = {nhanvien.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE()};
+                    model.addRow(row);
+                }
+                if (khachhang!=null){
+                    Object[] row = {khachhang.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE()};
+                    model.addRow(row);
+                }
             }
         }
+        
         
     }//GEN-LAST:event_searchActionPerformed
 

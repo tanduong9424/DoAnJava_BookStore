@@ -11,6 +11,7 @@ public class TAIKHOAN {
 	private String USERNAME;
 	private String PASSWORD;
 	private String ROLE;
+        private Boolean ishidden;
 	public TAIKHOAN() {
 		super();
 	}
@@ -18,11 +19,12 @@ public class TAIKHOAN {
 		super();
 		USERNAME = uSERNAME;
 	}
-	public TAIKHOAN(String uSERNAME, String pASSWORD, String rOLE) {
+	public TAIKHOAN(String uSERNAME, String pASSWORD, String rOLE,Boolean isHidden) {
 		super();
 		USERNAME = uSERNAME;
 		PASSWORD = pASSWORD;
 		ROLE = rOLE;
+                ishidden=isHidden;
 	}
 	public String getUSERNAME() {
 		return USERNAME;
@@ -42,6 +44,12 @@ public class TAIKHOAN {
 	public void setROLE(String rOLE) {
 		ROLE = rOLE;
 	}
-	
+	public boolean isISHIDDEN() {
+		return ishidden;
+	}
+
+	public void setISHIDDEN(boolean iSHIDDEN) {
+		ishidden= iSHIDDEN;
+	}
 	
 }

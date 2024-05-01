@@ -21,4 +21,6 @@ public interface NhanVien {
     ArrayList<NHANVIEN> getAllTaiKhoan();
     Boolean themNhanVienCoTK(NHANVIEN nhanvien,TAIKHOAN tk);
     NHANVIEN getByUsername(NHANVIEN nhanvien);
+    NHANVIEN getByID(NHANVIEN nhanvien);
+
 }

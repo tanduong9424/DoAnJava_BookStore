@@ -134,7 +134,6 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
             pst.setBoolean(6, t.isTttk());
             pst.setInt(7, t.getManv());
             ketqua=pst.executeUpdate();
-            System.out.println("đã chạm đến role nhân viên");
             JDBCUtil.closeConnection(con);
 
         } catch (Exception e) {
@@ -143,6 +142,7 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
         }
         return ketqua;
     }
+   
 
     @Override
     public int delete(NHANVIEN t) {
@@ -150,24 +150,41 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
         try {
             Connection con=JDBCUtil.getConnection();
 
-            String sqlCheck = "SELECT * FROM hoadon WHERE manv = ?";
-			PreparedStatement pstCheck = con.prepareStatement(sqlCheck);
-			pstCheck.setInt(1, t.getManv());
-			ResultSet rs = pstCheck.executeQuery();
+            String sqlCheck1 = "SELECT * FROM hoadon WHERE manv = ?";
+			PreparedStatement pstCheck1 = con.prepareStatement(sqlCheck1);
+			pstCheck1.setInt(1, t.getManv());
+			ResultSet rs1 = pstCheck1.executeQuery();
 	
-			if (rs.next()) {
+			if (rs1.next()) {
 				// Nếu có, in ra thông báo và trả về một giá trị ngay tại thời điểm đó mà không tiếp tục thực hiện các lệnh SQL tiếp theo
 				System.out.println("NHÂN VIÊN đã tồn tại trong hóa đơn, không thể xóa.");
-                String sql="UPDATE nhanvien SET tttk=? WHERE manv=?";
-                PreparedStatement pst=con.prepareStatement(sql);
-                pst.setBoolean(1, false);
-                pst.setInt(2, t.getManv());
-                ketqua=pst.executeUpdate();
-                JDBCUtil.closeConnection(con);
+                                String sql="UPDATE nhanvien SET tttk=? WHERE manv=?";
+                                PreparedStatement pst=con.prepareStatement(sql);
+                                pst.setBoolean(1, false);
+                                pst.setInt(2, t.getManv());
+                                ketqua=pst.executeUpdate();
+                                JDBCUtil.closeConnection(con);
 
 				return -1; // hoặc trả về một giá trị khác thích hợp
 			}
+            String sqlCheck2 = "SELECT * FROM phieunhap WHERE manv = ?";
+			PreparedStatement pstCheck2 = con.prepareStatement(sqlCheck2);
+			pstCheck2.setInt(1, t.getManv());
+			ResultSet rs2 = pstCheck2.executeQuery();
+	
+			if (rs2.next()) {
+				// Nếu có, in ra thông báo và trả về một giá trị ngay tại thời điểm đó mà không tiếp tục thực hiện các lệnh SQL tiếp theo
+				System.out.println("NHÂN VIÊN đã tồn tại trong phiếu nhập, không thể xóa.");
+                                String sql="UPDATE nhanvien SET tttk=? WHERE manv=?";
+                                PreparedStatement pst=con.prepareStatement(sql);
+                                pst.setBoolean(1, false);
+                                pst.setInt(2, t.getManv());
+                                ketqua=pst.executeUpdate();
+                                JDBCUtil.closeConnection(con);
 
+				return -1; // hoặc trả về một giá trị khác thích hợp
+			}
+                        
             String sql="DELETE from nhanvien WHERE manv=?";
             PreparedStatement pst=con.prepareStatement(sql);
             pst.setInt(1, t.getManv());
@@ -187,7 +204,7 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 		try {
 			Connection con=JDBCUtil.getConnection();
 			
-			String sql=" SELECT * FROM nhanvien ";
+			String sql=" SELECT * FROM nhanvien WHERE tttk=true";
 			
 			PreparedStatement pst=con.prepareStatement(sql);
 			
@@ -248,10 +265,10 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
         try {
             Connection con=JDBCUtil.getConnection();
             
-            String sql=" SELECT * FROM nhanvien WHERE username=? ";
+            String sql=" SELECT * FROM nhanvien WHERE username=? AND tttk=true";
             
             PreparedStatement pst=con.prepareStatement(sql);
-			pst.setString(1, t.getUsername());
+            pst.setString(1, t.getUsername());
             
             
             ResultSet rs=pst.executeQuery();
@@ -269,7 +286,7 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
             JDBCUtil.closeConnection(con);
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
+            System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectByusername class NHANVIENDAO \n");
             e.printStackTrace();
         }
         return ketqua;
@@ -280,7 +297,7 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 		try {
 			Connection con=JDBCUtil.getConnection();
 			
-			String sql=" SELECT * FROM nhanvien WHERE manv=? ";
+			String sql=" SELECT * FROM nhanvien WHERE manv=? AND tttk=true";
 			
 			PreparedStatement pst=con.prepareStatement(sql);
 			pst.setInt(1, t.getManv());
@@ -343,7 +360,7 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 		try {
 			Connection con=JDBCUtil.getConnection();
 			
-			String sql=" SELECT manv FROM nhanvien ";
+			String sql=" SELECT manv FROM nhanvien WHERE tttk=true";
 			
 			PreparedStatement pst=con.prepareStatement(sql);
 			

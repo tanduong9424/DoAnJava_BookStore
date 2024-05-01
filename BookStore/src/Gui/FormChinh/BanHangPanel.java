@@ -158,9 +158,7 @@ public void loadKhuyenMai(){
         img = new javax.swing.JLabel();
         ThongTinBanHang = new javax.swing.JPanel();
         ttKH = new javax.swing.JLabel();
-        maHD = new javax.swing.JLabel();
         ttNV = new javax.swing.JLabel();
-        maHDtext = new javax.swing.JTextField();
         comboxKH = new javax.swing.JComboBox<>();
         nv = new javax.swing.JTextField();
         newKH = new javax.swing.JButton();
@@ -416,24 +414,9 @@ public void loadKhuyenMai(){
         ttKH.setForeground(new java.awt.Color(0, 51, 51));
         ttKH.setText("Khách Hàng Mua");
 
-        maHD.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        maHD.setForeground(new java.awt.Color(0, 51, 51));
-        maHD.setText("Mã Hóa Đơn");
-
         ttNV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ttNV.setForeground(new java.awt.Color(0, 51, 51));
         ttNV.setText("Nhân Viên");
-
-        maHDtext.setEditable(false);
-        maHDtext.setBackground(new java.awt.Color(204, 255, 204));
-        maHDtext.setForeground(new java.awt.Color(0, 51, 51));
-        maHDtext.setText("HD01");
-        maHDtext.setFocusable(false);
-        maHDtext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                maHDtextActionPerformed(evt);
-            }
-        });
 
         comboxKH.setBackground(new java.awt.Color(204, 255, 204));
         comboxKH.setForeground(new java.awt.Color(0, 51, 51));
@@ -447,7 +430,7 @@ public void loadKhuyenMai(){
         nv.setEditable(false);
         nv.setBackground(new java.awt.Color(204, 255, 204));
         nv.setForeground(new java.awt.Color(0, 51, 51));
-        nv.setText("1");
+        nv.setText("28");
         nv.setFocusable(false);
         nv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -518,13 +501,9 @@ public void loadKhuyenMai(){
                 .addGap(21, 21, 21)
                 .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ThongTinBanHangLayout.createSequentialGroup()
-                        .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ttNV, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(maHD, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ttNV, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
-                        .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nv, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                            .addComponent(maHDtext)))
+                        .addComponent(nv, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(newKH)
                     .addGroup(ThongTinBanHangLayout.createSequentialGroup()
                         .addComponent(ThemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -543,11 +522,7 @@ public void loadKhuyenMai(){
         ThongTinBanHangLayout.setVerticalGroup(
             ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ThongTinBanHangLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(maHD)
-                    .addComponent(maHDtext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(34, 34, 34)
                 .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ttNV)
                     .addComponent(nv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -741,10 +716,6 @@ public void loadKhuyenMai(){
 
     }//GEN-LAST:event_dataHoadonMouseClicked
 
-    private void maHDtextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maHDtextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_maHDtextActionPerformed
-
     private void comboxKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxKHActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboxKHActionPerformed
@@ -901,7 +872,10 @@ public void loadKhuyenMai(){
         loadHOADONToTable();
         loadBooksToTable();
     }//GEN-LAST:event_FinishActionPerformed
-
+    public void hide_button(){
+        XoaBtn.setVisible(false);
+        newKH.setVisible(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ChiTietHD;
@@ -917,8 +891,6 @@ public void loadKhuyenMai(){
     private javax.swing.JTable dataHoadon;
     private javax.swing.JLabel img;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel maHD;
-    private javax.swing.JTextField maHDtext;
     private javax.swing.JButton newKH;
     private javax.swing.JTextField nv;
     private javax.swing.JPanel panelImg;

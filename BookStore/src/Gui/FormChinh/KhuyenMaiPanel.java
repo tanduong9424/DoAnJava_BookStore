@@ -360,7 +360,11 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
         });
     JOptionPane.showMessageDialog(this, datePicker, "Chọn ngày kết thúc", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_ChonNgay2ActionPerformed
-
+    public void hide_button(){
+        Them.setVisible(false);
+        Xoa.setVisible(false);
+        Sua.setVisible(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ChonNgay1;

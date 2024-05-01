@@ -42,7 +42,6 @@ public class AddNhaCungCap extends javax.swing.JFrame {
 
         PanelAdd = new javax.swing.JPanel();
         mid = new javax.swing.JPanel();
-        MaNCC = new javax.swing.JTextField();
         name = new javax.swing.JTextField();
         exit = new javax.swing.JLabel();
         bot = new javax.swing.JPanel();
@@ -53,13 +52,6 @@ public class AddNhaCungCap extends javax.swing.JFrame {
         PanelAdd.setLayout(new java.awt.BorderLayout());
 
         mid.setBackground(new java.awt.Color(51, 255, 255));
-
-        MaNCC.setEditable(false);
-        MaNCC.setBackground(new java.awt.Color(204, 255, 204));
-        MaNCC.setForeground(new java.awt.Color(0, 51, 51));
-        MaNCC.setText("NCC1");
-        MaNCC.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Nhà Cung Cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        MaNCC.setFocusable(false);
 
         name.setBackground(new java.awt.Color(204, 255, 204));
         name.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tên Nhà Cung Cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
@@ -80,18 +72,14 @@ public class AddNhaCungCap extends javax.swing.JFrame {
                 .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(midLayout.createSequentialGroup()
                 .addGap(108, 108, 108)
-                .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(MaNCC, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(name, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         midLayout.setVerticalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
                 .addComponent(exit)
-                .addGap(73, 73, 73)
-                .addComponent(MaNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(132, 132, 132)
                 .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(158, Short.MAX_VALUE))
         );
@@ -197,7 +185,6 @@ public class AddNhaCungCap extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField MaNCC;
     private javax.swing.JPanel PanelAdd;
     private javax.swing.JPanel bot;
     private javax.swing.JLabel exit;
