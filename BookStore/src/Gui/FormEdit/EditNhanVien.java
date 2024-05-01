@@ -202,7 +202,7 @@ public class EditNhanVien extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        NHANVIEN nhanvien = new NHANVIEN(maKH, null, userName, diaChi, mailPerson,sdtInt ,true);
+        NHANVIEN nhanvien = new NHANVIEN(maKH,userName, diaChi, mailPerson,sdtInt ,true);
         nhanVienImpl1.suaNhanVien(nhanvien);
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked

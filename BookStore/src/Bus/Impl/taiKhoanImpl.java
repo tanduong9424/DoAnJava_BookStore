@@ -47,20 +47,20 @@ public class taiKhoanImpl implements TaiKhoan {
         
         dstk.forEach((tk) -> {
             switch (kieuTimKiem) {
-                case "Họ và Tên":
-                    KHACHANG ketqua1 = khachHangDao.selectByUsername(new KHACHANG(tk.getUSERNAME()));
-                    if(ketqua1!=null){
-                        if (ketqua1.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
-                            result.add(tk);
-                        }
-                    }
-                    NHANVIEN ketqua2 = nhanVienDao.selectByUsername(new NHANVIEN(tk.getUSERNAME()));
-                    if(ketqua2!=null){
-                        if (ketqua2.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
-                            result.add(tk);
-                        }
-                    }
-                    break;
+//                case "Họ và Tên":
+//                    KHACHANG ketqua1 = khachHangDao.selectByUsername(new KHACHANG(tk.));
+//                    if(ketqua1!=null){
+//                        if (ketqua1.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
+//                            result.add(tk);
+//                        }
+//                    }
+//                    NHANVIEN ketqua2 = nhanVienDao.selectByUsername(new NHANVIEN(tk.getUSERNAME()));
+//                    if(ketqua2!=null){
+//                        if (ketqua2.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
+//                            result.add(tk);
+//                        }
+//                    }
+//                    break;
                    
                     
                 case "Tên Tài Khoản":
@@ -77,10 +77,18 @@ public class taiKhoanImpl implements TaiKhoan {
         });
         return result;    
     }
+    
 
     @Override
     public ArrayList<TAIKHOAN> getAllTaiKhoan() {
         return taiKhoanDao.selectAll();    
     }
-   
+
+    @Override
+    public Boolean themTaiKhoanNV(TAIKHOAN taiKhoan) {
+            return taiKhoanDao.insertNV(taiKhoan)==0;    }
+
+    @Override
+    public Boolean themTaiKhoanKH(TAIKHOAN taiKhoan) {
+            return taiKhoanDao.insertKH(taiKhoan)==0;    }  
 }

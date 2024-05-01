@@ -35,7 +35,6 @@ public class NhapHangPanel extends javax.swing.JPanel {
      SACH sachclicked=null;
      int selected_sach_row=0;
     int ma_clicked_hoadon=0;
-     
 
         public void loadBooksToTable() {
         DefaultTableModel model = (DefaultTableModel) Nhaptb.getModel();
@@ -127,9 +126,12 @@ public void loadAnh(SACH t) {
     }
     sum.setText(""+tongtien);
 }
+public void loadNhanVien(NHANVIEN nvDM){
+            int manv=nvDM.getManv();
+            NV.setText(manv+"");
+}    
     
-    
-    
+
     
     public NhapHangPanel() {
         initComponents();

@@ -39,6 +39,7 @@ public class BanHangPanel extends javax.swing.JPanel {
     /**
      * Creates new form BanHangPanel
      */
+
     public BanHangPanel() {
         initComponents();
         submit.setVisible(false);
@@ -109,7 +110,7 @@ public void loadAnh(SACH t) {
             img.setIcon(result);
         }
          else {
-            img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images.Book_img/doraemon.jpg")));
+            img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Book_img/img_default.jpg")));
         }        
     } catch (Exception ex) {
         // Nếu có lỗi xảy ra, in ra thông báo lỗi
@@ -127,6 +128,10 @@ public void loadtongtien(){
 public void loadKhachHang(){
             BanHanglmpl banhang=new BanHanglmpl();
             banhang.danhsachKhachHang(comboxKH);
+}
+public void loadNhanVien(NHANVIEN nvDM){
+        int manv=nvDM.getManv();
+        nv.setText(manv+"");
 }
 public void loadKhuyenMai(){
     KhuyenMailmpl km=new KhuyenMailmpl();
@@ -726,7 +731,7 @@ public void loadKhuyenMai(){
 
     private void newKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newKHActionPerformed
         // TODO add your handling code here:
-        AddKhachHang x=new AddKhachHang();
+        AddKhachHang x=new AddKhachHang(this);
         x.setVisible(true);
     }//GEN-LAST:event_newKHActionPerformed
 

@@ -5,6 +5,7 @@
 package Main;
 
 
+import Dto.NHANVIEN;
 import Gui.FormChinh.*;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -19,7 +20,14 @@ public class GiaoDienChinh extends javax.swing.JFrame {
     /**
      * Creates new form GiaoDienChinh
      */
-    public GiaoDienChinh() {
+    NHANVIEN nv;
+    public GiaoDienChinh(NHANVIEN nv) {
+        this.setUndecorated(true);
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.nv=nv;
+    }
+        public GiaoDienChinh() {
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -340,6 +348,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         banhang.loadBooksToTable();//load hoadon và sách
         banhang.loadHOADONToTable();
         banhang.loadKhachHang();
+        banhang.loadNhanVien(nv);
         banhang.loadKhuyenMai();//kết thúc
         Middle.add(banhang, "banhang");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
@@ -356,6 +365,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         nhaphang.loadBooksToTable();
         nhaphang.loadPHIEUNHAPToTable();
         nhaphang.loadNCC();
+        nhaphang.loadNhanVien(nv);
     }//GEN-LAST:event_NhapHangMouseClicked
 
     private void TaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TaiKhoanMouseClicked

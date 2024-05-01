@@ -7,6 +7,7 @@ package Gui.FormChinh;
 import Bus.Impl.khachHangImpl;
 import Bus.Impl.nhanVienImpl;
 import Bus.Impl.taiKhoanImpl;
+import Dao.TAIKHOANDAO;
 import Dto.KHACHANG;
 import Dto.NHANVIEN;
 import Dto.TAIKHOAN;
@@ -43,8 +44,8 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
             ArrayList<TAIKHOAN> listTaiKhoan = taiKhoanImpl.getAllTaiKhoan();
 
             for (TAIKHOAN taiKhoan : listTaiKhoan) {
-                NHANVIEN nhanvien = nhanVienImpl1.getByUsername(new NHANVIEN(taiKhoan.getUSERNAME()));
-                KHACHANG khachhang = khacHangImpl.getByUsername(new KHACHANG(taiKhoan.getUSERNAME()));
+                NHANVIEN nhanvien = nhanVienImpl1.getByID(new NHANVIEN(taiKhoan.getMANV()));
+                KHACHANG khachhang = khacHangImpl.getByID(new KHACHANG(taiKhoan.getMAKH()));
                 if(nhanvien!=null){
                     Object[] row = {nhanvien.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE(), null};
                     model.addRow(row);
@@ -333,8 +334,8 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
             
             ArrayList<TAIKHOAN> tkList = taiKhoanImpl.timKiem(kieuTimKiem,inputText);
             for (TAIKHOAN taiKhoan : tkList) {
-                NHANVIEN nhanvien = nhanVienImpl1.getByUsername(new NHANVIEN(taiKhoan.getUSERNAME()));
-                KHACHANG khachhang = khacHangImpl.getByUsername(new KHACHANG(taiKhoan.getUSERNAME()));
+                NHANVIEN nhanvien = nhanVienImpl1.getByID(new NHANVIEN(taiKhoan.getMANV()));
+                KHACHANG khachhang = khacHangImpl.getByID(new KHACHANG(taiKhoan.getMAKH()));
                 
                 if(nhanvien!=null){
                     Object[] row = {nhanvien.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE()};

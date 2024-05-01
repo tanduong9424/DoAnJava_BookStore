@@ -44,9 +44,6 @@ public class nhanVienImpl implements NhanVien{
     }
     
    
-    public Boolean suaNhanViencoTK(NHANVIEN nv,TAIKHOAN tk) {
-        return nhanVienDao.updateCOTK(nv,tk)==0;
-    }
     
 
     @Override
@@ -91,14 +88,8 @@ public class nhanVienImpl implements NhanVien{
         return nhanVienDao.selectAll();
     }
 
-    @Override
-    public Boolean themNhanVienCoTK(NHANVIEN nhanvien, TAIKHOAN tk) {
-        return nhanVienDao.insertCOTK(nhanvien, tk)==0;    
-    }
-    @Override
-    public NHANVIEN getByUsername(NHANVIEN nhanvien) {
-        return nhanVienDao.selectByUsername(nhanvien);
-    }
+
+
     @Override
     public NHANVIEN getByID(NHANVIEN nhanvien) {
         return nhanVienDao.selectById(nhanvien);
@@ -111,7 +102,7 @@ public class nhanVienImpl implements NhanVien{
         XSSFRow row =null;
         Cell cell=null;
         
-        String []colums ={"MNV","username","hoten","diachi","email","dienthoai","tttk"};
+        String []colums ={"MNV","hoten","diachi","email","dienthoai","tttk"};
         row=sheet.createRow(0);
         for(int i =0;i<colums.length;i++){
             cell=row.createCell(i);
@@ -123,12 +114,11 @@ public class nhanVienImpl implements NhanVien{
         for (NHANVIEN nhanvien : danhsachnhanvien) {
             row = sheet.createRow(rowNum++);
             row.createCell(0).setCellValue(nhanvien.getManv());
-            row.createCell(1).setCellValue(nhanvien.getUsername());
-            row.createCell(2).setCellValue(nhanvien.getHoten());
-            row.createCell(3).setCellValue(nhanvien.getDiachi());
-            row.createCell(4).setCellValue(nhanvien.getEmail());
-            row.createCell(5).setCellValue(nhanvien.getDienthoai());
-            row.createCell(6).setCellValue(nhanvien.isTttk());
+            row.createCell(1).setCellValue(nhanvien.getHoten());
+            row.createCell(2).setCellValue(nhanvien.getDiachi());
+            row.createCell(3).setCellValue(nhanvien.getEmail());
+            row.createCell(4).setCellValue(nhanvien.getDienthoai());
+            row.createCell(5).setCellValue(nhanvien.isTttk());
         }
         try {
             File f = new File("excel/nhanvien.xlsx");

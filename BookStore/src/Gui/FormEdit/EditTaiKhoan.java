@@ -166,7 +166,7 @@ public class EditTaiKhoan extends javax.swing.JFrame {
             return;
         }
         String Role =(String) selectrole.getSelectedItem();
-        TAIKHOAN taikhoan = new TAIKHOAN( userName, mkhau,Role,false);
+        TAIKHOAN taikhoan = new TAIKHOAN( userName, mkhau,Role);
         taiKhoanImpl.suaTaiKhoan(taikhoan);
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked

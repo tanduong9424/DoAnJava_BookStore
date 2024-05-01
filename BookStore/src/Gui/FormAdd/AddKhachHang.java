@@ -7,6 +7,7 @@ package Gui.FormAdd;
 import Bus.Impl.khachHangImpl;
 import Bus.Impl.taiKhoanImpl;
 import Dto.KHACHANG;
+import Gui.FormChinh.BanHangPanel;
 import javax.swing.JOptionPane;
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
@@ -21,6 +22,13 @@ public class AddKhachHang extends javax.swing.JFrame {
     /**
      * Creates new form AddKhachHang1
      */
+    BanHangPanel banhang;
+    public AddKhachHang(BanHangPanel banhang) {
+        this.setUndecorated(true);
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.banhang=banhang;
+    }
     public AddKhachHang() {
         this.setUndecorated(true);
         initComponents();
@@ -186,8 +194,9 @@ public class AddKhachHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        KHACHANG khachang = new KHACHANG(0, null, userName, diaChi, mailPerson, sdtInt, true);
+        KHACHANG khachang = new KHACHANG(  userName, diaChi, mailPerson, sdtInt, true);
         khaHangImpl.themKhachHang(khachang);
+        this.banhang.loadKhachHang();
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 

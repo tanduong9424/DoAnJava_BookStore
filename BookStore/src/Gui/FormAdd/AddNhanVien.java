@@ -187,7 +187,7 @@ public class AddNhanVien extends javax.swing.JFrame {
             return;
         }
         
-        NHANVIEN nhanvien = new NHANVIEN(0,null,hoVaten,diachi,email,sdtInt,true);
+        NHANVIEN nhanvien = new NHANVIEN(hoVaten,diachi,email,sdtInt,true);
         nhanVienImpl1.themNhanVien(nhanvien);
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked

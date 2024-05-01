@@ -19,25 +19,33 @@ public class KHUYENMAIDAO implements DAOInterface<KHUYENMAI>{
 	}
 
     @Override
-    public int insert(KHUYENMAI t) {
-        int ketqua=0;
-        try {
-            Connection con=JDBCUtil.getConnection();
-            String sql="INSERT khuyenmai (ngaytao,ngaybatdau,ngayketthuc,tongtiencanthiet,phantramgiam) VALUES (?,?,?,?,?) ";
-            PreparedStatement pst=con.prepareStatement(sql);
-            pst.setDate(1, t.getNgaytao());
-            pst.setDate(2, t.getNgaybatdau());
-            pst.setDate(3, t.getNgayketthuc());
-            pst.setInt(4, t.getTongtiencanthiet());
-            pst.setInt(5, t.getPhantramgiam());
-            JDBCUtil.closeConnection(con);
-        } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println("có lỗi xảy ra, không thể insert phiếu nhập");
-            e.printStackTrace();
+        public int insert(KHUYENMAI t) {
+            int ketqua = 0;
+            try {
+                Connection con = JDBCUtil.getConnection();
+                // Kiểm tra xem ngày bắt đầu có lớn hơn ngày kết thúc không
+                if (t.getNgaybatdau().after(t.getNgayketthuc())) {
+                    System.out.println("Ngày bắt đầu không thể lớn hơn ngày kết thúc. Không thể thêm khuyến mãi.");
+                    return ketqua;
+                }
+
+                String sql = "INSERT INTO khuyenmai (ngaytao, ngaybatdau, ngayketthuc, tongtiencanthiet, phantramgiam) VALUES (?, ?, ?, ?, ?)";
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.setDate(1, t.getNgaytao());
+                pst.setDate(2, t.getNgaybatdau());
+                pst.setDate(3, t.getNgayketthuc());
+                pst.setInt(4, t.getTongtiencanthiet());
+                pst.setInt(5, t.getPhantramgiam());
+                // Thực hiện executeUpdate() để thực hiện câu lệnh SQL INSERT
+                ketqua = pst.executeUpdate();
+                JDBCUtil.closeConnection(con);
+            } catch (Exception e) {
+                System.out.println("Có lỗi xảy ra, không thể insert phiếu nhập");
+                e.printStackTrace();
+            }
+            return ketqua;
         }
-        return ketqua;
-    }
+
 
     @Override
     public int update(KHUYENMAI t) {

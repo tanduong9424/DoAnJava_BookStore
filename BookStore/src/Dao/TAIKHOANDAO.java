@@ -21,12 +21,51 @@ public class TAIKHOANDAO implements DAOInterface<TAIKHOAN> {
 		int ketqua=0;
 		try {
 			Connection con=JDBCUtil.getConnection();
-			String sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE,ishidden) "+"VALUES (?,?,?,?)";
+			String sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE) "+"VALUES (?,?,?)";
 			PreparedStatement pst =con.prepareStatement(sql);
 			pst.setString(1, t.getUSERNAME());
 			pst.setString(2, t.getPASSWORD());
 			pst.setString(3, t.getROLE());
-                        pst.setBoolean(4,t.isISHIDDEN());
+                        ketqua=pst.executeUpdate();
+		}
+		catch (SQLException e){
+			// TODO Auto-generated catch block
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o insert() class TAIKHOANDAO \n");
+			e.printStackTrace();
+                        return 1;
+		}
+		return 0;
+	}
+	public int insertNV(TAIKHOAN t) {
+		int ketqua=0;
+		try {
+			Connection con=JDBCUtil.getConnection();
+			String sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE,manv) "+"VALUES (?,?,?,?)";
+			PreparedStatement pst =con.prepareStatement(sql);
+			pst.setString(1, t.getUSERNAME());
+			pst.setString(2, t.getPASSWORD());
+			pst.setString(3, t.getROLE());
+                        pst.setInt(4,t.getMANV());
+                        ketqua=pst.executeUpdate();
+		}
+		catch (SQLException e){
+			// TODO Auto-generated catch block
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o insert() class TAIKHOANDAO \n");
+			e.printStackTrace();
+                        return 1;
+		}
+		return 0;
+	}
+	public int insertKH(TAIKHOAN t) {
+		int ketqua=0;
+		try {
+			Connection con=JDBCUtil.getConnection();
+			String sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE,makh) "+"VALUES (?,?,?,?)";
+			PreparedStatement pst =con.prepareStatement(sql);
+			pst.setString(1, t.getUSERNAME());
+			pst.setString(2, t.getPASSWORD());
+			pst.setString(3, t.getROLE());
+                        pst.setInt(4,t.getMAKH());
                         ketqua=pst.executeUpdate();
 		}
 		catch (SQLException e){
@@ -77,24 +116,6 @@ public class TAIKHOANDAO implements DAOInterface<TAIKHOAN> {
 		return 0;
 	}
 //them taikhoan nv
-public int insertNV(TAIKHOAN t) {
-	int ketqua=0;
-	try {
-		Connection con=JDBCUtil.getConnection();
-		String sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE) "+
-		"VALUES (?,?,?)";
-		PreparedStatement pst =con.prepareStatement(sql);
-		pst.setString(1, t.getUSERNAME());
-		pst.setString(2, t.getPASSWORD());
-		pst.setString(3, "NV");
-	}
-	catch (SQLException e){
-		// TODO Auto-generated catch block
-		System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o insert() class TAIKHOANDAO \n");
-		e.printStackTrace();
-	}
-	return 0;
-}
 
 	@Override
 	public int update(TAIKHOAN t) {
@@ -232,7 +253,7 @@ public int insertNV(TAIKHOAN t) {
 		try {
 			Connection con=JDBCUtil.getConnection();
 			
-			String sql=" SELECT * FROM taikhoan WHERE ishidden=false";
+			String sql=" SELECT * FROM taikhoan ";
 			
 			PreparedStatement pst=con.prepareStatement(sql);
 			
@@ -241,7 +262,9 @@ public int insertNV(TAIKHOAN t) {
 				String USERNAME=rs.getString("USERNAME");
 				String PASSWORD=rs.getString("PASSWORD");
 				String ROLE=rs.getString("ROLE");
-				TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,ROLE,false);
+                                int makh=rs.getInt("makh");
+                                int manv=rs.getInt("manv");
+				TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,manv,makh,ROLE);
 				ketqua.add(taikhoan);
 			}
 			JDBCUtil.closeConnection(con);
@@ -262,7 +285,7 @@ public int insertNV(TAIKHOAN t) {
 			Connection con=JDBCUtil.getConnection();
 			
 			String sql=" SELECT * FROM taikhoan "+
-					"WHERE USERNAME=?";
+					" WHERE USERNAME=?";
 			
 			PreparedStatement pst=con.prepareStatement(sql);
 			pst.setString(1,t.getUSERNAME());
@@ -272,7 +295,9 @@ public int insertNV(TAIKHOAN t) {
 				String USERNAME=rs.getString("USERNAME");
 				String PASSWORD=rs.getString("PASSWORD");
 				String ROLE=rs.getString("ROLE");
-				TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,ROLE,false);
+                                int makh=rs.getInt("makh");
+                                int manv=rs.getInt("manv");
+				TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,manv,makh,ROLE);
 				ketqua=taikhoan;
 			}
 			JDBCUtil.closeConnection(con);
@@ -291,7 +316,7 @@ public int insertNV(TAIKHOAN t) {
 			Connection con=JDBCUtil.getConnection();
 			
 			String sql=" SELECT * FROM taikhoan "+
-					"WHERE "+condition;
+					" WHERE "+condition;
 			
 			Statement pst=con.createStatement();
 			
@@ -301,7 +326,7 @@ public int insertNV(TAIKHOAN t) {
 				String USERNAME=rs.getString("USERNAME");
 				String PASSWORD=rs.getString("PASSWORD");
 				String ROLE=rs.getString("ROLE");
-				TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,ROLE,false);
+				TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,ROLE);
 				ketqua.add(taikhoan);
 			}
 			JDBCUtil.closeConnection(con);
@@ -318,18 +343,20 @@ public int insertNV(TAIKHOAN t) {
             try {
                 Connection con=JDBCUtil.getConnection();
 
-                String sql=" SELECT * FROM taikhoan WHERE USERNAME=? AND ishidden=false";
+                String sql=" SELECT * FROM taikhoan WHERE USERNAME=? ";
 
                 PreparedStatement pst=con.prepareStatement(sql);
                 pst.setString(1, t.getUSERNAME());
 
                 ResultSet rs=pst.executeQuery();
                 while(rs.next()) {
-                    String username=rs.getString("USERNAME");	
-                    String passwd=rs.getString("PASSWORD");	
-                    String role=rs.getString("ROLE");	
-                    boolean tttk=rs.getBoolean("ishidden");	
-                    TAIKHOAN tk=new TAIKHOAN(username,passwd,role,tttk);
+				String USERNAME=rs.getString("USERNAME");
+				String PASSWORD=rs.getString("PASSWORD");
+				String ROLE=rs.getString("ROLE");
+                                int makh=rs.getInt("makh");
+                                int manv=rs.getInt("manv");
+				TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,manv,makh,ROLE);
+				TAIKHOAN tk=new TAIKHOAN(USERNAME,PASSWORD,ROLE);
                     ketqua=tk;
                 }
                 JDBCUtil.closeConnection(con);
@@ -347,18 +374,19 @@ public int insertNV(TAIKHOAN t) {
             try {
                 Connection con=JDBCUtil.getConnection();
 
-                String sql=" SELECT * FROM taikhoan WHERE USERNAME=? AND PASSWORD=? AND ishidden=false";
+                String sql=" SELECT * FROM taikhoan WHERE USERNAME=? AND PASSWORD=? ";
 
                 PreparedStatement pst=con.prepareStatement(sql);
                 pst.setString(1, t.getUSERNAME());
                 pst.setString(2, t.getPASSWORD());
                 ResultSet rs=pst.executeQuery();
                 while(rs.next()) {
-                    String username=rs.getString("USERNAME");	
-                    String passwd=rs.getString("PASSWORD");	
-                    String role=rs.getString("ROLE");	
-                    boolean tttk=rs.getBoolean("ishidden");	
-                    TAIKHOAN tk=new TAIKHOAN(username,passwd,role,tttk);
+				String USERNAME=rs.getString("USERNAME");
+				String PASSWORD=rs.getString("PASSWORD");
+				String ROLE=rs.getString("ROLE");
+                                int makh=rs.getInt("makh");
+                                int manv=rs.getInt("manv");
+				TAIKHOAN tk=new TAIKHOAN(USERNAME,PASSWORD,manv,makh,ROLE);
                     ketqua=tk;
                 }
                 JDBCUtil.closeConnection(con);

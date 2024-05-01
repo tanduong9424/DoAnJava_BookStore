@@ -5,7 +5,6 @@ import java.sql.Date;
 
 public class KHACHANG {
     private int makh;
-    private String username;
     private String hoten;
     private String diachi;
     private String email;
@@ -16,14 +15,13 @@ public class KHACHANG {
     public KHACHANG(int makh) {
         this.makh = makh;
     }
-    public KHACHANG(String username) {
-        this.username = username;
+    public KHACHANG(String hoten) {
+        this.hoten = hoten;
     }
     
-    public KHACHANG(int makh, String username, String hoten, String diachi, String email, int dienthoai,
+    public KHACHANG(int makh, String hoten, String diachi, String email, int dienthoai,
             boolean tttk) {
         this.makh = makh;
-        this.username = username;
         this.hoten = hoten;
         this.diachi = diachi;
         this.email = email;
@@ -32,9 +30,8 @@ public class KHACHANG {
     }
 
 
-    public KHACHANG(String username, String hoten, String diachi, String email, int dienthoai,
+    public KHACHANG( String hoten, String diachi, String email, int dienthoai,
             boolean tttk) {
-        this.username = username;
         this.hoten = hoten;
         this.diachi = diachi;
         this.email = email;
@@ -47,12 +44,7 @@ public class KHACHANG {
     public void setMakh(int makh) {
         this.makh = makh;
     }
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
+
     public String getHoten() {
         return hoten;
     }

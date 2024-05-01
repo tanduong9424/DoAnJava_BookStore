@@ -4,7 +4,6 @@ import java.sql.Date;
 
 public class NHANVIEN {
     private int manv;
-    private String username;
     private String hoten;
     private String diachi;
     private String email;
@@ -16,13 +15,10 @@ public class NHANVIEN {
     public NHANVIEN(int mANV) {
         manv=mANV;
     }
-    public NHANVIEN(String uSERNAME) {
-        username=uSERNAME;
-    }
+
     
 
-    public NHANVIEN(String username, String hoten, String diachi, String email, int dienthoai,boolean tttk) {
-        this.username = username;
+    public NHANVIEN( String hoten, String diachi, String email, int dienthoai,boolean tttk) {
         this.hoten = hoten;
         this.diachi = diachi;
         this.email = email;
@@ -30,17 +26,10 @@ public class NHANVIEN {
         this.tttk = tttk;
     }
 
-    public NHANVIEN(String hoten, String diachi, String email, int dienthoai, boolean tttk) {
-        this.hoten = hoten;
-        this.diachi = diachi;
-        this.email = email;
-        this.dienthoai = dienthoai;
-        this.tttk = tttk;
-    }
 
-    public NHANVIEN(int manv, String username, String hoten, String diachi, String email, int dienthoai,boolean tttk) {
+
+    public NHANVIEN(int manv, String hoten, String diachi, String email, int dienthoai,boolean tttk) {
         this.manv = manv;
-        this.username = username;
         this.hoten = hoten;
         this.diachi = diachi;
         this.email = email;
@@ -54,12 +43,7 @@ public class NHANVIEN {
     public void setManv(int manv) {
         this.manv = manv;
     }
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
+
     public String getHoten() {
         return hoten;
     }

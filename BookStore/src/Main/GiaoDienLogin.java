@@ -5,6 +5,11 @@
 package Main;
 
 import Bus.Impl.taiKhoanImpl;
+import Dao.KHACHHANGDAO;
+import Dao.NHANVIENDAO;
+import Dao.TAIKHOANDAO;
+import Dto.KHACHANG;
+import Dto.NHANVIEN;
 import Dto.TAIKHOAN;
 import javax.swing.JOptionPane;
 
@@ -207,12 +212,15 @@ public class GiaoDienLogin extends javax.swing.JFrame {
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         String tentk = txTenDangNhap.getText();
         String mk = txMatKhau.getText();
-        TAIKHOAN tmp=new TAIKHOAN(tentk,mk,null,false);
+        TAIKHOAN tmp=new TAIKHOAN(tentk,mk);
         taiKhoanImpl qltk = new taiKhoanImpl();
         TAIKHOAN tk = qltk.checkDangNhap(tmp);
+        TAIKHOAN result=TAIKHOANDAO.getInstance().selectById(tk);
+        NHANVIEN test2=new NHANVIEN(result.getMANV());
+        NHANVIEN nv=NHANVIENDAO.getInstance().selectById(test2);
         
         if (tk != null) {
-            GiaoDienChinh main=new GiaoDienChinh();
+            GiaoDienChinh main=new GiaoDienChinh(nv);
             main.setCauchao(tk.getUSERNAME());
             main.setVisible(true);
             main.display(tk.getROLE());

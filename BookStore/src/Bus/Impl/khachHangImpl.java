@@ -25,10 +25,7 @@ public class khachHangImpl implements khachHang{
 
     KHACHHANGDAO khachHangDao = new KHACHHANGDAO();
     
-    @Override
-    public KHACHANG getByUsername(KHACHANG t) {
-        return khachHangDao.selectByUsername(t);
-    }
+
     
     @Override
     public Boolean themKhachHang(KHACHANG khachang) {
@@ -89,15 +86,9 @@ public class khachHangImpl implements khachHang{
     }   
 
 
-    @Override
-    public Boolean themKhachHangCoTK(KHACHANG khachang,TAIKHOAN tk) {
-        return khachHangDao.insertCOTK(khachang,tk)==0;    
-    }
 
-    @Override
-    public Boolean suaKhachHangCoTK(KHACHANG khachang, TAIKHOAN tk) {
-        return khachHangDao.updateCOTK(khachang,tk)==0;    
-    }
+
+
 
     @Override
     public Boolean xuatExcel() {
@@ -107,7 +98,7 @@ public class khachHangImpl implements khachHang{
         XSSFRow row =null;
         Cell cell=null;
         
-        String []colums ={"MKH","username","hoten","diachi","email","dienthoai","ngaytao","tttk"};
+        String []colums ={"MKH","hoten","diachi","email","dienthoai","ngaytao","tttk"};
         row=sheet.createRow(0);
         for(int i =0;i<colums.length;i++){
             cell=row.createCell(i);
@@ -119,12 +110,11 @@ public class khachHangImpl implements khachHang{
         for (KHACHANG khachHang : danhSachKhachHang) {
             row = sheet.createRow(rowNum++);
             row.createCell(0).setCellValue(khachHang.getMakh());
-            row.createCell(1).setCellValue(khachHang.getUsername());
-            row.createCell(2).setCellValue(khachHang.getHoten());
-            row.createCell(3).setCellValue(khachHang.getDiachi());
-            row.createCell(4).setCellValue(khachHang.getEmail());
-            row.createCell(5).setCellValue(khachHang.getDienthoai());
-            row.createCell(6).setCellValue(khachHang.isTttk());
+            row.createCell(1).setCellValue(khachHang.getHoten());
+            row.createCell(2).setCellValue(khachHang.getDiachi());
+            row.createCell(3).setCellValue(khachHang.getEmail());
+            row.createCell(4).setCellValue(khachHang.getDienthoai());
+            row.createCell(5).setCellValue(khachHang.isTttk());
         }
         try {
             File f = new File("excel/khachhang.xlsx");
