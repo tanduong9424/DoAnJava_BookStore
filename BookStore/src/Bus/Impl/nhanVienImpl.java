@@ -42,9 +42,10 @@ public class nhanVienImpl implements NhanVien{
     public Boolean suaNhanVien(NHANVIEN taiKhoan) {
         return nhanVienDao.update(taiKhoan)==0;
     }
-    
-   
-    
+    @Override
+    public NHANVIEN getNamebyTk(TAIKHOAN t){
+        return nhanVienDao.getkhFromTK(t);
+    }
 
     @Override
     public ArrayList<NHANVIEN> timKiem(String kieuTimKiem, String inputText) {

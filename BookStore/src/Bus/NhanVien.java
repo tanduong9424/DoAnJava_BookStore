@@ -20,5 +20,5 @@ public interface NhanVien {
     ArrayList<NHANVIEN> timKiem(String kieuTimKiem,String inputText);
     ArrayList<NHANVIEN> getAllTaiKhoan();
     NHANVIEN getByID(NHANVIEN nhanvien);
-
+    NHANVIEN getNamebyTk(TAIKHOAN t);
 }

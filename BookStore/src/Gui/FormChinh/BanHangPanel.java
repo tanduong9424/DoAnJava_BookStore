@@ -246,7 +246,7 @@ public void loadKhuyenMai(){
         Finish.setForeground(new java.awt.Color(0, 51, 51));
         Finish.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_ok_30px.png"))); // NOI18N
         Finish.setText("Xong");
-        Finish.setToolTipText("Thêm mới hóa đơn bán hàng");
+        Finish.setToolTipText("Hoàn trả hoặc thanh toán hóa đơn");
         Finish.setHideActionText(true);
         Finish.setMaximumSize(new java.awt.Dimension(130, 37));
         Finish.setMinimumSize(new java.awt.Dimension(130, 37));
@@ -880,6 +880,12 @@ public void loadKhuyenMai(){
     public void hide_button(){
         XoaBtn.setVisible(false);
         newKH.setVisible(false);
+        Finish.setVisible(false);
+        ThemBtn.setVisible(false);
+        newKH.setVisible(false);
+        ttNV.setVisible(false);
+        nv.setVisible(false);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

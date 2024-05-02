@@ -260,7 +260,7 @@
               <Image iconType="3" name="/images/icons8_ok_30px.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Xong"/>
-            <Property name="toolTipText" type="java.lang.String" value="Th&#xea;m m&#x1edb;i h&#xf3;a &#x111;&#x1a1;n b&#xe1;n h&#xe0;ng"/>
+            <Property name="toolTipText" type="java.lang.String" value="Ho&#xe0;n tr&#x1ea3; ho&#x1eb7;c thanh to&#xe1;n h&#xf3;a &#x111;&#x1a1;n"/>
             <Property name="hideActionText" type="boolean" value="true"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[130, 37]"/>

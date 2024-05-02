@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2024 at 02:46 AM
+-- Generation Time: May 01, 2024 at 12:00 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -59,6 +59,19 @@ CREATE TABLE `chitietphieunhap` (
   `tongtien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `chitietphieunhap`
+--
+
+INSERT INTO `chitietphieunhap` (`mapn`, `MASACH`, `gianhap`, `soluong`, `tongtien`) VALUES
+(3, 1, 5, 22000, 110000),
+(3, 8, 2, 40000, 80000),
+(4, 8, 6, 30000, 180000),
+(4, 2, 9, 22000, 198000),
+(4, 1, 5, 20000, 100000),
+(5, 8, 1, 50000, 50000),
+(6, 2, 22000, 1, 22000);
+
 -- --------------------------------------------------------
 
 --
@@ -80,8 +93,8 @@ CREATE TABLE `hoadon` (
 --
 
 INSERT INTO `hoadon` (`MAHOADON`, `makh`, `manv`, `NGAYLAP`, `TONGTIEN`, `makhuyenmai`, `tthd`) VALUES
-(38, 2, 1, '2024-04-26', 72000, NULL, 0),
-(39, 1, 1, '2024-04-27', 47000, NULL, 0);
+(38, 2, 1, '2024-04-26', 72000, NULL, 1),
+(39, 1, 1, '2024-04-27', 47000, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -91,7 +104,6 @@ INSERT INTO `hoadon` (`MAHOADON`, `makh`, `manv`, `NGAYLAP`, `TONGTIEN`, `makhuy
 
 CREATE TABLE `khachhang` (
   `makh` int(11) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
   `hoten` varchar(255) NOT NULL,
   `diachi` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -103,11 +115,11 @@ CREATE TABLE `khachhang` (
 -- Dumping data for table `khachhang`
 --
 
-INSERT INTO `khachhang` (`makh`, `username`, `hoten`, `diachi`, `email`, `dienthoai`, `tttk`) VALUES
-(1, NULL, 'Huỳnh Tấn Dương', 'TpHCM', 'duong@gmail.com', 19001009, 1),
-(2, 'huykh', 'Lê Hoàng Huy', 'TpHCM', 'huy@gmail.com', 19009122, 1),
-(3, NULL, 'Lương Cẩm Đào','TpHCM', 'dao@gmail.com', 19002121, 1),
-(4, NULL, 'Nguyễn Xuân Duy', 'TpHCM', 'duy@gmail.com', 190021231, 1);
+INSERT INTO `khachhang` (`makh`, `hoten`, `diachi`, `email`, `dienthoai`, `tttk`) VALUES
+(1, 'huỳnh tấn dương', '12', 'sadfsdf@gmail.com', 1213323, 1),
+(2, 'HUY', '1221', 'HUY@', 239492394, 0),
+(3, 'duy', 'nhà mới', 'duydan@gmai.com', 123456789, 1),
+(4, 'đào', '098', '098', 98, 1);
 
 -- --------------------------------------------------------
 
@@ -125,6 +137,14 @@ CREATE TABLE `khuyenmai` (
   `ISHIDDEN` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `khuyenmai`
+--
+
+INSERT INTO `khuyenmai` (`makhuyenmai`, `ngaytao`, `ngaybatdau`, `ngayketthuc`, `tongtiencanthiet`, `phantramgiam`, `ISHIDDEN`) VALUES
+(1, '2024-04-29', '2024-04-30', '2024-05-03', 40000, 10, 0),
+(2, '2024-04-21', '2024-04-22', '2024-04-30', 3000, 20, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -133,7 +153,6 @@ CREATE TABLE `khuyenmai` (
 
 CREATE TABLE `nhanvien` (
   `manv` int(11) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
   `hoten` varchar(255) NOT NULL,
   `diachi` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -145,11 +164,11 @@ CREATE TABLE `nhanvien` (
 -- Dumping data for table `nhanvien`
 --
 
-INSERT INTO `nhanvien` (`manv`, `username`, `hoten`, `diachi`, `email`, `dienthoai`, `tttk`) VALUES
-(1, NULL, 'Lương Hoàng Huy', 'Ho Chi Minh city', 'huy@gmail.com', 10212139, 1),
-(2, 'duongnv', 'Nguyễn Xuân Dương', 'Ho Chi Minh city', 'duong@gmail.com', 1123133, 1),
-(3, NULL, 'Lê Cẩm Đào', 'Ho Chi Minh city', 'dao@gmail.com', 1231313, 1),
-(4, NULL, 'Huỳnh Tấn Duy', 'Ho Chi Minh city', 'duy@gmail.com', 1231355, 1);
+INSERT INTO `nhanvien` (`manv`, `hoten`, `diachi`, `email`, `dienthoai`, `tttk`) VALUES
+(1, 'huy', '179', '@gmail.com', 9, 0),
+(2, 'dương', '1', '1', 1, 1),
+(5, 'huy', '179', '@gmail.com', 9, 1),
+(6, 'huy', '179', '@gmail.com', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -167,7 +186,8 @@ CREATE TABLE `nhaxuatban` (
 --
 
 INSERT INTO `nhaxuatban` (`TENNHAXUATBAN`, `ISHIDDEN`) VALUES
-('Kim Đồng', 0);
+('Kim Đồng', 0),
+('Nhà Xuất Bản Giáo Dục', 0);
 
 -- --------------------------------------------------------
 
@@ -188,7 +208,11 @@ CREATE TABLE `phieunhap` (
 --
 
 INSERT INTO `phieunhap` (`mapn`, `manv`, `noinhap`, `tongtien`, `ngaynhap`) VALUES
-(1, 1, 'ĐẠI HỌC SÀI GÒN', 50000, '2024-04-23');
+(1, 1, 'ĐẠI HỌC SÀI GÒN', 50000, '2024-04-23'),
+(3, 1, '', 190000, '2024-04-30'),
+(4, 1, '', 478000, '2024-04-30'),
+(5, 1, '', 50000, '2024-04-30'),
+(6, 1, '', 22000, '2024-04-30');
 
 -- --------------------------------------------------------
 
@@ -212,9 +236,9 @@ CREATE TABLE `sach` (
 --
 
 INSERT INTO `sach` (`MASACH`, `TENSACH`, `IMAGE`, `SOLUONG`, `GIABIA`, `LANTAIBAN`, `TENNHAXUATBAN`, `ISHIDDEN`) VALUES
-(1, 'Doreamon', NULL, 0, 25000, 5, 'Kim Đồng', 0),
-(2, 'Conan', NULL, 0, 22000, 2, 'Kim Đồng', 0),
-(7, 'Dragon Ball', 'C:\\Users\\Admin\\Pictures\\Saved Pictures\\superhuman.jpg', 0, 35000, 2, 'Kim Đồng', 0);
+(1, 'Doreamon', NULL, 20001, 25000, 5, 'Kim Đồng', 0),
+(2, 'Conan', NULL, 22001, 22000, 2, 'Kim Đồng', 0),
+(8, 'Dragon Ball', 'C:\\Users\\Admin\\Pictures\\Saved Pictures\\superhuman.jpg', 80001, 50000, 2, 'Kim Đồng', 0);
 
 -- --------------------------------------------------------
 
@@ -225,16 +249,20 @@ INSERT INTO `sach` (`MASACH`, `TENSACH`, `IMAGE`, `SOLUONG`, `GIABIA`, `LANTAIBA
 CREATE TABLE `taikhoan` (
   `USERNAME` varchar(100) NOT NULL,
   `PASSWORD` varchar(100) NOT NULL,
-  `ROLE` varchar(100) NOT NULL
+  `ROLE` varchar(100) NOT NULL,
+  `makh` int(11) DEFAULT NULL,
+  `manv` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `taikhoan`
 --
 
-INSERT INTO `taikhoan` (`USERNAME`, `PASSWORD`, `ROLE`) VALUES
-('duongnv', '123', 'nv'),
-('huykh', '123', 'User');
+INSERT INTO `taikhoan` (`USERNAME`, `PASSWORD`, `ROLE`, `makh`, `manv`) VALUES
+('dương', '123', 'nv', NULL, NULL),
+('duyduongngu', '123', 'Nhân Viên', NULL, 1),
+('huy', '123', 'Quản Trị Viên', NULL, NULL),
+('huygoblin@gmail.com', '123456', 'Nhân Viên', NULL, 5);
 
 --
 -- Indexes for dumped tables
@@ -259,16 +287,15 @@ ALTER TABLE `chitietphieunhap`
 --
 ALTER TABLE `hoadon`
   ADD PRIMARY KEY (`MAHOADON`),
-  ADD KEY `hoadon_ibfk_1` (`manv`),
   ADD KEY `makhuyenmai` (`makhuyenmai`),
-  ADD KEY `makh` (`makh`);
+  ADD KEY `hoadon_ibfk_1` (`manv`),
+  ADD KEY `hoadon_ibfk_5` (`makh`);
 
 --
 -- Indexes for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  ADD PRIMARY KEY (`makh`),
-  ADD KEY `username` (`username`);
+  ADD PRIMARY KEY (`makh`);
 
 --
 -- Indexes for table `khuyenmai`
@@ -280,8 +307,7 @@ ALTER TABLE `khuyenmai`
 -- Indexes for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  ADD PRIMARY KEY (`manv`),
-  ADD KEY `username` (`username`);
+  ADD PRIMARY KEY (`manv`);
 
 --
 -- Indexes for table `nhaxuatban`
@@ -307,7 +333,9 @@ ALTER TABLE `sach`
 -- Indexes for table `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  ADD PRIMARY KEY (`USERNAME`);
+  ADD PRIMARY KEY (`USERNAME`),
+  ADD KEY `makh` (`makh`),
+  ADD KEY `manv` (`manv`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -317,37 +345,37 @@ ALTER TABLE `taikhoan`
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MAHOADON` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `MAHOADON` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `khuyenmai`
 --
 ALTER TABLE `khuyenmai`
-  MODIFY `makhuyenmai` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `makhuyenmai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `phieunhap`
 --
 ALTER TABLE `phieunhap`
-  MODIFY `mapn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `mapn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sach`
 --
 ALTER TABLE `sach`
-  MODIFY `MASACH` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `MASACH` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -371,21 +399,9 @@ ALTER TABLE `chitietphieunhap`
 -- Constraints for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  ADD CONSTRAINT `hoadon_ibfk_1` FOREIGN KEY (`manv`) REFERENCES `nhanvien` (`manv`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `hoadon_ibfk_1` FOREIGN KEY (`manv`) REFERENCES `nhanvien` (`manv`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `hoadon_ibfk_4` FOREIGN KEY (`makhuyenmai`) REFERENCES `khuyenmai` (`makhuyenmai`),
-  ADD CONSTRAINT `hoadon_ibfk_5` FOREIGN KEY (`makh`) REFERENCES `khachhang` (`makh`);
-
---
--- Constraints for table `khachhang`
---
-ALTER TABLE `khachhang`
-  ADD CONSTRAINT `khachhang_ibfk_1` FOREIGN KEY (`username`) REFERENCES `taikhoan` (`USERNAME`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `nhanvien`
---
-ALTER TABLE `nhanvien`
-  ADD CONSTRAINT `nhanvien_ibfk_1` FOREIGN KEY (`username`) REFERENCES `taikhoan` (`USERNAME`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `hoadon_ibfk_5` FOREIGN KEY (`makh`) REFERENCES `khachhang` (`makh`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `phieunhap`
@@ -398,6 +414,13 @@ ALTER TABLE `phieunhap`
 --
 ALTER TABLE `sach`
   ADD CONSTRAINT `FK_SACH_NHAXUATBAN` FOREIGN KEY (`TENNHAXUATBAN`) REFERENCES `nhaxuatban` (`TENNHAXUATBAN`);
+
+--
+-- Constraints for table `taikhoan`
+--
+ALTER TABLE `taikhoan`
+  ADD CONSTRAINT `taikhoan_ibfk_1` FOREIGN KEY (`makh`) REFERENCES `khachhang` (`makh`),
+  ADD CONSTRAINT `taikhoan_ibfk_2` FOREIGN KEY (`manv`) REFERENCES `nhanvien` (`manv`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

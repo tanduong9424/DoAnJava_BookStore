@@ -157,7 +157,7 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
         try {
             Connection con=JDBCUtil.getConnection();
             
-            String sql=" SELECT * FROM khachhang WHERE makh=? ";
+            String sql=" SELECT * FROM khachhang WHERE makh=? AND tttk=true";
             
             PreparedStatement pst=con.prepareStatement(sql);
 			pst.setInt(1, t.getMakh());
@@ -165,13 +165,13 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
             
             ResultSet rs=pst.executeQuery();
             while(rs.next()) {
-				int makh=rs.getInt("makh");	
+                int makh=rs.getInt("makh");	
                 String hoten=rs.getString("hoten");	
                 String diachi=rs.getString("diachi");	
                 String email=rs.getString("email");	
                 int dienthoai=rs.getInt("dienthoai");	
                 boolean tttk=rs.getBoolean("tttk");	
-				KHACHANG nv=new KHACHANG(makh,hoten,diachi,email,dienthoai,tttk);
+		KHACHANG nv=new KHACHANG(makh,hoten,diachi,email,dienthoai,tttk);
                 ketqua=nv;
             }
             JDBCUtil.closeConnection(con);
@@ -199,13 +199,13 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
 				int makh=rs.getInt("makh");	
-                String hoten=rs.getString("hoten");	
-                String diachi=rs.getString("diachi");	
-                String email=rs.getString("email");	
-                int dienthoai=rs.getInt("dienthoai");	
-                boolean tttk=rs.getBoolean("tttk");	
+                                String hoten=rs.getString("hoten");	
+                                String diachi=rs.getString("diachi");	
+                                String email=rs.getString("email");	
+                                int dienthoai=rs.getInt("dienthoai");	
+                                boolean tttk=rs.getBoolean("tttk");	
 				KHACHANG nv=new KHACHANG(makh,hoten,diachi,email,dienthoai,tttk);
-                ketqua.add(nv);
+                                ketqua.add(nv);
 			}
 			JDBCUtil.closeConnection(con);
 		} catch (SQLException e) {
@@ -231,5 +231,30 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
             e.printStackTrace();
         }
        return ketqua;
+    }
+    public KHACHANG getnvFromTK(TAIKHOAN t){
+       KHACHANG kq=null;
+        try{
+            Connection con=JDBCUtil.getConnection();
+            String sql="SELECT * FROM khachhang WHERE makh=?";
+            PreparedStatement pst=con.prepareStatement(sql);
+            pst.setInt(1,t.getMAKH());
+            
+            ResultSet rs=pst.executeQuery();
+            while(rs.next()){
+                int ma=rs.getInt("makh");
+                String name=rs.getString("hoten");
+                String dchi=rs.getString("diachi");
+                String email=rs.getString("email");
+                int phone=rs.getInt("dienthoai");
+                boolean tttk=rs.getBoolean("tttk");
+                KHACHANG tmp=new KHACHANG(ma,name,dchi,email,phone,tttk);
+                kq=tmp;
+            }
+        }catch(SQLException e){
+            System.out.print("co loi xay ra , thuc hien khong thanh cong getIDkh ow KHACHHANGDAO \n");
+            e.printStackTrace();
+        }
+        return kq;
     }
 }

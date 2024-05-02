@@ -64,7 +64,7 @@ public class PanelNhapSL_BanHang extends javax.swing.JFrame {
         bot = new javax.swing.JPanel();
         submitbtn = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         PanelNhapSL.setLayout(new java.awt.BorderLayout());
 

@@ -26,8 +26,11 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.nv=nv;
+        banhang.loadNhanVien(nv);
+        nhaphang.loadNhanVien(nv);
     }
-        public GiaoDienChinh() {
+    
+    public GiaoDienChinh() {
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -334,6 +337,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
             KhuyenMaiPanel khuyenmai = new KhuyenMaiPanel();
             BanHangPanel banhang = new BanHangPanel();
+            NhapHangPanel nhaphang = new NhapHangPanel();
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
         int confirmResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn thoát không?", "Xác nhận thoát", JOptionPane.YES_NO_OPTION);
@@ -348,7 +352,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         banhang.loadBooksToTable();//load hoadon và sách
         banhang.loadHOADONToTable();
         banhang.loadKhachHang();
-        banhang.loadNhanVien(nv);
+        
         banhang.loadKhuyenMai();//kết thúc
         Middle.add(banhang, "banhang");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
@@ -358,14 +362,13 @@ public class GiaoDienChinh extends javax.swing.JFrame {
     private void NhapHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NhapHangMouseClicked
         // TODO add your handling code here:
         Title.setText("Nhập Hàng");
-        NhapHangPanel nhaphang = new NhapHangPanel();
         Middle.add(nhaphang, "nhaphang");
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
         cardLayout.show(Middle, "nhaphang");
         nhaphang.loadBooksToTable();
         nhaphang.loadPHIEUNHAPToTable();
         nhaphang.loadNCC();
-        nhaphang.loadNhanVien(nv);
+        
     }//GEN-LAST:event_NhapHangMouseClicked
 
     private void TaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TaiKhoanMouseClicked
@@ -518,6 +521,10 @@ public class GiaoDienChinh extends javax.swing.JFrame {
             KhachHang.setVisible(false);
             khuyenmai.hide_button();
             banhang.hide_button();
+        }
+         else if(role.equals("Quản Trị Viên")){
+            banhang.hide_button();
+            nhaphang.hide_button();
         }
     }
     public void setCauchao(String name){

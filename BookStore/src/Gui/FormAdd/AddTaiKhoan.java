@@ -32,6 +32,7 @@ public class AddTaiKhoan extends javax.swing.JFrame {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        loadID();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,7 +56,7 @@ public class AddTaiKhoan extends javax.swing.JFrame {
         bot = new javax.swing.JPanel();
         submitbtn = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         PanelAdd.setLayout(new java.awt.BorderLayout());
 
@@ -90,11 +91,6 @@ public class AddTaiKhoan extends javax.swing.JFrame {
         TaiKhoan.setBackground(new java.awt.Color(204, 255, 204));
         TaiKhoan.setForeground(new java.awt.Color(0, 51, 51));
         TaiKhoan.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tài Khoản", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        TaiKhoan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TaiKhoanActionPerformed(evt);
-            }
-        });
 
         SelectID.setBackground(new java.awt.Color(204, 255, 204));
         SelectID.setForeground(new java.awt.Color(0, 51, 51));
@@ -213,18 +209,11 @@ public class AddTaiKhoan extends javax.swing.JFrame {
         String TK = TaiKhoan.getText();
         String MK = mkhau.getText();
         String Role =(String) SelectRole.getSelectedItem();
-        int manv=Integer.parseInt(SelectID.getSelectedItem().toString());
-        System.out.println(manv);
-        if(mode==2){
-               TAIKHOAN ad_new = new TAIKHOAN( TK, MK,Role);
-               if(taiKhoanImpl.themTaiKhoan(ad_new)==false){
-                    JOptionPane.showMessageDialog(this, "Tài Khoản đã tồn tại,hãy thử thêm số hoặc kí tự khác vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                    return;          
-                }
-        }
-        else{
+        
+        
+        if(mode==0){//NHÂN VIÊN
+            int id=Integer.parseInt(SelectID.getSelectedItem().toString());
             String hoVaten = name.getText();
-            int ID=Integer.parseInt((String) SelectID.getSelectedItem());
             if (isBlank(hoVaten)) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập họ và tên.", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -237,74 +226,59 @@ public class AddTaiKhoan extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Mật Khẩu", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if(mode==0){
-            TAIKHOAN taikhoan_new = new TAIKHOAN( TK, MK,manv,Role);
-
-                if(taiKhoanImpl.themTaiKhoanNV(taikhoan_new)==false){
-                    JOptionPane.showMessageDialog(this, "Tài Khoản đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                    return;          
-                }
-                else {
-                    if(mode==0){
-                        NHANVIEN nvtmp=new NHANVIEN(ID);//tạo 1 nv mới chỉ có mã thôi để lấy thông tin
-                        NHANVIEN nv_info=nhanVienImpl1.getByID(nvtmp); //lấy toàn bộ thông tin theo mã nv trên
-                        //copy những thông tin khác như dchi email để thêm nhân viên mới
-                        NHANVIEN nhanvien_new = new NHANVIEN(nv_info.getHoten(),nv_info.getDiachi(),nv_info.getEmail(),nv_info.getDienthoai(),true);
-                        nhanVienImpl1.themNhanVien(nhanvien_new);//thêm nhân viên đã được thêm username
-                        nhanVienImpl1.xoaNhanVien(nvtmp);//xóa nhân viên cũ không có username,nếu đã lập hóa đơn thì tttk->0 
-                    }
-                    else if (mode==1){
-                        KHACHANG khtmp= new KHACHANG(ID);
-                        KHACHANG kh_info=khachHangImpl1.getByID(khtmp);
-                        KHACHANG khachang_new =new KHACHANG(kh_info.getHoten(),kh_info.getDiachi(),kh_info.getEmail(),kh_info.getDienthoai(),true);
-                        khachHangImpl1.themKhachHang(khachang_new);
-                        khachHangImpl1.xoaKhachHang(khtmp);
-                    }
-
-                }                
-            }
-            else if(mode==1){
-            TAIKHOAN taikhoan_new = new TAIKHOAN( TK, MK,Role,manv);
-
-                    if(taiKhoanImpl.themTaiKhoanKH(taikhoan_new)==false){
-                        JOptionPane.showMessageDialog(this, "Tài Khoản đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                        return;          
-                    }
-                    else {
-                        if(mode==0){
-                            NHANVIEN nvtmp=new NHANVIEN(ID);//tạo 1 nv mới chỉ có mã thôi để lấy thông tin
-                            NHANVIEN nv_info=nhanVienImpl1.getByID(nvtmp); //lấy toàn bộ thông tin theo mã nv trên
-                            //copy những thông tin khác như dchi email để thêm nhân viên mới
-                            NHANVIEN nhanvien_new = new NHANVIEN(nv_info.getHoten(),nv_info.getDiachi(),nv_info.getEmail(),nv_info.getDienthoai(),true);
-                            nhanVienImpl1.themNhanVien(nhanvien_new);//thêm nhân viên đã được thêm username
-                            nhanVienImpl1.xoaNhanVien(nvtmp);//xóa nhân viên cũ không có username,nếu đã lập hóa đơn thì tttk->0 
-                        }
-                        else if (mode==1){
-                            KHACHANG khtmp= new KHACHANG(ID);
-                            KHACHANG kh_info=khachHangImpl1.getByID(khtmp);
-                            KHACHANG khachang_new =new KHACHANG(kh_info.getHoten(),kh_info.getDiachi(),kh_info.getEmail(),kh_info.getDienthoai(),true);
-                            khachHangImpl1.themKhachHang(khachang_new);
-                            khachHangImpl1.xoaKhachHang(khtmp);
-                        }
-
-                    }                   
-            }
-
+            TAIKHOAN nv_new = new TAIKHOAN( TK, MK,id,Role);
+            if(taiKhoanImpl.themTaiKhoanNV(nv_new)==false){
+                 JOptionPane.showMessageDialog(this, "Tài Khoản đã tồn tại,hãy thử thêm số hoặc kí tự khác vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                 return;          
+             }
         }
-        
+        else if(mode==1){//KHÁCH HÀNG
+            int id=Integer.parseInt(SelectID.getSelectedItem().toString());
+            String hoVaten = name.getText();
+            if (isBlank(hoVaten)) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập họ và tên.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (isBlank(TK)) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập Tài Khoản", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (isBlank(MK)) {
+                JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Mật Khẩu", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            TAIKHOAN kh_new=new TAIKHOAN(TK,MK,Role,id);
+            if(taiKhoanImpl.themTaiKhoanKH(kh_new)==false){
+                 JOptionPane.showMessageDialog(this, "Tài Khoản khách hàng này đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                 return;          
+             }
+        }
+        else if(mode==2){//ADMIN
+            if (isBlank(TK)) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập Tài Khoản", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (isBlank(MK)) {
+                JOptionPane.showMessageDialog(this, "Vui Lòng Nhập Mật Khẩu", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            TAIKHOAN ad_new = new TAIKHOAN( TK, MK,Role);
+            if(taiKhoanImpl.themTaiKhoan(ad_new)==false){
+                 JOptionPane.showMessageDialog(this, "Tài Khoản đã tồn tại,hãy thử thêm số hoặc kí tự khác vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                 return;          
+             }
+        }
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_exitMouseClicked
 
-    private void TaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TaiKhoanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TaiKhoanActionPerformed
-
     private void SelectRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectRoleActionPerformed
+        loadID();
+    }//GEN-LAST:event_SelectRoleActionPerformed
+    private void loadID(){
         int choose = SelectRole.getSelectedIndex();
         switch (choose) {
             case 0:
@@ -349,9 +323,8 @@ public class AddTaiKhoan extends javax.swing.JFrame {
                 TaiKhoan.setText("admin");
                 mkhau.setText("admin");
                 break;
-        }      
-    }//GEN-LAST:event_SelectRoleActionPerformed
-
+        }  
+    }
     private void SelectIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectIDActionPerformed
         // TODO add your handling code here:
         if (mode == 0) {

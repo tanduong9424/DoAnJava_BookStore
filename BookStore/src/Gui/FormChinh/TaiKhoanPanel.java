@@ -89,7 +89,7 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         Suabtn.setBackground(new java.awt.Color(204, 255, 204));
         Suabtn.setForeground(new java.awt.Color(0, 51, 51));
         Suabtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_maintenance_30px.png"))); // NOI18N
-        Suabtn.setText("Sửa Tài Khoản");
+        Suabtn.setText("Đổi Mật Khẩu");
         Suabtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SuabtnActionPerformed(evt);
@@ -262,10 +262,7 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
             EditTaiKhoan y = new EditTaiKhoan();
             y.setVisible(true);
             Object role = account.getValueAt(selectedRowIdx, 3);
-            if(role.equals("Quản Trị Viên")){
-                y.hide_select_role();
-            }
-            
+           
             Object value = account.getModel().getValueAt(selectedRowIdx, 1);
             String valueAsString = value.toString();
             y.addThongTin(valueAsString);
@@ -287,8 +284,12 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         if (selectedRowIdx != -1) { 
             Object value = account.getModel().getValueAt(selectedRowIdx, 1); 
             TAIKHOAN taikhoan = new TAIKHOAN(value.toString());
-            taiKhoanImpl.xoaTaiKhoan(taikhoan);
+            int confirmResult = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa không?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
+            if (confirmResult == JOptionPane.YES_OPTION) {
+                taiKhoanImpl.xoaTaiKhoan(taikhoan);
             loadTaiKhoanToTable();
+            }
+            
         }else{
             JOptionPane.showMessageDialog(this, "Vui Lòng Chọn tài khoản muốn xóa", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
 
@@ -320,7 +321,6 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_inputsearchActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        
         String kieuTimKiem = (String) thuoctinh.getSelectedItem();
         String inputText = inputsearch.getText();
         inputsearch.setText("");
@@ -333,25 +333,30 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
             model.setRowCount(0);
             
             ArrayList<TAIKHOAN> tkList = taiKhoanImpl.timKiem(kieuTimKiem,inputText);
+            //trả về 1 list tài khoản chứa thông tin tìm kiếm theo kiểu tìm kiếm
             for (TAIKHOAN taiKhoan : tkList) {
-                NHANVIEN nhanvien = nhanVienImpl1.getByID(new NHANVIEN(taiKhoan.getMANV()));
-                KHACHANG khachhang = khacHangImpl.getByID(new KHACHANG(taiKhoan.getMAKH()));
+            //duyệt list, tìm nhân viên/khách hàng/admin ứng với username được lọc ra
+                NHANVIEN nhanvien = nhanVienImpl1.getNamebyTk(taiKhoan);
+                KHACHANG khachhang = khacHangImpl.getNamebyTk(taiKhoan);
+                //TAIKHOAN admin = taiKhoanImpl.getByUsername(taiKhoan);
                 
                 if(nhanvien!=null){
                     Object[] row = {nhanvien.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE()};
                     model.addRow(row);
                 }
-                if (khachhang!=null){
+                else if (khachhang!=null){
                     Object[] row = {khachhang.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE()};
                     model.addRow(row);
                 }
+                else if (taiKhoan!=null){
+                    Object[] row = {null, taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE()};
+                    model.addRow(row);
+                }
+                
             }
-        }
-        
-        
     }//GEN-LAST:event_searchActionPerformed
 
-
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelTimKiem;
     private javax.swing.JButton Suabtn;

@@ -65,7 +65,7 @@ public class PanelNhapSL_NhapHang extends javax.swing.JFrame {
         bot = new javax.swing.JPanel();
         submitbtn = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         PanelNhapSL.setLayout(new java.awt.BorderLayout());
 
@@ -73,28 +73,29 @@ public class PanelNhapSL_NhapHang extends javax.swing.JFrame {
 
         MaSach.setEditable(false);
         MaSach.setBackground(new java.awt.Color(204, 255, 204));
+        MaSach.setForeground(new java.awt.Color(0, 51, 51));
         MaSach.setText("S1");
         MaSach.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Sách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         MaSach.setFocusable(false);
 
         TenSach.setEditable(false);
         TenSach.setBackground(new java.awt.Color(204, 255, 204));
+        TenSach.setForeground(new java.awt.Color(0, 51, 51));
         TenSach.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tên Sách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         TenSach.setFocusable(false);
 
         DonGia.setBackground(new java.awt.Color(204, 255, 204));
+        DonGia.setForeground(new java.awt.Color(0, 51, 51));
         DonGia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đơn Giá", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        DonGia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DonGiaActionPerformed(evt);
-            }
-        });
+        DonGia.setRequestFocusEnabled(false);
 
         NXB.setBackground(new java.awt.Color(204, 255, 204));
+        NXB.setForeground(new java.awt.Color(0, 51, 51));
         NXB.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhà Cung Cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         NXB.setFocusable(false);
 
         inputSL.setBackground(new java.awt.Color(204, 255, 204));
+        inputSL.setForeground(new java.awt.Color(0, 51, 51));
         inputSL.setBorder(null);
         inputSL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,10 +241,6 @@ public class PanelNhapSL_NhapHang extends javax.swing.JFrame {
     private void inputSLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSLActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputSLActionPerformed
-
-    private void DonGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DonGiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DonGiaActionPerformed
     
     public void setThongTinPanel(String s1,String s2,String s3,String s4){
         this.MaSach.setText(s1);

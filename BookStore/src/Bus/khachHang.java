@@ -21,4 +21,5 @@ public interface khachHang {
     Boolean xuatExcel();
     ArrayList<KHACHANG> selectAll();
     KHACHANG getByID(KHACHANG khachang);
+    KHACHANG getNamebyTk(TAIKHOAN t);
 }

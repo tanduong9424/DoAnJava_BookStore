@@ -123,12 +123,13 @@ public class TAIKHOANDAO implements DAOInterface<TAIKHOAN> {
 		try {
 			Connection con=JDBCUtil.getConnection();
 			
-			String sql="UPDATE  taikhoan  "+" SET "+" PASSWORD=?,"+" ROLE=?"+" WHERE USERNAME=?";
-			PreparedStatement pst=con.prepareStatement(sql);
 			
+                        String sql = "UPDATE taikhoan SET PASSWORD=? WHERE USERNAME=?";
+
+			PreparedStatement pst=con.prepareStatement(sql);
+
 			pst.setString(1,t.getPASSWORD());
-			pst.setString(2,t.getROLE());
-			pst.setString(3,t.getUSERNAME());
+			pst.setString(2,t.getUSERNAME());
 			
 			ketqua=pst.executeUpdate();
 			System.out.print("thuc hien cau lenh "+sql+"\n");
@@ -218,16 +219,18 @@ public class TAIKHOANDAO implements DAOInterface<TAIKHOAN> {
 		int ketqua=0;
 		try {
 			Connection con=JDBCUtil.getConnection();
-			String sqlCheck = "SELECT * FROM nhanvien WHERE username = ? UNION SELECT * FROM khachhang WHERE username = ?";
+			String sqlCheck = "SELECT * FROM nhanvien WHERE manv = ? UNION SELECT * FROM khachhang WHERE makh = ?";
                         PreparedStatement pstCheck = con.prepareStatement(sqlCheck);
-			pstCheck.setString(1, t.getUSERNAME());
-			pstCheck.setString(2, t.getUSERNAME());
+			pstCheck.setInt(1, t.getMANV());
+			pstCheck.setInt(2, t.getMAKH());
 			ResultSet rs = pstCheck.executeQuery();
                         if (rs.next()) {
-				String sql1="UPDATE taikhoan"+" SET ishidden=true"+" WHERE USERNAME=?";
+				String sql1="UPDATE nhanvien"+" SET tttk=false"+" WHERE manv=?"+
+                                            "UPDATE khachhang"+" SET tttk=false"+" WHERE makh=?";
 				PreparedStatement pst1=con.prepareStatement(sql1);
 				System.out.print("thuc hien cau lenh "+sql1+"\n");
-				pst1.setString(1,t.getUSERNAME());
+				pst1.setInt(1,t.getMANV());
+                                pst1.setInt(2,t.getMAKH());
 				ketqua=pst1.executeUpdate();
 				JDBCUtil.closeConnection(con);
 			}

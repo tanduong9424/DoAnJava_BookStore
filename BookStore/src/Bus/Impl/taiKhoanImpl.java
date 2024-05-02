@@ -47,21 +47,21 @@ public class taiKhoanImpl implements TaiKhoan {
         
         dstk.forEach((tk) -> {
             switch (kieuTimKiem) {
-//                case "Họ và Tên":
-//                    KHACHANG ketqua1 = khachHangDao.selectByUsername(new KHACHANG(tk.));
-//                    if(ketqua1!=null){
-//                        if (ketqua1.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
-//                            result.add(tk);
-//                        }
-//                    }
-//                    NHANVIEN ketqua2 = nhanVienDao.selectByUsername(new NHANVIEN(tk.getUSERNAME()));
-//                    if(ketqua2!=null){
-//                        if (ketqua2.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
-//                            result.add(tk);
-//                        }
-//                    }
-//                    break;
-                   
+                case "Họ và Tên":
+                   KHACHANG ketqua1 = khachHangDao.getnvFromTK(tk);
+                    if(ketqua1!=null){
+                        if (ketqua1.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
+                           result.add(tk);
+                        }
+                    }
+                   /* NHANVIEN ketqua2 = nhanVienDao.selectByUsername(new NHANVIEN(tk.getUSERNAME()));
+                   if(ketqua2!=null){
+                      if (ketqua2.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
+                           result.add(tk);
+                       }
+                   }
+                    break;
+                   */
                     
                 case "Tên Tài Khoản":
                     if (tk.getUSERNAME().toLowerCase().contains(inputText.toLowerCase())) {

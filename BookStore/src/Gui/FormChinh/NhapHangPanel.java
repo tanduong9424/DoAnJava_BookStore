@@ -172,7 +172,6 @@ public void loadNhanVien(NHANVIEN nvDM){
         xoaspbtn = new javax.swing.JButton();
         ThongTinNhapHangPanel = new javax.swing.JPanel();
         tongtien = new javax.swing.JLabel();
-        maNhapHang = new javax.swing.JTextField();
         sum = new javax.swing.JTextField();
         nhacungcap = new javax.swing.JLabel();
         selectNCC = new javax.swing.JComboBox<>();
@@ -576,23 +575,11 @@ public void loadNhanVien(NHANVIEN nvDM){
         tongtien.setForeground(new java.awt.Color(0, 51, 51));
         tongtien.setText("Tổng tiền (triệu VND)");
 
-        maNhapHang.setEditable(false);
-        maNhapHang.setBackground(new java.awt.Color(204, 255, 204));
-        maNhapHang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        maNhapHang.setForeground(new java.awt.Color(0, 51, 51));
-        maNhapHang.setText("NH01");
-        maNhapHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Nhập Hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        maNhapHang.setFocusable(false);
-        maNhapHang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                maNhapHangActionPerformed(evt);
-            }
-        });
-
         sum.setEditable(false);
         sum.setBackground(new java.awt.Color(204, 255, 204));
         sum.setText("0");
         sum.setToolTipText("");
+        sum.setCaretColor(new java.awt.Color(0, 51, 51));
         sum.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         sum.setFocusable(false);
         sum.setName(""); // NOI18N
@@ -695,7 +682,6 @@ public void loadNhanVien(NHANVIEN nvDM){
                     .addGroup(ThongTinNhapHangPanelLayout.createSequentialGroup()
                         .addGroup(ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(SL, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(maNhapHang, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(NV, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ThongTinNhapHangPanelLayout.createSequentialGroup()
@@ -716,12 +702,10 @@ public void loadNhanVien(NHANVIEN nvDM){
             ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ThongTinNhapHangPanelLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addGroup(ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(maNhapHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(nhacungcap)
-                        .addComponent(selectNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(7, 7, 7)
+                .addGroup(ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nhacungcap)
+                    .addComponent(selectNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addNewNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -772,6 +756,7 @@ public void loadNhanVien(NHANVIEN nvDM){
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         // TODO add your handling code here:
             // Lấy nội dung từ JTextField
+            inputsearch1.setText("");
     String searchText = inputsearch1.getText();
     loadPHIEUNHAPToTable();
     // Kiểm tra xem searchText có rỗng không
@@ -850,10 +835,6 @@ public void loadNhanVien(NHANVIEN nvDM){
         // TODO add your handling code here:
     }//GEN-LAST:event_XoaBtnActionPerformed
 
-    private void maNhapHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maNhapHangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_maNhapHangActionPerformed
-
     private void sumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sumActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sumActionPerformed
@@ -870,6 +851,7 @@ public void loadNhanVien(NHANVIEN nvDM){
 
     private void Search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search1ActionPerformed
         // TODO add your handling code here:
+        inputsearch2.setText("");
                             // Lấy nội dung từ JTextField
     String searchText = inputsearch2.getText();
     loadBooksToTable();
@@ -944,6 +926,7 @@ public void loadNhanVien(NHANVIEN nvDM){
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
+        
         submit.setVisible(false);
         xoaspbtn.setVisible(false);       
                 DefaultTableModel dataModel = (DefaultTableModel) jTable1.getModel();
@@ -962,6 +945,8 @@ public void loadNhanVien(NHANVIEN nvDM){
         status=0;
 //        banhang.danhSachHoaDon(model);
         loadPHIEUNHAPToTable();
+        SL.setText("");
+        sum.setText("");
     }//GEN-LAST:event_submitActionPerformed
 
     private void xoaspbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaspbtnActionPerformed
@@ -1040,7 +1025,15 @@ public void loadNhanVien(NHANVIEN nvDM){
         // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
         model.setRowCount(0);
     }//GEN-LAST:event_XoaBtnMouseClicked
-
+    public void hide_button(){
+        XoaBtn.setVisible(false);
+        ThemBtn.setVisible(false);
+        addNewNCC.setVisible(false);
+        NV.setVisible(false);
+        XoaBtn1.setVisible(false);
+        SuaBtn1.setVisible(false);
+        addNewSach.setVisible(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ChiTietHD;
@@ -1064,7 +1057,6 @@ public void loadNhanVien(NHANVIEN nvDM){
     private javax.swing.JTextField inputsearch2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField maNhapHang;
     private javax.swing.JLabel nhacungcap;
     private javax.swing.JPanel panelImg;
     private javax.swing.JScrollPane scroll1;

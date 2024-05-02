@@ -11,6 +11,7 @@ import Dao.TAIKHOANDAO;
 import Dto.KHACHANG;
 import Dto.NHANVIEN;
 import Dto.TAIKHOAN;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -53,7 +54,7 @@ public class GiaoDienLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        plForm.setBackground(new java.awt.Color(0, 255, 153));
+        plForm.setBackground(new java.awt.Color(0, 153, 153));
 
         btnDangNhap.setBackground(new java.awt.Color(0, 255, 153));
         btnDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -79,12 +80,16 @@ public class GiaoDienLogin extends javax.swing.JFrame {
                 .addComponent(btnDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
         );
 
-        plInput.setBackground(new java.awt.Color(255, 255, 204));
+        plInput.setBackground(new java.awt.Color(0, 51, 51));
 
         txTenDangNhap.setBackground(new java.awt.Color(102, 255, 204));
         txTenDangNhap.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txTenDangNhap.setForeground(new java.awt.Color(0, 0, 0));
         txTenDangNhap.setCaretColor(new java.awt.Color(0, 0, 255));
+        txTenDangNhap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txTenDangNhapKeyPressed(evt);
+            }
+        });
 
         lbImgPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_key_30px.png"))); // NOI18N
 
@@ -92,8 +97,12 @@ public class GiaoDienLogin extends javax.swing.JFrame {
 
         txMatKhau.setBackground(new java.awt.Color(0, 255, 204));
         txMatKhau.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txMatKhau.setForeground(new java.awt.Color(0, 0, 0));
         txMatKhau.setCaretColor(new java.awt.Color(0, 0, 204));
+        txMatKhau.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txMatKhauKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout plInputLayout = new javax.swing.GroupLayout(plInput);
         plInput.setLayout(plInputLayout);
@@ -128,11 +137,11 @@ public class GiaoDienLogin extends javax.swing.JFrame {
                 .addGap(44, 44, 44))
         );
 
-        plHeader.setBackground(new java.awt.Color(204, 255, 204));
+        plHeader.setBackground(new java.awt.Color(0, 51, 51));
 
         lbHeader.setBackground(new java.awt.Color(0, 255, 153));
         lbHeader.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lbHeader.setForeground(new java.awt.Color(0, 0, 51));
+        lbHeader.setForeground(new java.awt.Color(204, 255, 204));
         lbHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbHeader.setText("QUẢN LÝ CỬA HÀNG SÁCH");
 
@@ -166,7 +175,7 @@ public class GiaoDienLogin extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        lbAva.setBackground(new java.awt.Color(204, 255, 204));
+        lbAva.setBackground(new java.awt.Color(0, 153, 153));
         lbAva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbAva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_commercial_development_management_64px.png"))); // NOI18N
 
@@ -215,16 +224,27 @@ public class GiaoDienLogin extends javax.swing.JFrame {
         TAIKHOAN tmp=new TAIKHOAN(tentk,mk);
         taiKhoanImpl qltk = new taiKhoanImpl();
         TAIKHOAN tk = qltk.checkDangNhap(tmp);
-        TAIKHOAN result=TAIKHOANDAO.getInstance().selectById(tk);
-        NHANVIEN test2=new NHANVIEN(result.getMANV());
+        //TAIKHOAN result=TAIKHOANDAO.getInstance().selectById(tk);
+        System.out.println(tk.getROLE());
+        NHANVIEN test2=new NHANVIEN(tk.getMANV());
         NHANVIEN nv=NHANVIENDAO.getInstance().selectById(test2);
         
+        
         if (tk != null) {
-            GiaoDienChinh main=new GiaoDienChinh(nv);
+            GiaoDienChinh main=null;
+            if(tk.getROLE().equals("Nhân Viên")){
+                main=new GiaoDienChinh(nv);
+                
+            }
+            else if(tk.getROLE().equals("Quản Trị Viên")){
+                main=new GiaoDienChinh();
+            }
             main.setCauchao(tk.getUSERNAME());
             main.setVisible(true);
             main.display(tk.getROLE());
             this.dispose();
+                
+
         } else {
             JOptionPane.showMessageDialog(this, "Sai thông tin đăng nhập!");
             txTenDangNhap.requestFocus();
@@ -235,6 +255,20 @@ public class GiaoDienLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void txTenDangNhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txTenDangNhapKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    txMatKhau.requestFocusInWindow(); // Di chuyển trỏ xuống nhập mật khẩu
+                }
+    }//GEN-LAST:event_txTenDangNhapKeyPressed
+
+    private void txMatKhauKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMatKhauKeyPressed
+        // TODO add your handling code here:
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                   btnDangNhap.doClick();
+                }
+    }//GEN-LAST:event_txMatKhauKeyPressed
 
     /**
      * @param args the command line arguments

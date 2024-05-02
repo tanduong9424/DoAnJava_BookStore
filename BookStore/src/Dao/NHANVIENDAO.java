@@ -1,5 +1,6 @@
 package Dao;
 
+import Dto.KHACHANG;
 import Dto.NHANVIEN;
 import Dto.TAIKHOAN;
 import conDatabase.JDBCUtil;
@@ -37,8 +38,6 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
         }
         return ketqua;
     }
-
-
 
     @Override
     public int update(NHANVIEN t) {
@@ -81,8 +80,6 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
         }
         return ketqua;
     }
-
-   
 
     @Override
     public int delete(NHANVIEN t) {
@@ -172,33 +169,30 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
     public ArrayList selectAllEXCEPT_TTTK_FALSE() {
         ArrayList<NHANVIEN> ketqua=new ArrayList<NHANVIEN>();
 		try {
-			Connection con=JDBCUtil.getConnection();
-			
-			String sql=" SELECT * FROM nhanvien WHERE tttk=true ";
-			
-			PreparedStatement pst=con.prepareStatement(sql);
-			
-			
-			ResultSet rs=pst.executeQuery();
-			while(rs.next()) {
-				int manv=rs.getInt("manv");	
-                                String hoten=rs.getString("hoten");	
-                                String diachi=rs.getString("diachi");	
-                                String email=rs.getString("email");	
-                                int dienthoai=rs.getInt("dienthoai");		
-                                boolean tttk=rs.getBoolean("tttk");	
-				NHANVIEN nv=new NHANVIEN(manv,hoten,diachi,email,dienthoai,tttk);
-				ketqua.add(nv);
-			}
-			JDBCUtil.closeConnection(con);
+                    Connection con=JDBCUtil.getConnection();
+                    String sql=" SELECT * FROM nhanvien WHERE tttk=true ";
+                    PreparedStatement pst=con.prepareStatement(sql);
+
+                    ResultSet rs=pst.executeQuery();
+                    while(rs.next()) {
+                            int manv=rs.getInt("manv");	
+                            String hoten=rs.getString("hoten");	
+                            String diachi=rs.getString("diachi");	
+                            String email=rs.getString("email");	
+                            int dienthoai=rs.getInt("dienthoai");		
+                            boolean tttk=rs.getBoolean("tttk");	
+                            NHANVIEN nv=new NHANVIEN(manv,hoten,diachi,email,dienthoai,tttk);
+                            ketqua.add(nv);
+                    }
+                    JDBCUtil.closeConnection(con);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
 			e.printStackTrace();
 		}
-		return ketqua;
+	return ketqua;
     }
-
+    
     @Override
     public NHANVIEN selectById(NHANVIEN t) {
         NHANVIEN ketqua=null;
@@ -240,8 +234,7 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 					"WHERE "+condition;
 			
 			PreparedStatement pst=con.prepareStatement(sql);
-			
-			
+	
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()) {
 				int manv=rs.getInt("manv");	
@@ -283,6 +276,32 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 			e.printStackTrace();
 		}
 		return IDnv;
+    }
+
+    public NHANVIEN getkhFromTK(TAIKHOAN t) {
+       NHANVIEN kq=null;
+       
+       try{
+           Connection con=JDBCUtil.getConnection();
+           String sql="SELECT * FROM nhanvien WHERE manv=?";
+           PreparedStatement pst=con.prepareStatement(sql);
+           pst.setInt(1,t.getMAKH());
+           ResultSet rs=pst.executeQuery();
+           while(rs.next()){
+               int makh=rs.getInt("manv");
+               String hoten=rs.getString("hoten");
+               String diachi=rs.getString("diachi");
+               int dienthoai=rs.getInt("dienthoai");
+               String email=rs.getString("email");
+               Boolean tttk =rs.getBoolean("tttk");
+               NHANVIEN tmp=new NHANVIEN(makh,hoten,diachi,email,dienthoai,tttk);
+               kq=tmp;
+           }
+       }catch(SQLException e){
+           e.printStackTrace();
+           System.out.print("co loi o getkhFromTK");
+       }
+       return kq;
     }
     
 }
