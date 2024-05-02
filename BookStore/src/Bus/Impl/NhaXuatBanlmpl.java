@@ -7,6 +7,7 @@ package Bus.Impl;
 import Bus.NhaXuatBan;
 import Dao.NHAXUATBANDAO;
 import Dto.NHAXUATBAN;
+import Dto.PHIEUNHAP;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
@@ -41,5 +42,7 @@ public class NhaXuatBanlmpl implements NhaXuatBan{
             model.addItem(row);
         }
     }
-    
+    public void SetTextNHAXUATBAN(javax.swing.JTextField j,PHIEUNHAP t) {
+        j.setText(t.getNoinhap());
+    }
 }

@@ -225,8 +225,8 @@ public class GiaoDienLogin extends javax.swing.JFrame {
         taiKhoanImpl qltk = new taiKhoanImpl();
         TAIKHOAN tk = qltk.checkDangNhap(tmp);
         //TAIKHOAN result=TAIKHOANDAO.getInstance().selectById(tk);
-        System.out.println(tk.getROLE());
         NHANVIEN test2=new NHANVIEN(tk.getMANV());
+        System.out.println(tk.getROLE());
         NHANVIEN nv=NHANVIENDAO.getInstance().selectById(test2);
         
         

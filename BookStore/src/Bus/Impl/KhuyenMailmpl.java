@@ -17,12 +17,14 @@ import javax.swing.JComboBox;
 public class KhuyenMailmpl implements KhuyenMai{
 
     @Override
-    public void danhsachKhuyenMai(JComboBox model) {
+    public void danhsachKhuyenMai(JComboBox model,int tongtien) {
         model.removeAllItems();
         ArrayList<KHUYENMAI> result=KHUYENMAIDAO.getInstance().selectActivePromotionsToday();
         for (KHUYENMAI tk : result) {
+            if(tk.getTongtiencanthiet()<=tongtien){                
             String row = tk.toString(); // Điều chỉnh dữ liệu tùy thuộc vào cách bạn muốn hiển thị
             model.addItem(row);
+            }
         }
        }
 

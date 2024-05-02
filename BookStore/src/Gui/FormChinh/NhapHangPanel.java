@@ -7,6 +7,7 @@ package Gui.FormChinh;
 
 import Bus.Impl.NhaXuatBanlmpl;
 import Bus.Impl.NhapHanglmpl;
+import Dao.PHIEUNHAPDAO;
 import Dao.SACHDAO;
 import Dto.NHANVIEN;
 import Dto.PHIEUNHAP;
@@ -118,6 +119,16 @@ public void loadAnh(SACH t) {
             ex.printStackTrace();
         }
     }  
+    public void setTextNCC(){
+        try {
+            NhapHanglmpl nhaphang=new NhapHanglmpl();
+            PHIEUNHAP result=nhaphang.PhieuNhapById(new PHIEUNHAP(ma_clicked_hoadon));
+            NhaXuatBanlmpl nxb=new NhaXuatBanlmpl();
+            nxb.SetTextNHAXUATBAN(NhaCC,result );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     public void loadtongtien(){
     int tongtien=0;
     for(int i=0;i<jTable1.getRowCount();i++){
@@ -467,6 +478,11 @@ public void loadNhanVien(NHANVIEN nvDM){
         NhaCC.setForeground(new java.awt.Color(0, 51, 51));
         NhaCC.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhà Cung Cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         NhaCC.setFocusable(false);
+        NhaCC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NhaCCActionPerformed(evt);
+            }
+        });
 
         jTable1.setBackground(new java.awt.Color(204, 255, 204));
         jTable1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -816,6 +832,7 @@ public void loadNhanVien(NHANVIEN nvDM){
             String maPHIEUNHAPStr = PhieuNhaptb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
             int maPn = Integer.parseInt(maPHIEUNHAPStr); // Chuyển đổi thành số nguyên
             ma_clicked_hoadon=maPn;
+            setTextNCC();
             PHIEUNHAP hd = new PHIEUNHAP(maPn);
             loadCHITIETPHIEUNHAPToTable(hd);
         }
@@ -1025,6 +1042,10 @@ public void loadNhanVien(NHANVIEN nvDM){
         // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
         model.setRowCount(0);
     }//GEN-LAST:event_XoaBtnMouseClicked
+
+    private void NhaCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NhaCCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NhaCCActionPerformed
     public void hide_button(){
         XoaBtn.setVisible(false);
         ThemBtn.setVisible(false);

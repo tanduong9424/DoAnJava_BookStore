@@ -134,8 +134,13 @@ public void loadNhanVien(NHANVIEN nvDM){
         nv.setText(manv+"");
 }
 public void loadKhuyenMai(){
+    int tongtien=0;
+    if(!(sum.getText()).isEmpty()){
+        tongtien=Integer.parseInt(sum.getText());
+    }
+
     KhuyenMailmpl km=new KhuyenMailmpl();
-    km.danhsachKhuyenMai(comboxKH1);
+    km.danhsachKhuyenMai(comboxKH1,tongtien);
 }
 
     /**
