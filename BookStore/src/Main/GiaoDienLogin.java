@@ -49,14 +49,16 @@ public class GiaoDienLogin extends javax.swing.JFrame {
         txMatKhau = new javax.swing.JPasswordField();
         plHeader = new javax.swing.JPanel();
         lbHeader = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        exit = new javax.swing.JLabel();
         lbAva = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         plForm.setBackground(new java.awt.Color(0, 153, 153));
 
-        btnDangNhap.setBackground(new java.awt.Color(0, 255, 153));
+        plDangNhap.setForeground(new java.awt.Color(0, 153, 153));
+
+        btnDangNhap.setBackground(new java.awt.Color(0, 153, 153));
         btnDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnDangNhap.setForeground(new java.awt.Color(10, 10, 10));
         btnDangNhap.setText("ĐĂNG NHẬP");
@@ -76,13 +78,13 @@ public class GiaoDienLogin extends javax.swing.JFrame {
         plDangNhapLayout.setVerticalGroup(
             plDangNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plDangNhapLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        plInput.setBackground(new java.awt.Color(0, 51, 51));
+        plInput.setBackground(new java.awt.Color(0, 102, 102));
 
-        txTenDangNhap.setBackground(new java.awt.Color(102, 255, 204));
+        txTenDangNhap.setBackground(new java.awt.Color(255, 255, 204));
         txTenDangNhap.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txTenDangNhap.setCaretColor(new java.awt.Color(0, 0, 255));
         txTenDangNhap.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -95,7 +97,7 @@ public class GiaoDienLogin extends javax.swing.JFrame {
 
         lbImgUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-account-30.png"))); // NOI18N
 
-        txMatKhau.setBackground(new java.awt.Color(0, 255, 204));
+        txMatKhau.setBackground(new java.awt.Color(255, 255, 204));
         txMatKhau.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txMatKhau.setCaretColor(new java.awt.Color(0, 0, 204));
         txMatKhau.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -130,25 +132,25 @@ public class GiaoDienLogin extends javax.swing.JFrame {
                     .addGroup(plInputLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(txTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)))
                 .addGroup(plInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbImgPass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txMatKhau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44))
         );
 
-        plHeader.setBackground(new java.awt.Color(0, 51, 51));
+        plHeader.setBackground(new java.awt.Color(0, 102, 102));
 
         lbHeader.setBackground(new java.awt.Color(0, 255, 153));
         lbHeader.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lbHeader.setForeground(new java.awt.Color(204, 255, 204));
+        lbHeader.setForeground(new java.awt.Color(255, 255, 255));
         lbHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbHeader.setText("QUẢN LÝ CỬA HÀNG SÁCH");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_cancel_30px_1.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_cancel_30px_1.png"))); // NOI18N
+        exit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                exitMouseClicked(evt);
             }
         });
 
@@ -160,7 +162,7 @@ public class GiaoDienLogin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lbHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         plHeaderLayout.setVerticalGroup(
@@ -169,7 +171,7 @@ public class GiaoDienLogin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(plHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plHeaderLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(exit)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(lbHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
                 .addContainerGap())
@@ -195,8 +197,8 @@ public class GiaoDienLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbAva)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(plInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(plInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(plDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -221,40 +223,43 @@ public class GiaoDienLogin extends javax.swing.JFrame {
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         String tentk = txTenDangNhap.getText();
         String mk = txMatKhau.getText();
-        TAIKHOAN tmp=new TAIKHOAN(tentk,mk);
+        
         taiKhoanImpl qltk = new taiKhoanImpl();
-        TAIKHOAN tk = qltk.checkDangNhap(tmp);
-        //TAIKHOAN result=TAIKHOANDAO.getInstance().selectById(tk);
-        NHANVIEN test2=new NHANVIEN(tk.getMANV());
-        System.out.println(tk.getROLE());
-        NHANVIEN nv=NHANVIENDAO.getInstance().selectById(test2);
-        
-        
-        if (tk != null) {
-            GiaoDienChinh main=null;
-            if(tk.getROLE().equals("Nhân Viên")){
-                main=new GiaoDienChinh(nv);
-                
-            }
-            else if(tk.getROLE().equals("Quản Trị Viên")){
-                main=new GiaoDienChinh();
-            }
-            main.setCauchao(tk.getUSERNAME());
-            main.setVisible(true);
-            main.display(tk.getROLE());
-            this.dispose();
-                
+        TAIKHOAN tk_correct = qltk.checkDangNhapTK(tentk);
 
-        } else {
-            JOptionPane.showMessageDialog(this, "Sai thông tin đăng nhập!");
+        if (tk_correct != null) {
+            GiaoDienChinh main=null;
+            Boolean mk_correct=qltk.checkDangNhapMK(tk_correct,mk);
+            
+            if (mk_correct==true){
+                if(tk_correct.getROLE().equals("Nhân Viên")){//nếu là nhân viên thì lấy ra nhân viên tmp để bỏ vào giao diện setid nv ở bán hàng
+                    NHANVIEN nvtmp=new NHANVIEN(tk_correct.getMANV());
+                    NHANVIEN nv=NHANVIENDAO.getInstance().selectById(nvtmp);
+                    main=new GiaoDienChinh(nv);
+                }
+                else if(tk_correct.getROLE().equals("Quản Trị Viên")){
+                    main=new GiaoDienChinh();
+                }
+                main.setCauchao(tk_correct.getUSERNAME());
+                main.setVisible(true);
+                main.display(tk_correct.getROLE());
+                this.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Sai mật khẩu đăng nhập!");
+                txMatKhau.requestFocus();
+            }
+        } 
+        else {
+            JOptionPane.showMessageDialog(this, "Sai tài khoản đăng nhập!");
             txTenDangNhap.requestFocus();
         }
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_exitMouseClicked
 
     private void txTenDangNhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txTenDangNhapKeyPressed
         // TODO add your handling code here:
@@ -307,7 +312,7 @@ public class GiaoDienLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangNhap;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel exit;
     private javax.swing.JLabel lbAva;
     private javax.swing.JLabel lbHeader;
     private javax.swing.JLabel lbImgPass;

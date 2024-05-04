@@ -165,33 +165,6 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 		}
 		return ketqua;
     }
-    //nhân viên còn hoạt động
-    public ArrayList selectAllEXCEPT_TTTK_FALSE() {
-        ArrayList<NHANVIEN> ketqua=new ArrayList<NHANVIEN>();
-		try {
-                    Connection con=JDBCUtil.getConnection();
-                    String sql=" SELECT * FROM nhanvien WHERE tttk=true ";
-                    PreparedStatement pst=con.prepareStatement(sql);
-
-                    ResultSet rs=pst.executeQuery();
-                    while(rs.next()) {
-                            int manv=rs.getInt("manv");	
-                            String hoten=rs.getString("hoten");	
-                            String diachi=rs.getString("diachi");	
-                            String email=rs.getString("email");	
-                            int dienthoai=rs.getInt("dienthoai");		
-                            boolean tttk=rs.getBoolean("tttk");	
-                            NHANVIEN nv=new NHANVIEN(manv,hoten,diachi,email,dienthoai,tttk);
-                            ketqua.add(nv);
-                    }
-                    JDBCUtil.closeConnection(con);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
-			e.printStackTrace();
-		}
-	return ketqua;
-    }
     
     @Override
     public NHANVIEN selectById(NHANVIEN t) {
@@ -278,14 +251,14 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
 		return IDnv;
     }
 
-    public NHANVIEN getkhFromTK(TAIKHOAN t) {
+    public NHANVIEN SearchNVByID(TAIKHOAN t) {
        NHANVIEN kq=null;
        
        try{
            Connection con=JDBCUtil.getConnection();
-           String sql="SELECT * FROM nhanvien WHERE manv=?";
+           String sql="SELECT * FROM nhanvien WHERE manv=? AND tttk=true";
            PreparedStatement pst=con.prepareStatement(sql);
-           pst.setInt(1,t.getMAKH());
+           pst.setInt(1,t.getMANV());
            ResultSet rs=pst.executeQuery();
            while(rs.next()){
                int makh=rs.getInt("manv");
@@ -303,5 +276,60 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
        }
        return kq;
     }
-    
+    public ArrayList<NHANVIEN> timkiemNangCao(String input, String type) {
+        ArrayList<NHANVIEN> ketqua = new ArrayList<>();
+        String sql;
+        try {
+            Connection con = JDBCUtil.getConnection();
+            PreparedStatement pst = null;
+            switch (type) {
+                case "Mã Nhân Viên":
+                    sql = "SELECT * FROM nhanvien WHERE CAST(manv AS VARCHAR(20)) LIKE ? AND tttk=true";
+                    pst = con.prepareStatement(sql);
+                    pst.setString(1, "%" + input + "%");
+                    break;
+                case "Tên Nhân Viên":
+                    sql = "SELECT * FROM nhanvien WHERE LOWER(hoten) LIKE ? AND tttk=true";
+                    pst = con.prepareStatement(sql);
+                    pst.setString(1, "%" + input.toLowerCase() + "%");
+                    break;
+                case "Địa Chỉ":
+                    sql = "SELECT * FROM nhanvien WHERE LOWER(diachi) LIKE ? AND tttk=true";
+                    pst = con.prepareStatement(sql);
+                    pst.setString(1, "%" + input.toLowerCase() + "%");
+                    break;
+                case "Số Điện Thoại":
+                    sql = "SELECT * FROM nhanvien WHERE CAST(dienthoai AS VARCHAR(20)) LIKE ? AND tttk=true";
+                    pst = con.prepareStatement(sql);
+                    pst.setString(1, "%" + input + "%");
+                    break;
+                case "Email":
+                    sql = "SELECT * FROM nhanvien WHERE LOWER(email) LIKE ? AND tttk=true";
+                    pst = con.prepareStatement(sql);
+                    pst.setString(1, "%" + input.toLowerCase() + "%");
+                    break;
+            }
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int manv = rs.getInt("manv");
+                String hoten = rs.getString("hoten");
+                String diachi = rs.getString("diachi");
+                String email = rs.getString("email");
+                int dienthoai = rs.getInt("dienthoai");
+                boolean tttk = rs.getBoolean("tttk");
+                NHANVIEN nhanVien = new NHANVIEN(manv, hoten, diachi, email, dienthoai, tttk);
+                ketqua.add(nhanVien);
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.print("co loi o timkiemnangcao NHANVIENDAO\n");
+            e.printStackTrace();
+        }
+        return ketqua;
+    }
+
+
+
+
+
 }

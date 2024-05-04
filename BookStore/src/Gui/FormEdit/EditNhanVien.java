@@ -70,11 +70,6 @@ public class EditNhanVien extends javax.swing.JFrame {
         mail.setBackground(new java.awt.Color(204, 255, 204));
         mail.setForeground(new java.awt.Color(0, 51, 5));
         mail.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        mail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mailActionPerformed(evt);
-            }
-        });
 
         phone.setBackground(new java.awt.Color(204, 255, 204));
         phone.setForeground(new java.awt.Color(0, 51, 5));
@@ -211,11 +206,13 @@ public class EditNhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_exitMouseClicked
-
-    private void mailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mailActionPerformed
-
+    public void setData(String manv,String tennv,String diachi,String email,String sdt){
+        MaNV.setText(manv);
+        name.setText(tennv);
+        dchi.setText(diachi);
+        mail.setText(email);
+        phone.setText(sdt);
+    }
     /**
      * @param args the command line arguments
      */
@@ -267,7 +264,4 @@ public class EditNhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel submitbtn;
     // End of variables declaration//GEN-END:variables
 
-    public void addThongTin(String valueAsString) {
-        MaNV.setText(valueAsString);
-    }
 }

@@ -108,9 +108,5 @@ public class NhapHanglmpl implements NhapHang{
         System.out.println("da xoa "+row);
         dataModel.removeRow(row);
     }
-    public PHIEUNHAP PhieuNhapById(PHIEUNHAP t) {
-        PHIEUNHAP kq=PHIEUNHAPDAO.getInstance().selectById(t);
-        return kq;
-    }    
     
 }

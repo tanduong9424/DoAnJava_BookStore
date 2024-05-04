@@ -232,11 +232,11 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
         }
        return ketqua;
     }
-    public KHACHANG getnvFromTK(TAIKHOAN t){
+    public KHACHANG SearchKHByID(TAIKHOAN t){
        KHACHANG kq=null;
         try{
             Connection con=JDBCUtil.getConnection();
-            String sql="SELECT * FROM khachhang WHERE makh=?";
+            String sql="SELECT * FROM khachhang WHERE makh=? AND tttk=true";
             PreparedStatement pst=con.prepareStatement(sql);
             pst.setInt(1,t.getMAKH());
             

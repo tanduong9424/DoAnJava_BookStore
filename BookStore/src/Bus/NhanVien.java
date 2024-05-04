@@ -17,7 +17,7 @@ public interface NhanVien {
     Boolean themNhanVien(NHANVIEN taiKhoan);
     Boolean xoaNhanVien(NHANVIEN taiKhoan);
     Boolean suaNhanVien(NHANVIEN taiKhoan);
-    ArrayList<NHANVIEN> timKiem(String kieuTimKiem,String inputText);
+    ArrayList<NHANVIEN> timKiem(String text,String kieuTimKiem);
     ArrayList<NHANVIEN> getAllTaiKhoan();
     NHANVIEN getByID(NHANVIEN nhanvien);
     NHANVIEN getNamebyTk(TAIKHOAN t);

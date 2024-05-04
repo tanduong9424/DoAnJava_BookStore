@@ -223,7 +223,6 @@ public class PanelNhapSL_BanHang extends javax.swing.JFrame {
         BanHanglmpl banhang=new BanHanglmpl();
         banhang.TaomoiChiTietHoaDon(dataModel, t, sl);
         this.banhangs.loadtongtien();
-        this.banhangs.loadKhuyenMai();
         this.dispose();
 
     }//GEN-LAST:event_submitbtnMouseClicked
