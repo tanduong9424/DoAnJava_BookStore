@@ -4,6 +4,7 @@
  */
 package Gui.FormAdd;
 
+import Bus.Impl.KhuyenMailmpl;
 import Dto.KHUYENMAI;
 import com.github.lgooddatepicker.components.DatePicker;
 import java.time.LocalDate;
@@ -16,9 +17,10 @@ import static org.apache.logging.log4j.util.Strings.isBlank;
  * @author DELL
  */
 public class AddKhuyenMai extends javax.swing.JFrame {
-    Date date1;//ngày tạo km
-    Date date2;//ngày bắt đầu km
-    Date date3;//ngày kết thúc km
+    java.sql.Date date1;//ngày tạo km
+    java.sql.Date date2;//ngày bắt đầu km
+    java.sql.Date date3;//ngày kết thúc km
+    KhuyenMailmpl khuyenMailmpl = new KhuyenMailmpl();
     /**
      * Creates new form AddKhuyenMai
      */
@@ -270,9 +272,8 @@ public class AddKhuyenMai extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Tổng tiền cần thiết nhập không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        /*String makm=MaKM.getText().toString();
-        KHUYENMAI km =new KHUYENMAI(makm,date1,date2,date3,tongtienInt,phantramInt,true);
-        KhuyenMaiTmpl.themKhuyenMai(km);*/
+        KHUYENMAI km =new KHUYENMAI(0,date1,date2,date3,tongtienInt,phantramInt,true);
+        khuyenMailmpl.addKhuyenMai(km);
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 

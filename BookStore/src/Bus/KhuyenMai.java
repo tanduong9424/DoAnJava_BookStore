@@ -5,6 +5,7 @@
 package Bus;
 
 import Dto.KHUYENMAI;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 
 /**
@@ -13,7 +14,8 @@ import javax.swing.JComboBox;
  */
 public interface KhuyenMai {
     void danhsachKhuyenMai(JComboBox model);
-    void addKhuyenMai(KHUYENMAI t);
-    void deleteKhuyeMai(KHUYENMAI t);
-    void updateKhuyenMai(KHUYENMAI t);
+    Boolean addKhuyenMai(KHUYENMAI t);
+    Boolean deleteKhuyeMai(KHUYENMAI t);
+    Boolean updateKhuyenMai(KHUYENMAI t);
+    ArrayList<KHUYENMAI> getAllKM();
 }

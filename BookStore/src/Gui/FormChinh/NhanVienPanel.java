@@ -30,7 +30,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
     public NhanVienPanel() {
         initComponents();
     }
-        public void loadNhanVienToTable(){
+    public void loadNhanVienToTable(){
         DefaultTableModel model = (DefaultTableModel) DataNhanVien.getModel();
         model.setRowCount(0);
 

@@ -4,15 +4,16 @@
  */
 package Gui.FormChinh;
 
+import Dto.KHUYENMAI;
 import Gui.FormAdd.AddKhuyenMai;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static org.apache.logging.log4j.util.Strings.isBlank;
 import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.components.DatePickerSettings;
-import java.awt.Color;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import Bus.Impl.KhuyenMailmpl;
+
+
 /**
  *
  * @author DELL
@@ -21,10 +22,27 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
     /**
      * Creates new form KhuyenMaiPanel
      */
+    KhuyenMailmpl khuyenMailmpl = new KhuyenMailmpl();
+    
     public KhuyenMaiPanel() {
         initComponents();
     }
+    public void loadKhuyenMaiToTable(){
+        DefaultTableModel model = (DefaultTableModel) DataKhuyenMai.getModel();
+        model.setRowCount(0);
 
+        try {
+            System.out.print("hoạt động");
+            ArrayList<KHUYENMAI> listKhuyenMai = khuyenMailmpl.getAllKM();
+
+            for (KHUYENMAI khuyenmai : listKhuyenMai) {
+                Object[] row = {khuyenmai.getMakhuyenmai(),khuyenmai.getNgaytao(),khuyenmai.getNgaybatdau(),khuyenmai.getNgayketthuc(),khuyenmai.getTongtiencanthiet(),khuyenmai.getPhantramgiam()};
+                model.addRow(row);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -172,6 +190,15 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
         Sua.setForeground(new java.awt.Color(0, 51, 51));
         Sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_maintenance_30px.png"))); // NOI18N
         Sua.setText("Sửa Thông tin khuyến mãi");
+        Sua.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                SuaAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         Sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SuaActionPerformed(evt);
@@ -221,7 +248,7 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -243,7 +270,7 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
                         .addGap(27, 27, 27)
                         .addComponent(Xoa))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 232, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,48 +320,48 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         AddKhuyenMai x = new AddKhuyenMai();
         x.setVisible(true);
-        /*x.addWindowListener(new java.awt.event.WindowAdapter() {
+        x.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                 loadKhuyenMaiToTable();
             }
-        });*/
+        });
     }//GEN-LAST:event_ThemActionPerformed
 
     private void XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoaActionPerformed
         // TODO add your handling code here:
-        /*int selectedRowIdx = KhachHangtb.getSelectedRow();
+        int selectedRowIdx = DataKhuyenMai.getSelectedRow();
         if (selectedRowIdx != -1) {
-            Object value = KhachHangtb.getModel().getValueAt(selectedRowIdx, 0);
+            Object value = DataKhuyenMai.getModel().getValueAt(selectedRowIdx, 0);
             int intValue = Integer.parseInt(value.toString());
-            KHACHANG khachang = new KHACHANG(intValue);
-            khaHangImpl.xoaKhachHang(khachang);
-            loadBooksToTable();
+            KHUYENMAI khuyenmai = new KHUYENMAI(intValue);
+            khuyenMailmpl.deleteKhuyeMai(khuyenmai);
+            loadKhuyenMaiToTable();
         }else{
             JOptionPane.showMessageDialog(this, "Vui Lòng Chọn tài khoản muốn xóa", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
 
-        }*/
+        }
     }//GEN-LAST:event_XoaActionPerformed
 
     private void SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaActionPerformed
         // TODO add your handling code here:
-        /*int selectedRowIdx = KhachHangtb.getSelectedRow();
-        if (selectedRowIdx != -1) {
-            EditKhachHang y = new EditKhachHang();
-            y.setVisible(true);
-            Object value = KhachHangtb.getModel().getValueAt(selectedRowIdx, 0);
-            String valueAsString = value.toString();
-            y.addThongTin(valueAsString);
-            y.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                    loadBooksToTable();
-                }
-            });
-        }else{
-            JOptionPane.showMessageDialog(this, "Vui Lòng Chọn tài khoản muốn Sửa", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
-
-        }*/
+        int selectedRowIdx = DataKhuyenMai.getSelectedRow();
+//        if (selectedRowIdx != -1) {
+//            EditKhuyenMai y = new EditKhuyenMai();
+//            y.setVisible(true);
+//            Object value = KhachHangtb.getModel().getValueAt(selectedRowIdx, 0);
+//            String valueAsString = value.toString();
+//            y.addThongTin(valueAsString);
+//            y.addWindowListener(new java.awt.event.WindowAdapter() {
+//                @Override
+//                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+//                    loadBooksToTable();
+//                }
+//            });
+//        }else{
+//            JOptionPane.showMessageDialog(this, "Vui Lòng Chọn tài khoản muốn Sửa", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
+//
+//        }
     }//GEN-LAST:event_SuaActionPerformed
 
     private void ChonNgay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChonNgay1ActionPerformed
@@ -360,6 +387,10 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
         });
     JOptionPane.showMessageDialog(this, datePicker, "Chọn ngày kết thúc", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_ChonNgay2ActionPerformed
+
+    private void SuaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_SuaAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SuaAncestorAdded
     public void hide_button(){
         Them.setVisible(false);
         Xoa.setVisible(false);

@@ -8,6 +8,7 @@ import Bus.Impl.khachHangImpl;
 import Dto.KHACHANG;
 import Gui.FormAdd.AddKhachHang;
 import Gui.FormEdit.EditKhachHang;
+import java.awt.event.KeyEvent;
 
 
 
@@ -41,6 +42,9 @@ public class KhachHangPanel extends javax.swing.JPanel {
                 Object[] row = {khachang.getMakh(), khachang.getHoten(), khachang.getDiachi(), khachang.getDienthoai(), khachang.getEmail()};
                 model.addRow(row);
             }
+            String choose=(String) thuoctinh.getSelectedItem();
+            inputSearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, choose, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51)));
+  
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -204,6 +208,11 @@ public class KhachHangPanel extends javax.swing.JPanel {
                 inputSearchActionPerformed(evt);
             }
         });
+        inputSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputSearchKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelSearchLayout = new javax.swing.GroupLayout(panelSearch);
         panelSearch.setLayout(panelSearchLayout);
@@ -228,6 +237,8 @@ public class KhachHangPanel extends javax.swing.JPanel {
                     .addComponent(thuoctinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0))
         );
+
+        inputSearch.getAccessibleContext().setAccessibleName("Mã Khác");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -316,6 +327,8 @@ public class KhachHangPanel extends javax.swing.JPanel {
 
     private void thuoctinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thuoctinhActionPerformed
         // TODO add your handling code here:
+        String choose=(String) thuoctinh.getSelectedItem();
+        inputSearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, choose, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51)));
     }//GEN-LAST:event_thuoctinhActionPerformed
 
     private void inputSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSearchActionPerformed
@@ -338,6 +351,13 @@ public class KhachHangPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_searchActionPerformed
+
+    private void inputSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSearchKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            search.doClick();
+        }
+    }//GEN-LAST:event_inputSearchKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
