@@ -18,4 +18,5 @@ public interface KhuyenMai {
     Boolean deleteKhuyeMai(KHUYENMAI t);
     Boolean updateKhuyenMai(KHUYENMAI t);
     ArrayList<KHUYENMAI> getAllKM();
+    ArrayList<KHUYENMAI> timKiem(String kieuTimKiem,String inputText,String fromDate , String toDate);
 }

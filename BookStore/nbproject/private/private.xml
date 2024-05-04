@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DELL/Desktop/TIEPTUC_DoAnJava_BookStore/BookStore/src/Bus/Impl/taiKhoanImpl.java</file>
-            <file>file:/C:/Users/DELL/Desktop/TIEPTUC_DoAnJava_BookStore/BookStore/src/Dao/DAOInterface.java</file>
-            <file>file:/C:/Users/DELL/Desktop/TIEPTUC_DoAnJava_BookStore/BookStore/src/Gui/FormChinh/TaiKhoanPanel.java</file>
-            <file>file:/C:/Users/DELL/Desktop/TIEPTUC_DoAnJava_BookStore/BookStore/src/Gui/FormEdit/EditTaiKhoan.java</file>
-            <file>file:/C:/Users/DELL/Desktop/TIEPTUC_DoAnJava_BookStore/BookStore/src/Dao/TAIKHOANDAO.java</file>
+            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/conDatabase/JDBCUtil.java</file>
+            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormChinh/KhachHangPanel.java</file>
+            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormChinh/KhuyenMaiPanel.java</file>
+            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Dao/KHUYENMAIDAO.java</file>
+            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Bus/Impl/KhuyenMailmpl.java</file>
         </group>
     </open-files>
 </project-private>

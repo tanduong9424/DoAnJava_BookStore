@@ -284,20 +284,25 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) DataKhuyenMai.getModel();
-        model.setRowCount(0);
-
+        
         String kieuTimKiem = (String) thuoctinh.getSelectedItem();
         String inputText = inputsearch.getText();
+        String fromDate = from.getText();
+        String toDate = to.getText();
         if (isBlank(inputText)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa cần tìm", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        /*ArrayList<NHANVIEN> tkList = nhanVienImpl1.timKiem(kieuTimKiem,inputText);
-        for (NHANVIEN nhanVien : tkList) {
-            Object[] row = {nhanVien.getManv(), nhanVien.getHoten(), nhanVien.getNgaytao(),nhanVien.getDiachi(),nhanVien.getDienthoai(),nhanVien.getEmail()};
+        
+        DefaultTableModel model = (DefaultTableModel) DataKhuyenMai.getModel();
+        model.setRowCount(0);
+        
+        
+        ArrayList<KHUYENMAI> listKhuyenMai = khuyenMailmpl.timKiem(kieuTimKiem,inputText,fromDate,toDate);
+        for (KHUYENMAI khuyenmai : listKhuyenMai) {
+            Object[] row = {khuyenmai.getMakhuyenmai(),khuyenmai.getNgaytao(),khuyenmai.getNgaybatdau(),khuyenmai.getNgayketthuc(),khuyenmai.getTongtiencanthiet(),khuyenmai.getPhantramgiam()};
             model.addRow(row);
-        }*/
+        }
     }//GEN-LAST:event_searchActionPerformed
 
     private void thuoctinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thuoctinhActionPerformed
@@ -352,7 +357,7 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
             y.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                    //loadBooksToTable();
+                    loadKhuyenMaiToTable();
                 }
             });
         }else{

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: May 04, 2024 at 04:26 PM
+-- Host: 127.0.0.1
+-- Generation Time: May 01, 2024 at 12:00 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,7 +40,10 @@ CREATE TABLE `chitiethoadon` (
 --
 
 INSERT INTO `chitiethoadon` (`MAHOADON`, `MASACH`, `SOLUONG`, `GIATIEN`, `THANHTIEN`) VALUES
-(44, 12, 1, 40000, 40000);
+(38, 1, 50000, 2, 25000),
+(38, 2, 22000, 1, 22000),
+(39, 1, 25000, 1, 25000),
+(39, 2, 22000, 1, 22000);
 
 -- --------------------------------------------------------
 
@@ -61,15 +64,13 @@ CREATE TABLE `chitietphieunhap` (
 --
 
 INSERT INTO `chitietphieunhap` (`mapn`, `MASACH`, `gianhap`, `soluong`, `tongtien`) VALUES
-(9, 9, 35000, 100, 3500000),
-(9, 10, 20000, 100, 2000000),
-(9, 11, 90000, 100, 9000000),
-(9, 12, 40000, 100, 4000000),
-(9, 13, 148000, 100, 14800000),
-(9, 14, 70000, 100, 7000000),
-(9, 15, 95000, 100, 9500000),
-(11, 10, 20000, 3, 60000),
-(11, 15, 95000, 5, 475000);
+(3, 1, 5, 22000, 110000),
+(3, 8, 2, 40000, 80000),
+(4, 8, 6, 30000, 180000),
+(4, 2, 9, 22000, 198000),
+(4, 1, 5, 20000, 100000),
+(5, 8, 1, 50000, 50000),
+(6, 2, 22000, 1, 22000);
 
 -- --------------------------------------------------------
 
@@ -92,7 +93,8 @@ CREATE TABLE `hoadon` (
 --
 
 INSERT INTO `hoadon` (`MAHOADON`, `makh`, `manv`, `NGAYLAP`, `TONGTIEN`, `makhuyenmai`, `tthd`) VALUES
-(44, 1, 1, '2024-05-01', 36000, 1, 1);
+(38, 2, 1, '2024-04-26', 72000, NULL, 1),
+(39, 1, 1, '2024-04-27', 47000, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -114,8 +116,10 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`makh`, `hoten`, `diachi`, `email`, `dienthoai`, `tttk`) VALUES
-(1, 'Nguyễn Xuân Dương', 'Đà Nẵng', 'xduong@gmail.com', 456433453, 1),
-(2, 'Huỳnh Tấn Huy', 'Ninh Bình', 'thuy@gmail.com', 533563422, 1);
+(1, 'huỳnh tấn dương', '12', 'sadfsdf@gmail.com', 1213323, 1),
+(2, 'HUY', '1221', 'HUY@', 239492394, 0),
+(3, 'duy', 'nhà mới', 'duydan@gmai.com', 123456789, 1),
+(4, 'đào', '098', '098', 98, 1);
 
 -- --------------------------------------------------------
 
@@ -161,10 +165,10 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`manv`, `hoten`, `diachi`, `email`, `dienthoai`, `tttk`) VALUES
-(1, 'Nguyễn Xuân Duy', 'Tp HCM', 'duy@gmail.com', 94385435, 1),
-(5, 'Lê Hoàng Huy', 'Tp HCM', 'huy@gmail.com', 943854343, 1),
-(6, 'Lương Cẩm Đào', 'Tp HCM', 'dao@gmail.com', 458345663, 1),
-(10, 'Huỳnh Tấn Dương', 'TpHCM', 'duong@gmail.com', 373148245, 1);
+(1, 'huy', '179', '@gmail.com', 9, 0),
+(2, 'dương', '1', '1', 1, 1),
+(5, 'huy', '179', '@gmail.com', 9, 1),
+(6, 'huy', '179', '@gmail.com', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -183,11 +187,7 @@ CREATE TABLE `nhaxuatban` (
 
 INSERT INTO `nhaxuatban` (`TENNHAXUATBAN`, `ISHIDDEN`) VALUES
 ('Kim Đồng', 0),
-('Nhà Xuất Bản Giáo Dục', 0),
-('Nhà xuất bản Trẻ', 0),
-('Nhà xuất bản văn học', 0),
-('Nhà Xuất Bản Xây Dựng', 0),
-('Nhà Xuất Bản Đại Học Quốc Gia TP.HCM', 0);
+('Nhà Xuất Bản Giáo Dục', 0);
 
 -- --------------------------------------------------------
 
@@ -208,8 +208,11 @@ CREATE TABLE `phieunhap` (
 --
 
 INSERT INTO `phieunhap` (`mapn`, `manv`, `noinhap`, `tongtien`, `ngaynhap`) VALUES
-(9, 1, ' Công Ty Cổ Phần Phát Hành Sách Tp. HCM', 49800000, '2024-05-01'),
-(11, 1, ' Công Ty Cổ Phần Phát Hành Sách Tp. HCM', 535000, '2024-05-01');
+(1, 1, 'ĐẠI HỌC SÀI GÒN', 50000, '2024-04-23'),
+(3, 1, '', 190000, '2024-04-30'),
+(4, 1, '', 478000, '2024-04-30'),
+(5, 1, '', 50000, '2024-04-30'),
+(6, 1, '', 22000, '2024-04-30');
 
 -- --------------------------------------------------------
 
@@ -233,13 +236,9 @@ CREATE TABLE `sach` (
 --
 
 INSERT INTO `sach` (`MASACH`, `TENSACH`, `IMAGE`, `SOLUONG`, `GIABIA`, `LANTAIBAN`, `TENNHAXUATBAN`, `ISHIDDEN`) VALUES
-(9, 'Frieren tập5', 'C:\\Users\\DELL\\Desktop\\TIEPTUC_DoAnJava_BookStore\\BookStore\\src\\images\\Book_img\\frieren.jpg', 99, 35000, 1, 'Kim Đồng', 0),
-(10, 'Doraemon tập 1', 'C:\\Users\\DELL\\Desktop\\TIEPTUC_DoAnJava_BookStore\\BookStore\\src\\images\\Book_img\\doraemon.jpg', 100, 20000, 1, 'Kim Đồng', 0),
-(11, 'Cho tôi xin một vé đi tuổi thơ', 'C:\\Users\\DELL\\Desktop\\TIEPTUC_DoAnJava_BookStore\\BookStore\\src\\images\\Book_img\\chotoixin1vedituoitho.jpg', 98, 90000, 2, 'Nhà xuất bản Trẻ', 0),
-(12, 'Dế Mèn phiêu lưu ký', 'C:\\Users\\DELL\\Desktop\\TIEPTUC_DoAnJava_BookStore\\BookStore\\src\\images\\Book_img\\demen.jpg', 97, 40000, 3, 'Kim Đồng', 0),
-(13, 'Đứa trẻ hiểu chuyện thường không có kẹo ăn', 'C:\\Users\\DELL\\Desktop\\TIEPTUC_DoAnJava_BookStore\\BookStore\\src\\images\\Book_img\\dua-tre-hieu-chuyen-thuong-khong-co-keo-an.jpg', 100, 148000, 5, 'Nhà xuất bản văn học', 0),
-(14, 'Giải tích 1', 'C:\\Users\\DELL\\Desktop\\TIEPTUC_DoAnJava_BookStore\\BookStore\\src\\images\\Book_img\\gt1.jpg', 99, 70000, 3, 'Nhà Xuất Bản Đại Học Quốc Gia TP.HCM', 0),
-(15, 'Lập trình Java', 'C:\\Users\\DELL\\Desktop\\TIEPTUC_DoAnJava_BookStore\\BookStore\\src\\images\\Book_img\\java.png', 105, 95000, 6, 'Nhà Xuất Bản Xây Dựng', 0);
+(1, 'Doreamon', NULL, 20001, 25000, 5, 'Kim Đồng', 0),
+(2, 'Conan', NULL, 22001, 22000, 2, 'Kim Đồng', 0),
+(8, 'Dragon Ball', 'C:\\Users\\Admin\\Pictures\\Saved Pictures\\superhuman.jpg', 80001, 50000, 2, 'Kim Đồng', 0);
 
 -- --------------------------------------------------------
 
@@ -260,14 +259,10 @@ CREATE TABLE `taikhoan` (
 --
 
 INSERT INTO `taikhoan` (`USERNAME`, `PASSWORD`, `ROLE`, `makh`, `manv`) VALUES
-('aa', 'ssssd', 'Khách Hàng', 2, NULL),
-('admin', 'admin', 'Quản Trị Viên', NULL, NULL),
-('duongkh', 'vvvv', 'Khách Hàng', 1, NULL),
-('duynv', '123', 'Nhân Viên', NULL, 1),
-('duythongkeeeeeeee', 'aaaa', 'Nhân Viên', NULL, 1),
-('duyxxx1111', 'sss', 'Nhân Viên', NULL, 1),
-('huygoblin@gmail.com', '123456', 'Nhân Viên', NULL, 5),
-('huyyyyyyyyyyyyyyyyyyyy', 'aaaaaaaaaaaaaaa', 'Khách Hàng', 2, NULL);
+('dương', '123', 'nv', NULL, NULL),
+('duyduongngu', '123', 'Nhân Viên', NULL, 1),
+('huy', '123', 'Quản Trị Viên', NULL, NULL),
+('huygoblin@gmail.com', '123456', 'Nhân Viên', NULL, 5);
 
 --
 -- Indexes for dumped tables
@@ -350,13 +345,13 @@ ALTER TABLE `taikhoan`
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MAHOADON` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `MAHOADON` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `khuyenmai`
@@ -368,19 +363,19 @@ ALTER TABLE `khuyenmai`
 -- AUTO_INCREMENT for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `phieunhap`
 --
 ALTER TABLE `phieunhap`
-  MODIFY `mapn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `mapn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sach`
 --
 ALTER TABLE `sach`
-  MODIFY `MASACH` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `MASACH` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

@@ -29,13 +29,14 @@ public class KHUYENMAIDAO implements DAOInterface<KHUYENMAI>{
                     return ketqua;
                 }
 
-                String sql = "INSERT INTO khuyenmai (ngaytao, ngaybatdau, ngayketthuc, tongtiencanthiet, phantramgiam) VALUES (?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO khuyenmai (ngaytao, ngaybatdau, ngayketthuc, tongtiencanthiet, phantramgiam,ISHIDDEN) VALUES (?, ?, ?, ?, ?)";
                 PreparedStatement pst = con.prepareStatement(sql);
                 pst.setDate(1, t.getNgaytao());
                 pst.setDate(2, t.getNgaybatdau());
                 pst.setDate(3, t.getNgayketthuc());
                 pst.setInt(4, t.getTongtiencanthiet());
                 pst.setInt(5, t.getPhantramgiam());
+                pst.setInt(6, 0);
                 // Thực hiện executeUpdate() để thực hiện câu lệnh SQL INSERT
                 ketqua = pst.executeUpdate();
                 JDBCUtil.closeConnection(con);
@@ -157,7 +158,7 @@ public class KHUYENMAIDAO implements DAOInterface<KHUYENMAI>{
 			}
 	
 			// Nếu không có giá trị nào giống, thực hiện cập nhật
-			String sql = "DELETE khuyenmai "  + " WHERE makhuyenmai=? ";
+			String sql = "DELETE FROM khuyenmai "  + " WHERE makhuyenmai=? ";
 	
 			PreparedStatement pst = con.prepareStatement(sql);
 	

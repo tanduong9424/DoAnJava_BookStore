@@ -9,6 +9,7 @@ import Dao.KHUYENMAIDAO;
 import Dto.KHUYENMAI;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
+import static org.apache.logging.log4j.util.Strings.isBlank;
 
 /**
  *
@@ -46,6 +47,21 @@ public class KhuyenMailmpl implements KhuyenMai{
     public ArrayList<KHUYENMAI> getAllKM() {
         return khuyenmaidao.selectAll();  
     }
+
+    @Override
+    public ArrayList<KHUYENMAI> timKiem(String kieuTimKiem, String inputText, String fromDate, String toDate) {
+        if (isBlank(fromDate)|| isBlank(toDate)) {
+            KHUYENMAI t = new KHUYENMAI(Integer.parseInt(inputText));
+            ArrayList<KHUYENMAI> listKhuyenMai = new ArrayList<>();
+            listKhuyenMai.add(khuyenmaidao.selectById(t));
+            return listKhuyenMai;
+        }
+        else{
+            return null;
+        }
+    }
+
+
     
     
 }

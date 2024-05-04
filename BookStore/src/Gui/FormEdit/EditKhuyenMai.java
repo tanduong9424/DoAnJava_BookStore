@@ -7,8 +7,12 @@ package Gui.FormEdit;
 import Bus.Impl.KhuyenMailmpl;
 import Dto.KHUYENMAI;
 import com.github.lgooddatepicker.components.DatePicker;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static org.apache.logging.log4j.util.Strings.isBlank;
 
@@ -17,9 +21,7 @@ import static org.apache.logging.log4j.util.Strings.isBlank;
  * @author DELL
  */
 public class EditKhuyenMai extends javax.swing.JFrame {
-    java.sql.Date date1;//ngày tạo km
-    java.sql.Date date2;//ngày bắt đầu km
-    java.sql.Date date3;//ngày kết thúc km
+   
     KhuyenMailmpl khuyenMailmpl = new KhuyenMailmpl();
     /**
      * Creates new form EditKhuyenMai
@@ -253,14 +255,6 @@ public class EditKhuyenMai extends javax.swing.JFrame {
 
     private void ChonNgay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChonNgay1ActionPerformed
         // TODO add your handling code here:
-        DatePicker datePicker = new DatePicker();
-        datePicker.setDateToToday();//đặt mặc định là hôm nay
-        datePicker.addDateChangeListener((dce) -> {
-            ngaytao.setText(datePicker.getDateStringOrEmptyString());
-        });
-        LocalDate x = datePicker.getDate();
-        JOptionPane.showMessageDialog(this, datePicker, "Chọn ngày tạo khuyến mãi", JOptionPane.PLAIN_MESSAGE);
-        date1 = java.sql.Date.valueOf(x);
     }//GEN-LAST:event_ChonNgay1ActionPerformed
 
     private void ngaytaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ngaytaoActionPerformed
@@ -269,26 +263,10 @@ public class EditKhuyenMai extends javax.swing.JFrame {
 
     private void ChonNgay2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChonNgay2ActionPerformed
         // TODO add your handling code here:
-        DatePicker datePicker = new DatePicker();
-        datePicker.setDateToToday();//đặt mặc định là hôm nay
-        datePicker.addDateChangeListener((dce) -> {
-            ngaybatdau.setText(datePicker.getDateStringOrEmptyString());
-        });
-        LocalDate y = datePicker.getDate();
-        JOptionPane.showMessageDialog(this, datePicker, "Chọn ngày bắt đầu", JOptionPane.PLAIN_MESSAGE);
-        date2 = java.sql.Date.valueOf(y);
     }//GEN-LAST:event_ChonNgay2ActionPerformed
 
     private void ChonNgay3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChonNgay3ActionPerformed
         // TODO add your handling code here:
-        DatePicker datePicker = new DatePicker();
-        datePicker.setDateToToday();//đặt mặc định là hôm nay
-        datePicker.addDateChangeListener((dce) -> {
-            ngayketthuc.setText(datePicker.getDateStringOrEmptyString());
-        });
-        LocalDate z = datePicker.getDate();
-        JOptionPane.showMessageDialog(this, datePicker, "Chọn ngày kết thúc", JOptionPane.PLAIN_MESSAGE);
-        date3 = java.sql.Date.valueOf(z);
     }//GEN-LAST:event_ChonNgay3ActionPerformed
 
     private void ngayketthucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ngayketthucActionPerformed
@@ -298,6 +276,35 @@ public class EditKhuyenMai extends javax.swing.JFrame {
 
     private void submitbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbtnMouseClicked
         // TODO add your handling code here:
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        Date date1 = null;
+        Date date2 = null;
+        Date date3 = null;
+        
+        try {
+            date1 = dateFormat.parse(ngaytao.getText());
+            date2 = dateFormat.parse(ngaybatdau.getText());
+            date3 = dateFormat.parse(ngayketthuc.getText());
+        } catch (ParseException ex) {
+            
+        }
+        java.sql.Date sqlDate1 = new java.sql.Date(date1.getTime());
+        java.sql.Date sqlDate2 = new java.sql.Date(date2.getTime());
+        java.sql.Date sqlDate3 = new java.sql.Date(date3.getTime());
+        
+        String idKm = MaKM.getText();
+        if (isBlank(idKm)) {
+            JOptionPane.showMessageDialog(this, "Lỗi Id", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int idKmInt;
+        try {
+            idKmInt = Integer.parseInt(idKm);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Phần trăm giảm giá nhập không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String tongtien = StienCanThiet.getText();
         if (isBlank(tongtien)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập tổng tiền cần thiết", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -321,8 +328,8 @@ public class EditKhuyenMai extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Tổng tiền cần thiết nhập không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        KHUYENMAI km =new KHUYENMAI(0,date1,date2,date3,tongtienInt,phantramInt,true);
-        khuyenMailmpl.addKhuyenMai(km);
+        KHUYENMAI km =new KHUYENMAI(idKmInt,sqlDate1,sqlDate2,sqlDate3,tongtienInt,phantramInt,true);
+        khuyenMailmpl.updateKhuyenMai(km);
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
     public void setData(String makm,String stien,String percent,String ngaytaokm,String ngaybatdaukm,String ngayketthuckm ){
