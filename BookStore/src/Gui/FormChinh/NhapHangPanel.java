@@ -7,7 +7,6 @@ package Gui.FormChinh;
 
 import Bus.Impl.NhaXuatBanlmpl;
 import Bus.Impl.NhapHanglmpl;
-import Dao.PHIEUNHAPDAO;
 import Dao.SACHDAO;
 import Dto.NHANVIEN;
 import Dto.PHIEUNHAP;
@@ -119,16 +118,6 @@ public void loadAnh(SACH t) {
             ex.printStackTrace();
         }
     }  
-    public void setTextNCC(){
-        try {
-            NhapHanglmpl nhaphang=new NhapHanglmpl();
-            PHIEUNHAP result=nhaphang.PhieuNhapById(new PHIEUNHAP(ma_clicked_hoadon));
-            NhaXuatBanlmpl nxb=new NhaXuatBanlmpl();
-            nxb.SetTextNHAXUATBAN(NhaCC,result );
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
     public void loadtongtien(){
     int tongtien=0;
     for(int i=0;i<jTable1.getRowCount();i++){
@@ -376,7 +365,7 @@ public void loadNhanVien(NHANVIEN nvDM){
             .addGroup(panelImgLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         SuaBtn1.setBackground(new java.awt.Color(204, 255, 204));
@@ -454,7 +443,9 @@ public void loadNhanVien(NHANVIEN nvDM){
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DanhSachNhapLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(DanhSachNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelImg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(DanhSachNhapLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(panelImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(DanhSachNhapLayout.createSequentialGroup()
                         .addGroup(DanhSachNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(DanhSachNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -478,11 +469,6 @@ public void loadNhanVien(NHANVIEN nvDM){
         NhaCC.setForeground(new java.awt.Color(0, 51, 51));
         NhaCC.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhà Cung Cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         NhaCC.setFocusable(false);
-        NhaCC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NhaCCActionPerformed(evt);
-            }
-        });
 
         jTable1.setBackground(new java.awt.Color(204, 255, 204));
         jTable1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -610,7 +596,6 @@ public void loadNhanVien(NHANVIEN nvDM){
         nhacungcap.setText("Nhà Cung Cấp");
 
         selectNCC.setForeground(new java.awt.Color(0, 51, 51));
-        selectNCC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         selectNCC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectNCCActionPerformed(evt);
@@ -640,7 +625,6 @@ public void loadNhanVien(NHANVIEN nvDM){
         NV.setBackground(new java.awt.Color(204, 255, 204));
         NV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         NV.setForeground(new java.awt.Color(0, 51, 51));
-        NV.setText("1");
         NV.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhân Viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         NV.setFocusable(false);
 
@@ -707,12 +691,14 @@ public void loadNhanVien(NHANVIEN nvDM){
                             .addGroup(ThongTinNhapHangPanelLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(addNewNCC)
+                                    .addGroup(ThongTinNhapHangPanelLayout.createSequentialGroup()
+                                        .addComponent(addNewNCC)
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(ThongTinNhapHangPanelLayout.createSequentialGroup()
                                         .addComponent(nhacungcap, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(selectNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                        .addComponent(selectNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(42, 42, 42))))))))
         );
         ThongTinNhapHangPanelLayout.setVerticalGroup(
             ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -763,9 +749,10 @@ public void loadNhanVien(NHANVIEN nvDM){
                     .addComponent(PhieuNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ChiTietHD, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DanhSachNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ThongTinNhapHangPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(ThongTinNhapHangPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -832,7 +819,6 @@ public void loadNhanVien(NHANVIEN nvDM){
             String maPHIEUNHAPStr = PhieuNhaptb.getValueAt(row, 0).toString(); // Lấy giá trị của cột "Mã Hóa Đơn"
             int maPn = Integer.parseInt(maPHIEUNHAPStr); // Chuyển đổi thành số nguyên
             ma_clicked_hoadon=maPn;
-            setTextNCC();
             PHIEUNHAP hd = new PHIEUNHAP(maPn);
             loadCHITIETPHIEUNHAPToTable(hd);
         }
@@ -1042,10 +1028,6 @@ public void loadNhanVien(NHANVIEN nvDM){
         // Xóa tất cả các dòng cũ trong bảng trước khi load dữ liệu mới
         model.setRowCount(0);
     }//GEN-LAST:event_XoaBtnMouseClicked
-
-    private void NhaCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NhaCCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NhaCCActionPerformed
     public void hide_button(){
         XoaBtn.setVisible(false);
         ThemBtn.setVisible(false);

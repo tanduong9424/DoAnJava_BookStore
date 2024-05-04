@@ -44,45 +44,14 @@ public class nhanVienImpl implements NhanVien{
     }
     @Override
     public NHANVIEN getNamebyTk(TAIKHOAN t){
-        return nhanVienDao.getkhFromTK(t);
+        return nhanVienDao.SearchNVByID(t);
     }
 
     @Override
-    public ArrayList<NHANVIEN> timKiem(String kieuTimKiem, String inputText) {
-        ArrayList<NHANVIEN> result = new ArrayList<>();
-        ArrayList<NHANVIEN> dsnv = nhanVienDao.selectAll();
-        dsnv.forEach((nv) -> {
-         switch (kieuTimKiem) {
-            case "Mã Khách Hàng":
-                if (String.valueOf(nv.getManv()).toLowerCase().contains(inputText.toLowerCase())) {
-                    result.add(nv);
-                }
-                break;
-            case "Tên Khách Hàng":
-                if (nv.getHoten() != null && nv.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
-                    result.add(nv);
-                }
-                break;
-            case "Địa Chỉ":
-                if (nv.getDiachi() != null && nv.getDiachi().toLowerCase().contains(inputText.toLowerCase())) {
-                    result.add(nv);
-                }
-                break;
-            case "Số Điện Thoại":
-                if (String.valueOf(nv.getDienthoai()).toLowerCase().contains(inputText.toLowerCase())) {
-                    result.add(nv);
-                }
-                break;
-            case "Email":
-                if (nv.getEmail() != null && nv.getEmail().toLowerCase().contains(inputText.toLowerCase())) {
-                    result.add(nv);
-                }
-                break;        
-        }
-
-        });
-
-        return result;    }
+    public ArrayList<NHANVIEN> timKiem(String text,String kieuTimKiem) {
+        ArrayList<NHANVIEN> result = nhanVienDao.timkiemNangCao(text,kieuTimKiem);
+        return result;    
+    }
 
     @Override
     public ArrayList<NHANVIEN> getAllTaiKhoan() {

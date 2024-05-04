@@ -47,7 +47,7 @@ public class khachHangImpl implements khachHang{
     }
     @Override
     public KHACHANG getNamebyTk(TAIKHOAN t) {
-        return khachHangDao.getnvFromTK(t);
+        return khachHangDao.SearchKHByID(t);
     }
    @Override
     public ArrayList<KHACHANG> timKiem(String kieuTimKiem,String inputText) {

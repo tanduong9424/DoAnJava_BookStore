@@ -13,6 +13,7 @@ import Dto.NHANVIEN;
 import Dto.TAIKHOAN;
 import Gui.FormAdd.AddTaiKhoan;
 import Gui.FormEdit.EditTaiKhoan;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -140,9 +141,9 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         inputsearch.setBackground(new java.awt.Color(204, 255, 204));
         inputsearch.setForeground(new java.awt.Color(0, 51, 51));
         inputsearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Họ và Tên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Black", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        inputsearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputsearchActionPerformed(evt);
+        inputsearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputsearchKeyPressed(evt);
             }
         });
 
@@ -316,14 +317,11 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
         loadTaiKhoanToTable();
     }//GEN-LAST:event_thuoctinhActionPerformed
 
-    private void inputsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputsearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputsearchActionPerformed
-
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         String kieuTimKiem = (String) thuoctinh.getSelectedItem();
         String inputText = inputsearch.getText();
         inputsearch.setText("");
+        Boolean has=false;
         if (isBlank(inputText)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa cần tìm", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
@@ -333,30 +331,40 @@ public class TaiKhoanPanel extends javax.swing.JPanel {
             model.setRowCount(0);
             
             ArrayList<TAIKHOAN> tkList = taiKhoanImpl.timKiem(kieuTimKiem,inputText);
-            //trả về 1 list tài khoản chứa thông tin tìm kiếm theo kiểu tìm kiếm
+            //trả về 1 list tài khoản gồm 3 loại nv kh ad.muốn thêm vào table thì ta tạo mới nv kh dựa vào tài khoản trong list này để
+            //lấy tra cột hoten còn admin thì không cần, chỉ cần ko tạo mới nv kh bằng tk trong list thì nó mặc định là admin
+            
             for (TAIKHOAN taiKhoan : tkList) {
             //duyệt list, tìm nhân viên/khách hàng/admin ứng với username được lọc ra
                 NHANVIEN nhanvien = nhanVienImpl1.getNamebyTk(taiKhoan);
                 KHACHANG khachhang = khacHangImpl.getNamebyTk(taiKhoan);
-                //TAIKHOAN admin = taiKhoanImpl.getByUsername(taiKhoan);
                 
                 if(nhanvien!=null){
                     Object[] row = {nhanvien.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE()};
                     model.addRow(row);
+                    has=true;//đánh dấu đây là tài khoản nv ,ko phải admin và đã được insert vào table
                 }
-                else if (khachhang!=null){
+                if (khachhang!=null){
                     Object[] row = {khachhang.getHoten(), taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE()};
                     model.addRow(row);
+                    has=true;//đánh dấu đây là tài khoản kh, ko phải admin và đã insert vào table
                 }
-                else if (taiKhoan!=null){
+                if (taiKhoan!=null && has==false){//kiểm tra xem tk hiện xét đã đc insert chưa (nếu chưa thì tk là admin)
                     Object[] row = {null, taiKhoan.getUSERNAME(), taiKhoan.getPASSWORD(), taiKhoan.getROLE()};
                     model.addRow(row);
                 }
-                
             }
+        }
     }//GEN-LAST:event_searchActionPerformed
 
-    }
+    private void inputsearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputsearchKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    search.doClick();
+                }
+    }//GEN-LAST:event_inputsearchKeyPressed
+
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelTimKiem;
     private javax.swing.JButton Suabtn;

@@ -8,6 +8,7 @@ import Bus.Impl.nhanVienImpl;
 import Dto.NHANVIEN;
 import Gui.FormAdd.AddNhanVien;
 import Gui.FormEdit.EditNhanVien;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +30,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
     public NhanVienPanel() {
         initComponents();
     }
-    public void loadNhanVienToTable(){
+        public void loadNhanVienToTable(){
         DefaultTableModel model = (DefaultTableModel) DataNhanVien.getModel();
         model.setRowCount(0);
 
@@ -38,7 +39,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
             ArrayList<NHANVIEN> listNhanVien = nhanVienImpl1.getAllTaiKhoan();
 
             for (NHANVIEN nhanVien : listNhanVien) {
-                Object[] row = {nhanVien.getManv(), nhanVien.getHoten(),nhanVien.getDiachi(),nhanVien.getDienthoai(),nhanVien.getEmail()};
+                Object[] row = {nhanVien.getManv(), nhanVien.getHoten(),nhanVien.getDiachi(),nhanVien.getEmail(),nhanVien.getDienthoai()};
                 model.addRow(row);
             }
         } catch (Exception ex) {
@@ -83,7 +84,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
         thuoctinh.setBackground(new java.awt.Color(204, 255, 204));
         thuoctinh.setForeground(new java.awt.Color(0, 51, 51));
-        thuoctinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã Nhân Viên", "Tên Nhân Viên", "Email", "Số Điện Thoại", "Địa Chỉ" }));
+        thuoctinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã Nhân Viên", "Tên Nhân Viên", "Địa Chỉ", "Email", "Số Điện Thoại" }));
         thuoctinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 thuoctinhActionPerformed(evt);
@@ -92,10 +93,10 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
         inputsearch.setBackground(new java.awt.Color(204, 255, 204));
         inputsearch.setForeground(new java.awt.Color(0, 51, 51));
-        inputsearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tất Cả", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        inputsearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputsearchActionPerformed(evt);
+        inputsearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Nhân Viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        inputsearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputsearchKeyPressed(evt);
             }
         });
 
@@ -145,7 +146,7 @@ public class NhanVienPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã nhân viên", "Tên nhân viên", "Địa chỉ", "Số điện thoại", "Email"
+                "Mã nhân viên", "Tên nhân viên", "Địa chỉ", "Email", "Số điện thoại"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -161,6 +162,23 @@ public class NhanVienPanel extends javax.swing.JPanel {
         DataNhanVien.setShowHorizontalLines(true);
         DataNhanVien.setShowVerticalLines(true);
         scroll1.setViewportView(DataNhanVien);
+
+        javax.swing.GroupLayout dataNVLayout = new javax.swing.GroupLayout(dataNV);
+        dataNV.setLayout(dataNVLayout);
+        dataNVLayout.setHorizontalGroup(
+            dataNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dataNVLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 1232, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        dataNVLayout.setVerticalGroup(
+            dataNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dataNVLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
 
         Them.setBackground(new java.awt.Color(204, 255, 204));
         Them.setForeground(new java.awt.Color(0, 51, 51));
@@ -185,45 +203,12 @@ public class NhanVienPanel extends javax.swing.JPanel {
         Sua.setBackground(new java.awt.Color(204, 255, 204));
         Sua.setForeground(new java.awt.Color(0, 51, 51));
         Sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_support_30px.png"))); // NOI18N
-        Sua.setText("Sửa thông tin Nhân Viên");
+        Sua.setText("Sửa Nhân Viên");
         Sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SuaActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout dataNVLayout = new javax.swing.GroupLayout(dataNV);
-        dataNV.setLayout(dataNVLayout);
-        dataNVLayout.setHorizontalGroup(
-            dataNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dataNVLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Them)
-                .addGap(30, 30, 30)
-                .addComponent(Xoa)
-                .addGap(30, 30, 30)
-                .addComponent(Sua)
-                .addGap(100, 100, 100))
-            .addGroup(dataNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(dataNVLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 1232, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        dataNVLayout.setVerticalGroup(
-            dataNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataNVLayout.createSequentialGroup()
-                .addGap(0, 592, Short.MAX_VALUE)
-                .addGroup(dataNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Sua)
-                    .addComponent(Xoa)
-                    .addComponent(Them)))
-            .addGroup(dataNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(dataNVLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(46, Short.MAX_VALUE)))
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -236,6 +221,12 @@ public class NhanVienPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Them)
+                        .addGap(30, 30, 30)
+                        .addComponent(Sua)
+                        .addGap(30, 30, 30)
+                        .addComponent(Xoa)
+                        .addGap(30, 30, 30)
                         .addComponent(XuatExcel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -243,23 +234,22 @@ public class NhanVienPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(XuatExcel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PanelTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Xoa)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Them)
+                                .addComponent(Sua)
+                                .addComponent(XuatExcel)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(dataNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void thuoctinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thuoctinhActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_thuoctinhActionPerformed
-
-    private void inputsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputsearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputsearchActionPerformed
 
     private void XuatExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XuatExcelActionPerformed
         // TODO add your handling code here:
@@ -304,9 +294,13 @@ public class NhanVienPanel extends javax.swing.JPanel {
         if (selectedRowIdx != -1) {
             EditNhanVien y = new EditNhanVien();
             y.setVisible(true);
-            Object value = DataNhanVien.getModel().getValueAt(selectedRowIdx, 0);
-            String valueAsString = value.toString();
-            y.addThongTin(valueAsString);
+            Object manv = DataNhanVien.getModel().getValueAt(selectedRowIdx, 0);
+            Object tennv = DataNhanVien.getModel().getValueAt(selectedRowIdx, 1);
+            Object dchi = DataNhanVien.getModel().getValueAt(selectedRowIdx, 2);
+            Object email = DataNhanVien.getModel().getValueAt(selectedRowIdx, 3);
+            Object sdt = DataNhanVien.getModel().getValueAt(selectedRowIdx, 4);
+            
+            y.setData(manv.toString(),tennv.toString(),dchi.toString(),email.toString(),sdt.toString());
             y.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosed(java.awt.event.WindowEvent windowEvent) {
@@ -330,12 +324,26 @@ public class NhanVienPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa cần tìm", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        ArrayList<NHANVIEN> tkList = nhanVienImpl1.timKiem(kieuTimKiem,inputText);
+        ArrayList<NHANVIEN> tkList = nhanVienImpl1.timKiem(inputText,kieuTimKiem);
         for (NHANVIEN nhanVien : tkList) {
-            Object[] row = {nhanVien.getManv(), nhanVien.getHoten(),nhanVien.getDiachi(),nhanVien.getDienthoai(),nhanVien.getEmail()};
+            Object[] row = {nhanVien.getManv(), nhanVien.getHoten(),nhanVien.getDiachi(),nhanVien.getEmail(),nhanVien.getDienthoai()};
             model.addRow(row);
         }
     }//GEN-LAST:event_searchActionPerformed
+
+    private void inputsearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputsearchKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                    search.doClick();
+                }
+    }//GEN-LAST:event_inputsearchKeyPressed
+
+    private void thuoctinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thuoctinhActionPerformed
+        // TODO add your handling code here:
+        String choose=(String) thuoctinh.getSelectedItem();
+        inputsearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, choose, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51)));
+        loadNhanVienToTable();
+        inputsearch.setText("");
+    }//GEN-LAST:event_thuoctinhActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

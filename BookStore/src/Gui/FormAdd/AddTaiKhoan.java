@@ -230,7 +230,7 @@ public class AddTaiKhoan extends javax.swing.JFrame {
                 return;
             }
             TAIKHOAN nv_new = new TAIKHOAN( TK, MK,id,Role);
-            if(taiKhoanImpl.themTaiKhoanNV(nv_new)==false){
+            if(taiKhoanImpl.themTaiKhoan(nv_new)==false){
                  JOptionPane.showMessageDialog(this, "Tài Khoản đã tồn tại,hãy thử thêm số hoặc kí tự khác vào", "Lỗi", JOptionPane.ERROR_MESSAGE);
                  return;          
              }
@@ -255,7 +255,7 @@ public class AddTaiKhoan extends javax.swing.JFrame {
                 return;
             }
             TAIKHOAN kh_new=new TAIKHOAN(TK,MK,Role,id);
-            if(taiKhoanImpl.themTaiKhoanKH(kh_new)==false){
+            if(taiKhoanImpl.themTaiKhoan(kh_new)==false){
                  JOptionPane.showMessageDialog(this, "Tài Khoản khách hàng này đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
                  return;          
              }

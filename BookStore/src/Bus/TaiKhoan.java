@@ -13,11 +13,10 @@ import java.util.ArrayList;
  */
 public interface TaiKhoan {
     Boolean themTaiKhoan(TAIKHOAN taiKhoan);
-    Boolean themTaiKhoanNV(TAIKHOAN taiKhoan);
-    Boolean themTaiKhoanKH(TAIKHOAN taiKhoan);
     Boolean xoaTaiKhoan(TAIKHOAN taiKhoan);
     Boolean suaTaiKhoan(TAIKHOAN taiKhoan);
     ArrayList<TAIKHOAN> timKiem(String kieuTimKiem,String inputText);
     ArrayList<TAIKHOAN> getAllTaiKhoan();
-    TAIKHOAN checkDangNhap(TAIKHOAN taiKhoan);
+    TAIKHOAN checkDangNhapTK(String taiKhoan);
+    Boolean checkDangNhapMK(TAIKHOAN taiKhoan,String input);
 }

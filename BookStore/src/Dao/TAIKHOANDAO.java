@@ -9,395 +9,241 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
-
 public class TAIKHOANDAO implements DAOInterface<TAIKHOAN> {
-	public static TAIKHOANDAO getInstance() {
-		return new TAIKHOANDAO();
-	}
-//them tai khoan bat ky
-	@Override
-	public int insert(TAIKHOAN t) {
-		int ketqua=0;
-		try {
-			Connection con=JDBCUtil.getConnection();
-			String sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE) "+"VALUES (?,?,?)";
-			PreparedStatement pst =con.prepareStatement(sql);
-			pst.setString(1, t.getUSERNAME());
-			pst.setString(2, t.getPASSWORD());
-			pst.setString(3, t.getROLE());
-                        ketqua=pst.executeUpdate();
-		}
-		catch (SQLException e){
-			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o insert() class TAIKHOANDAO \n");
-			e.printStackTrace();
-                        return 1;
-		}
-		return 0;
-	}
-	public int insertNV(TAIKHOAN t) {
-		int ketqua=0;
-		try {
-			Connection con=JDBCUtil.getConnection();
-			String sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE,manv) "+"VALUES (?,?,?,?)";
-			PreparedStatement pst =con.prepareStatement(sql);
-			pst.setString(1, t.getUSERNAME());
-			pst.setString(2, t.getPASSWORD());
-			pst.setString(3, t.getROLE());
-                        pst.setInt(4,t.getMANV());
-                        ketqua=pst.executeUpdate();
-		}
-		catch (SQLException e){
-			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o insert() class TAIKHOANDAO \n");
-			e.printStackTrace();
-                        return 1;
-		}
-		return 0;
-	}
-	public int insertKH(TAIKHOAN t) {
-		int ketqua=0;
-		try {
-			Connection con=JDBCUtil.getConnection();
-			String sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE,makh) "+"VALUES (?,?,?,?)";
-			PreparedStatement pst =con.prepareStatement(sql);
-			pst.setString(1, t.getUSERNAME());
-			pst.setString(2, t.getPASSWORD());
-			pst.setString(3, t.getROLE());
-                        pst.setInt(4,t.getMAKH());
-                        ketqua=pst.executeUpdate();
-		}
-		catch (SQLException e){
-			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o insert() class TAIKHOANDAO \n");
-			e.printStackTrace();
-                        return 1;
-		}
-		return 0;
-	}
-            public int insertQuick(TAIKHOAN t) {
-            int ketqua=0;
-            try {
-                    Connection con=JDBCUtil.getConnection();
-                    String sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE) "+
-                    "VALUES (?,?,?)";
-                    PreparedStatement pst =con.prepareStatement(sql);
+    public static TAIKHOANDAO getInstance() {
+            return new TAIKHOANDAO();
+    }
+
+    @Override
+    public int insert(TAIKHOAN t) {
+        int ketqua=0;
+        String sql;
+        try {
+            Connection con=JDBCUtil.getConnection();
+            PreparedStatement pst=null;
+            switch (t.getROLE()) {
+                case "Nhân Viên":
+                    sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE,manv) "+"VALUES (?,?,?,?)";
+                    pst = con.prepareStatement(sql);
                     pst.setString(1, t.getUSERNAME());
-                    pst.setString(2, "123");
+                    pst.setString(2, t.getPASSWORD());
                     pst.setString(3, t.getROLE());
-                    ketqua=pst.executeUpdate();
+                    pst.setInt(4,t.getMANV());
+                    break;
+                case "Khách Hàng":
+                    sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE,makh) "+"VALUES (?,?,?,?)";
+                    pst =con.prepareStatement(sql);
+                    pst.setString(1, t.getUSERNAME());
+                    pst.setString(2, t.getPASSWORD());
+                    pst.setString(3, t.getROLE());
+                    pst.setInt(4,t.getMAKH());
+                    break;
+                case "Quản Trị Viên":
+                    sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE) "+"VALUES (?,?,?)";
+                    pst =con.prepareStatement(sql);
+                    pst.setString(1, t.getUSERNAME());
+                    pst.setString(2, t.getPASSWORD());
+                    pst.setString(3, t.getROLE());
+                    break;   
             }
-            catch (SQLException e){
-                    // TODO Auto-generated catch block
-                    System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o insert() class TAIKHOANDAO \n");
-                    e.printStackTrace();
-                    return 1;
-            }
-            return 0;
-	}
-//them taikhoan user
-	public int insertUser(TAIKHOAN t) {
-		int ketqua=0;
-		try {
-			Connection con=JDBCUtil.getConnection();
-			String sql="INSERT INTO taikhoan (USERNAME,PASSWORD,ROLE) "+
-			"VALUES (?,?,?)";
-			PreparedStatement pst =con.prepareStatement(sql);
-			pst.setString(1, t.getUSERNAME());
-			pst.setString(2, t.getPASSWORD());
-			pst.setString(3, "USER");
-		}
-		catch (SQLException e){
-			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o insert() class TAIKHOANDAO \n");
-			e.printStackTrace();
-		}
-		return 0;
-	}
-//them taikhoan nv
-
-	@Override
-	public int update(TAIKHOAN t) {
-		int ketqua=0;
-		try {
-			Connection con=JDBCUtil.getConnection();
-			
-			
-                        String sql = "UPDATE taikhoan SET PASSWORD=? WHERE USERNAME=?";
-
-			PreparedStatement pst=con.prepareStatement(sql);
-
-			pst.setString(1,t.getPASSWORD());
-			pst.setString(2,t.getUSERNAME());
-			
-			ketqua=pst.executeUpdate();
-			System.out.print("thuc hien cau lenh "+sql+"\n");
-			JDBCUtil.closeConnection(con);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.print("\nco loi xay ra, thuc hien cau lenh khong thanh cong o update() class TAIKHOANDAO \n");
-			e.printStackTrace();
-		}
-		return 0;
-	}
-	public int updateUSERNAME(TAIKHOAN t,String USERNAME) {
-		int ketqua=0;
-		try {
-			Connection con=JDBCUtil.getConnection();
-			TAIKHOAN tktest=new TAIKHOAN(USERNAME);
-			TAIKHOAN kqtest=selectById(tktest);
-			if(kqtest==null){
-				String sql="UPDATE  taikhoan  "+" SET "+" USERNAME=?"+" WHERE USERNAME=?";
-				
-				PreparedStatement pst=con.prepareStatement(sql);
-				
-				pst.setString(1,USERNAME);
-				pst.setString(2,t.getUSERNAME());
-				
-				ketqua=pst.executeUpdate();
-				System.out.print("thuc hien cau lenh "+sql+"\n");
-				JDBCUtil.closeConnection(con);
-			}
-			System.out.print("ĐÃ CÓ USERNAME NÀY TỒN TẠI");
-			JDBCUtil.closeConnection(con);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.print("\nco loi xay ra, thuc hien cau lenh khong thanh cong o update() class TAIKHOANDAO \n");
-			e.printStackTrace();
-		}
-		return 0;
-	}
-	public int updatePASSWORD(TAIKHOAN t) {
-		int ketqua=0;
-		try {
-			Connection con=JDBCUtil.getConnection();
-			
-			String sql="UPDATE  taikhoan  "+" SET "+" PASSWORD=?"+" WHERE USERNAME=?";
-			
-			PreparedStatement pst=con.prepareStatement(sql);
-			
-			pst.setString(1,t.getPASSWORD());
-			pst.setString(2,t.getUSERNAME());
-			
-			ketqua=pst.executeUpdate();
-			System.out.print("thuc hien cau lenh "+sql+"\n");
-			JDBCUtil.closeConnection(con);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.print("\nco loi xay ra, thuc hien cau lenh khong thanh cong o update() class TAIKHOANDAO \n");
-			e.printStackTrace();
-		}
-		return 0;
-	}
-	public int updateROLE(TAIKHOAN t) {
-		int ketqua=0;
-		try {
-			Connection con=JDBCUtil.getConnection();
-			
-			String sql="UPDATE  taikhoan  "+" SET "+" ROLE=?"+" WHERE USERNAME=?";
-			
-			PreparedStatement pst=con.prepareStatement(sql);
-			
-			pst.setString(1,t.getPASSWORD());
-			pst.setString(2,t.getROLE());
-			
-			ketqua=pst.executeUpdate();
-			System.out.print("thuc hien cau lenh "+sql+"\n");
-			JDBCUtil.closeConnection(con);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.print("\nco loi xay ra, thuc hien cau lenh khong thanh cong o update() class TAIKHOANDAO \n");
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-	@Override
-	public int delete(TAIKHOAN t) {
-		int ketqua=0;
-		try {
-			Connection con=JDBCUtil.getConnection();
-			String sqlCheck = "SELECT * FROM nhanvien WHERE manv = ? UNION SELECT * FROM khachhang WHERE makh = ?";
-                        PreparedStatement pstCheck = con.prepareStatement(sqlCheck);
-			pstCheck.setInt(1, t.getMANV());
-			pstCheck.setInt(2, t.getMAKH());
-			ResultSet rs = pstCheck.executeQuery();
-                        if (rs.next()) {
-				String sql1="UPDATE nhanvien"+" SET tttk=false"+" WHERE manv=?"+
-                                            "UPDATE khachhang"+" SET tttk=false"+" WHERE makh=?";
-				PreparedStatement pst1=con.prepareStatement(sql1);
-				System.out.print("thuc hien cau lenh "+sql1+"\n");
-				pst1.setInt(1,t.getMANV());
-                                pst1.setInt(2,t.getMAKH());
-				ketqua=pst1.executeUpdate();
-				JDBCUtil.closeConnection(con);
-			}
-                        else{
-				String sql1="DELETE from  taikhoan  "+" WHERE USERNAME=?";
-				PreparedStatement pst1=con.prepareStatement(sql1);
-				System.out.print("thuc hien cau lenh "+sql1+"\n");
-				pst1.setString(1,t.getUSERNAME());
-				ketqua=pst1.executeUpdate();
-				JDBCUtil.closeConnection(con);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.print("\nco loi xay ra, thuc hien cau lenh khong thanh cong o delete() class TAIKHOANDAO \n");
-			e.printStackTrace();
-		}
-		return 0;
-	}
-//cho admin,hệ thống
-	@Override
-	public ArrayList<TAIKHOAN> selectAll() {
-		ArrayList<TAIKHOAN> ketqua=new ArrayList<TAIKHOAN>();
-		try {
-			Connection con=JDBCUtil.getConnection();
-			
-			String sql=" SELECT * FROM taikhoan ";
-			
-			PreparedStatement pst=con.prepareStatement(sql);
-			
-			ResultSet rs=pst.executeQuery();
-			while(rs.next()) {
-				String USERNAME=rs.getString("USERNAME");
-				String PASSWORD=rs.getString("PASSWORD");
-				String ROLE=rs.getString("ROLE");
-                                int makh=rs.getInt("makh");
-                                int manv=rs.getInt("manv");
-				TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,manv,makh,ROLE);
-				ketqua.add(taikhoan);
-			}
-			JDBCUtil.closeConnection(con);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class TAIKHOANDAO \n");
-			e.printStackTrace();
-		}
-		return ketqua;
-	}
-       
-	
-
-	@Override
-	public TAIKHOAN selectById(TAIKHOAN t) {
-		TAIKHOAN ketqua=null;
-		try {
-			Connection con=JDBCUtil.getConnection();
-			
-			String sql=" SELECT * FROM taikhoan "+
-					" WHERE USERNAME=?";
-			
-			PreparedStatement pst=con.prepareStatement(sql);
-			pst.setString(1,t.getUSERNAME());
-			System.out.print("Đã thực thi câu lệnh"+sql);
-			ResultSet rs=pst.executeQuery();
-			while(rs.next()) {
-				String USERNAME=rs.getString("USERNAME");
-				String PASSWORD=rs.getString("PASSWORD");
-				String ROLE=rs.getString("ROLE");
-                                int makh=rs.getInt("makh");
-                                int manv=rs.getInt("manv");
-				TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,manv,makh,ROLE);
-				ketqua=taikhoan;
-			}
-			JDBCUtil.closeConnection(con);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectById class TAIKHOANDAO \n");
-			e.printStackTrace();
-		}
-		return ketqua;
-	}
-        
-	@Override
-	public ArrayList<TAIKHOAN> selectByCondition(String condition) {
-		ArrayList<TAIKHOAN> ketqua=new ArrayList<TAIKHOAN>();
-		try {
-			Connection con=JDBCUtil.getConnection();
-			
-			String sql=" SELECT * FROM taikhoan "+
-					" WHERE "+condition;
-			
-			Statement pst=con.createStatement();
-			
-			
-			ResultSet rs=pst.executeQuery(sql);
-			while(rs.next()) {
-				String USERNAME=rs.getString("USERNAME");
-				String PASSWORD=rs.getString("PASSWORD");
-				String ROLE=rs.getString("ROLE");
-				TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,ROLE);
-				ketqua.add(taikhoan);
-			}
-			JDBCUtil.closeConnection(con);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectByCondition class TAIKHOANDAO \n");
-			e.printStackTrace();
-		}
-		return ketqua;
-	}
-        
-        public TAIKHOAN selectByUsername(TAIKHOAN t) {
-            TAIKHOAN ketqua=null;
-            try {
-                Connection con=JDBCUtil.getConnection();
-
-                String sql=" SELECT * FROM taikhoan WHERE USERNAME=? ";
-
-                PreparedStatement pst=con.prepareStatement(sql);
-                pst.setString(1, t.getUSERNAME());
-
-                ResultSet rs=pst.executeQuery();
-                while(rs.next()) {
-				String USERNAME=rs.getString("USERNAME");
-				String PASSWORD=rs.getString("PASSWORD");
-				String ROLE=rs.getString("ROLE");
-                                int makh=rs.getInt("makh");
-                                int manv=rs.getInt("manv");
-				TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,manv,makh,ROLE);
-				TAIKHOAN tk=new TAIKHOAN(USERNAME,PASSWORD,ROLE);
-                    ketqua=tk;
-                }
-                JDBCUtil.closeConnection(con);
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectByusername class NHANVIENDAO \n");
-                e.printStackTrace();
-            }
-            return ketqua;
+            ketqua=pst.executeUpdate();
+            JDBCUtil.closeConnection(con);
         }
-        
-        
-        public TAIKHOAN selectByAccount(TAIKHOAN t) {
-            TAIKHOAN ketqua=null;
-            try {
-                Connection con=JDBCUtil.getConnection();
-
-                String sql=" SELECT * FROM taikhoan WHERE USERNAME=? AND PASSWORD=? ";
-
-                PreparedStatement pst=con.prepareStatement(sql);
-                pst.setString(1, t.getUSERNAME());
-                pst.setString(2, t.getPASSWORD());
-                ResultSet rs=pst.executeQuery();
-                while(rs.next()) {
-				String USERNAME=rs.getString("USERNAME");
-				String PASSWORD=rs.getString("PASSWORD");
-				String ROLE=rs.getString("ROLE");
-                                int makh=rs.getInt("makh");
-                                int manv=rs.getInt("manv");
-				TAIKHOAN tk=new TAIKHOAN(USERNAME,PASSWORD,manv,makh,ROLE);
-                    ketqua=tk;
-                }
-                JDBCUtil.closeConnection(con);
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectByAccount class NHANVIENDAO \n");
-                e.printStackTrace();
-            }
-            return ketqua;
+        catch (SQLException e){
+            System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o insert() class TAIKHOANDAO \n");
+            e.printStackTrace();
+            ketqua=1;
         }
+        return 0;
+    }
+
+    @Override
+    public int update(TAIKHOAN t) {
+        int ketqua=0;
+        try {
+            Connection con=JDBCUtil.getConnection();
+            String sql = "UPDATE taikhoan SET PASSWORD=? WHERE USERNAME=?";
+
+            PreparedStatement pst=con.prepareStatement(sql);
+            pst.setString(1,t.getPASSWORD());
+            pst.setString(2,t.getUSERNAME());
+
+            ketqua=pst.executeUpdate();
+            System.out.print("thuc hien cau lenh "+sql+"\n");
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.print("\nco loi xay ra, thuc hien cau lenh khong thanh cong o update() class TAIKHOANDAO \n");
+            e.printStackTrace();
+            ketqua=1;
+        }
+        return ketqua;
+    }
+
+    @Override
+    public int delete(TAIKHOAN t) {
+        int ketqua=0;
+        try {
+            Connection con=JDBCUtil.getConnection();
+            String sql="DELETE from  taikhoan  "+" WHERE USERNAME=?";
+            PreparedStatement pst=con.prepareStatement(sql);
+            pst.setString(1,t.getUSERNAME());
+            ketqua=pst.executeUpdate();
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.print("\nco loi xay ra, thuc hien cau lenh khong thanh cong o delete() class TAIKHOANDAO \n");
+            e.printStackTrace();
+            ketqua=1;
+        }
+        return ketqua;
+    }
+    
+    @Override
+    public ArrayList<TAIKHOAN> selectAll() {
+        ArrayList<TAIKHOAN> ketqua=new ArrayList<TAIKHOAN>();
+        try {
+            Connection con=JDBCUtil.getConnection();
+            String sql=" SELECT * FROM taikhoan ";
+            PreparedStatement pst=con.prepareStatement(sql);
+            ResultSet rs=pst.executeQuery();
+            while(rs.next()) {
+                String USERNAME=rs.getString("USERNAME");
+                String PASSWORD=rs.getString("PASSWORD");
+                String ROLE=rs.getString("ROLE");
+                int makh=rs.getInt("makh");
+                int manv=rs.getInt("manv");
+                TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,manv,makh,ROLE);
+                ketqua.add(taikhoan);
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class TAIKHOANDAO \n");
+            e.printStackTrace();
+        }
+        return ketqua;
+    }
+
+    @Override
+    public TAIKHOAN selectById(TAIKHOAN t) {//không sử dụng, chỉ cho có interface DAOInteface thôi
+        TAIKHOAN ketqua=null;
+        try {
+            Connection con=JDBCUtil.getConnection();
+            String sql=" SELECT * FROM taikhoan "+" WHERE USERNAME=?";
+            PreparedStatement pst=con.prepareStatement(sql);
+            pst.setString(1,t.getUSERNAME());
+            ResultSet rs=pst.executeQuery();
+            while(rs.next()) {
+                String USERNAME=rs.getString("USERNAME");
+                String PASSWORD=rs.getString("PASSWORD");
+                String ROLE=rs.getString("ROLE");
+                int makh=rs.getInt("makh");
+                int manv=rs.getInt("manv");
+                TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,manv,makh,ROLE);
+                ketqua=taikhoan;
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectById class TAIKHOANDAO \n");
+            e.printStackTrace();
+        }
+        return ketqua;
+    }
+
+    @Override
+    public ArrayList<TAIKHOAN> selectByCondition(String condition) {
+        ArrayList<TAIKHOAN> ketqua=new ArrayList<TAIKHOAN>();
+        try {
+            Connection con=JDBCUtil.getConnection();
+            String sql=" SELECT * FROM taikhoan "+" WHERE "+condition;
+            Statement pst=con.createStatement();
+            ResultSet rs=pst.executeQuery(sql);
+            while(rs.next()) {
+                String USERNAME=rs.getString("USERNAME");
+                String PASSWORD=rs.getString("PASSWORD");
+                String ROLE=rs.getString("ROLE");
+                TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,ROLE);
+                ketqua.add(taikhoan);
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectByCondition class TAIKHOANDAO \n");
+            e.printStackTrace();
+        }
+        return ketqua;
+    }
+
+    public TAIKHOAN selectByUsername(TAIKHOAN t) {
+        TAIKHOAN ketqua=null;
+        try {
+            Connection con=JDBCUtil.getConnection();
+            String sql=" SELECT * FROM taikhoan WHERE USERNAME=? ";
+            PreparedStatement pst=con.prepareStatement(sql);
+            pst.setString(1, t.getUSERNAME());
+            ResultSet rs=pst.executeQuery();
+            while(rs.next()) {
+                String USERNAME=rs.getString("USERNAME");
+                String PASSWORD=rs.getString("PASSWORD");
+                String ROLE=rs.getString("ROLE");
+                int makh=rs.getInt("makh");
+                int manv=rs.getInt("manv");
+                TAIKHOAN taikhoan=new TAIKHOAN(USERNAME,PASSWORD,manv,makh,ROLE);
+                TAIKHOAN tk=new TAIKHOAN(USERNAME,PASSWORD,ROLE);
+                ketqua=tk;
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectByusername class NHANVIENDAO \n");
+            e.printStackTrace();
+        }
+        return ketqua;
+    }
+
+
+    public TAIKHOAN CheckTK(String tk) {//dể đăng nhập
+        TAIKHOAN ketqua=null;
+        try {
+            Connection con=JDBCUtil.getConnection();
+            String sql=" SELECT * FROM taikhoan WHERE USERNAME=?";
+            PreparedStatement pst=con.prepareStatement(sql);
+            pst.setString(1, tk);
+            ResultSet rs=pst.executeQuery();
+            while(rs.next()) {
+                String USERNAME=rs.getString("USERNAME");
+                String PASSWORD=rs.getString("PASSWORD");
+                String ROLE=rs.getString("ROLE");
+                int makh=rs.getInt("makh");
+                int manv=rs.getInt("manv");
+                TAIKHOAN tk_new=new TAIKHOAN(USERNAME,PASSWORD,manv,makh,ROLE);
+                ketqua=tk_new;
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o CheckTk class TAIKHOANDAO \n");
+            e.printStackTrace();
+        }
+        return ketqua;
+    }
+    
+    public Boolean CheckMK(TAIKHOAN tk, String inputPassword) {//để đăng nhập
+        boolean check = false;
+        String pass = null;
+        try {
+            Connection con = JDBCUtil.getConnection();
+            String sql = "SELECT PASSWORD FROM taikhoan WHERE USERNAME=?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, tk.getUSERNAME());
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                pass = rs.getString("PASSWORD");
+                if (inputPassword.equals(pass)) {
+                    check = true; // Mật khẩu hợp lệ
+                }
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o CheckMk class TAIKHOANDAO\n");
+            e.printStackTrace();
+        }
+        return check;
+    }
+
 }
