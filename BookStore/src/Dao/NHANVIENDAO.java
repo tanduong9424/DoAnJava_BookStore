@@ -31,6 +31,7 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
             pst.setBoolean(5, t.isTttk());
             ketqua=pst.executeUpdate();
 			JDBCUtil.closeConnection(con);
+            return ketqua;
 
         } catch (Exception e) {
             System.out.println("updateCOTK");

@@ -210,10 +210,13 @@ public class AddTaiKhoan extends javax.swing.JFrame {
         String MK = mkhau.getText();
         String Role =(String) SelectRole.getSelectedItem();
         
-        
         if(mode==0){//NHÂN VIÊN
             int id=Integer.parseInt(SelectID.getSelectedItem().toString());
             String hoVaten = name.getText();
+            if (isBlank((String)SelectID.getSelectedItem())) {
+                JOptionPane.showMessageDialog(this, "Id Không tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             if (isBlank(hoVaten)) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập họ và tên.", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -235,6 +238,10 @@ public class AddTaiKhoan extends javax.swing.JFrame {
         else if(mode==1){//KHÁCH HÀNG
             int id=Integer.parseInt(SelectID.getSelectedItem().toString());
             String hoVaten = name.getText();
+            if (isBlank((String)SelectID.getSelectedItem())) {
+                JOptionPane.showMessageDialog(this, "Id Không tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             if (isBlank(hoVaten)) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập họ và tên.", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 return;

@@ -196,7 +196,6 @@ public class AddKhachHang extends javax.swing.JFrame {
         }
         KHACHANG khachang = new KHACHANG(  userName, diaChi, mailPerson, sdtInt, true);
         khaHangImpl.themKhachHang(khachang);
-        this.banhang.loadKhachHang();
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 
