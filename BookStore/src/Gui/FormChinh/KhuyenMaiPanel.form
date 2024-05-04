@@ -297,7 +297,6 @@
         <Property name="text" type="java.lang.String" value="S&#x1eed;a Th&#xf4;ng tin khuy&#x1ebf;n m&#xe3;i"/>
       </Properties>
       <Events>
-        <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="SuaAncestorAdded"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SuaActionPerformed"/>
       </Events>
     </Component>

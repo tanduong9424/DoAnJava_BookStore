@@ -12,6 +12,7 @@ import static org.apache.logging.log4j.util.Strings.isBlank;
 import com.github.lgooddatepicker.components.DatePicker;
 import java.util.ArrayList;
 import Bus.Impl.KhuyenMailmpl;
+import Gui.FormEdit.EditKhuyenMai;
 
 
 /**
@@ -190,15 +191,6 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
         Sua.setForeground(new java.awt.Color(0, 51, 51));
         Sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_maintenance_30px.png"))); // NOI18N
         Sua.setText("Sửa Thông tin khuyến mãi");
-        Sua.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                SuaAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
         Sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SuaActionPerformed(evt);
@@ -346,22 +338,27 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
     private void SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuaActionPerformed
         // TODO add your handling code here:
         int selectedRowIdx = DataKhuyenMai.getSelectedRow();
-//        if (selectedRowIdx != -1) {
-//            EditKhuyenMai y = new EditKhuyenMai();
-//            y.setVisible(true);
-//            Object value = KhachHangtb.getModel().getValueAt(selectedRowIdx, 0);
-//            String valueAsString = value.toString();
-//            y.addThongTin(valueAsString);
-//            y.addWindowListener(new java.awt.event.WindowAdapter() {
-//                @Override
-//                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-//                    loadBooksToTable();
-//                }
-//            });
-//        }else{
-//            JOptionPane.showMessageDialog(this, "Vui Lòng Chọn tài khoản muốn Sửa", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
-//
-//        }
+        if (selectedRowIdx != -1) {
+            EditKhuyenMai y = new EditKhuyenMai();
+            y.setVisible(true);
+            Object makm = DataKhuyenMai.getModel().getValueAt(selectedRowIdx, 0);
+            Object ngaytao = DataKhuyenMai.getModel().getValueAt(selectedRowIdx, 1);
+            Object ngaybatdau = DataKhuyenMai.getModel().getValueAt(selectedRowIdx, 2);
+            Object ngayketthuc = DataKhuyenMai.getModel().getValueAt(selectedRowIdx, 3);
+            Object tongtiencanthiet = DataKhuyenMai.getModel().getValueAt(selectedRowIdx, 4);
+            Object percentGiam = DataKhuyenMai.getModel().getValueAt(selectedRowIdx, 5);
+            y.setData(makm.toString(),tongtiencanthiet.toString(),percentGiam.toString(),ngaytao.toString(),ngaybatdau.toString(),ngayketthuc.toString());
+            //y.addThongTin(valueAsString);
+            y.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                    //loadBooksToTable();
+                }
+            });
+        }else{
+            JOptionPane.showMessageDialog(this, "Vui Lòng Chọn tài khoản muốn Sửa", "Lỗi", JOptionPane.INFORMATION_MESSAGE);
+
+        }
     }//GEN-LAST:event_SuaActionPerformed
 
     private void ChonNgay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChonNgay1ActionPerformed
@@ -387,10 +384,6 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
         });
     JOptionPane.showMessageDialog(this, datePicker, "Chọn ngày kết thúc", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_ChonNgay2ActionPerformed
-
-    private void SuaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_SuaAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SuaAncestorAdded
     public void hide_button(){
         Them.setVisible(false);
         Xoa.setVisible(false);
