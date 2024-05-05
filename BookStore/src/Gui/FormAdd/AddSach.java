@@ -9,6 +9,7 @@ import Dao.SACHDAO;
 import Dto.SACH;
 import Gui.FormChinh.NhapHangPanel;
 import java.awt.Color;
+import java.awt.FileDialog;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -250,31 +251,14 @@ public class AddSach extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_NhaCungCapActionPerformed
 
-    private void URL_imgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_URL_imgMouseClicked
-        // TODO add your handling code here:
-         JFileChooser fileChooser = new JFileChooser();
-
-    // Set the file chooser to select files only
-    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
-    // Set filter to display only image files
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "gif", "jpeg");
-    fileChooser.setFileFilter(filter);
-
-    // Show the file chooser dialog to the user
-    int result = fileChooser.showOpenDialog(null);
-
-    // Check if the user selected a file
-    if (result == JFileChooser.APPROVE_OPTION) {
-        // Get the selected file
-        File selectedFile = fileChooser.getSelectedFile();
-
-        // Get the path of the selected file
-        String selectedFilePath = selectedFile.getAbsolutePath();
-
-         url = selectedFilePath;
+    private void URL_imgMouseClicked(java.awt.event.MouseEvent evt) {                                     
+        FileDialog fd = new FileDialog(this);
+        fd.setVisible(true);
+        String filename = fd.getFile();
+        if (filename != null) {
+            url=filename;
+        }
     }
-    }//GEN-LAST:event_URL_imgMouseClicked
 
     /**
      * @param args the command line arguments

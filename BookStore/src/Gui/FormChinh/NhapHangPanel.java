@@ -95,14 +95,12 @@ public void loadAnh(SACH t) {
     try {
         if(url !=null){
             // Tạo một đối tượng ImageIcon từ đường dẫn ảnh
-            ImageIcon icon = new ImageIcon(url);
-
-            // Đặt hình ảnh lên jLabel1
+            ImageIcon icon = new ImageIcon(getClass().getResource("/images/Book_img/" + url));
             ImageIcon result=resizeImage(icon,180,273);
-            jLabel1.setIcon(result);
+            img.setIcon(result);
         }
          else {
-            jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images.Book_img/doraemon.jpg")));
+            img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Book_img/img_default.jpg")));
         }        
     } catch (Exception ex) {
         // Nếu có lỗi xảy ra, in ra thông báo lỗi
@@ -160,7 +158,7 @@ public void loadNhanVien(NHANVIEN nvDM){
         inputsearch2 = new javax.swing.JTextField();
         Search1 = new javax.swing.JButton();
         panelImg = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        img = new javax.swing.JLabel();
         SuaBtn1 = new javax.swing.JButton();
         XoaBtn1 = new javax.swing.JButton();
         addNewSach = new javax.swing.JButton();
@@ -349,7 +347,7 @@ public void loadNhanVien(NHANVIEN nvDM){
         panelImg.setBackground(new java.awt.Color(204, 255, 204));
         panelImg.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ảnh minh họa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Book_img/img_default.png"))); // NOI18N
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Book_img/img_default.png"))); // NOI18N
 
         javax.swing.GroupLayout panelImgLayout = new javax.swing.GroupLayout(panelImg);
         panelImg.setLayout(panelImgLayout);
@@ -357,14 +355,14 @@ public void loadNhanVien(NHANVIEN nvDM){
             panelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImgLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(img)
                 .addGap(0, 0, 0))
         );
         panelImgLayout.setVerticalGroup(
             panelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelImgLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(jLabel1)
+                .addComponent(img)
                 .addGap(0, 0, 0))
         );
 
@@ -1056,9 +1054,9 @@ public void loadNhanVien(NHANVIEN nvDM){
     private javax.swing.JButton XoaBtn1;
     private javax.swing.JButton addNewNCC;
     private javax.swing.JButton addNewSach;
+    private javax.swing.JLabel img;
     private javax.swing.JTextField inputsearch1;
     private javax.swing.JTextField inputsearch2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel nhacungcap;
     private javax.swing.JPanel panelImg;

@@ -99,13 +99,10 @@ public ImageIcon resizeImage(ImageIcon icon, int maxWidth, int maxHeight) {
 }
 public void loadAnh(SACH t) {
     String url = t.getIMAGE(); // Lấy đường dẫn ảnh từ đối tượng SACH
-    
     try {
         if(url !=null){
             // Tạo một đối tượng ImageIcon từ đường dẫn ảnh
-            ImageIcon icon = new ImageIcon(url);
-
-            // Đặt hình ảnh lên jLabel1
+            ImageIcon icon = new ImageIcon(getClass().getResource("/images/Book_img/" + url));
             ImageIcon result=resizeImage(icon,180,273);
             img.setIcon(result);
         }
