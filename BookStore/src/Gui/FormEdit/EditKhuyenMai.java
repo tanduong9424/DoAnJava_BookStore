@@ -255,18 +255,37 @@ public class EditKhuyenMai extends javax.swing.JFrame {
 
     private void ChonNgay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChonNgay1ActionPerformed
         // TODO add your handling code here:
+        DatePicker datePicker = new DatePicker();
+        datePicker.setDateToToday();//đặt mặc định là hôm nay
+        datePicker.addDateChangeListener((dce) -> {
+            ngaytao.setText(datePicker.getDateStringOrEmptyString());
+        });
+        JOptionPane.showMessageDialog(this, datePicker, "Chọn ngày tạo khuyến mãi", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_ChonNgay1ActionPerformed
 
     private void ngaytaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ngaytaoActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_ngaytaoActionPerformed
 
     private void ChonNgay2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChonNgay2ActionPerformed
         // TODO add your handling code here:
+        DatePicker datePicker = new DatePicker();
+        datePicker.setDateToToday();//đặt mặc định là hôm nay
+        datePicker.addDateChangeListener((dce) -> {
+            ngaybatdau.setText(datePicker.getDateStringOrEmptyString());
+        });
+        JOptionPane.showMessageDialog(this, datePicker, "Chọn ngày bắt đầu", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_ChonNgay2ActionPerformed
 
     private void ChonNgay3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChonNgay3ActionPerformed
         // TODO add your handling code here:
+        DatePicker datePicker = new DatePicker();
+        datePicker.setDateToToday();//đặt mặc định là hôm nay
+        datePicker.addDateChangeListener((dce) -> {
+            ngayketthuc.setText(datePicker.getDateStringOrEmptyString());
+        });
+        JOptionPane.showMessageDialog(this, datePicker, "Chọn ngày kết thúc", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_ChonNgay3ActionPerformed
 
     private void ngayketthucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ngayketthucActionPerformed
