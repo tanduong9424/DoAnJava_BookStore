@@ -44,6 +44,10 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
             ex.printStackTrace();
         }
     }
+    public void resetNgay(){
+        from.setText("");
+        to.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -289,11 +293,8 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
         String inputText = inputsearch.getText();
         String fromDate = from.getText();
         String toDate = to.getText();
-        if (isBlank(inputText)) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa cần tìm", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
+            loadKhuyenMaiToTable();
+        System.out.println("inputtEXT " +inputText);
         DefaultTableModel model = (DefaultTableModel) DataKhuyenMai.getModel();
         model.setRowCount(0);
         

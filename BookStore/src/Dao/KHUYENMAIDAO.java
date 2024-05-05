@@ -29,7 +29,7 @@ public class KHUYENMAIDAO implements DAOInterface<KHUYENMAI>{
                     return ketqua;
                 }
 
-                String sql = "INSERT INTO khuyenmai (ngaytao, ngaybatdau, ngayketthuc, tongtiencanthiet, phantramgiam,ISHIDDEN) VALUES (?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO khuyenmai (ngaytao, ngaybatdau, ngayketthuc, tongtiencanthiet, phantramgiam,ISHIDDEN) VALUES (?, ?, ?, ?, ?,?)";
                 PreparedStatement pst = con.prepareStatement(sql);
                 pst.setDate(1, t.getNgaytao());
                 pst.setDate(2, t.getNgaybatdau());
@@ -297,6 +297,35 @@ public class KHUYENMAIDAO implements DAOInterface<KHUYENMAI>{
 		}
 		return ketqua;
     }
+ public KHUYENMAI selectByIdFromTo(KHUYENMAI t, String start, String end) {
+    KHUYENMAI ketqua = null;
+    try {
+        Connection con = JDBCUtil.getConnection();
+        String sql = "SELECT * FROM khuyenmai WHERE makhuyenmai = ? AND ngaytao BETWEEN ? AND ?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, t.getMakhuyenmai());
+        pst.setString(2, start);
+        pst.setString(3, end);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            int makhuyenmai = rs.getInt("makhuyenmai");
+            Date ngaytao = rs.getDate("ngaytao");
+            Date ngaybatdau = rs.getDate("ngaybatdau");
+            Date ngayketthuc = rs.getDate("ngayketthuc");
+            int tongtiencanthiet = rs.getInt("tongtiencanthiet");
+            int phantramgiam = rs.getInt("phantramgiam");
+            boolean ISHIDDEN = rs.getBoolean("ISHIDDEN");
+            KHUYENMAI km = new KHUYENMAI(makhuyenmai, ngaytao, ngaybatdau, ngayketthuc, tongtiencanthiet, phantramgiam, ISHIDDEN);
+            ketqua = km;
+        }
+        JDBCUtil.closeConnection(con);
+    } catch (SQLException e) {
+        System.out.print("Có lỗi xảy ra, thực hiện câu lệnh không thành công trong selectAll class LINHVUCDAO \n");
+        e.printStackTrace();
+    }
+    return ketqua;
+}
+
 
     @Override
     public ArrayList<KHUYENMAI> selectByCondition(String condition) {
@@ -312,7 +341,7 @@ public class KHUYENMAIDAO implements DAOInterface<KHUYENMAI>{
 			
 			ResultSet rs=pst.executeQuery(sql);
 			while(rs.next()) {
-				int makhuyenmai=rs.getInt("makhuyenmai");
+		int makhuyenmai=rs.getInt("makhuyenmai");
                 Date ngaytao=rs.getDate("ngaytao");
                 Date ngaybatdau=rs.getDate("ngaybatdau");
                 Date ngayketthuc=rs.getDate("ngayketthuc");

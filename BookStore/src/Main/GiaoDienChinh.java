@@ -489,6 +489,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         CardLayout cardLayout = (CardLayout) Middle.getLayout();
         cardLayout.show(Middle, "khuyenmai");
         khuyenmai.loadKhuyenMaiToTable();
+        khuyenmai.resetNgay();
     }//GEN-LAST:event_KhuyenMaiMouseClicked
 
     private void KhuyenMaiMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KhuyenMaiMouseMoved

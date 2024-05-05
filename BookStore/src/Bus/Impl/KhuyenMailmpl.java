@@ -50,14 +50,50 @@ public class KhuyenMailmpl implements KhuyenMai{
 
     @Override
     public ArrayList<KHUYENMAI> timKiem(String kieuTimKiem, String inputText, String fromDate, String toDate) {
-        if (isBlank(fromDate)|| isBlank(toDate)) {
-            KHUYENMAI t = new KHUYENMAI(Integer.parseInt(inputText));
-            ArrayList<KHUYENMAI> listKhuyenMai = new ArrayList<>();
-            listKhuyenMai.add(khuyenmaidao.selectById(t));
-            return listKhuyenMai;
+        ArrayList<KHUYENMAI> listKhuyenMai = new ArrayList<>();
+        System.out.println(" ngay bat dau "+fromDate+" ngay ket thuc "+ toDate);
+        if(inputText!="" && inputText!=null && !isBlank(inputText)){          
+            if(kieuTimKiem=="Mã Khuyến Mãi"){            
+                if (isBlank(fromDate)|| isBlank(toDate)) {
+                    KHUYENMAI t = new KHUYENMAI(Integer.parseInt(inputText));
+                    listKhuyenMai.add(khuyenmaidao.selectById(t));
+                    return listKhuyenMai;
+                }
+                else{
+                    KHUYENMAI t = new KHUYENMAI(Integer.parseInt(inputText));
+                    listKhuyenMai.add(khuyenmaidao.selectByIdFromTo(t, fromDate, toDate));
+                    return listKhuyenMai;
+                }
+                }
+            else if(kieuTimKiem=="Tổng tiền cần thiết"){
+                if (isBlank(fromDate)|| isBlank(toDate)) {
+                    String sql=" tongtiencanthiet = "+inputText;
+                    listKhuyenMai=KHUYENMAIDAO.getInstance().selectByCondition(sql);
+                    return listKhuyenMai;
+                }
+                else{
+                    String sql=" tongtiencanthiet = "+inputText+" AND ngaytao BETWEEN '"+fromDate+"' AND '"+toDate+"'";
+                    listKhuyenMai=KHUYENMAIDAO.getInstance().selectByCondition(sql);
+                    return listKhuyenMai;
+                }            
+            }
+            else{
+                if (isBlank(fromDate)|| isBlank(toDate)) {
+                    String sql=" phantramgiam = "+inputText;
+                    listKhuyenMai=KHUYENMAIDAO.getInstance().selectByCondition(sql);
+                    return listKhuyenMai;
+                }
+                else{
+                    String sql=" phantramgiam = "+inputText+" AND ngaytao BETWEEN '"+fromDate+"' AND '"+toDate+"'";
+                    listKhuyenMai=KHUYENMAIDAO.getInstance().selectByCondition(sql);
+                    return listKhuyenMai;
+                }             
+            }
         }
         else{
-            return null;
+            String sql="  ngaytao BETWEEN '"+fromDate+"' AND '"+toDate+"'";
+            listKhuyenMai=KHUYENMAIDAO.getInstance().selectByCondition(sql);
+            return listKhuyenMai;
         }
     }
 

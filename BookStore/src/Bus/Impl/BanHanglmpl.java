@@ -128,7 +128,7 @@ public class BanHanglmpl implements BanHang{
     
     // Tạo một bảng tạm thời để lưu các dòng được lọc
     DefaultTableModel tempModel = new DefaultTableModel();
-    tempModel.setColumnIdentifiers(new Object[]{"MAHOADON", "Manv", "TENTAIKHOAN", "NGAYLAP", "Makhuyenmai", "Phantramgiam", "TONGTIEN"});
+    tempModel.setColumnIdentifiers(new Object[]{"MAHOADON", "Manv", "TENTAIKHOAN", "NGAYLAP", "Makhuyenmai", "Phantramgiam", "TONGTIEN","tttk"});
     
     // Kiểm tra xem dataHoadon có rỗng không
     if (dataHoadon != null) {
@@ -142,12 +142,13 @@ String ngaylap = dataHoadon.getValueAt(i, 3) != null ? dataHoadon.getValueAt(i, 
 String makm = dataHoadon.getValueAt(i, 4) != null ? dataHoadon.getValueAt(i, 4).toString().trim() : "null";
 String phantramgiam = dataHoadon.getValueAt(i, 5) != null ? dataHoadon.getValueAt(i, 5).toString().trim() : "null";
 String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i, 6).toString().trim() : "null";
+String tttk=dataHoadon.getValueAt(i, 7) != null ? dataHoadon.getValueAt(i, 7).toString().trim() : "null";
 
                 // Kiểm tra xem nếu giá trị này chứa nội dung tìm kiếm
                 if (mahoadon.equalsIgnoreCase(searchText.trim()) || manv.equalsIgnoreCase(searchText.trim()) ||
                         makh.equalsIgnoreCase(searchText.trim()) || ngaylap.equalsIgnoreCase(searchText.trim())||
                         makm.equalsIgnoreCase(searchText.trim()) || phantramgiam.equalsIgnoreCase(searchText.trim())||
-                        tongtien.equalsIgnoreCase(searchText.trim())) {
+                        tongtien.equalsIgnoreCase(searchText.trim()) || tttk.equalsIgnoreCase(searchText.trim())) {
                     // Nếu có, thêm dòng này vào bảng tạm thời
                     Object[] row = {
                         dataHoadon.getValueAt(i, 0),
@@ -156,7 +157,8 @@ String tongtien = dataHoadon.getValueAt(i, 6) != null ? dataHoadon.getValueAt(i,
                         dataHoadon.getValueAt(i, 3), // NGAYLAP
                         dataHoadon.getValueAt(i, 4), // Makhuyenmai
                         dataHoadon.getValueAt(i, 5), // Phantramgiam
-                        dataHoadon.getValueAt(i, 6)  // TONGTIEN;
+                        dataHoadon.getValueAt(i, 6),  // TONGTIEN;
+                        dataHoadon.getValueAt(i, 7)
                     };
                     tempModel.addRow(row);
                 }
