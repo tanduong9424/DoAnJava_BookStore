@@ -37,8 +37,10 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
             ArrayList<KHUYENMAI> listKhuyenMai = khuyenMailmpl.getAllKM();
 
             for (KHUYENMAI khuyenmai : listKhuyenMai) {
-                Object[] row = {khuyenmai.getMakhuyenmai(),khuyenmai.getNgaytao(),khuyenmai.getNgaybatdau(),khuyenmai.getNgayketthuc(),khuyenmai.getTongtiencanthiet(),khuyenmai.getPhantramgiam()};
-                model.addRow(row);
+                if(khuyenmai.isISHIDDEN()==false){
+                    Object[] row = {khuyenmai.getMakhuyenmai(),khuyenmai.getNgaytao(),khuyenmai.getNgaybatdau(),khuyenmai.getNgayketthuc(),khuyenmai.getTongtiencanthiet(),khuyenmai.getPhantramgiam()};
+                    model.addRow(row);
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -123,7 +125,7 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
         from.setEditable(false);
         from.setBackground(new java.awt.Color(204, 255, 204));
         from.setForeground(new java.awt.Color(0, 51, 51));
-        from.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Từ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        from.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày tạo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         from.setFocusable(false);
         from.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,7 +136,7 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
         to.setEditable(false);
         to.setBackground(new java.awt.Color(204, 255, 204));
         to.setForeground(new java.awt.Color(0, 51, 51));
-        to.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đến", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
+        to.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày kết thúc", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         to.setFocusable(false);
 
         javax.swing.GroupLayout PanelTimKiemLayout = new javax.swing.GroupLayout(PanelTimKiem);
@@ -300,15 +302,9 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
         
         
         ArrayList<KHUYENMAI> listKhuyenMai = khuyenMailmpl.timKiem(kieuTimKiem,inputText,fromDate,toDate);
-        if(listKhuyenMai==null){
-            JOptionPane.showMessageDialog(null, "Không Tìm Thấy.", "thông báo", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         for (KHUYENMAI khuyenmai : listKhuyenMai) {
-            if(khuyenmai.isISHIDDEN()==false){
-                Object[] row = {khuyenmai.getMakhuyenmai(),khuyenmai.getNgaytao(),khuyenmai.getNgaybatdau(),khuyenmai.getNgayketthuc(),khuyenmai.getTongtiencanthiet(),khuyenmai.getPhantramgiam()};
-                model.addRow(row);
-            }
+            Object[] row = {khuyenmai.getMakhuyenmai(),khuyenmai.getNgaytao(),khuyenmai.getNgaybatdau(),khuyenmai.getNgayketthuc(),khuyenmai.getTongtiencanthiet(),khuyenmai.getPhantramgiam()};
+            model.addRow(row);
         }
     }//GEN-LAST:event_searchActionPerformed
 

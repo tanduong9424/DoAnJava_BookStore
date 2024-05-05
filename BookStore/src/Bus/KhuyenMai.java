@@ -13,7 +13,7 @@ import javax.swing.JComboBox;
  * @author Admin
  */
 public interface KhuyenMai {
-    void danhsachKhuyenMai(JComboBox model);
+    void danhsachKhuyenMai(JComboBox model,int tongtien);
     Boolean addKhuyenMai(KHUYENMAI t);
     Boolean deleteKhuyeMai(KHUYENMAI t);
     Boolean updateKhuyenMai(KHUYENMAI t);

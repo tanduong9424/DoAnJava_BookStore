@@ -184,8 +184,17 @@ String tttk=dataHoadon.getValueAt(i, 7) != null ? dataHoadon.getValueAt(i, 7).to
 //chưa xong
     @Override
     public void TaoHoaDonDatabase(HOADON t,NHANVIEN nv,KHACHANG tk,KHUYENMAI km,DefaultTableModel dataModel) {
-        KHUYENMAI resultkm=KHUYENMAIDAO.getInstance().selectById(km);
-        int kq=HOADONDAO.getInstance().insertHOADONCOTKCOMAKM(t,tk,resultkm,nv);
+        
+        
+        int kq=0;
+        if(km!=null){
+            KHUYENMAI resultkm=KHUYENMAIDAO.getInstance().selectById(km);
+            kq=HOADONDAO.getInstance().insertHOADONCOTKCOMAKM(t,tk,resultkm,nv);
+        }
+        else{
+            kq=HOADONDAO.getInstance().insertHOADONCOTKKOMAKM(t, tk, nv);
+        }
+        
 //        thêm các trường hợp có tài khoản và có mã khuyến mãi
         if(kq!=0){         
         HOADON hd=new HOADON(kq);
@@ -208,7 +217,8 @@ String tttk=dataHoadon.getValueAt(i, 7) != null ? dataHoadon.getValueAt(i, 7).to
 
     @Override
     public void XoaHoaDonDatabase(HOADON t) {
-        HOADONDAO.getInstance().delete(t);
+        HOADON result=HOADONDAO.getInstance().selectById(t);
+        HOADONDAO.getInstance().delete(result);
     }
 
     @Override
@@ -223,8 +233,10 @@ String tttk=dataHoadon.getValueAt(i, 7) != null ? dataHoadon.getValueAt(i, 7).to
 
     @Override
     public void HOANTHANHHOADON(HOADON t) {
-        HOADONDAO.getInstance().updateHOANTHANH(t);
-        HOADONDAO.getInstance().XacNhanHoaDon(t);
+        if(t.isTthd()==false){
+            HOADONDAO.getInstance().updateHOANTHANH(t);
+            HOADONDAO.getInstance().XacNhanHoaDon(t);
+        } 
     }
 
     @Override

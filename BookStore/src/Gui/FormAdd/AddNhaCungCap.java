@@ -140,7 +140,6 @@ public class AddNhaCungCap extends javax.swing.JFrame {
         String tennhaxuatban=name.getText();
         NHAXUATBAN nxb=new NHAXUATBAN(tennhaxuatban);
         NHAXUATBANDAO.getInstance().insert(nxb);
-        this.nhaphang.loadNCC();
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 

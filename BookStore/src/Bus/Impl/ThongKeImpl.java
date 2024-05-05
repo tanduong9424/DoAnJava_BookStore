@@ -50,7 +50,7 @@ public class ThongKeImpl {
                 else{
                     hoten=result.getHoten();    
                 }
-                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),hoten,hoadon.getNGAYLAP(),hoadon.getTONGTIEN()};
+                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),hoadon.getmakh(),hoten,hoadon.getNGAYLAP(),hoadon.getTONGTIEN()};
                 model.addRow(row);
 
                     }                
@@ -143,7 +143,20 @@ public class ThongKeImpl {
                 Date ngayLap = rs.getDate("NGAYLAP");
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(ngayLap);
-                int weekOfMonth = cal.get(Calendar.WEEK_OF_MONTH);
+
+                int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+                int weekOfMonth;
+
+                // Phân loại ngày vào tuần tương ứng
+                if (dayOfMonth >= 1 && dayOfMonth <= 7) {
+                    weekOfMonth = 1;
+                } else if (dayOfMonth >= 8 && dayOfMonth <= 14) {
+                    weekOfMonth = 2;
+                } else if (dayOfMonth >= 15 && dayOfMonth <= 21) {
+                    weekOfMonth = 3;
+                } else {
+                    weekOfMonth = 4;
+                }
 
                 // Phân loại hóa đơn vào tuần tương ứng và tính tổng tiền
                 int tongTien = rs.getInt("TONGTIEN");

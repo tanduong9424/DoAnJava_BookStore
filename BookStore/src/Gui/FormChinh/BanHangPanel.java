@@ -7,6 +7,7 @@ package Gui.FormChinh;
 
 import Bus.Impl.BanHanglmpl;
 import Bus.Impl.KhuyenMailmpl;
+import Dao.HOADONDAO;
 import Dao.SACHDAO;
 import Dto.HOADON;
 import Dto.KHACHANG;
@@ -131,8 +132,13 @@ public void loadNhanVien(NHANVIEN nvDM){
         nv.setText(manv+"");
 }
 public void loadKhuyenMai(){
+    int tongtien=0;
+    if(!(sum.getText()).isEmpty()){
+        tongtien=Integer.parseInt(sum.getText());
+    }
+
     KhuyenMailmpl km=new KhuyenMailmpl();
-    km.danhsachKhuyenMai(comboxKH1);
+    km.danhsachKhuyenMai(comboxKH1,tongtien);
 }
 
     /**
@@ -386,7 +392,7 @@ public void loadKhuyenMai(){
                         .addComponent(search2)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(DanhSachSPLayout.createSequentialGroup()
-                        .addComponent(scroll22, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                        .addComponent(scroll22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
@@ -519,7 +525,7 @@ public void loadKhuyenMai(){
                         .addGroup(ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboxKH1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboxKH, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         ThongTinBanHangLayout.setVerticalGroup(
             ThongTinBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -670,14 +676,14 @@ public void loadKhuyenMai(){
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(HoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ChiTietHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(DanhSachSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DanhSachSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ThongTinBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ThongTinBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -778,16 +784,15 @@ public void loadKhuyenMai(){
     
     public static String extractMakhFromString(String input) {
         // Biểu thức chính quy để tìm chuỗi makh=xxxx
-        Pattern pattern = Pattern.compile("(\\d+)-([^\\s]+)");
-        Matcher matcher = pattern.matcher(input);
+        Pattern pattern = Pattern.compile("(\\d+)-([^\\s-]+)");
+    Matcher matcher = pattern.matcher(input);
 
-
-        if (matcher.find()) {
-            return matcher.group(1); // Trả về phần trùng khớp đầu tiên, tức là số sau dấu '='
-        } else {
-            // Không tìm thấy makh trong chuỗi
-            return null; // hoặc bạn có thể trả về một giá trị mặc định hoặc thông báo lỗi tùy ý
-        }
+    if (matcher.find()) {
+        return matcher.group(1); // Trả về phần trùng khớp đầu tiên, tức là số sau dấu '='
+    } else {
+        // Không tìm thấy makh trong chuỗi
+        return null; // hoặc bạn có thể trả về một giá trị mặc định hoặc thông báo lỗi tùy ý
+    }
     }    
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
@@ -802,9 +807,16 @@ public void loadKhuyenMai(){
             int makh=Integer.parseInt(makhStr);
             LocalDate today = LocalDate.now();
             Date sqlDate = Date.valueOf(today);
-            String makmStr=extractMakhFromString((String) comboxKH1.getSelectedItem());
-            int makm=Integer.parseInt(makmStr);
-            KHUYENMAI km=new KHUYENMAI(makm);
+            String makmStr=null;
+            int makm;
+            KHUYENMAI km=null;
+            if(comboxKH1.getSelectedItem()!=null){
+                makmStr=extractMakhFromString((String) comboxKH1.getSelectedItem());
+                makm=Integer.parseInt(makmStr);
+                km =new KHUYENMAI(makm);
+            }
+            
+            
             NHANVIEN nv=new NHANVIEN(manv);
             KHACHANG tk=new KHACHANG(makh);
             HOADON t=new HOADON(makh,manv,sqlDate,tongtien,false);
@@ -870,7 +882,8 @@ public void loadKhuyenMai(){
         // TODO add your handling code here:
         HOADON t=new HOADON(ma_clicked_hoadon);
         BanHanglmpl banhang=new BanHanglmpl();
-        banhang.HOANTHANHHOADON(t);
+        HOADON result =HOADONDAO.getInstance().selectById(t);
+        banhang.HOANTHANHHOADON(result);
         loadHOADONToTable();
         loadBooksToTable();
     }//GEN-LAST:event_FinishActionPerformed

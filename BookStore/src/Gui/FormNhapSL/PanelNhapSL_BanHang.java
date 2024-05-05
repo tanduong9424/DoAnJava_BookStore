@@ -5,8 +5,11 @@
 package Gui.FormNhapSL;
 
 import Bus.Impl.BanHanglmpl;
+import Dao.SACHDAO;
 import Dto.SACH;
 import Gui.FormChinh.BanHangPanel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -218,11 +221,20 @@ public class PanelNhapSL_BanHang extends javax.swing.JFrame {
         DefaultTableModel dataModel=(DefaultTableModel) this.selectedSach.getModel();
         int sl=Integer.parseInt(inputSL.getText());
         int masach=Integer.parseInt(this.masach);
-        int gia=Integer.parseInt(this.dongia);
-        SACH t=new SACH(masach,this.tensach,this.nxb,gia);
-        BanHanglmpl banhang=new BanHanglmpl();
-        banhang.TaomoiChiTietHoaDon(dataModel, t, sl);
-        this.banhangs.loadtongtien();
+        SACH result=SACHDAO.getInstance().selectById(new SACH(masach));
+        if(sl>result.getSOLUONG()){
+            JOptionPane.showMessageDialog(null, "Số lượng vượt quá giới hạn ");
+            this.dispose();
+        }
+        else{
+            int gia=Integer.parseInt(this.dongia);
+            SACH t=new SACH(masach,this.tensach,this.nxb,gia);
+            BanHanglmpl banhang=new BanHanglmpl();
+            banhang.TaomoiChiTietHoaDon(dataModel, t, sl);
+            this.banhangs.loadtongtien();
+            this.banhangs.loadKhuyenMai();
+            this.dispose();
+        }
         this.dispose();
 
     }//GEN-LAST:event_submitbtnMouseClicked

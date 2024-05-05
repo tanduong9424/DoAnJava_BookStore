@@ -106,16 +106,7 @@ public void loadAnh(SACH t) {
         // Nếu có lỗi xảy ra, in ra thông báo lỗi
         ex.printStackTrace();
     }
-} 
-    public void loadNCC() {
-
-        try {
-            NhaXuatBanlmpl nxb=new NhaXuatBanlmpl();
-            nxb.danhsachNHAXUATBAN(selectNCC);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }  
+}  
     public void loadtongtien(){
     int tongtien=0;
     for(int i=0;i<jTable1.getRowCount();i++){
@@ -163,7 +154,6 @@ public void loadNhanVien(NHANVIEN nvDM){
         XoaBtn1 = new javax.swing.JButton();
         addNewSach = new javax.swing.JButton();
         ChiTietHD = new javax.swing.JPanel();
-        NhaCC = new javax.swing.JTextField();
         scroll3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         submit = new javax.swing.JButton();
@@ -171,8 +161,6 @@ public void loadNhanVien(NHANVIEN nvDM){
         ThongTinNhapHangPanel = new javax.swing.JPanel();
         tongtien = new javax.swing.JLabel();
         sum = new javax.swing.JTextField();
-        nhacungcap = new javax.swing.JLabel();
-        selectNCC = new javax.swing.JComboBox<>();
         addNewNCC = new javax.swing.JButton();
         SL = new javax.swing.JTextField();
         NV = new javax.swing.JTextField();
@@ -356,7 +344,7 @@ public void loadNhanVien(NHANVIEN nvDM){
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImgLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(img)
-                .addGap(0, 0, 0))
+                .addContainerGap())
         );
         panelImgLayout.setVerticalGroup(
             panelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,7 +407,7 @@ public void loadNhanVien(NHANVIEN nvDM){
         DanhSachNhapLayout.setHorizontalGroup(
             DanhSachNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DanhSachNhapLayout.createSequentialGroup()
-                .addGroup(DanhSachNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(DanhSachNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DanhSachNhapLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(inputsearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -430,11 +418,13 @@ public void loadNhanVien(NHANVIEN nvDM){
                         .addGap(5, 5, 5)
                         .addComponent(SuaBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
-                        .addComponent(XoaBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scroll2))
-                .addGap(0, 0, 0)
+                        .addComponent(XoaBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(DanhSachNhapLayout.createSequentialGroup()
+                        .addComponent(scroll2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(panelImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         DanhSachNhapLayout.setVerticalGroup(
             DanhSachNhapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -454,19 +444,13 @@ public void loadNhanVien(NHANVIEN nvDM){
                                 .addComponent(XoaBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(addNewSach, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scroll2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(scroll2, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         ChiTietHD.setBackground(new java.awt.Color(0, 204, 204));
         ChiTietHD.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi Tiết Phiếu Nhập", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
         ChiTietHD.setPreferredSize(new java.awt.Dimension(188, 188));
-
-        NhaCC.setEditable(false);
-        NhaCC.setBackground(new java.awt.Color(204, 255, 204));
-        NhaCC.setForeground(new java.awt.Color(0, 51, 51));
-        NhaCC.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhà Cung Cấp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        NhaCC.setFocusable(false);
 
         jTable1.setBackground(new java.awt.Color(204, 255, 204));
         jTable1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -546,8 +530,7 @@ public void loadNhanVien(NHANVIEN nvDM){
                 .addGroup(ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scroll3, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
                     .addGroup(ChiTietHDLayout.createSequentialGroup()
-                        .addComponent(NhaCC, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(xoaspbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -556,13 +539,9 @@ public void loadNhanVien(NHANVIEN nvDM){
         ChiTietHDLayout.setVerticalGroup(
             ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ChiTietHDLayout.createSequentialGroup()
-                .addGroup(ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ChiTietHDLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(NhaCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(xoaspbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(ChiTietHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(xoaspbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scroll3, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                 .addContainerGap())
@@ -586,17 +565,6 @@ public void loadNhanVien(NHANVIEN nvDM){
         sum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sumActionPerformed(evt);
-            }
-        });
-
-        nhacungcap.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        nhacungcap.setForeground(new java.awt.Color(0, 51, 51));
-        nhacungcap.setText("Nhà Cung Cấp");
-
-        selectNCC.setForeground(new java.awt.Color(0, 51, 51));
-        selectNCC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectNCCActionPerformed(evt);
             }
         });
 
@@ -688,24 +656,13 @@ public void loadNhanVien(NHANVIEN nvDM){
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(ThongTinNhapHangPanelLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addGroup(ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(ThongTinNhapHangPanelLayout.createSequentialGroup()
-                                        .addComponent(addNewNCC)
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(ThongTinNhapHangPanelLayout.createSequentialGroup()
-                                        .addComponent(nhacungcap, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(selectNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(42, 42, 42))))))))
+                                .addComponent(addNewNCC)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         ThongTinNhapHangPanelLayout.setVerticalGroup(
             ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ThongTinNhapHangPanelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nhacungcap)
-                    .addComponent(selectNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(46, 46, 46)
                 .addGroup(ThongTinNhapHangPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addNewNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -730,9 +687,9 @@ public void loadNhanVien(NHANVIEN nvDM){
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(DanhSachNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DanhSachNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ThongTinNhapHangPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(ThongTinNhapHangPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PhieuNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -757,7 +714,7 @@ public void loadNhanVien(NHANVIEN nvDM){
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         // TODO add your handling code here:
             // Lấy nội dung từ JTextField
-            inputsearch1.setText("");
+            
     String searchText = inputsearch1.getText();
     loadPHIEUNHAPToTable();
     // Kiểm tra xem searchText có rỗng không
@@ -782,9 +739,9 @@ public void loadNhanVien(NHANVIEN nvDM){
     String tongtien = PhieuNhaptb.getValueAt(i, 4) != null ? PhieuNhaptb.getValueAt(i, 4).toString().trim() : "null";
 
                 // Kiểm tra xem nếu giá trị này chứa nội dung tìm kiếm
-                if (maphieunhap.equalsIgnoreCase(searchText.trim()) || manv.equalsIgnoreCase(searchText.trim()) ||
-                        nhacungcap.equalsIgnoreCase(searchText.trim()) || ngaylap.equalsIgnoreCase(searchText.trim())||
-                        tongtien.equalsIgnoreCase(searchText.trim())) {
+                if (maphieunhap.contains(searchText.trim()) || manv.contains(searchText.trim()) ||
+                        nhacungcap.contains(searchText.trim()) || ngaylap.contains(searchText.trim())||
+                        tongtien.contains(searchText.trim())) {
                     // Nếu có, thêm dòng này vào bảng tạm thời
                     Object[] row = {
                         PhieuNhaptb.getValueAt(i, 0),
@@ -808,6 +765,7 @@ public void loadNhanVien(NHANVIEN nvDM){
         }
         dataModel.addRow(row);
     }
+    inputsearch1.setText("");
     }//GEN-LAST:event_SearchActionPerformed
 
     private void PhieuNhaptbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PhieuNhaptbMouseClicked
@@ -852,7 +810,7 @@ public void loadNhanVien(NHANVIEN nvDM){
 
     private void Search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search1ActionPerformed
         // TODO add your handling code here:
-        inputsearch2.setText("");
+        
                             // Lấy nội dung từ JTextField
     String searchText = inputsearch2.getText();
     loadBooksToTable();
@@ -877,8 +835,8 @@ public void loadNhanVien(NHANVIEN nvDM){
     String nhacungcap = Nhaptb.getValueAt(i, 3) != null ? Nhaptb.getValueAt(i, 3).toString().trim() : "null";
 
                 // Kiểm tra xem nếu giá trị này chứa nội dung tìm kiếm
-                if (masach.equalsIgnoreCase(searchText.trim()) || tensach.equalsIgnoreCase(searchText.trim()) ||
-                        dongia.equalsIgnoreCase(searchText.trim()) || nhacungcap.equalsIgnoreCase(searchText.trim())) {
+                if (masach.contains(searchText.trim()) || tensach.contains(searchText.trim()) ||
+                        dongia.contains(searchText.trim()) || nhacungcap.contains(searchText.trim())) {
                     // Nếu có, thêm dòng này vào bảng tạm thời
                     Object[] row = {
                         Nhaptb.getValueAt(i, 0),
@@ -901,6 +859,7 @@ public void loadNhanVien(NHANVIEN nvDM){
         }
         dataModel.addRow(row);
     }
+    inputsearch2.setText("");
     }//GEN-LAST:event_Search1ActionPerformed
 
     private void inputsearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputsearch2ActionPerformed
@@ -920,10 +879,6 @@ public void loadNhanVien(NHANVIEN nvDM){
         AddNhaCungCap x=new AddNhaCungCap(this);
         x.setVisible(true);
     }//GEN-LAST:event_addNewNCCActionPerformed
-
-    private void selectNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectNCCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_selectNCCActionPerformed
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
@@ -1040,7 +995,6 @@ public void loadNhanVien(NHANVIEN nvDM){
     private javax.swing.JPanel ChiTietHD;
     private javax.swing.JPanel DanhSachNhap;
     private javax.swing.JTextField NV;
-    private javax.swing.JTextField NhaCC;
     private javax.swing.JTable Nhaptb;
     private javax.swing.JPanel PhieuNhap;
     private javax.swing.JTable PhieuNhaptb;
@@ -1058,12 +1012,10 @@ public void loadNhanVien(NHANVIEN nvDM){
     private javax.swing.JTextField inputsearch1;
     private javax.swing.JTextField inputsearch2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel nhacungcap;
     private javax.swing.JPanel panelImg;
     private javax.swing.JScrollPane scroll1;
     private javax.swing.JScrollPane scroll2;
     private javax.swing.JScrollPane scroll3;
-    private javax.swing.JComboBox<String> selectNCC;
     private javax.swing.JButton submit;
     private javax.swing.JTextField sum;
     private javax.swing.JLabel tongtien;

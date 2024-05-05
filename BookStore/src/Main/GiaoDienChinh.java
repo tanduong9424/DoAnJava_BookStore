@@ -367,7 +367,6 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         cardLayout.show(Middle, "nhaphang");
         nhaphang.loadBooksToTable();
         nhaphang.loadPHIEUNHAPToTable();
-        nhaphang.loadNCC();
         
     }//GEN-LAST:event_NhapHangMouseClicked
 

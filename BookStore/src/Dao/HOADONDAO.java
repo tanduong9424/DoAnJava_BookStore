@@ -197,17 +197,20 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 		int ketqua=0;
 		try {
 			Connection con=JDBCUtil.getConnection();
-			String sqlKho="SELECT MASACH,SOLUONG FROM hoadon,chitiethoadon "+
+                        if(t.isTthd()==true){
+                            String sqlKho="SELECT MASACH,SOLUONG FROM hoadon,chitiethoadon "+
 						"WHERE hoadon.MAHOADON=chitiethoadon.MAHOADON AND hoadon.MAHOADON=?";
-			PreparedStatement pst1=con.prepareStatement(sqlKho);
-			pst1.setInt(1, t.getMAHOADON());
-			ResultSet rs=pst1.executeQuery();
-			while(rs.next()) {
-				int MASACH=rs.getInt("MASACH");
-				int SOLUONG=rs.getInt("SOLUONG");
-				SACH kho=new SACH(MASACH);
-				SACHDAO.getInstance().thuhoiSACH(kho,SOLUONG);
-			}
+                            PreparedStatement pst1=con.prepareStatement(sqlKho);
+                            pst1.setInt(1, t.getMAHOADON());
+                            ResultSet rs=pst1.executeQuery();
+                            while(rs.next()) {
+                                    int MASACH=rs.getInt("MASACH");
+                                    int SOLUONG=rs.getInt("SOLUONG");
+                                    SACH kho=new SACH(MASACH);
+                                    SACHDAO.getInstance().thuhoiSACH(kho,SOLUONG);
+                            }
+                        }
+			
 			
 			
 			
