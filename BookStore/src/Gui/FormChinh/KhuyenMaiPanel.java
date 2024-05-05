@@ -300,9 +300,15 @@ public class KhuyenMaiPanel extends javax.swing.JPanel {
         
         
         ArrayList<KHUYENMAI> listKhuyenMai = khuyenMailmpl.timKiem(kieuTimKiem,inputText,fromDate,toDate);
+        if(listKhuyenMai==null){
+            JOptionPane.showMessageDialog(null, "Không Tìm Thấy.", "thông báo", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         for (KHUYENMAI khuyenmai : listKhuyenMai) {
-            Object[] row = {khuyenmai.getMakhuyenmai(),khuyenmai.getNgaytao(),khuyenmai.getNgaybatdau(),khuyenmai.getNgayketthuc(),khuyenmai.getTongtiencanthiet(),khuyenmai.getPhantramgiam()};
-            model.addRow(row);
+            if(khuyenmai.isISHIDDEN()==false){
+                Object[] row = {khuyenmai.getMakhuyenmai(),khuyenmai.getNgaytao(),khuyenmai.getNgaybatdau(),khuyenmai.getNgayketthuc(),khuyenmai.getTongtiencanthiet(),khuyenmai.getPhantramgiam()};
+                model.addRow(row);
+            }
         }
     }//GEN-LAST:event_searchActionPerformed
 

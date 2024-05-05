@@ -10,7 +10,9 @@ import Dto.KHUYENMAI;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import static org.apache.logging.log4j.util.Strings.isBlank;
-
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 /**
  *
  * @author Admin
@@ -47,10 +49,27 @@ public class KhuyenMailmpl implements KhuyenMai{
     public ArrayList<KHUYENMAI> getAllKM() {
         return khuyenmaidao.selectAllEXCEPTISHIDDEN();  
     }
-
+    
+    private String backOneDay(String toDate){
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = sdf.parse(toDate);
+            
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            calendar.add(Calendar.DAY_OF_MONTH, -1); 
+            date = calendar.getTime();
+            
+            return sdf.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     @Override
     public ArrayList<KHUYENMAI> timKiem(String kieuTimKiem, String inputText, String fromDate, String toDate) {
         ArrayList<KHUYENMAI> listKhuyenMai = new ArrayList<>();
+        fromDate = backOneDay(fromDate);
         System.out.println(" ngay bat dau "+fromDate+" ngay ket thuc "+ toDate);
         if(inputText!="" && inputText!=null && !isBlank(inputText)){          
             if(kieuTimKiem=="Mã Khuyến Mãi"){            
