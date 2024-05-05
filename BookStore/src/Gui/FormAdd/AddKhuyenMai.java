@@ -41,13 +41,10 @@ public class AddKhuyenMai extends javax.swing.JFrame {
 
         PanelAdd = new javax.swing.JPanel();
         mid = new javax.swing.JPanel();
-        MaKM = new javax.swing.JTextField();
         StienCanThiet = new javax.swing.JTextField();
         PhanTramGiam = new javax.swing.JTextField();
         exit = new javax.swing.JLabel();
         ngaybatdau = new javax.swing.JTextField();
-        ChonNgay1 = new javax.swing.JButton();
-        ngaytao = new javax.swing.JTextField();
         ChonNgay2 = new javax.swing.JButton();
         ChonNgay3 = new javax.swing.JButton();
         ngayketthuc = new javax.swing.JTextField();
@@ -60,12 +57,6 @@ public class AddKhuyenMai extends javax.swing.JFrame {
 
         mid.setBackground(new java.awt.Color(51, 255, 255));
         mid.setPreferredSize(new java.awt.Dimension(400, 396));
-
-        MaKM.setEditable(false);
-        MaKM.setBackground(new java.awt.Color(204, 255, 204));
-        MaKM.setForeground(new java.awt.Color(0, 51, 51));
-        MaKM.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã Khuyến Mãi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        MaKM.setFocusable(false);
 
         StienCanThiet.setBackground(new java.awt.Color(204, 255, 204));
         StienCanThiet.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tổng tiền cần thiết", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
@@ -88,24 +79,6 @@ public class AddKhuyenMai extends javax.swing.JFrame {
         ngaybatdau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ngaybatdauActionPerformed(evt);
-            }
-        });
-
-        ChonNgay1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_calendar_31_30px.png"))); // NOI18N
-        ChonNgay1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChonNgay1ActionPerformed(evt);
-            }
-        });
-
-        ngaytao.setEditable(false);
-        ngaytao.setBackground(new java.awt.Color(204, 255, 204));
-        ngaytao.setForeground(new java.awt.Color(0, 51, 51));
-        ngaytao.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày tạo Khuyến mãi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51))); // NOI18N
-        ngaytao.setFocusable(false);
-        ngaytao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ngaytaoActionPerformed(evt);
             }
         });
 
@@ -141,12 +114,10 @@ public class AddKhuyenMai extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
                 .addGap(109, 109, 109)
                 .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PhanTramGiam)
+                    .addComponent(PhanTramGiam, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                     .addGroup(midLayout.createSequentialGroup()
                         .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(StienCanThiet)
-                            .addComponent(MaKM, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                            .addComponent(ngaytao)
+                            .addComponent(StienCanThiet, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                             .addComponent(ngaybatdau)
                             .addComponent(ngayketthuc))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -155,7 +126,6 @@ public class AddKhuyenMai extends javax.swing.JFrame {
                     .addGroup(midLayout.createSequentialGroup()
                         .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(ChonNgay2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ChonNgay1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ChonNgay3, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(62, 62, 62))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, midLayout.createSequentialGroup()
@@ -165,25 +135,16 @@ public class AddKhuyenMai extends javax.swing.JFrame {
         midLayout.setVerticalGroup(
             midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(midLayout.createSequentialGroup()
-                .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(midLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(MaKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(exit))
+                .addComponent(exit)
+                .addGap(52, 52, 52)
+                .addComponent(StienCanThiet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
+                .addComponent(PhanTramGiam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(midLayout.createSequentialGroup()
-                        .addComponent(StienCanThiet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(PhanTramGiam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
                         .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(midLayout.createSequentialGroup()
-                                .addGroup(midLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ngaytao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ChonNgay1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ngaybatdau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ngaybatdau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ChonNgay2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ngayketthuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -277,22 +238,6 @@ public class AddKhuyenMai extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_submitbtnMouseClicked
 
-    private void ChonNgay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChonNgay1ActionPerformed
-        // TODO add your handling code here:
-        DatePicker datePicker = new DatePicker();
-        datePicker.setDateToToday();//đặt mặc định là hôm nay
-        datePicker.addDateChangeListener((dce) -> {
-            ngaytao.setText(datePicker.getDateStringOrEmptyString());
-        });
-        LocalDate x = datePicker.getDate();
-        JOptionPane.showMessageDialog(this, datePicker, "Chọn ngày tạo khuyến mãi", JOptionPane.PLAIN_MESSAGE);
-        date1 = java.sql.Date.valueOf(x);
-    }//GEN-LAST:event_ChonNgay1ActionPerformed
-
-    private void ngaytaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ngaytaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ngaytaoActionPerformed
-
     private void ChonNgay2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChonNgay2ActionPerformed
         // TODO add your handling code here:
         DatePicker datePicker = new DatePicker();
@@ -362,10 +307,8 @@ public class AddKhuyenMai extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ChonNgay1;
     private javax.swing.JButton ChonNgay2;
     private javax.swing.JButton ChonNgay3;
-    private javax.swing.JTextField MaKM;
     private javax.swing.JPanel PanelAdd;
     private javax.swing.JTextField PhanTramGiam;
     private javax.swing.JTextField StienCanThiet;
@@ -374,7 +317,6 @@ public class AddKhuyenMai extends javax.swing.JFrame {
     private javax.swing.JPanel mid;
     private javax.swing.JTextField ngaybatdau;
     private javax.swing.JTextField ngayketthuc;
-    private javax.swing.JTextField ngaytao;
     private javax.swing.JLabel submitbtn;
     // End of variables declaration//GEN-END:variables
 }

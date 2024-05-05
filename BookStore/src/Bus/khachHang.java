@@ -17,7 +17,7 @@ public interface khachHang {
     Boolean themKhachHang(KHACHANG khachang);
     Boolean xoaKhachHang(KHACHANG khachang);
     Boolean suaKhachHang(KHACHANG khachang);
-    ArrayList<KHACHANG> timKiem(String kieuTimKiem,String inputText);
+    ArrayList<KHACHANG> timKiem(String text,String kieuTimKiem);
     Boolean xuatExcel();
     ArrayList<KHACHANG> selectAll();
     KHACHANG getByID(KHACHANG khachang);

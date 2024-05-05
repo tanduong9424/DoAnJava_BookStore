@@ -328,9 +328,4 @@ public class NHANVIENDAO implements DAOInterface<NHANVIEN>{
         }
         return ketqua;
     }
-
-
-
-
-
 }

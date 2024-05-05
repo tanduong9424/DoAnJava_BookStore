@@ -50,48 +50,10 @@ public class khachHangImpl implements khachHang{
         return khachHangDao.SearchKHByID(t);
     }
    @Override
-    public ArrayList<KHACHANG> timKiem(String kieuTimKiem,String inputText) {
-        
-        ArrayList<KHACHANG> result = new ArrayList<>();
-        ArrayList<KHACHANG> dskh = khachHangDao.selectAll();
-        dskh.forEach((kh) -> {
-         switch (kieuTimKiem) {
-            case "Mã Nhân Viên":
-                if (String.valueOf(kh.getMakh()).toLowerCase().contains(inputText.toLowerCase())) {
-                    result.add(kh);
-                }
-                break;
-            case "Tên Nhân Viên":
-                if (kh.getHoten() != null && kh.getHoten().toLowerCase().contains(inputText.toLowerCase())) {
-                    result.add(kh);
-                }
-                break;
-            case "Địa Chỉ":
-                if (kh.getDiachi() != null && kh.getDiachi().toLowerCase().contains(inputText.toLowerCase())) {
-                    result.add(kh);
-                }
-                break;
-            case "Số Điện Thoại":
-                if (String.valueOf(kh.getDienthoai()).toLowerCase().contains(inputText.toLowerCase())) {
-                    result.add(kh);
-                }
-                break;
-            case "Email":
-                if (kh.getEmail() != null && kh.getEmail().toLowerCase().contains(inputText.toLowerCase())) {
-                    result.add(kh);
-                }
-                break;        
-        }
-
-        });
-
-        return result;
+    public ArrayList<KHACHANG> timKiem(String text,String kieuTimKiem) {
+        ArrayList<KHACHANG> result = khachHangDao.timkiemNangCao(text,kieuTimKiem);
+        return result;    
     }   
-
-
-
-
-
 
     @Override
     public Boolean xuatExcel() {

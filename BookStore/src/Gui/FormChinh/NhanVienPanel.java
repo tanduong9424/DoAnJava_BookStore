@@ -324,8 +324,8 @@ public class NhanVienPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa cần tìm", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        ArrayList<NHANVIEN> tkList = nhanVienImpl1.timKiem(inputText,kieuTimKiem);
-        for (NHANVIEN nhanVien : tkList) {
+        ArrayList<NHANVIEN> nvList = nhanVienImpl1.timKiem(inputText,kieuTimKiem);
+        for (NHANVIEN nhanVien : nvList) {
             Object[] row = {nhanVien.getManv(), nhanVien.getHoten(),nhanVien.getDiachi(),nhanVien.getEmail(),nhanVien.getDienthoai()};
             model.addRow(row);
         }

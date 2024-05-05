@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static org.apache.logging.log4j.util.Strings.isBlank;
 
 /**
  *
@@ -329,6 +330,8 @@ public class KhachHangPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String choose=(String) thuoctinh.getSelectedItem();
         inputSearch.setBorder(javax.swing.BorderFactory.createTitledBorder(null, choose, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(0, 51, 51)));
+        loadKhachHangToTable();
+        inputSearch.setText("");
     }//GEN-LAST:event_thuoctinhActionPerformed
 
     private void inputSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSearchActionPerformed
@@ -342,14 +345,16 @@ public class KhachHangPanel extends javax.swing.JPanel {
         
         String kieuTimKiem = (String) thuoctinh.getSelectedItem();
         String inputText = inputSearch.getText();
-        
-        if(inputText!=null){
-            ArrayList<KHACHANG> sachList = khaHangImpl.timKiem(kieuTimKiem,inputText);
-            for (KHACHANG khachang : sachList) {
-                Object[] row = {khachang.getMakh(), khachang.getHoten(), khachang.getDiachi(), khachang.getDienthoai(), khachang.getEmail()};
-                model.addRow(row);
-            }
+        if (isBlank(inputText)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập từ khóa cần tìm", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        ArrayList<KHACHANG> khList = khaHangImpl.timKiem(inputText,kieuTimKiem);
+        for (KHACHANG khachHang : khList) {
+            Object[] row = {khachHang.getMakh(), khachHang.getHoten(),khachHang.getDiachi(),khachHang.getDienthoai(),khachHang.getEmail()};
+            model.addRow(row);
+        }
+
     }//GEN-LAST:event_searchActionPerformed
 
     private void inputSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSearchKeyPressed

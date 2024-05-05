@@ -75,12 +75,10 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="PhanTramGiam" alignment="0" max="32767" attributes="0"/>
+                          <Component id="PhanTramGiam" alignment="0" pref="188" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="StienCanThiet" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="MaKM" pref="187" max="32767" attributes="0"/>
-                                  <Component id="ngaytao" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="StienCanThiet" alignment="0" pref="187" max="32767" attributes="0"/>
                                   <Component id="ngaybatdau" alignment="0" max="32767" attributes="0"/>
                                   <Component id="ngayketthuc" alignment="0" max="32767" attributes="0"/>
                               </Group>
@@ -92,7 +90,6 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="ChonNgay2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ChonNgay1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="ChonNgay3" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
@@ -108,29 +105,16 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="MaKM" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="exit" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="exit" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <Component id="StienCanThiet" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Component id="PhanTramGiam" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="StienCanThiet" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Component id="PhanTramGiam" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="ngaytao" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="ChonNgay1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="ngaybatdau" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="ngaybatdau" min="-2" max="-2" attributes="0"/>
                                   <Component id="ChonNgay2" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -144,26 +128,6 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="MaKM">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="cc" green="ff" red="cc" type="rgb"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="0" type="rgb"/>
-                </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="M&#xe3; Khuy&#x1ebf;n M&#xe3;i">
-                      <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
-                      <Color PropertyName="color" blue="33" green="33" red="0" type="rgb"/>
-                    </TitledBorder>
-                  </Border>
-                </Property>
-                <Property name="focusable" type="boolean" value="false"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="StienCanThiet">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -225,39 +189,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ngaybatdauActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="ChonNgay1">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/icons8_calendar_31_30px.png"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChonNgay1ActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="ngaytao">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="cc" green="ff" red="cc" type="rgb"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="0" type="rgb"/>
-                </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Ng&#xe0;y t&#x1ea1;o Khuy&#x1ebf;n m&#xe3;i">
-                      <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
-                      <Color PropertyName="color" blue="33" green="33" red="0" type="rgb"/>
-                    </TitledBorder>
-                  </Border>
-                </Property>
-                <Property name="focusable" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ngaytaoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ChonNgay2">
