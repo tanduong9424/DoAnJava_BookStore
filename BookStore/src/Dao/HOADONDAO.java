@@ -1,6 +1,8 @@
 
 package Dao;
 
+import Dao.DAOInterface;
+import Dao.SACHDAO;
 import Dto.HOADON;
 import Dto.KHACHANG;
 import Dto.KHUYENMAI;
@@ -255,6 +257,7 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 
 	@Override
 	public ArrayList<HOADON> selectAll() {
+            
 		ArrayList<HOADON> ketqua=new ArrayList<HOADON>();
 		try {
 			Connection con=JDBCUtil.getConnection();
@@ -417,5 +420,170 @@ public class HOADONDAO implements DAOInterface<HOADON>{
 		}
 		return false;
 	}
+        public int selectMaKHChitieu(KHACHANG t) {
+		int ketqua=0;
+                
+		try {
+                        Connection con=JDBCUtil.getConnection();
+			String sql=" SELECT SUM(TONGTIEN) AS TONGTIEN    FROM hoadon   WHERE makh = ? AND tthd =1;";
+			PreparedStatement pst=con.prepareStatement(sql);
+			pst.setInt(1,t.getMakh());
+			ResultSet rs=pst.executeQuery();
+                        rs = pst.executeQuery();
+                        // Kiểm tra xem ResultSet có dữ liệu không
+                        while (rs.next()) {
+                            // Lấy giá trị SUM từ cột TONGTIEN trong kết quả của câu truy vấn
+                            ketqua = rs.getInt("TONGTIEN");
+                        }
+                        System.out.print(ketqua);
+			JDBCUtil.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
+			e.printStackTrace();
+		}
+		return ketqua;
+	}
+        public int selectMaNVDoanhthu(NHANVIEN t) {
+		int ketqua=0;
+                
+		try {
+                        Connection con=JDBCUtil.getConnection();
+			String sql=" SELECT SUM(TONGTIEN) AS TONGTIEN    FROM hoadon   WHERE manv = ? AND tthd =1;";
+			PreparedStatement pst=con.prepareStatement(sql);
+			pst.setInt(1,t.getManv());
+			ResultSet rs=pst.executeQuery();
+                        rs = pst.executeQuery();
+                        // Kiểm tra xem ResultSet có dữ liệu không
+                        while (rs.next()) {
+                            // Lấy giá trị SUM từ cột TONGTIEN trong kết quả của câu truy vấn
+                            ketqua = rs.getInt("TONGTIEN");
+                        }
+                        System.out.print(ketqua);
+			JDBCUtil.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
+			e.printStackTrace();
+		}
+		return ketqua;
+	}
+        public int selectTongTien(){
+            int ketqua=0;
+            try {
+                        Connection con=JDBCUtil.getConnection();
+			String sql=" SELECT SUM(TONGTIEN) AS TONGTIEN    FROM hoadon   WHERE tthd =1;";
+			PreparedStatement pst=con.prepareStatement(sql);
+			ResultSet rs=pst.executeQuery();
+                        rs = pst.executeQuery();
+                        // Kiểm tra xem ResultSet có dữ liệu không
+                        while (rs.next()) {
+                            // Lấy giá trị SUM từ cột TONGTIEN trong kết quả của câu truy vấn
+                            ketqua = rs.getInt("TONGTIEN");
+                        }
+                        System.out.print(ketqua);
+			JDBCUtil.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
+			e.printStackTrace();
+		}
+		return ketqua;
+	}
+        public HOADON selectHoaDonMax(String nhapngay1MAX, String nhapngay2MAX){
+            HOADON ketqua =null ;
+            try {
+                        Connection con=JDBCUtil.getConnection();
+			String sql=" SELECT *  FROM hoadon  WHERE tthd =1 AND NGAYLAP BETWEEN ? AND ?  ORDER BY TONGTIEN DESC LIMIT 1;";
+			PreparedStatement pst=con.prepareStatement(sql);
+			pst.setString(1,nhapngay1MAX);
+			pst.setString(2,nhapngay2MAX);
+			ResultSet rs=pst.executeQuery();
+			while(rs.next()) {
+				int MAHOADON=rs.getInt("MAHOADON");
+				int makh=rs.getInt("makh");
+				int manv=rs.getInt("manv");
+				Date NGAYLAP=rs.getDate("NGAYLAP");
+				int TONGTIEN=rs.getInt("TONGTIEN");
+				int makhuyenmai=rs.getInt("makhuyenmai");
+				boolean tthd=rs.getBoolean("tthd");
+				HOADON hoadon=new HOADON(MAHOADON,makh,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd);
+				ketqua=hoadon;
+			}
+			JDBCUtil.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
+			e.printStackTrace();
+		}
+		return ketqua;
+	}
+        public ArrayList<HOADON> selectHoaDonMax2(){
+            ArrayList<HOADON> ketqua=new ArrayList<HOADON>();
+            try {
+                        Connection con=JDBCUtil.getConnection();
+			String sql=" SELECT *  FROM hoadon  WHERE tthd =1 ORDER BY TONGTIEN DESC LIMIT 1;";
+			PreparedStatement pst=con.prepareStatement(sql);
+			ResultSet rs=pst.executeQuery();
+			while(rs.next()) {
+				int MAHOADON=rs.getInt("MAHOADON");
+				int makh=rs.getInt("makh");
+				int manv=rs.getInt("manv");
+				Date NGAYLAP=rs.getDate("NGAYLAP");
+				int TONGTIEN=rs.getInt("TONGTIEN");
+				int makhuyenmai=rs.getInt("makhuyenmai");
+				boolean tthd=rs.getBoolean("tthd");
+				HOADON hoadon=new HOADON(MAHOADON,makh,manv,NGAYLAP,TONGTIEN,makhuyenmai,tthd);
+				ketqua.add(hoadon);
+			}
+			JDBCUtil.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
+			e.printStackTrace();
+		}
+		return ketqua;
+	}
+        public double selectHoaDonTB(String nhapngay1TB, String nhapngay2TB){
+            double ketqua = 0 ;
+            try {
+                        Connection con=JDBCUtil.getConnection();
+			String sql=" SELECT AVG(TONGTIEN) AS TRUNGBINH_TONGTIEN   FROM hoadon  WHERE tthd=1 AND NGAYLAP BETWEEN ? AND ?;";
+			PreparedStatement pst=con.prepareStatement(sql);
+			pst.setString(1,nhapngay1TB);
+			pst.setString(2,nhapngay2TB);
+			ResultSet rs=pst.executeQuery();
+			while (rs.next()) {
+                            // Lấy giá trị SUM từ cột TONGTIEN trong kết quả của câu truy vấn
+                            ketqua = rs.getDouble("TRUNGBINH_TONGTIEN");
+                        }
+                        System.out.print(ketqua);
+			JDBCUtil.closeConnection(con);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.print("co loi xay ra, thuc hien cau lenh khong thanh cong o selectAll class HOADONDAO \n");
+			e.printStackTrace();
+		}
+		return ketqua;
+	}
+        public double selectHoaDonTB2() {
+            double ketqua = 0;
+            try {
+                Connection con = JDBCUtil.getConnection();
+                String sql = "SELECT AVG(TONGTIEN) AS TRUNGBINH_TONGTIEN FROM hoadon WHERE tthd=1;";
+                PreparedStatement pst = con.prepareStatement(sql);
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    // Di chuyển con trỏ đến hàng đầu tiên và lấy giá trị từ cột TRUNGBINH_TONGTIEN
+                    ketqua = rs.getDouble("TRUNGBINH_TONGTIEN");
+                }
+                System.out.print(ketqua);
+                JDBCUtil.closeConnection(con);
+            } catch (SQLException e) {
+                System.out.print("Có lỗi xảy ra khi thực hiện câu lệnh không thành công trong lớp HOADONDAO \n");
+                e.printStackTrace();
+            }
+            return ketqua;
+        }
 
 }
