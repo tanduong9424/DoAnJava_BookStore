@@ -284,8 +284,9 @@ public class AddKhuyenMai extends javax.swing.JFrame {
         datePicker.addDateChangeListener((dce) -> {
             ngaytao.setText(datePicker.getDateStringOrEmptyString());
         });
-        LocalDate x = datePicker.getDate();
+        
         JOptionPane.showMessageDialog(this, datePicker, "Chọn ngày tạo khuyến mãi", JOptionPane.PLAIN_MESSAGE);
+        LocalDate x = datePicker.getDate();
         date1 = java.sql.Date.valueOf(x);
     }//GEN-LAST:event_ChonNgay1ActionPerformed
 
@@ -300,8 +301,9 @@ public class AddKhuyenMai extends javax.swing.JFrame {
         datePicker.addDateChangeListener((dce) -> {
             ngaybatdau.setText(datePicker.getDateStringOrEmptyString());
         });
-        LocalDate y = datePicker.getDate();
+        
         JOptionPane.showMessageDialog(this, datePicker, "Chọn ngày bắt đầu", JOptionPane.PLAIN_MESSAGE);
+        LocalDate y = datePicker.getDate();
         date2 = java.sql.Date.valueOf(y);
     }//GEN-LAST:event_ChonNgay2ActionPerformed
 
@@ -312,8 +314,9 @@ public class AddKhuyenMai extends javax.swing.JFrame {
         datePicker.addDateChangeListener((dce) -> {
             ngayketthuc.setText(datePicker.getDateStringOrEmptyString());
         });
-         LocalDate z = datePicker.getDate();
+         
         JOptionPane.showMessageDialog(this, datePicker, "Chọn ngày kết thúc", JOptionPane.PLAIN_MESSAGE);
+        LocalDate z = datePicker.getDate();
         date3 = java.sql.Date.valueOf(z);
     }//GEN-LAST:event_ChonNgay3ActionPerformed
 

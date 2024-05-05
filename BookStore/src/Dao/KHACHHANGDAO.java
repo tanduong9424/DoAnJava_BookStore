@@ -257,4 +257,55 @@ public class KHACHHANGDAO implements DAOInterface<KHACHANG>{
         }
         return kq;
     }
+    public ArrayList<KHACHANG> timkiemNangCao(String input, String type) {
+        ArrayList<KHACHANG> ketqua = new ArrayList<>();
+        String sql;
+        try {
+            Connection con = JDBCUtil.getConnection();
+            PreparedStatement pst = null;
+            switch (type) {
+                case "Mã Nhân Viên":
+                    sql = "SELECT * FROM khachhang WHERE CAST(manv AS VARCHAR(20)) LIKE ? AND tttk=true";
+                    pst = con.prepareStatement(sql);
+                    pst.setString(1, "%" + input + "%");
+                    break;
+                case "Tên Nhân Viên":
+                    sql = "SELECT * FROM khachhang WHERE LOWER(hoten) LIKE ? AND tttk=true";
+                    pst = con.prepareStatement(sql);
+                    pst.setString(1, "%" + input.toLowerCase() + "%");
+                    break;
+                case "Địa Chỉ":
+                    sql = "SELECT * FROM khachhang WHERE LOWER(diachi) LIKE ? AND tttk=true";
+                    pst = con.prepareStatement(sql);
+                    pst.setString(1, "%" + input.toLowerCase() + "%");
+                    break;
+                case "Số Điện Thoại":
+                    sql = "SELECT * FROM khachhang WHERE CAST(dienthoai AS VARCHAR(20)) LIKE ? AND tttk=true";
+                    pst = con.prepareStatement(sql);
+                    pst.setString(1, "%" + input + "%");
+                    break;
+                case "Email":
+                    sql = "SELECT * FROM khachhang WHERE LOWER(email) LIKE ? AND tttk=true";
+                    pst = con.prepareStatement(sql);
+                    pst.setString(1, "%" + input.toLowerCase() + "%");
+                    break;
+            }
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int manv = rs.getInt("manv");
+                String hoten = rs.getString("hoten");
+                String diachi = rs.getString("diachi");
+                String email = rs.getString("email");
+                int dienthoai = rs.getInt("dienthoai");
+                boolean tttk = rs.getBoolean("tttk");
+                KHACHANG nhanVien = new KHACHANG(manv, hoten, diachi, email, dienthoai, tttk);
+                ketqua.add(nhanVien);
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.print("co loi o timkiemnangcao NHANVIENDAO\n");
+            e.printStackTrace();
+        }
+        return ketqua;
+    }
 }
