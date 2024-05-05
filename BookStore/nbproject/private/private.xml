@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DELL/Desktop/s/DoAnJava_BookStore/BookStore/src/Gui/FormChinh/NhapHangPanel.java</file>
-            <file>file:/C:/Users/DELL/Desktop/s/DoAnJava_BookStore/BookStore/src/Gui/FormChinh/BanHangPanel.java</file>
-            <file>file:/C:/Users/DELL/Desktop/s/DoAnJava_BookStore/BookStore/src/Gui/FormAdd/AddTaiKhoan.java</file>
+            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/conDatabase/JDBCUtil.java</file>
+            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Dao/KHUYENMAIDAO.java</file>
+            <file>file:/D:/Desktop/DoAnJava_BookStore/BookStore/src/Gui/FormAdd/AddKhuyenMai.java</file>
         </group>
     </open-files>
 </project-private>

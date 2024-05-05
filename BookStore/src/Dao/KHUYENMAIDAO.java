@@ -22,6 +22,9 @@ public class KHUYENMAIDAO implements DAOInterface<KHUYENMAI>{
         public int insert(KHUYENMAI t) {
             int ketqua = 0;
             try {
+                java.time.LocalDate ngayHienTai = java.time.LocalDate.now();
+                java.sql.Date ngayTao = java.sql.Date.valueOf(ngayHienTai);
+                
                 Connection con = JDBCUtil.getConnection();
                 // Kiểm tra xem ngày bắt đầu có lớn hơn ngày kết thúc không
                 if (t.getNgaybatdau().after(t.getNgayketthuc())) {
@@ -31,7 +34,7 @@ public class KHUYENMAIDAO implements DAOInterface<KHUYENMAI>{
 
                 String sql = "INSERT INTO khuyenmai (ngaytao, ngaybatdau, ngayketthuc, tongtiencanthiet, phantramgiam,ISHIDDEN) VALUES (?, ?, ?, ?, ?,?)";
                 PreparedStatement pst = con.prepareStatement(sql);
-                pst.setDate(1, t.getNgaytao());
+                pst.setDate(1, ngayTao);
                 pst.setDate(2, t.getNgaybatdau());
                 pst.setDate(3, t.getNgayketthuc());
                 pst.setInt(4, t.getTongtiencanthiet());
