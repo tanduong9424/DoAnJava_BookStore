@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 01, 2024 at 12:00 PM
+-- Host: 127.0.0.1:3306
+-- Generation Time: May 05, 2024 at 07:42 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,16 +35,6 @@ CREATE TABLE `chitiethoadon` (
   `THANHTIEN` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `chitiethoadon`
---
-
-INSERT INTO `chitiethoadon` (`MAHOADON`, `MASACH`, `SOLUONG`, `GIATIEN`, `THANHTIEN`) VALUES
-(38, 1, 50000, 2, 25000),
-(38, 2, 22000, 1, 22000),
-(39, 1, 25000, 1, 25000),
-(39, 2, 22000, 1, 22000);
-
 -- --------------------------------------------------------
 
 --
@@ -64,13 +54,10 @@ CREATE TABLE `chitietphieunhap` (
 --
 
 INSERT INTO `chitietphieunhap` (`mapn`, `MASACH`, `gianhap`, `soluong`, `tongtien`) VALUES
-(3, 1, 5, 22000, 110000),
-(3, 8, 2, 40000, 80000),
-(4, 8, 6, 30000, 180000),
-(4, 2, 9, 22000, 198000),
-(4, 1, 5, 20000, 100000),
-(5, 8, 1, 50000, 50000),
-(6, 2, 22000, 1, 22000);
+(15, 18, 40000, 88, 3520000),
+(15, 19, 148000, 77, 11396000),
+(15, 20, 100000, 66, 6600000),
+(15, 21, 70000, 55, 3850000);
 
 -- --------------------------------------------------------
 
@@ -87,14 +74,6 @@ CREATE TABLE `hoadon` (
   `makhuyenmai` int(11) DEFAULT NULL,
   `tthd` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `hoadon`
---
-
-INSERT INTO `hoadon` (`MAHOADON`, `makh`, `manv`, `NGAYLAP`, `TONGTIEN`, `makhuyenmai`, `tthd`) VALUES
-(38, 2, 1, '2024-04-26', 72000, NULL, 1),
-(39, 1, 1, '2024-04-27', 47000, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -116,10 +95,8 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`makh`, `hoten`, `diachi`, `email`, `dienthoai`, `tttk`) VALUES
-(1, 'huỳnh tấn dương', '12', 'sadfsdf@gmail.com', 1213323, 1),
-(2, 'HUY', '1221', 'HUY@', 239492394, 0),
-(3, 'duy', 'nhà mới', 'duydan@gmai.com', 123456789, 1),
-(4, 'đào', '098', '098', 98, 1);
+(1, 'Huỳnh Tấn Dương', 'Tp HCM', 'tduong@gmail.com', 945345832, 1),
+(2, 'Lương Cẩm Đào', 'Tp HCM', 'cdao@gmail.com', 94353834, 1);
 
 -- --------------------------------------------------------
 
@@ -165,10 +142,8 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`manv`, `hoten`, `diachi`, `email`, `dienthoai`, `tttk`) VALUES
-(1, 'huy', '179', '@gmail.com', 9, 0),
-(2, 'dương', '1', '1', 1, 1),
-(5, 'huy', '179', '@gmail.com', 9, 1),
-(6, 'huy', '179', '@gmail.com', 9, 1);
+(1, 'Nguyễn Xuân Duy', 'Tp HCM', 'duy@gmail.com', 94385435, 1),
+(5, 'Lê Hoàng Huy', 'Tp HCM', 'huy@gmail.com', 943854343, 1);
 
 -- --------------------------------------------------------
 
@@ -187,7 +162,11 @@ CREATE TABLE `nhaxuatban` (
 
 INSERT INTO `nhaxuatban` (`TENNHAXUATBAN`, `ISHIDDEN`) VALUES
 ('Kim Đồng', 0),
-('Nhà Xuất Bản Giáo Dục', 0);
+('Nhà Xuất Bản Giáo Dục', 0),
+('Nhà xuất bản Trẻ', 0),
+('Nhà xuất bản văn học', 0),
+('Nhà Xuất Bản Xây Dựng', 0),
+('Nhà Xuất Bản Đại Học Quốc Gia TP.HCM', 0);
 
 -- --------------------------------------------------------
 
@@ -208,11 +187,7 @@ CREATE TABLE `phieunhap` (
 --
 
 INSERT INTO `phieunhap` (`mapn`, `manv`, `noinhap`, `tongtien`, `ngaynhap`) VALUES
-(1, 1, 'ĐẠI HỌC SÀI GÒN', 50000, '2024-04-23'),
-(3, 1, '', 190000, '2024-04-30'),
-(4, 1, '', 478000, '2024-04-30'),
-(5, 1, '', 50000, '2024-04-30'),
-(6, 1, '', 22000, '2024-04-30');
+(15, 1, ' Công Ty Cổ Phần Phát Hành Sách Tp. HCM', 25366000, '2024-05-05');
 
 -- --------------------------------------------------------
 
@@ -236,9 +211,11 @@ CREATE TABLE `sach` (
 --
 
 INSERT INTO `sach` (`MASACH`, `TENSACH`, `IMAGE`, `SOLUONG`, `GIABIA`, `LANTAIBAN`, `TENNHAXUATBAN`, `ISHIDDEN`) VALUES
-(1, 'Doreamon', NULL, 20001, 25000, 5, 'Kim Đồng', 0),
-(2, 'Conan', NULL, 22001, 22000, 2, 'Kim Đồng', 0),
-(8, 'Dragon Ball', 'C:\\Users\\Admin\\Pictures\\Saved Pictures\\superhuman.jpg', 80001, 50000, 2, 'Kim Đồng', 0);
+(17, 'Cho tôi xin một vé đi tuổi thơ', 'chotoixin1vedituoitho.jpg', 99, 35000, 2, 'Kim Đồng', 0),
+(18, 'Dế Mèn phiêu lưu ký', 'demen.jpg', 88, 40000, 2, 'Kim Đồng', 0),
+(19, 'Đứa trẻ hiểu chuyện thường không có kẹo ăn', 'dua-tre-hieu-chuyen-thuong-khong-co-keo-an.jpg', 77, 148000, 5, 'Nhà xuất bản văn học', 0),
+(20, 'Lập Trình Java Căn Bản', 'java.png', 66, 100000, 3, 'Nhà Xuất Bản Xây Dựng', 0),
+(21, 'Giải Tích 1', 'gt1.jpg', 55, 70000, 2, 'Nhà Xuất Bản Đại Học Quốc Gia TP.HCM', 0);
 
 -- --------------------------------------------------------
 
@@ -259,10 +236,12 @@ CREATE TABLE `taikhoan` (
 --
 
 INSERT INTO `taikhoan` (`USERNAME`, `PASSWORD`, `ROLE`, `makh`, `manv`) VALUES
-('dương', '123', 'nv', NULL, NULL),
-('duyduongngu', '123', 'Nhân Viên', NULL, 1),
-('huy', '123', 'Quản Trị Viên', NULL, NULL),
-('huygoblin@gmail.com', '123456', 'Nhân Viên', NULL, 5);
+('admin', 'admin', 'Quản Trị Viên', NULL, NULL),
+('daoKH', '345', 'Khách Hàng', 2, NULL),
+('duongKH', '345', 'Khách Hàng', 1, NULL),
+('duongKH2', '678', 'Khách Hàng', 1, NULL),
+('lhhNV', '123', 'Nhân Viên', NULL, 5),
+('nxdNV', '123', 'Nhân Viên', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -345,13 +324,13 @@ ALTER TABLE `taikhoan`
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MAHOADON` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `MAHOADON` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `khuyenmai`
@@ -363,19 +342,19 @@ ALTER TABLE `khuyenmai`
 -- AUTO_INCREMENT for table `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `phieunhap`
 --
 ALTER TABLE `phieunhap`
-  MODIFY `mapn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `mapn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `sach`
 --
 ALTER TABLE `sach`
-  MODIFY `MASACH` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `MASACH` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
