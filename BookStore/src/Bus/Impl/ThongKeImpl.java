@@ -25,6 +25,7 @@ import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static org.apache.logging.log4j.util.Strings.isBlank;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -42,8 +43,14 @@ public class ThongKeImpl {
                 System.out.print(makh);
                 KHACHANG hihi = new KHACHANG(makh);
                 KHACHANG result = KHACHHANGDAO.getInstance().selectById(hihi);
-                
-                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),result.getHoten(),hoadon.getNGAYLAP(),hoadon.getTONGTIEN()};
+                String hoten;
+                if(result==null){
+                    hoten="";
+                }
+                else{
+                    hoten=result.getHoten();    
+                }
+                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),hoten,hoadon.getNGAYLAP(),hoadon.getTONGTIEN()};
                 model.addRow(row);
 
                     }                
@@ -69,7 +76,14 @@ public class ThongKeImpl {
             System.out.print(makh);
             KHACHANG hihi = new KHACHANG(makh);
             KHACHANG result = KHACHHANGDAO.getInstance().selectById(hihi);
-            Object[] row = {ketqua.getMAHOADON(),ketqua.getManv(),result.getHoten(),ketqua.getNGAYLAP(),ketqua.getTONGTIEN()};
+            String hoten;
+                if(result!=null){
+                    hoten=result.getHoten();
+                }
+                else{
+                    hoten="";
+                }
+            Object[] row = {ketqua.getMAHOADON(),ketqua.getManv(),hoten,ketqua.getNGAYLAP(),ketqua.getTONGTIEN()};
             model.addRow(row);
         }
         else{
@@ -80,8 +94,14 @@ public class ThongKeImpl {
                 System.out.print(makh);
                 KHACHANG hihi = new KHACHANG(makh);
                 KHACHANG result = KHACHHANGDAO.getInstance().selectById(hihi);
-                
-                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),result.getHoten(),hoadon.getNGAYLAP(),hoadon.getTONGTIEN()};
+                String hoten;
+                if(result!=null){
+                    hoten=result.getHoten();
+                }
+                else{
+                    hoten="";
+                }
+                Object[] row = {hoadon.getMAHOADON(),hoadon.getManv(),hoten,hoadon.getNGAYLAP(),hoadon.getTONGTIEN()};
                 model.addRow(row);
 
                     } 
@@ -89,12 +109,14 @@ public class ThongKeImpl {
     }
     public void loadHoaDonTB(javax.swing.JTextField t, String nhapngay1TB, String nhapngay2TB){
         
-        if (nhapngay1TB == null || nhapngay2TB == null){
+        if (isBlank(nhapngay1TB) || isBlank(nhapngay2TB) || nhapngay1TB=="" || nhapngay1TB==null || nhapngay2TB=="" || nhapngay2TB==null){
+            System.out.println("th1");
             double ketqua=HOADONDAO.getInstance().selectHoaDonTB2();
             t.setText(ketqua+"");
             
         }
         else{
+            System.out.println("th2");
             double ketqua=HOADONDAO.getInstance().selectHoaDonTB(nhapngay1TB,nhapngay2TB);
             t.setText(ketqua+"");
         }    
