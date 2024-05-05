@@ -206,13 +206,18 @@ public class EditKhachHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        KHACHANG khachang = new KHACHANG(userName, diaChi, mailPerson,sdtInt , true);
+        KHACHANG khachang = new KHACHANG(maKH,userName, diaChi, mailPerson,sdtInt , true);
         khaHangImpl.suaKhachHang(khachang);
         this.dispose();
      
     }//GEN-LAST:event_submitbtnMouseClicked
-    public void addThongTin(String maKH){
+    public void addThongTin(String maKH,String tennv,String Dchi,String sdt,String email){
         MaKH.setText(maKH);
+        name.setText(tennv);
+        dchi.setText(Dchi);
+        mail.setText(email);
+        phone.setText(sdt);
+        
     }
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:

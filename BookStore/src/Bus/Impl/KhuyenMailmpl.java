@@ -45,7 +45,7 @@ public class KhuyenMailmpl implements KhuyenMai{
 
     @Override
     public ArrayList<KHUYENMAI> getAllKM() {
-        return khuyenmaidao.selectAll();  
+        return khuyenmaidao.selectAllEXCEPTISHIDDEN();  
     }
 
     @Override

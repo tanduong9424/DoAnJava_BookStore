@@ -213,7 +213,7 @@ public class KHUYENMAIDAO implements DAOInterface<KHUYENMAI>{
             Connection con = JDBCUtil.getConnection();
             Date homNay = new Date(System.currentTimeMillis()); // Lấy ngày hôm nay
 
-            String sql = "SELECT * FROM khuyenmai WHERE ngaybatdau <= ? AND ngayketthuc >= ?";
+            String sql = "SELECT * FROM khuyenmai WHERE ngaybatdau <= ? AND ngayketthuc >= ? AND ISHIDDEN = false";
             
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setDate(1, homNay);

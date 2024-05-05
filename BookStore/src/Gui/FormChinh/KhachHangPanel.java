@@ -312,8 +312,12 @@ public class KhachHangPanel extends javax.swing.JPanel {
             EditKhachHang y = new EditKhachHang();
              y.setVisible(true);
             Object value = KhachHangtb.getModel().getValueAt(selectedRowIdx, 0); 
-            String valueAsString = value.toString();
-            y.addThongTin(valueAsString);
+            Object tennv = KhachHangtb.getModel().getValueAt(selectedRowIdx, 1);
+            Object dchi = KhachHangtb.getModel().getValueAt(selectedRowIdx, 2);
+            Object sdt = KhachHangtb.getModel().getValueAt(selectedRowIdx, 3);
+            Object email = KhachHangtb.getModel().getValueAt(selectedRowIdx, 4);
+            
+            y.addThongTin(value.toString(),tennv.toString(),dchi.toString(),sdt.toString(),email.toString());
             y.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
